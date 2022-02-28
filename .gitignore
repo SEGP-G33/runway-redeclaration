@@ -25,3 +25,10 @@ hs_err_pid*
 # attributes files in macOS
 .DS_Store
 */.DS_Store
+
+# Maven
+target/
+
+# IntelliJ IDEA
+.idea/
+*.iml
