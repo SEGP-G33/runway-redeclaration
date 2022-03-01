@@ -16,16 +16,16 @@ public class Calculator {
      * Calculates the new runway parameters in the case that a plane is taking off towards and obstacle,
      * or landing towards an obstacle
      *
+     * @param distFromThresh The distance of the obstacle from the threshold of the runway
      * @return the complete set of runway parameters
      */
-    public RunwayParameters calculateCase1(){
+    public RunwayParameters calculateCase1(Integer distFromThresh){
         RunwayParameters params = new RunwayParameters();
-        Integer distFromThresh = this.getDistanceFromThreshold();
 
-        Integer TORA = distFromThresh + runway.getDisplacedThreshold();
-        Integer ASDA = TORA;
-        Integer TODA = TORA;
-        Integer LDA = distFromThresh - runway.getRESALength() - runway.getStripEndLength();
+        Double TORA = distFromThresh + runway.getDisplacedThreshold();
+        Double ASDA = TORA;
+        Double TODA = TORA;
+        Double LDA = distFromThresh - runway.getRESALength() - runway.getStripEndLength();
 
         params.setTORA(TORA);
         params.setASDA(ASDA);
@@ -38,17 +38,17 @@ public class Calculator {
      * Calculates the new runway parameters in the case that a plane is taking off away from an obstacle,
      * or landing over the obstacle
      *
-     * @return the complete set of runway parameters
+     * @param distFromThresh The distance of the obstacle from the threshold of the runway
+     * @return
      */
-    public RunwayParameters calculateCase2(){
+    public RunwayParameters calculateCase2(Integer distFromThresh){
         RunwayParameters params = new RunwayParameters();
-        Integer distFromThresh = this.getDistanceFromThreshold();
-        Integer slopeCalc = this.getSlopeCalculation();
+        Double slopeCalc = this.getSlopeCalculation();
 
-        Integer TORA = this.runway.getDefaultParameters().getTORA() - this.plane.getBlastProtection() - distFromThresh - this.runway.getDisplacedThreshold();
-        Integer ASDA = TORA + this.runway.getStopWayLength();
-        Integer TODA = TORA + this.runway.getClearWayLength();
-        Integer LDA = this.runway.getDefaultParameters().getLDA() - distFromThresh - slopeCalc - this.runway.getStripEndLength();
+        Double TORA = this.runway.getDefaultParameters().getTORA() - this.plane.getBlastProtection() - distFromThresh - this.runway.getDisplacedThreshold();
+        Double ASDA = TORA + this.runway.getStopWayLength();
+        Double TODA = TORA + this.runway.getClearWayLength();
+        Double LDA = this.runway.getDefaultParameters().getLDA() - distFromThresh - slopeCalc - this.runway.getStripEndLength();
 
         params.setTORA(TORA);
         params.setASDA(ASDA);
@@ -74,14 +74,8 @@ public class Calculator {
         return runway;
     }
 
-    public Integer getDistanceFromThreshold(){
-        // TODO
-        return 0;
-    }
-
-    public Integer getSlopeCalculation(){
-        // TODO
-        return 0;
+    private Double getSlopeCalculation(){
+        return (double) (this.obstacle.getHeight() * 50);
     }
 
     /**

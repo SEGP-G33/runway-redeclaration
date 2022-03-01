@@ -11,17 +11,17 @@ public class RunwayParameters {
 
     private Runway runway;
     private Character direction;
-    private Integer TORA;   // Take-Off Runway Available
-    private Integer  TODA;  // Take-Off Distance Available
-    private Integer ASDA;   // Accelerate-Stop Distance Available
-    private Integer LDA;    // Landing Distance Available
+    private Double TORA;   // Take-Off Runway Available
+    private Double  TODA;  // Take-Off Distance Available
+    private Double ASDA;   // Accelerate-Stop Distance Available
+    private Double LDA;    // Landing Distance Available
     /**
      * These two are not mentioned in the UML, but are in the spec
      * May become necessary, may become redundant
      */
-    private Integer ALS;    // Approach Landing Surface
-    private Integer TOCS;   // Take-Off Climb Surface
-    private Integer RESA;   // Runway End Safety Area
+    private Double ALS;    // Approach Landing Surface
+    private Double TOCS;   // Take-Off Climb Surface
+    private Double RESA;   // Runway End Safety Area
 
     /**
      * -=-=-=-=-=-=-=-
@@ -37,31 +37,31 @@ public class RunwayParameters {
         return this.direction;
     }
 
-    public Integer getTORA() {
+    public Double getTORA() {
         return this.TORA;
     }
 
-    public Integer getTODA() {
+    public Double getTODA() {
         return this.TODA;
     }
 
-    public Integer getASDA() {
+    public Double getASDA() {
         return this.ASDA;
     }
 
-    public Integer getLDA(){
+    public Double getLDA(){
         return this.LDA;
     }
 
-    public Integer getALS(){
+    public Double getALS(){
         return this.ALS;
     }
 
-    public Integer getTOCS(){
+    public Double getTOCS(){
         return this.TOCS;
     }
 
-    public Integer getRESA() {
+    public Double getRESA() {
         return this.RESA;
     }
 
@@ -83,31 +83,31 @@ public class RunwayParameters {
         }
     }
 
-    public void setTORA(Integer TORA) {
+    public void setTORA(Double TORA) {
         this.TORA = TORA;
     }
 
-    public void setTODA(Integer TODA) {
+    public void setTODA(Double TODA) {
         this.TODA = TODA;
     }
 
-    public void setASDA(Integer ASDA) {
+    public void setASDA(Double ASDA) {
         this.ASDA = ASDA;
     }
 
-    public void setLDA(Integer LDA) {
+    public void setLDA(Double LDA) {
         this.LDA = LDA;
     }
 
-    public void setALS(Integer ALS) {
+    public void setALS(Double ALS) {
         this.ALS = ALS;
     }
 
-    public void setTOCS(Integer TOCS) {
+    public void setTOCS(Double TOCS) {
         this.TOCS = TOCS;
     }
 
-    public void setRESA(Integer RESA){
+    public void setRESA(Double RESA){
         this.RESA = RESA;
     }
 }

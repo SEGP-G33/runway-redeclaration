@@ -1,20 +1,17 @@
 package seg.g33.Entitites;
 
-import seg.g33.Exceptions.NoObstaclePresentException;
-
 public class Runway {
 
     private Airport airport;
     private Integer angle;
     private Character direction;
-    private Integer length;
+    private Double length;
     // We may decide that these 4 instance variables are redundant or better used elsewhere
-    private Integer clearWayLength;
-    private Integer stopWayLength;
-    private Integer RESALength;
-    private Integer stripEndLength;
-    private Integer displacedThreshold = 0;
-    private Obstacle obstacle;
+    private Double clearWayLength;
+    private Double stopWayLength;
+    private Double RESALength;
+    private Double stripEndLength;
+    private Double displacedThreshold = 0d;
 
     /**
      * Constructor method for a runway
@@ -27,8 +24,8 @@ public class Runway {
      * @param RESALength the length of the RESA
      * @param stripEndLength the length of the strip end
      */
-    public Runway(Airport airport, Integer angle, Character direction, Integer length,
-                  Integer clearWayLength, Integer stopWayLength, Integer RESALength, Integer stripEndLength){
+    public Runway(Airport airport, Integer angle, Character direction, Double length,
+                  Double clearWayLength, Double stopWayLength, Double RESALength, Double stripEndLength) throws IllegalArgumentException{
 
         // Airport assignment
         this.airport = airport;
@@ -102,23 +99,23 @@ public class Runway {
         return direction;
     }
 
-    public Integer getLength() {
+    public Double getLength() {
         return length;
     }
 
-    public Integer getClearWayLength() {
+    public Double getClearWayLength() {
         return clearWayLength;
     }
 
-    public Integer getStopWayLength() {
+    public Double getStopWayLength() {
         return stopWayLength;
     }
 
-    public Integer getRESALength() {
+    public Double getRESALength() {
         return RESALength;
     }
 
-    public Integer getStripEndLength() {
+    public Double getStripEndLength() {
         return stripEndLength;
     }
 
@@ -127,15 +124,7 @@ public class Runway {
         return new RunwayParameters();
     }
 
-    public Obstacle getObstacle() throws NoObstaclePresentException {
-        if (this.obstacle != null){
-            return this.obstacle;
-        } else {
-            throw new NoObstaclePresentException("Runway has no Obstacle present");
-        }
-    }
-
-    public Integer getDisplacedThreshold(){
+    public Double getDisplacedThreshold(){
         return this.displacedThreshold;
     }
 
@@ -144,11 +133,8 @@ public class Runway {
      * Setter Methods
      * -=-=-=-=-=-=-=-
      */
-    public void setObstacle(Obstacle obstacle){
-        this.obstacle = obstacle;
-    }
 
-    public void setDisplacedThreshold(Integer displacedThreshold){
+    public void setDisplacedThreshold(Double displacedThreshold){
         this.displacedThreshold = displacedThreshold;
     }
 }
