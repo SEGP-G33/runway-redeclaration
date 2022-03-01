@@ -1,0 +1,7 @@
+<Obstacle>
+    <name>Pigeon</name>
+    <description>A bird on the runway</description>
+    <length>3</length>
+    <width>2</width>
+    <weight>3</weight>
+</Obstacle>
