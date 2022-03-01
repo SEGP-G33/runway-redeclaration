@@ -23,6 +23,14 @@ public class RunwayParameters {
     private Double TOCS;   // Take-Off Climb Surface
     private Double RESA;   // Runway End Safety Area
 
+    public RunwayParameters(){
+        this.ALS = 0d;
+        this.TOCS = 0d;
+        this.RESA = 0d;
+    }
+
+
+
     /**
      * -=-=-=-=-=-=-=-
      * Getter Methods
