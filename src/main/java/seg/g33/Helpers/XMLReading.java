@@ -20,40 +20,34 @@ public class XMLReading {
 //        var reader = new XMLReading();
 //
 //        // Reads Airport
-//        reader.configureAirportFromXMLFile("src/main/resources/Airport.xml");
+//        //reader.configureAirportFromXMLFile("src/main/resources/Airport.xml");
 //
 //        // Reads Obstacle and prints it
 //        System.out.println(reader.configureObstacleFromXMLFile("src/main/resources/Obstacle.xml"));
 //    }
 
     public Airport configureAirportFromXMLFile(String filename) {
-
         var factory = DocumentBuilderFactory.newInstance();
-        Document xmlFile;
 
         Airport airport = null;
 
         try {
             var builder = factory.newDocumentBuilder();
             var file = new File(filename);
-
-            xmlFile = builder.parse(file);
+            var xmlFile = builder.parse(file);
             xmlFile.getDocumentElement().normalize();
 
             var name =  xmlFile.getElementsByTagName("airportName").item(0).getTextContent();
-            System.out.println("Airport Name: " +  name);
-
-            var airportRunwaysList = xmlFile.getElementsByTagName("airportRunway");
-            System.out.println(name + " has " + airportRunwaysList.getLength() + " runways");
-
             airport = new Airport(name);
 
+            var airportRunwaysList = xmlFile.getElementsByTagName("airportRunway");
             for (int i = 0; i < airportRunwaysList.getLength(); i++) {
                 var runwayNode = airportRunwaysList.item(i);
                 var runway = buildRunwayFromNode(runwayNode, airport);
             }
         }
         catch (Exception e) {
+            // TODO: Handle exceptions
             e.printStackTrace();
         }
 
@@ -75,26 +69,38 @@ public class XMLReading {
                 var runwaySectionNode = runwaySectionsList.item(j);
                 if (runwayNode.getNodeType() == Node.ELEMENT_NODE) {
                     var runwaySectionElement = (Element) runwaySectionNode;
-                    var angle = Integer.parseInt(runwaySectionElement.getElementsByTagName("angle").item(0).getTextContent());
-                    var direction = runwaySectionElement.getElementsByTagName("direction").item(0).getTextContent();
-                    var length = Double.parseDouble(runwaySectionElement.getElementsByTagName("length").item(0).getTextContent());
-                    var clearway = Double.parseDouble(runwaySectionElement.getElementsByTagName("clearway").item(0).getTextContent());
-                    var stopway = Double.parseDouble(runwaySectionElement.getElementsByTagName("stopway").item(0).getTextContent());
-                    var resa = Double.parseDouble(runwaySectionElement.getElementsByTagName("resa").item(0).getTextContent());
-                    var tora = Double.parseDouble(runwaySectionElement.getElementsByTagName("tora").item(0).getTextContent());
-                    var toda = Double.parseDouble(runwaySectionElement.getElementsByTagName("toda").item(0).getTextContent());
-                    var asda = Double.parseDouble(runwaySectionElement.getElementsByTagName("asda").item(0).getTextContent());
-                    var lda = Double.parseDouble(runwaySectionElement.getElementsByTagName("lda").item(0).getTextContent());
-                    var stripend = Double.parseDouble(runwaySectionElement.getElementsByTagName("stripend").item(0).getTextContent());
-                    var displaced = Double.parseDouble(runwaySectionElement.getElementsByTagName("displaced").item(0).getTextContent());
-
-                    runway = new Runway(runwayName, airport, angle, direction.charAt(0), tora, asda, toda, lda, clearway, stopway, resa, stripend, displaced);
+                    runway = buildRunwayFromElement(runwayName, airport, runwaySectionElement)
                 }
             }
         }
         return runway;
     }
 
+    /**
+     * Builds an instance of the Runway class
+     */
+    private Runway buildRunwayFromElement(String runwayName, Airport airport, Element runwaySectionElement) {
+        var angle = Integer.parseInt(extractValue("angle", runwaySectionElement));
+        var direction = extractValue("direction", runwaySectionElement);
+        var length = Double.parseDouble(extractValue("length", runwaySectionElement));
+        var clearway = Double.parseDouble(extractValue("clearway", runwaySectionElement));
+        var stopway = Double.parseDouble(extractValue("stopway", runwaySectionElement));
+        var resa = Double.parseDouble(extractValue("resa", runwaySectionElement));
+        var tora = Double.parseDouble(extractValue("tora", runwaySectionElement));
+        var toda = Double.parseDouble(extractValue("toda", runwaySectionElement));
+        var asda = Double.parseDouble(extractValue("asda", runwaySectionElement));
+        var lda = Double.parseDouble(extractValue("lda", runwaySectionElement));
+        var stripend = Double.parseDouble(extractValue("stripend", runwaySectionElement));
+        var displaced = Double.parseDouble(extractValue("displaced", runwaySectionElement));
+
+        return new Runway(runwayName, airport, angle, direction.charAt(0), tora, asda, toda, lda, clearway, stopway, resa, stripend, displaced);
+    }
+
+    /**
+     * Reads an obstacle XML file and creates an obstacle object
+     * @param filename the filename of the XML file
+     * @return an instance of the Obstacle class
+     */
     public Obstacle configureObstacleFromXMLFile(String filename) {
         Obstacle obstacle = null;
 
@@ -111,22 +117,34 @@ public class XMLReading {
             obstacle = buildObstacleFromElement(obstacleRoot);
 
         } catch (Exception e) {
+            // TODO: Handle exception.
             e.printStackTrace();
         }
 
         return obstacle;
     }
 
+    /**
+     * Builds an instance of the Obstacle class from the given root node.
+     * @param root the root of the obstacle XML file
+     * @return an instance of the Obstacle class
+     */
     private Obstacle buildObstacleFromElement(Element root) {
         var name = extractValue("name", root);
-        var height = extractValue("height", root);
+        var height = Double.parseDouble(extractValue("height", root));
         var center = Double.parseDouble(extractValue("centerDistance", root));
         var left = Double.parseDouble(extractValue("leftDistance", root));
         var right = Double.parseDouble(extractValue("rightDistance", root));
 
-        return new Obstacle(name, Double.parseDouble(height), Double.parseDouble(height), Double.parseDouble(height), Double.parseDouble(height));
+        return new Obstacle(name, height, center, left, right);
     }
 
+    /**
+     * Helper function to avoid repeatedly writing 'getElementsByTagName(tagName).item(0).getTextContent()';
+     * @param tagName the name of the tag in which the value we extract is located
+     * @param root the parent or root node that its children is the tag with the extracted value
+     * @return the text contents of the tag
+     */
     private String extractValue(String tagName, Element root) {
         return root.getElementsByTagName(tagName).item(0).getTextContent();
     }
