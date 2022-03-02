@@ -29,6 +29,12 @@ public class RunwayParameters {
         this.RESA = 0d;
     }
 
+    public RunwayParameters(Double TORA, Double ASDA, Double TODA, Double LDA){
+        this.TORA = TORA;
+        this.ASDA = ASDA;
+        this.TODA = TODA;
+        this.LDA = LDA;
+    }
 
 
     /**
