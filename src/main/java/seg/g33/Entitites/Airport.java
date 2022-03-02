@@ -3,31 +3,38 @@ package seg.g33.Entitites;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Airport {
+public final class Airport {
+
     private String name;
-    private int airportId;
     private ArrayList<Runway> airportRunways;
 
     public Airport() {
         this.airportRunways = new ArrayList<Runway>();
-        this.airportId = UUID.randomUUID().hashCode();
     }
 
-    public Airport(String name){
-        this();
+    public Airport(String name) {
         this.name = name;
     }
 
-    public void addRunway(Runway r){
-        this.airportRunways.add(r);
+    public void addRunway(Runway runway){
+        this.airportRunways.add(runway);
     }
 
-    //removeRunway goes to here
+    public void removeRunway(Runway runway) {
+        this.airportRunways.remove(runway);
+    }
 
-    //getter for runways
+    public Runway retrieveRunway(String runwayName) {
+        for (Runway runway : getAirportRunways()) {
+            if (runway.getName().equals(runwayName)) {
+                return runway;
+            }
+        }
+        return null;
+    }
 
-    public int getAirportId(){
-        return this.airportId;
+    public ArrayList<Runway> getAirportRunways() {
+        return this.airportRunways;
     }
 
     public String getName() {

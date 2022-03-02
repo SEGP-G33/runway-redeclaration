@@ -1,7 +1,7 @@
 <Obstacle>
     <name>Pigeon</name>
-    <description>A bird on the runway</description>
-    <length>3</length>
-    <width>2</width>
-    <weight>3</weight>
+    <height>34</height>
+    <centerDistance>10</centerDistance>
+    <leftDistance>20</leftDistance>
+    <rightDistance>30</rightDistance>
 </Obstacle>

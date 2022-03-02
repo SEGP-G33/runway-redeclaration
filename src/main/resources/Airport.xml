@@ -1,43 +1,56 @@
 <airport>
     <airportName>JFK International Airport</airportName>
     <airportRunways>
-        <runway>
+        <airportRunway>
             <name>Runway 1</name>
-            <RunwaySection>
+            <runwaySection>
                 <angle>20.0</angle>
                 <direction>L</direction>
                 <length>10.0</length>
                 <clearway>20.0</clearway>
                 <stopway>30.0</stopway>
-                <Resa>40.0</Resa>
+                <resa>40.0</resa>
+                <tora>1000</tora>
+                <toda>2000</toda>
+                <asda>3000</asda>
+                <lda>3000</lda>
+                <lda>3000</lda>
                 <stripend>50.0</stripend>
                 <displaced>60.0</displaced>
-            </RunwaySection>
-        </runway>
+            </runwaySection>
+        </airportRunway>
 
-        <runway>
+        <airportRunway>
             <name>Runway 2</name>
-            <RunwaySection>
+            <runwaySection>
                 <angle>20.0</angle>
                 <direction>L</direction>
                 <length>10.0</length>
                 <clearway>20.0</clearway>
                 <stopway>30.0</stopway>
-                <Resa>40.0</Resa>
+                <resa>40.0</resa>
+                <tora>1000</tora>
+                <toda>2000</toda>
+                <asda>3000</asda>
+                <lda>3000</lda>
                 <stripend>50.0</stripend>
                 <displaced>60.0</displaced>
-            </RunwaySection>
+            </runwaySection>
 
-            <RunwaySection>
+            <runwaySection>
                 <angle>20.0</angle>
-                <direction>L</direction>
+                <direction>R</direction>
                 <length>10.0</length>
                 <clearway>20.0</clearway>
                 <stopway>30.0</stopway>
-                <Resa>40.0</Resa>
+                <resa>40.0</resa>
+                <tora>1000</tora>
+                <toda>2000</toda>
+                <asda>3000</asda>
+                <lda>3000</lda>
                 <stripend>50.0</stripend>
                 <displaced>60.0</displaced>
-            </RunwaySection>
-        </runway>
+            </runwaySection>
+        </airportRunway>
     </airportRunways>
 </airport>

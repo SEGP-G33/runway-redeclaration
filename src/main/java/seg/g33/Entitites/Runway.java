@@ -2,6 +2,7 @@ package seg.g33.Entitites;
 
 public class Runway {
 
+    private final String name;
     private final Airport airport;
     private final Integer angle;
     private final Character direction;
@@ -17,10 +18,12 @@ public class Runway {
     private Double stripEndLength = 0d;
     private Double displacedThreshold = 0d;
 
-    public Runway(Airport airport, Integer angle, Character direction, Double defTORA, Double defASDA, Double defTODA, Double defLDA,
-                  Double clearWayLength, Double stopWayLength, Double RESALength, Double stripEndLength, Double displacedThreshold){
+    public Runway(String name, Airport airport, Integer angle, Character direction, Double defTORA, Double defASDA, Double defTODA, Double defLDA,
+                  Double clearWayLength, Double stopWayLength, Double RESALength, Double stripEndLength, Double displacedThreshold) {
+
         // Airport assignment
         this.airport = airport;
+        this.name = name;
 
         // Guard statement for angle
         if (angle >= 0 && angle <= 36) {
@@ -100,7 +103,9 @@ public class Runway {
         }
     }
 
-    public Runway(Airport airport, Integer angle, Character direction, Double defTORA, Double defASDA, Double defTODA, Double defLDA){
+    public Runway(String name, Airport airport, Integer angle, Character direction, Double defTORA, Double defASDA, Double defTODA, Double defLDA){
+        this.name = name;
+
         // Airport assignment
         this.airport = airport;
 
@@ -147,11 +152,14 @@ public class Runway {
         }
     }
 
+
     /**
      * -=-=-=-=-=-=-=-
      * Getter Methods
      * -=-=-=-=-=-=-=-
      */
+
+    public String getName() { return name; }
 
     public Airport getAirport() {
         return airport;
