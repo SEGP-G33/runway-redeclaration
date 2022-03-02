@@ -16,15 +16,15 @@ import java.io.IOException;
 public class XMLReading {
 
     // TODO: Here just to test the reading of XML Files. DELETE LATER ON.
-//    public static void main(String[] args) {
-//        var reader = new XMLReading();
-//
-//        // Reads Airport
-//        //reader.configureAirportFromXMLFile("src/main/resources/Airport.xml");
-//
-//        // Reads Obstacle and prints it
-//        System.out.println(reader.configureObstacleFromXMLFile("src/main/resources/Obstacle.xml"));
-//    }
+    public static void main(String[] args) {
+        var reader = new XMLReading();
+
+        // Reads Airport
+        //reader.configureAirportFromXMLFile("src/main/resources/Airport.xml");
+
+        // Reads Obstacle and prints it
+        System.out.println(reader.configureObstacleFromXMLFile("src/main/resources/Obstacle.xml"));
+    }
 
     public Airport configureAirportFromXMLFile(String filename) {
         var factory = DocumentBuilderFactory.newInstance();
@@ -69,7 +69,7 @@ public class XMLReading {
                 var runwaySectionNode = runwaySectionsList.item(j);
                 if (runwayNode.getNodeType() == Node.ELEMENT_NODE) {
                     var runwaySectionElement = (Element) runwaySectionNode;
-                    runway = buildRunwayFromElement(runwayName, airport, runwaySectionElement)
+                    runway = buildRunwayFromElement(runwayName, airport, runwaySectionElement);
                 }
             }
         }
