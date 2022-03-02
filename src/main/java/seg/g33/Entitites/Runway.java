@@ -6,11 +6,13 @@ public class Runway {
     private final Airport airport;
     private final Integer angle;
     private final Character direction;
+
     // These define a runway in the spec
     private final Double defTORA;
     private final Double defASDA;
     private final Double defTODA;
     private final Double defLDA;
+
     // We may decide that these 4 instance variables are redundant or better used elsewhere
     private Double clearWayLength = 0d;
     private Double stopWayLength = 0d;
