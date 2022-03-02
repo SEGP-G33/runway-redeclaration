@@ -35,8 +35,8 @@ Runway Re-declaration tool for SEG 2021-22
     - [ ] Code
     - [ ] Test
     - [ ] Debug (done)
-- [ ] R4 List of predefined obstacles (Quintin doing)
-    - [x] UML
+- [ ] R4 List of predefined obstacles
+    - [ ] UML
     - [ ] Code
     - [ ] Test
     - [ ] Debug (done)
