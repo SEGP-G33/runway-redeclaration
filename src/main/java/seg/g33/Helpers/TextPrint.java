@@ -68,6 +68,10 @@ public class TextPrint {
                 .append("-------- [System Information End] --------\n").toString();
     }
 
+    /******************
+     * TextPrint Plane *
+     ******************/
+
     public static String text(Plane plane) {
         StringBuilder string = new StringBuilder();
         return string.append("     ____  _        _    _   _ _____ \n" +
@@ -79,6 +83,10 @@ public class TextPrint {
                 .append("  BLAST\t\t:  " + plane.getBlastProtection() + "\n")
                 .append("-------- [System Information End] --------\n").toString();
     }
+
+    /********************
+     * TextPrint Obstacle *
+     ********************/
 
     public static String text(Obstacle obstacle) {
         StringBuilder string = new StringBuilder();
@@ -95,6 +103,10 @@ public class TextPrint {
                 .append("-------- [System Information End] --------\n").toString();
     }
 
+    /**********************
+     * TextPrint Calculator *
+     **********************/
+
     public static String text(Calculator calculator) {
         StringBuilder string = new StringBuilder();
         return string.append("  ____    _    _     ____ _   _ _        _  _____ ___  ____  \n" +
@@ -103,17 +115,34 @@ public class TextPrint {
                         "| |___ / ___ \\| |__| |___| |_| | |___ / ___ \\| || |_| |  _ < \n" +
                         " \\____/_/   \\_\\_____\\____|\\___/|_____/_/   \\_\\_| \\___/|_| \\_\\\n")
                 .append("  NAME\t\t\t:  " + calculator.getName() + "\n")
-                .append("  HEIGHT\t\t:  " + calculator.getHeight() + "\n")
-                .append("  CenterDistance\t:  " + calculator.getCenterDistance() + "\n")
-                .append("  RightDistance\t:  " + calculator.getRightDistance() + "\n")
-                .append("  LeftDistance\t:  " + calculator.getLeftDistance() + "\n")
+                .append("  PLANE\t\t:  " + calculator.getPlane() + "\n")
+                .append("  RUNWAY\t\t:  " + calculator.getRunway() + "\n")
+                .append("  OBSTACLE\t\t:  " + calculator.getObstacle() + "\n")
                 .append("-------- [System Information End] --------\n").toString();
     }
 
 
+    /****************************
+     * TextPrint RunwayParameters *
+     ****************************/
 
-
-    /**
-     * TODO: Calculate; RunwayParameters
-     */
+    public static String text(RunwayParameters parameter) {
+        StringBuilder string = new StringBuilder();
+        return string.append(" ____   _    ____      _    __  __ _____ _____ _____ ____  \n" +
+                        "|  _ \\ / \\  |  _ \\    / \\  |  \\/  | ____|_   _| ____|  _ \\ \n" +
+                        "| |_) / _ \\ | |_) |  / _ \\ | |\\/| |  _|   | | |  _| | |_) |\n" +
+                        "|  __/ ___ \\|  _ <  / ___ \\| |  | | |___  | | | |___|  _ < \n" +
+                        "|_| /_/   \\_\\_| \\_\\/_/   \\_\\_|  |_|_____| |_| |_____|_| \\_\\\n")
+                .append("  NAME\t\t\t:  " + parameter.getName() + "\n")
+                .append("  RUNWAY\t\t:  " + parameter.getRunway() + "\n")
+                .append("  TORA\t\t\t:  " + parameter.getTORA() + "\n")
+                .append("  TODA\t\t\t:  " + parameter.getTODA() + "\n")
+                .append("  ASDA\t\t\t:  " + parameter.getASDA() + "\n")
+                .append("  LDA\t\t\t:  " + parameter.getLDA() + "\n")
+                .append("  ALS\t\t\t:  " + parameter.getALS() + "\n")
+                .append("  TOCS\t\t\t:  " + parameter.getTOCS() + "\n")
+                .append("  DIRECTION\t:  " + parameter.getDirection() + "\n")
+                .append("  RESA\t\t\t:  " + parameter.getRESA() + "\n")
+                .append("-------- [System Information End] --------\n").toString();
+    }
 }
