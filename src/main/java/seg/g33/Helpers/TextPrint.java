@@ -1,6 +1,7 @@
 package seg.g33.Helpers;
 
 import seg.g33.Entitites.Airport;
+import seg.g33.Entitites.Plane;
 import seg.g33.Entitites.Runway;
 
 /**
@@ -66,6 +67,18 @@ public class TextPrint {
                 .append("  ClearWay\t\t:  " + runway.getClearWayLength() + "\n")
                 .append("  StopWay\t\t:  " + runway.getStopWayLength() + "\n")
                 .append("  THRESHOLD\t\t:  " + runway.getDisplacedThreshold() + "\n")
+                .append("-------- [System Information End] --------\n").toString();
+    }
+
+    public static String text(Plane plane) {
+        StringBuilder string = new StringBuilder();
+        return string.append("     ____  _        _    _   _ _____ \n" +
+                        "    |  _ \\| |      / \\  | \\ | | ____|\n" +
+                        "    | |_) | |     / _ \\ |  \\| |  _|  \n" +
+                        "    |  __/| |___ / ___ \\| |\\  | |___ \n" +
+                        "    |_|   |_____/_/   \\_\\_| \\_|_____|")
+                .append("  NAME\t\t\t:  " + plane.getName() + "\n")
+                .append("  BLAST\t\t:  " + plane.getBlastProtection() + "\n")
                 .append("-------- [System Information End] --------\n").toString();
     }
 
