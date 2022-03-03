@@ -36,7 +36,7 @@ public class TextPrint {
                         " / ___ \\ | ||  _ <|  __/| |_| |  _ < | |  \n" +
                         "/_/   \\_\\___|_| \\_\\_|    \\___/|_| \\_\\|_|  \n")
                 .append("---------- [System Information] ----------\n")
-                .append((airport.getName() == null) ? "  NAME\t\t\t:  null\n" : ("  NAME\t\t\t:  " + airport.getName() + "\n"));
+                .append("  NAME\t\t\t:  " + airport.getName() + "\n");
         if (airport.getAirportRunways() != null)
             for (Runway runway : airport.getAirportRunways())
                 string.append("  RUNWAY" + runwayIndex++ + "\t\t:  " + runway.getName() + "\n");
@@ -55,19 +55,20 @@ public class TextPrint {
                         " |  _ <| |_| | |\\  | \\ V  V / ___ \\| |  \n" +
                         " |_| \\_\\\\___/|_| \\_|  \\_/\\_/_/   \\_\\_|  \n")
                 .append("---------- [System Information] ----------\n")
-                .append((runway.getAirport() == null) ? "  AIRPORT\t\t:  null\n" : ("  AIRPORT\t\t:  " + runway.getAirport().getName() + "\n"))
-                .append((runway.getName() == null) ? "  NAME\t\t\t:  null\n" : ("  NAME\t\t\t:  " + runway.getName() + "\n"))
-                .append((runway.getAngle() == null) ? "  ANGLE\t\t\t:  null\n" : ("  ANGLE\t\t\t:  " + runway.getAngle() + "\n"))
-                .append((runway.getDirection() == null) ? "  DIRECTION\t\t:  null\n" : ("  DIRECTION\t\t:  " + runway.getDirection() + "\n"))
-                .append((runway.getDefTORA() == null) ? "  TORA\t\t\t:  null\n" : ("  TORA\t\t\t:  " + runway.getDefTORA() + "\n"))
-                .append((runway.getDefASDA() == null) ? "  ASDA\t\t\t:  null\n" : ("  ASDA\t\t\t:  " + runway.getDefASDA() + "\n"))
-                .append((runway.getDefTODA() == null) ? "  TODA\t\t\t:  null\n" : ("  TODA\t\t\t:  " + runway.getDefTODA() + "\n"))
-                .append((runway.getDefLDA() == null) ? "  LDA\t\t\t:  null\n" : ("  LDA\t\t\t:  " + runway.getDefLDA() + "\n"))
-                .append((runway.getClearWayLength() == null) ? "  ClearWay\t\t:  null\n" : ("  ClearWay\t\t:  " + runway.getClearWayLength() + "\n"))
-                .append((runway.getStopWayLength() == null) ? "  StopWay\t\t:  null\n" : ("  StopWay\t\t:  " + runway.getStopWayLength() + "\n"))
-                .append((runway.getDisplacedThreshold() == null) ? "  THRESHOLD\t\t:  null\n" : ("  THRESHOLD\t\t:  " + runway.getDisplacedThreshold() + "\n"))
+                .append("  NAME\t\t\t:  " + runway.getName() + "\n")
+                .append("  AIRPORT\t\t:  " + runway.getAirport().getName() + "\n")
+                .append("  ANGLE\t\t\t:  " + runway.getAngle() + "\n")
+                .append("  DIRECTION\t\t:  " + runway.getDirection() + "\n")
+                .append("  TORA\t\t\t:  " + runway.getDefTORA() + "\n")
+                .append("  ASDA\t\t\t:  "+ runway.getDefASDA() + "\n")
+                .append("  TODA\t\t\t:  " + runway.getDefTODA() + "\n")
+                .append("  LDA\t\t\t:  " + runway.getDefLDA() + "\n")
+                .append("  ClearWay\t\t:  " + runway.getClearWayLength() + "\n")
+                .append("  StopWay\t\t:  " + runway.getStopWayLength() + "\n")
+                .append("  THRESHOLD\t\t:  " + runway.getDisplacedThreshold() + "\n")
                 .append("-------- [System Information End] --------\n").toString();
     }
+
 
     /**
      * TODO: Plane; Obstacle; Calculate; RunwayParameters
