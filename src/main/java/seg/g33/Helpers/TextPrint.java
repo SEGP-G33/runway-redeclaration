@@ -1,6 +1,7 @@
 package seg.g33.Helpers;
 
 import seg.g33.Entitites.Airport;
+import seg.g33.Entitites.Obstacle;
 import seg.g33.Entitites.Plane;
 import seg.g33.Entitites.Runway;
 
@@ -82,8 +83,23 @@ public class TextPrint {
                 .append("-------- [System Information End] --------\n").toString();
     }
 
+    public static String text(Obstacle obstacle) {
+        StringBuilder string = new StringBuilder();
+        return string.append("     ____  _        _    _   _ _____ \n" +
+                        "    |  _ \\| |      / \\  | \\ | | ____|\n" +
+                        "    | |_) | |     / _ \\ |  \\| |  _|  \n" +
+                        "    |  __/| |___ / ___ \\| |\\  | |___ \n" +
+                        "    |_|   |_____/_/   \\_\\_| \\_|_____|")
+                .append("  NAME\t\t\t:  " + obstacle.getName() + "\n")
+                .append("  HEIGHT\t\t:  " + obstacle.getHeight() + "\n")
+                .append("  CenterDistance\t:  " + obstacle.getCenterDistance() + "\n")
+                .append("  RightDistance\t:  " + obstacle.getRightDistance() + "\n")
+                .append("  LeftDistance\t:  " + obstacle.getLeftDistance() + "\n")
+                .append("-------- [System Information End] --------\n").toString();
+    }
+
 
     /**
-     * TODO: Plane; Obstacle; Calculate; RunwayParameters
+     * TODO: Obstacle; Calculate; RunwayParameters
      */
 }
