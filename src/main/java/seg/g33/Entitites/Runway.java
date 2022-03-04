@@ -1,11 +1,15 @@
 package seg.g33.Entitites;
 
+import java.util.ArrayList;
+
 public class Runway {
 
     private final String name;
     private final Airport airport;
     private final Integer angle;
     private final Character direction;
+
+    private final ArrayList<RunwaySection> runwaySections;
 
     // These define a runway in the spec
     private final Double defTORA;
@@ -26,6 +30,8 @@ public class Runway {
         // Airport assignment
         this.airport = airport;
         this.name = name;
+
+        this.runwaySections = new ArrayList<>();
 
         // Guard statement for angle
         if (angle >= 0 && angle <= 36) {
@@ -106,7 +112,9 @@ public class Runway {
     }
 
     public Runway(String name, Airport airport, Integer angle, Character direction, Double defTORA, Double defASDA, Double defTODA, Double defLDA){
+
         this.name = name;
+        this.runwaySections = new ArrayList<>();
 
         // Airport assignment
         this.airport = airport;
@@ -154,6 +162,9 @@ public class Runway {
         }
     }
 
+    public void addRunwaySection(RunwaySection section) {
+        this.runwaySections.add(section);
+    }
 
     /**
      * -=-=-=-=-=-=-=-
@@ -161,10 +172,16 @@ public class Runway {
      * -=-=-=-=-=-=-=-
      */
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
     public Airport getAirport() {
         return airport;
+    }
+
+    public ArrayList<RunwaySection> getRunwaySections() {
+        return runwaySections;
     }
 
     public Integer getAngle() {
@@ -220,6 +237,7 @@ public class Runway {
      * Setter Methods
      * -=-=-=-=-=-=-=-
      */
+
     public void setClearWayLength(Double clearWayLength) {
         this.clearWayLength = clearWayLength;
     }
