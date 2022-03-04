@@ -4,9 +4,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
-import seg.g33.Entitites.Airport;
-import seg.g33.Entitites.Obstacle;
-import seg.g33.Entitites.Runway;
+import seg.g33.Entitites.*;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -20,10 +18,10 @@ public class XMLReading {
         var reader = new XMLReading();
 
         // Reads Airport
-        //reader.configureAirportFromXMLFile("src/main/resources/Airport.xml");
+        reader.configureAirportFromXMLFile("src/main/resources/Airport.xml");
 
         // Reads Obstacle and prints it
-        System.out.println(reader.configureObstacleFromXMLFile("src/main/resources/Obstacle.xml"));
+        // System.out.println(reader.configureObstacleFromXMLFile("src/main/resources/Obstacle.xml"));
     }
 
     public Airport configureAirportFromXMLFile(String filename) {
@@ -44,6 +42,7 @@ public class XMLReading {
             for (int i = 0; i < airportRunwaysList.getLength(); i++) {
                 var runwayNode = airportRunwaysList.item(i);
                 var runway = buildRunwayFromNode(runwayNode, airport);
+                airport.addRunway(runway);
             }
         }
         catch (Exception e) {
@@ -69,11 +68,30 @@ public class XMLReading {
                 var runwaySectionNode = runwaySectionsList.item(j);
                 if (runwayNode.getNodeType() == Node.ELEMENT_NODE) {
                     var runwaySectionElement = (Element) runwaySectionNode;
+                    var runwaySection = buildRunwaySection(runway, runwaySectionElement);
+                    // TODO: There is something wrong here. In line 73 this will be set for every run of the loop.
+                    // TODO: We don't want that. I'll change later tho.
                     runway = buildRunwayFromElement(runwayName, airport, runwaySectionElement);
+                    runway.addRunwaySection(runwaySection);
                 }
             }
         }
         return runway;
+    }
+
+    private RunwaySection buildRunwaySection(Runway runway, Element runwaySectionElement) {
+        var sectionParams = buildRunwaySectionParams(runwaySectionElement);
+        var angle = Integer.parseInt(extractValue("angle", runwaySectionElement));
+        var displaced = Double.parseDouble(extractValue("displaced", runwaySectionElement));
+        return new RunwaySection(runway, angle, displaced, sectionParams);
+    }
+
+    private RunwayParameters buildRunwaySectionParams(Element runwaySectionElement) {
+        var tora = Double.parseDouble(extractValue("tora", runwaySectionElement));
+        var asda = Double.parseDouble(extractValue("asda", runwaySectionElement));
+        var toda = Double.parseDouble(extractValue("toda", runwaySectionElement));
+        var lda = Double.parseDouble(extractValue("lda", runwaySectionElement));
+        return new RunwayParameters(tora, asda, toda, lda);
     }
 
     /**
@@ -87,8 +105,8 @@ public class XMLReading {
         var stopway = Double.parseDouble(extractValue("stopway", runwaySectionElement));
         var resa = Double.parseDouble(extractValue("resa", runwaySectionElement));
         var tora = Double.parseDouble(extractValue("tora", runwaySectionElement));
-        var toda = Double.parseDouble(extractValue("toda", runwaySectionElement));
         var asda = Double.parseDouble(extractValue("asda", runwaySectionElement));
+        var toda = Double.parseDouble(extractValue("toda", runwaySectionElement));
         var lda = Double.parseDouble(extractValue("lda", runwaySectionElement));
         var stripend = Double.parseDouble(extractValue("stripend", runwaySectionElement));
         var displaced = Double.parseDouble(extractValue("displaced", runwaySectionElement));

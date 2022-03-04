@@ -13,7 +13,6 @@ import java.io.FileOutputStream;
 
 public class XMLWriting {
 
-
     /**
      * Creates an XML file for a given obstacle.
      * @param obstacle The obstacle class instance to be saved

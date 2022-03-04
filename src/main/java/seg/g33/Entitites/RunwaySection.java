@@ -3,7 +3,7 @@ package seg.g33.Entitites;
 public class RunwaySection {
 
     private Runway runway;
-    private Double angle;
+    private Integer angle;
     private Double displaced;
     private RunwayParameters parameters;
 
@@ -21,7 +21,7 @@ public class RunwaySection {
      * @param displaced The displaced threshold
      * @param parameters Runway parameters
      */
-    public RunwaySection(Runway runway, Double angle, Double displaced, RunwayParameters parameters) {
+    public RunwaySection(Runway runway, Integer angle, Double displaced, RunwayParameters parameters) {
         this.runway = runway;
         this.angle = angle;
         this.displaced = displaced;
@@ -36,11 +36,11 @@ public class RunwaySection {
         this.runway = runway;
     }
 
-    public Double getAngle() {
+    public Integer getAngle() {
         return angle;
     }
 
-    public void setAngle(Double angle) {
+    public void setAngle(Integer angle) {
         this.angle = angle;
     }
 

@@ -9,12 +9,16 @@ package seg.g33.Entitites;
  */
 public class RunwayParameters {
 
+    /**
+     * Properties
+     */
     private Runway runway;
     private Character direction;
     private Double TORA;   // Take-Off Runway Available
     private Double  TODA;  // Take-Off Distance Available
     private Double ASDA;   // Accelerate-Stop Distance Available
     private Double LDA;    // Landing Distance Available
+
     /**
      * These two are not mentioned in the UML, but are in the spec
      * May become necessary, may become redundant
@@ -23,13 +27,21 @@ public class RunwayParameters {
     private Double TOCS;   // Take-Off Climb Surface
     private Double RESA;   // Runway End Safety Area
 
-    public RunwayParameters(){
+    /**
+     * Default constructor
+     */
+    public RunwayParameters() {
         this.ALS = 0d;
         this.TOCS = 0d;
         this.RESA = 0d;
     }
 
+    /**
+     * Parametrized constructor
+     */
     public RunwayParameters(Double TORA, Double ASDA, Double TODA, Double LDA){
+        this();
+
         this.TORA = TORA;
         this.ASDA = ASDA;
         this.TODA = TODA;
@@ -43,7 +55,7 @@ public class RunwayParameters {
      * -=-=-=-=-=-=-=-
      */
 
-    public Runway getName() {
+    public Runway getRunway() {
         return this.runway;
     }
 

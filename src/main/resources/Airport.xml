@@ -4,7 +4,7 @@
         <airportRunway>
             <name>Runway 1</name>
             <runwaySection>
-                <angle>20.0</angle>
+                <angle>20</angle>
                 <direction>L</direction>
                 <length>10.0</length>
                 <clearway>20.0</clearway>
@@ -23,7 +23,7 @@
         <airportRunway>
             <name>Runway 2</name>
             <runwaySection>
-                <angle>20.0</angle>
+                <angle>20</angle>
                 <direction>L</direction>
                 <length>10.0</length>
                 <clearway>20.0</clearway>
@@ -38,7 +38,7 @@
             </runwaySection>
 
             <runwaySection>
-                <angle>20.0</angle>
+                <angle>20</angle>
                 <direction>R</direction>
                 <length>10.0</length>
                 <clearway>20.0</clearway>
