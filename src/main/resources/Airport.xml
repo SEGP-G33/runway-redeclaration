@@ -1,0 +1,55 @@
+<airport>
+    <airportName>JFK International Airport</airportName>
+    <airportRunways>
+        <airportRunway>
+            <name>Runway 1</name>
+            <runwaySection>
+                <angle>20</angle>
+                <direction>L</direction>
+                <length>10.0</length>
+                <clearway>20.0</clearway>
+                <stopway>30.0</stopway>
+                <resa>40.0</resa>
+                <tora>1000</tora>
+                <toda>2000</toda>
+                <asda>3000</asda>
+                <lda>3000</lda>
+                <stripend>50.0</stripend>
+                <displaced>60.0</displaced>
+            </runwaySection>
+        </airportRunway>
+
+        <airportRunway>
+            <name>Runway 2</name>
+            <runwaySection>
+                <angle>20</angle>
+                <direction>L</direction>
+                <length>10.0</length>
+                <clearway>20.0</clearway>
+                <stopway>30.0</stopway>
+                <resa>40.0</resa>
+                <tora>1000</tora>
+                <toda>2000</toda>
+                <asda>3000</asda>
+                <lda>3000</lda>
+                <stripend>50.0</stripend>
+                <displaced>60.0</displaced>
+            </runwaySection>
+
+            <runwaySection>
+                <angle>20</angle>
+                <direction>R</direction>
+                <length>10.0</length>
+                <clearway>20.0</clearway>
+                <stopway>30.0</stopway>
+                <resa>40.0</resa>
+                <tora>1000</tora>
+                <toda>2000</toda>
+                <asda>3000</asda>
+                <lda>3000</lda>
+                <stripend>50.0</stripend>
+                <displaced>60.0</displaced>
+            </runwaySection>
+        </airportRunway>
+    </airportRunways>
+</airport>
