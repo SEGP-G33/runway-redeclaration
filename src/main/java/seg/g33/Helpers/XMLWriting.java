@@ -1,5 +1,7 @@
 package seg.g33.Helpers;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import seg.g33.Entitites.Airport;
@@ -16,9 +18,10 @@ import java.io.FileOutputStream;
 
 public class XMLWriting {
 
-    public static void main(String[] args) {
-
-    }
+    /**
+     * Logger
+     */
+    private static final Logger logger = LogManager.getLogger(XMLWriting.class);
 
     /**
      * Creates an XML file for a given Airport.

@@ -1,5 +1,7 @@
 package seg.g33.Helpers;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -13,17 +15,16 @@ import java.io.IOException;
 
 public class XMLReading {
 
-    // TODO: Here just to test the reading of XML Files. DELETE LATER ON.
-    public static void main(String[] args) {
-        var reader = new XMLReading();
+    /**
+     * Logger
+     */
+    private static final Logger logger = LogManager.getLogger(XMLReading.class);
 
-        // Reads Airport
-        reader.configureAirportFromXMLFile("src/main/resources/Airport.xml");
-
-        // Reads Obstacle and prints it
-        // System.out.println(reader.configureObstacleFromXMLFile("src/main/resources/Obstacle.xml"));
-    }
-
+    /**
+     * Reads an Airport from an XML file.
+     * @param filename the filename of the XML file
+     * @return an instance of the Airport class
+     */
     public Airport configureAirportFromXMLFile(String filename) {
         var factory = DocumentBuilderFactory.newInstance();
 
@@ -53,6 +54,12 @@ public class XMLReading {
         return airport;
     }
 
+    /**
+     * Builds a Runway instance from a Node
+     * @param runwayNode the node of the XMl file
+     * @param airport the airport which the runway is a part of
+     * @return an instance of the Runway class
+     */
     private Runway buildRunwayFromNode(Node runwayNode, Airport airport) {
         Runway runway = null;
 
@@ -79,6 +86,12 @@ public class XMLReading {
         return runway;
     }
 
+    /**
+     * Builds a RunwaySection instance
+     * @param runway The runway the section is a part of
+     * @param runwaySectionElement the XML element the RunwaySection is a part of
+     * @return an instance of the RunwaySection class
+     */
     private RunwaySection buildRunwaySection(Runway runway, Element runwaySectionElement) {
         var sectionParams = buildRunwaySectionParams(runwaySectionElement);
         var angle = Integer.parseInt(extractValue("angle", runwaySectionElement));
@@ -86,6 +99,11 @@ public class XMLReading {
         return new RunwaySection(runway, angle, displaced, sectionParams);
     }
 
+    /**
+     * Builds an instance of the RunwayParams
+     * @param runwaySectionElement the XML element the RunwaySection is a part of
+     * @return an instance of the RunwayParams class
+     */
     private RunwayParameters buildRunwaySectionParams(Element runwaySectionElement) {
         var tora = Double.parseDouble(extractValue("tora", runwaySectionElement));
         var asda = Double.parseDouble(extractValue("asda", runwaySectionElement));
