@@ -133,8 +133,7 @@ public class TextPrint {
                         "| |_) / _ \\ | |_) |  / _ \\ | |\\/| |  _|   | | |  _| | |_) |\n" +
                         "|  __/ ___ \\|  _ <  / ___ \\| |  | | |___  | | | |___|  _ < \n" +
                         "|_| /_/   \\_\\_| \\_\\/_/   \\_\\_|  |_|_____| |_| |_____|_| \\_\\\n")
-                .append("  NAME\t\t\t:  " + parameter.getName() + "\n")
-//                .append("  RUNWAY\t\t:  " + parameter.getRunway() + "\n")
+                .append("  RUNWAY\t\t:  " + parameter.getRunway() + "\n")
                 .append("  TORA\t\t\t:  " + parameter.getTORA() + "\n")
                 .append("  TODA\t\t\t:  " + parameter.getTODA() + "\n")
                 .append("  ASDA\t\t\t:  " + parameter.getASDA() + "\n")
