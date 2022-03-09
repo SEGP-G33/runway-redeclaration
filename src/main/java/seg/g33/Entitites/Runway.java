@@ -269,7 +269,4 @@ public class Runway {
         this.displacedThreshold = displacedThreshold;
     }
 
-    public void addRunwaySection(RunwaySection section) {
-        this.runwaySections.add(section);
-    }
 }
