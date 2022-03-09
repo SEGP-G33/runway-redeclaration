@@ -27,6 +27,7 @@ public final class Airport {
      */
     public Airport(String name) {
         this.name = name;
+        this.airportRunways = new ArrayList<Runway>();
     }
 
     /**
