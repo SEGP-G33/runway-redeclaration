@@ -15,16 +15,29 @@ public class TextPrint {
      * need delete *
      **************/
 
-    public static void main(String[] args) {
-        Airport airport = new Airport("LHR");
-        System.out.println(text(airport));
-        Runway runway = new Runway("R27", airport, 10, 'L', 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0);
-        System.out.println(text(runway));
-
-        ObstaclePresets presets = new ObstaclePresets();
-        System.out.println(text(presets.getObstaclePreset("Obstacle")));
-        System.out.println(text(presets.getAllObstaclePresets().get(2)));
-    }
+//    public static void main(String[] args) {
+//        Airport airport = new Airport("LHR");
+//        Runway runway = new Runway("R27", airport, 10, 'L', 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0);
+//        System.out.println(text(airport));
+//        System.out.println(text(runway));
+//
+//        Obstacle obstacle = new Obstacle("test",20.0,20.0,20.0,20.0);
+//        System.out.println(text(obstacle));
+//
+//        Plane plane = new Plane("787-1");
+//        System.out.println(text(plane));
+//
+//        Calculator calculator = new Calculator();
+//        System.out.println(text(calculator));
+//
+//        RunwayParameters parameters = new RunwayParameters();
+//        System.out.println(text(parameters));
+//
+//        ObstaclePresets presets = new ObstaclePresets();
+//        presets.createObstaclePreset(obstacle);
+//        System.out.println(text(presets.getObstaclePreset("Obstacle")));
+//        System.out.println(text(presets.getAllObstaclePresets().get(2)));
+//    }
 
     /********************
      * TextPrint Airport *
@@ -84,7 +97,7 @@ public class TextPrint {
                         "    |  __/| |___ / ___ \\| |\\  | |___ \n" +
                         "    |_|   |_____/_/   \\_\\_| \\_|_____|\n")
                 .append("  NAME\t\t\t:  " + plane.getName() + "\n")
-                .append("  BLAST\t\t:  " + plane.getBlastProtection() + "\n")
+                .append("  BLAST\t\t\t:  " + plane.getBlastProtection() + "\n")
                 .append("-------- [System Information End] --------\n").toString();
     }
 
@@ -101,7 +114,7 @@ public class TextPrint {
                         " \\___/|____/____/ |_/_/   \\_\\____|_____|_____|\n")
                 .append("  NAME\t\t\t:  " + obstacle.getName() + "\n")
                 .append("  HEIGHT\t\t:  " + obstacle.getHeight() + "\n")
-                .append("  CenterDistance\t:  " + obstacle.getCenterDistance() + "\n")
+                .append("  CenterDistance:  " + obstacle.getCenterDistance() + "\n")
                 .append("  RightDistance\t:  " + obstacle.getRightDistance() + "\n")
                 .append("  LeftDistance\t:  " + obstacle.getLeftDistance() + "\n")
                 .append("-------- [System Information End] --------\n").toString();
@@ -118,8 +131,7 @@ public class TextPrint {
                         "| |     / _ \\ | |  | |   | | | | |     / _ \\ | || | | | |_) |\n" +
                         "| |___ / ___ \\| |__| |___| |_| | |___ / ___ \\| || |_| |  _ < \n" +
                         " \\____/_/   \\_\\_____\\____|\\___/|_____/_/   \\_\\_| \\___/|_| \\_\\\n")
-//                .append("  NAME\t\t\t:  " + calculator.getName() + "\n")
-                .append("  PLANE\t\t:  " + calculator.getPlane() + "\n")
+                .append("  PLANE\t\t\t:  " + calculator.getPlane() + "\n")
                 .append("  RUNWAY\t\t:  " + calculator.getRunway() + "\n")
                 .append("  OBSTACLE\t\t:  " + calculator.getObstacle() + "\n")
                 .append("-------- [System Information End] --------\n").toString();
@@ -144,7 +156,7 @@ public class TextPrint {
                 .append("  LDA\t\t\t:  " + parameter.getLDA() + "\n")
                 .append("  ALS\t\t\t:  " + parameter.getALS() + "\n")
                 .append("  TOCS\t\t\t:  " + parameter.getTOCS() + "\n")
-                .append("  DIRECTION\t:  " + parameter.getDirection() + "\n")
+                .append("  DIRECTION\t\t:  " + parameter.getDirection() + "\n")
                 .append("  RESA\t\t\t:  " + parameter.getRESA() + "\n")
                 .append("-------- [System Information End] --------\n").toString();
     }

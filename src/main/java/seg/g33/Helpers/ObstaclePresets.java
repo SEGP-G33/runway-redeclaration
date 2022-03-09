@@ -68,4 +68,13 @@ public class ObstaclePresets {
         }
         return obstacles;
     }
+
+    /**
+     * Creates an xml file with the name of the obstacle, if one already exists, the file is replaced
+     * @param obstacle The obstacle that is being saved
+     */
+    public void createObstaclePreset(Obstacle obstacle) {
+        XMLWriting writer = new XMLWriting();
+        writer.createObstacleXMLFile(obstacle, obstaclesDirectory+"/"+obstacle.getName()+".xml");
+    }
 }
