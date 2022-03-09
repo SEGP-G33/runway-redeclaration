@@ -162,9 +162,6 @@ public class Runway {
         }
     }
 
-    public void addRunwaySection(RunwaySection section) {
-        this.runwaySections.add(section);
-    }
 
     /**
      * -=-=-=-=-=-=-=-
@@ -256,5 +253,9 @@ public class Runway {
 
     public void setDisplacedThreshold(Double displacedThreshold) {
         this.displacedThreshold = displacedThreshold;
+    }
+
+    public void addRunwaySection(RunwaySection section) {
+        this.runwaySections.add(section);
     }
 }
