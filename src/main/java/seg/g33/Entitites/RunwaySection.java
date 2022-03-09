@@ -59,4 +59,22 @@ public class RunwaySection {
     public void setParameters(RunwayParameters parameters) {
         this.parameters = parameters;
     }
+
+    /**
+     * toString method used for debugging.
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "RunwaySection{" +
+                "runway=" + runway +
+                ", angle=" + angle +
+                ", displaced=" + displaced +
+                ", parameters=" + parameters +
+                ", RESA=" + RESA +
+                ", stripend=" + stripend +
+                ", stopway=" + stopway +
+                ", clearway=" + clearway +
+                '}';
+    }
 }

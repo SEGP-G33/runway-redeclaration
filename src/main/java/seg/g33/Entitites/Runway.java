@@ -4,11 +4,17 @@ import java.util.ArrayList;
 
 public class Runway {
 
+    /**
+     * Properties
+     */
     private final String name;
     private final Airport airport;
     private final Integer angle;
     private final Character direction;
 
+    /**
+     * ArrayList of RunwaySections
+     */
     private final ArrayList<RunwaySection> runwaySections;
 
     // These define a runway in the spec
@@ -24,6 +30,9 @@ public class Runway {
     private Double stripEndLength = 0d;
     private Double displacedThreshold = 0d;
 
+    /**
+     * Constructor
+     */
     public Runway(String name, Airport airport, Integer angle, Character direction, Double defTORA, Double defASDA, Double defTODA, Double defLDA,
                   Double clearWayLength, Double stopWayLength, Double RESALength, Double stripEndLength, Double displacedThreshold) {
 
@@ -162,6 +171,10 @@ public class Runway {
         }
     }
 
+    /**
+     * Adds RunwaySection to this runway
+     * @param section the RunwaySection instance to be added
+     */
     public void addRunwaySection(RunwaySection section) {
         this.runwaySections.add(section);
     }
@@ -171,7 +184,6 @@ public class Runway {
      * Getter Methods
      * -=-=-=-=-=-=-=-
      */
-
     public String getName() {
         return name;
     }
@@ -237,7 +249,6 @@ public class Runway {
      * Setter Methods
      * -=-=-=-=-=-=-=-
      */
-
     public void setClearWayLength(Double clearWayLength) {
         this.clearWayLength = clearWayLength;
     }

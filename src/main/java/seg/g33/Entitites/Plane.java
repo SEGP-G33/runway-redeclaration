@@ -32,30 +32,39 @@ public class Plane {
     }
 
 
+    /**
+     * Getters
+     */
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Double getBlastProtection() {
         return blastProtection;
     }
 
-    public void setBlastProtection(Double blastProtection) {
-        this.blastProtection = blastProtection;
-    }
-
     public Double getSlope() {
         return slope;
+    }
+
+    /**
+     * Setters
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBlastProtection(Double blastProtection) {
+        this.blastProtection = blastProtection;
     }
 
     public void setSlope(Double slope) {
         this.slope = slope;
     }
 
+    /**
+     * toString method used for simple debugging
+     */
     @Override
     public String toString() {
         return "Plane{" +
