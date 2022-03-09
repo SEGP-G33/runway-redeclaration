@@ -1,0 +1,7 @@
+<Obstacle>
+    <name>Plane</name>
+    <height>50</height>
+    <centerDistance>20</centerDistance>
+    <leftDistance>40</leftDistance>
+    <rightDistance>70</rightDistance>
+</Obstacle>

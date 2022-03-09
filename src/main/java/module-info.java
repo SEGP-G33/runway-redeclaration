@@ -7,4 +7,6 @@ module seg.g33 {
 
     opens seg.g33 to javafx.fxml;
     exports seg.g33;
+    exports seg.g33.Controllers;
+    opens seg.g33.Controllers to javafx.fxml;
 }
