@@ -38,42 +38,82 @@ public class Obstacle {
         this.rightDistance = right;
     }
 
+    /**
+     * Getter for the name of the obstacle
+     * @return the name of the obstacle
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Setter for the name of the obstacle
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Getter method to get the height of the obstacle
+     * @return
+     */
     public double getHeight() {
         return height;
     }
 
+    /**
+     * Setter method to set the height of the obstacle
+     * @param height sets the height of an obstacle
+     */
     public void setHeight(double height) {
         this.height = height;
     }
 
+    /**
+     * Getter method to get the distance to the center of the runway from the obstacle
+     * @return distance from the obstacle to the center of the runway
+     */
     public Double getCenterDistance() {
         return centerDistance;
     }
 
+    /**
+     * Setter method to set the distance of the obstacle from the center of the runway
+     * @param centerDistance distance of the obstacle from the center of the runway
+     */
     public void setCenterDistance(Double centerDistance) {
         this.centerDistance = centerDistance;
     }
 
+    /**
+     * Getter method to get the distance to the left of the runway from the obstacle
+     * @return distance from the obstacle to the left of the runway
+     */
     public Double getLeftDistance() {
         return leftDistance;
     }
 
+    /**
+     * Setter method to set the distance of the obstacle from the left of the runway
+     * @param leftDistance distance of the obstacle from the left of the runway
+     */
     public void setLeftDistance(Double leftDistance) {
         this.leftDistance = leftDistance;
     }
 
+    /**
+     * Getter method to get the distance to the right of the runway from the obstacle
+     * @return distance from the obstacle to the right of the runway
+     */
     public Double getRightDistance() {
         return rightDistance;
     }
 
+    /**
+     * Setter method to set the distance of the obstacle from the right of the runway
+     * @param rightDistance distance of the obstacle from the right of the runway
+     */
     public void setRightDistance(Double rightDistance) {
         this.rightDistance = rightDistance;
     }
