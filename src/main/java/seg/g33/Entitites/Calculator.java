@@ -1,5 +1,7 @@
 package seg.g33.Entitites;
 
+import java.util.ArrayList;
+
 /**
  * Calculator class
  *
@@ -12,123 +14,128 @@ public class Calculator {
     private Obstacle obstacle;
     private Runway runway;
 
-    /**
-     * Calculates the new runway parameters in the case that a plane is taking off towards and obstacle,
-     * or landing towards an obstacle
-     *
-     * @param distFromThresh The distance of the obstacle from the threshold of the runway
-     * @return the complete set of runway parameters
-     */
-    public RunwayParameters calcCase1(Integer distFromThresh){
-        RunwayParameters params = new RunwayParameters();
+    public Calculator(String name, Plane plane, Obstacle obstacle, Runway runway){
+        this.name = name;
+        this.plane = plane;
+        this.obstacle = obstacle;
+        this.runway = runway;
+    }
 
-        Double TORA = distFromThresh + runway.getDisplacedThreshold();
-        Double ASDA = TORA;
-        Double TODA = TORA;
-        Double LDA = distFromThresh - runway.getRESALength() - runway.getStripEndLength();
+    public ArrayList<RunwayParameters> calculate(Double distFromLeftThreshold, Double distFromRightThreshold){
+        RunwaySection lowerRunway = runway.getRunwaySections().get(0);
+        RunwaySection upperRunway = runway.getRunwaySections().get(1);
+        RunwayParameters lowerParams;
+        RunwayParameters upperParams;
 
-        params.setTORA(TORA);
-        params.setASDA(ASDA);
-        params.setTODA(TODA);
-        params.setLDA(LDA);
+        if (distFromRightThreshold >= runway.getDefaultParameters().getTORA()){
+            // object is closer to right hand side on 09L/27R runway
+            lowerParams = calculateTowards(lowerRunway, distFromLeftThreshold);
+            upperParams = calculateAway(upperRunway, distFromRightThreshold);
+        } else {
+            // object is closer to left hand side on 09L/27R runway
+            lowerParams = calculateAway(lowerRunway, distFromLeftThreshold);
+            upperParams = calculateTowards(upperRunway, distFromRightThreshold);
+        }
+
+        ArrayList<RunwayParameters> params = new ArrayList<>();
+        params.add(lowerParams);
+        params.add(upperParams);
         return params;
     }
 
-    /**
-     * Calculates the new runway parameters in the case that a plane is taking off away from an obstacle,
-     * or landing over the obstacle
-     *
-     * @param distFromThresh The distance of the obstacle from the threshold of the runway
-     * @return the new set of runway parameters
-     */
-    public RunwayParameters calcCase2(Integer distFromThresh){
-        RunwayParameters params = new RunwayParameters();
-        Double slopeCalc = this.getSlopeCalculation();
 
-        Double TORA = this.runway.getDefaultParameters().getTORA() - this.plane.getBlastProtection() - distFromThresh - this.runway.getDisplacedThreshold();
-        Double ASDA = TORA + this.runway.getStopWayLength();
-        Double TODA = TORA + this.runway.getClearWayLength();
-        Double LDA = this.runway.getDefaultParameters().getLDA() - distFromThresh - slopeCalc - this.runway.getStripEndLength();
+    public RunwayParameters calculateTowards(RunwaySection section, Double distFromThreshold){
+        Double TORA = distFromThreshold - slopeCalc() - section.getStripEndLength();
+        Double LDA = distFromThreshold - section.getRESALength() - section.getStripEndLength();
 
-        params.setTORA(TORA);
-        params.setASDA(ASDA);
-        params.setTODA(TODA);
-        params.setLDA(LDA);
-        return params;
+        return new RunwayParameters(TORA, TORA, TORA, LDA);
     }
 
-    /**
-     * Calculates runway parameters the same as calcCase1, but this time returns them as a String describing the working out
-     * This is important as it allows the redeclaration calculators to compare their working out with the software results
-     *
-     * @param distFromThresh The distance of the obstacle from the threshold of the runway
-     * @return A string describing the calculations
-     */
-    public String calcAsStringCase1(Integer distFromThresh){
-        RunwayParameters params = this.calcCase1(distFromThresh);
-        String result = "Complete Calculations: Taking off towards or landing towards obstacle";
+    public RunwayParameters calculateAway(RunwaySection section, Double distFromThreshold){
+        RunwayParameters original = section.getDefaultParameters();
+        Double TORA = original.getTORA() - plane.getBlastProtection() - distFromThreshold - section.getDisplacedThreshold();
+        Double ASDA = TORA + section.getStopWayLength();
+        Double TODA = TORA + section.getClearWayLength();
+        Double LDA = original.getLDA() - distFromThreshold - section.getStripEndLength() - slopeCalc();
 
-        // Adds each calculated value on a new line of the result
-        result += String.format("\t- TORA: %s + %s = %s\n", distFromThresh, runway.getDisplacedThreshold(), params.getTORA());
-        result += String.format("\t- ASDA: %s\n", params.getASDA());
-        result += String.format("\t- TODA: %s\n", params.getTODA());
-        result += String.format("\t- LDA : %s - %s - %s = %s\n", distFromThresh, runway.getRESALength(), runway.getStripEndLength(), params.getLDA());
+        return new RunwayParameters(TORA, ASDA, TODA, LDA);
+    }
+
+    public String calcAsString(Double distFromLeftThreshold, Double distFromRightThreshold){
+        RunwaySection lowerRunway = runway.getRunwaySections().get(0);
+        RunwaySection upperRunway = runway.getRunwaySections().get(1);
+        String result = "Calculations:\n";
+        String lowerParams;
+        String upperParams;
+
+        if (distFromRightThreshold >= runway.getDefaultParameters().getTORA()){
+            // object is closer to right hand side on 09L/27R runway
+            lowerParams = calcTowardsAsString(lowerRunway, distFromLeftThreshold);
+            upperParams = calcAwayAsString(upperRunway, distFromRightThreshold);
+        } else {
+            // object is closer to left hand side on 09L/27R runway
+            lowerParams = calcAwayAsString(lowerRunway, distFromLeftThreshold);
+            upperParams = calcTowardsAsString(upperRunway, distFromRightThreshold);
+        }
+
+        result += lowerParams;
+        result += upperParams;
+        return result;
+    }
+
+    public String calcTowardsAsString(RunwaySection section, Double distFromThreshold){
+        String result = String.format("\t Runway %s: TakeOff Toward Obstacle, Landing Toward Obstacle", section.getAngle());
+        result += String.format("\t\t- TORA: \n");
+        result += String.format("\t\t- ASDA: \n");
+        result += String.format("\t\t- TODA: \n");
+        result += String.format("\t\t- LDA : \n");
 
         return result;
     }
 
-    /**
-     * Calculates runway parameters the same as calcCase2, but this time returns them as a String describing the working out
-     * This is important as it allows the redeclaration calculators to compare their working out with the software results
-     *
-     * @param distFromThresh The distance of the obstacle from the threshold of the runway
-     * @return A string describing the calculations
-     */
-    public String calcAsStringCase2(Integer distFromThresh){
-        RunwayParameters params = this.calcCase1(distFromThresh);
-        String result = "Complete Calculations: Taking off away or landing over obstacle";
-        Double slopeCalc = this.getSlopeCalculation();
+    public String calcAwayAsString(RunwaySection section, Double distFromThreshold){
+        String result = String.format("\t Runway %s: TakeOff Away From Obstacle, Landing Over Obstacle", section.getAngle());
+        result += String.format("\t\t- TORA: \n");
+        result += String.format("\t\t- ASDA: \n");
+        result += String.format("\t\t- TODA: \n");
+        result += String.format("\t\t- LDA : \n");
 
-        // Adds each calculated value on a new line of the result
-        result += String.format("\t- TORA: %s - %s - %s - %s = %s\n", runway.getDefaultParameters().getTORA(), plane.getBlastProtection(), distFromThresh, runway.getDisplacedThreshold(), params.getTORA());
-        result += String.format("\t- ASDA: %s + %s = %s\n", params.getTORA(), runway.getStopWayLength(), params.getASDA());
-        result += String.format("\t- TODA: %s + %s = %s\n", params.getTORA(), runway.getClearWayLength(), params.getTODA());
-        result += String.format("\t- LDA : %s - %s - %s - %s = %s\n", runway.getDefaultParameters().getLDA(), distFromThresh, slopeCalc, runway.getStripEndLength(), params.getLDA());
         return result;
+    }
+    public Double slopeCalc(){
+        return obstacle.getHeight() * plane.getSlope();
     }
 
     /**
-     * -=-=-=-=-=-=-=-
-     * Getter Methods
-     * -=-=-=-=-=-=-=-
+     *  Getters and Setters
      */
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Plane getPlane() {
         return plane;
+    }
+
+    public void setPlane(Plane plane) {
+        this.plane = plane;
     }
 
     public Obstacle getObstacle() {
         return obstacle;
     }
 
-    public Runway getRunway() {
-        return runway;
-    }
-
-    private Double getSlopeCalculation(){
-        return (this.obstacle.getHeight() * this.plane.getSlope());
-    }
-
-    /**
-     * -=-=-=-=-=-=-=-
-     * Setter Methods
-     * -=-=-=-=-=-=-=-
-     */
-    public void setPlane(Plane plane) {
-        this.plane = plane;
-    }
-
     public void setObstacle(Obstacle obstacle) {
         this.obstacle = obstacle;
+    }
+
+    public Runway getRunway() {
+        return runway;
     }
 
     public void setRunway(Runway runway) {
