@@ -122,12 +122,12 @@ public class RunwaySection {
         return "RunwaySection{" +
                 "runway=" + runway +
                 ", angle=" + angle +
-                ", displaced=" + displaced +
-                ", parameters=" + parameters +
-                ", RESA=" + RESA +
-                ", stripend=" + stripend +
-                ", stopway=" + stopway +
-                ", clearway=" + clearway +
+                ", defaultParameters=" + defaultParameters +
+                ", clearWayLength=" + clearWayLength +
+                ", stopWayLength=" + stopWayLength +
+                ", RESALength=" + RESALength +
+                ", stripEndLength=" + stripEndLength +
+                ", displacedThreshold=" + displacedThreshold +
                 '}';
     }
 }
