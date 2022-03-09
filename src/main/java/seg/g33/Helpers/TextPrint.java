@@ -20,6 +20,10 @@ public class TextPrint {
         System.out.println(text(airport));
         Runway runway = new Runway("R27", airport, 10, 'L', 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0);
         System.out.println(text(runway));
+
+        ObstaclePresets presets = new ObstaclePresets();
+        System.out.println(text(presets.getObstaclePreset("Obstacle")));
+        System.out.println(text(presets.getAllObstaclePresets().get(2)));
     }
 
     /********************
