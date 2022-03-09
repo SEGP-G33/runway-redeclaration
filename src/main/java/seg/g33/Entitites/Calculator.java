@@ -84,21 +84,25 @@ public class Calculator {
     }
 
     public String calcTowardsAsString(RunwaySection section, Double distFromThreshold){
+        RunwayParameters params = calculateTowards(section, distFromThreshold);
+
         String result = String.format("\t Runway %s: TakeOff Toward Obstacle, Landing Toward Obstacle", section.getAngle());
-        result += String.format("\t\t- TORA: \n");
-        result += String.format("\t\t- ASDA: \n");
-        result += String.format("\t\t- TODA: \n");
-        result += String.format("\t\t- LDA : \n");
+        result += String.format("\t\t- TORA: %s - %s - %s = %s \n", distFromThreshold, slopeCalc(), section.getStripEndLength(), params.getTORA());
+        result += String.format("\t\t- ASDA: %s = %s \n", params.getTORA(), params.getASDA());
+        result += String.format("\t\t- TODA: %s = %s \n", params.getTORA(), params.getTODA());
+        result += String.format("\t\t- LDA : %s - %s - %s = %s \n", distFromThreshold, section.getRESALength(), section.getStripEndLength(), params.getLDA());
 
         return result;
     }
 
     public String calcAwayAsString(RunwaySection section, Double distFromThreshold){
+        RunwayParameters params = calculateAway(section, distFromThreshold);
+
         String result = String.format("\t Runway %s: TakeOff Away From Obstacle, Landing Over Obstacle", section.getAngle());
-        result += String.format("\t\t- TORA: \n");
-        result += String.format("\t\t- ASDA: \n");
-        result += String.format("\t\t- TODA: \n");
-        result += String.format("\t\t- LDA : \n");
+        result += String.format("\t\t- TORA: %s - %s - %s - %s = %s\n", section.getDefaultParameters().getTORA(), plane.getBlastProtection(), distFromThreshold, runway.getDisplacedThreshold(), params.getTORA());
+        result += String.format("\t\t- ASDA: %s + %s = %s\n", params.getTORA(), section.getStopWayLength(), params.getASDA());
+        result += String.format("\t\t- TODA: %s + %s = %s\n", params.getTORA(), runway.getClearWayLength(), params.getTODA());
+        result += String.format("\t\t- LDA : %s - %s - %s - %s = %s\n", runway.getDefaultParameters().getLDA(), distFromThreshold, slopeCalc(), runway.getStripEndLength(), params.getLDA());
 
         return result;
     }
