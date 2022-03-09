@@ -46,6 +46,12 @@
             <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
+        <!-- Gluon Glisten (com.gluonhq.charm.glisten.*) for main-menu.fxml -->
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>charm-glisten</artifactId>
+            <version>6.1.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
