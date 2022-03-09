@@ -21,7 +21,11 @@ public class TextPrint {
         Runway runway = new Runway("R27", airport, 10, 'L', 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0);
         System.out.println(text(runway));
 
+        Obstacle obstacle = new Obstacle("test",20.0,20.0,20.0,20.0);
+        System.out.println(text(obstacle));
+
         ObstaclePresets presets = new ObstaclePresets();
+        presets.createObstaclePreset(obstacle);
         System.out.println(text(presets.getObstaclePreset("Obstacle")));
         System.out.println(text(presets.getAllObstaclePresets().get(2)));
     }
