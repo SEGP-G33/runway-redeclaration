@@ -48,7 +48,7 @@ public class XMLWriting {
 
                 for (RunwaySection runwaySection: runway.getRunwaySections()) {
                     var sectionElement = xmlFile.createElement("runwaySection");
-                    var params = runwaySection.getParameters();
+                    var params = runwaySection.getDefaultParameters();
 
                     var angle = Integer.toString(runwaySection.getAngle());
                     var direction = String.valueOf(params.getDirection());
