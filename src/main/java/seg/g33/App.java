@@ -52,4 +52,9 @@ public class App extends Application {
         launch();
     }
 
+    static void showResponse(String breakdown){
+
+    }
+
+
 }
