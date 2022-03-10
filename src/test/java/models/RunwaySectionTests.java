@@ -28,7 +28,7 @@ public class RunwaySectionTests {
      * Makes sure the runway and runwaySection are correctly linked and that the class was constructed correctly
      */
     @Test
-    public void CheckRunwaySectionProperties() {
+    public void testRunwaySectionProperties() {
         var isRunway = runwaySection.getRunway();
         assertEquals(runway1,isRunway);
 
@@ -38,24 +38,24 @@ public class RunwaySectionTests {
 
         assertEquals(runway1,runwaySection.getRunway());
         assertEquals(1,runwaySection.getAngle());
-        assertEquals(1.0,runwaySection.getDisplaced());
-        assertEquals(runwayParameters1,runwaySection.getParameters());
+        assertEquals(1.0,runwaySection.getDisplacedThreshold());
+        assertEquals(runwayParameters1,runwaySection.getDefaultParameters());
     }
 
     /**
      * Makes sure all setters and getters work
      */
     @Test
-    public void CheckSettersAndGetters() {
+    public void testRunwaySectionGettersSetters() {
         runwaySection.setRunway(runway2);
         runwaySection.setAngle(2);
         runwaySection.setDisplaced(2.0);
-        runwaySection.setParameters(runwayParameters2);
+        runwaySection.setDefaultParameters(runwayParameters2);
 
         assertNotEquals(runway1,runwaySection.getRunway());
         assertEquals(runway2,runwaySection.getRunway());
         assertEquals(2,runwaySection.getAngle());
-        assertEquals(2.0,runwaySection.getDisplaced());
-        assertEquals(runwayParameters2,runwaySection.getParameters());
+        assertEquals(2.0,runwaySection.getDisplacedThreshold());
+        assertEquals(runwayParameters2,runwaySection.getDefaultParameters());
     }
 }
