@@ -49,6 +49,7 @@ public class XMLReading {
         catch (Exception e) {
             // TODO: Handle exceptions
             e.printStackTrace();
+            return null;
         }
 
         return airport;
@@ -155,6 +156,7 @@ public class XMLReading {
         } catch (Exception e) {
             // TODO: Handle exception.
             e.printStackTrace();
+            return null;
         }
 
         return obstacle;

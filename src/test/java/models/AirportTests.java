@@ -23,7 +23,6 @@ public class AirportTests {
     private final Runway runway2 = new Runway("Runway2",airport1,0,'L',1.0,1.0,1.0,1.0);
     private final Runway runway3 = new Runway("Runway3",airport2,0,'L',1.0,1.0,1.0,1.0);
 
-
     /**
      *
      * This test checks if airport names and runways in them are correct.
@@ -55,7 +54,6 @@ public class AirportTests {
      */
     @Test
     public void checkAddRemove(){
-
         airport1.removeRunway(runway2);
         var isRunway5 = airport1.getAirportRunways().contains(runway2);  // should assert to false
         assertEquals(false, isRunway5, "Airport1 should not have\"Runway2\" anymore since it was removed.");
