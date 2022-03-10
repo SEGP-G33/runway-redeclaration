@@ -58,7 +58,7 @@ public class AirportPresets {
      * Gets all presets in the previously specified directory
      * @return Returns a list of Airports presets, or null if there were none
      */
-    public List<Airport> getAllObstaclePresets() {
+    public List<Airport> getAllAirportPresets() {
         List<Airport> airports = new ArrayList<>();
         File airportsFile = new File(airportDirectory);
         File[] airportNames = airportsFile.listFiles();

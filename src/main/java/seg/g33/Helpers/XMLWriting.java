@@ -29,6 +29,10 @@ public class XMLWriting {
      * @param filename Filename for the XML file
      */
     public void createAirportXMLFile(Airport airport, String filename) {
+        if (airport == null) {
+            throw new IllegalArgumentException("Airport can't be null");
+        }
+
         var builderFactory = DocumentBuilderFactory.newInstance();
         var transformerFactory = TransformerFactory.newInstance();
 
@@ -110,6 +114,10 @@ public class XMLWriting {
         var builderFactory = DocumentBuilderFactory.newInstance();
         var transformerFactory  = TransformerFactory.newInstance();
 
+        if (obstacle == null) {
+            throw new IllegalArgumentException("Obstacle can't be null...");
+        }
+
         try {
             var builder = builderFactory.newDocumentBuilder();
             var transformer = transformerFactory.newTransformer();
@@ -127,7 +135,7 @@ public class XMLWriting {
             xmlFile.appendChild(rootElement);
 
             var source = new DOMSource(xmlFile);
-            var outputStream = new FileOutputStream(filename);
+            var outputStream = new FileOutputStream(filename + ".xml");
             var result = new StreamResult(outputStream);
 
             // TODO: Look more into properties for tranformer. These 2 are needed to properly indent the XML File.
