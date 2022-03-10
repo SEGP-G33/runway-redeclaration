@@ -29,12 +29,12 @@ public class Calculator {
 
         if (distFromRightThreshold >= runway.getDefaultParameters().getTORA()){
             // object is closer to right hand side on 09L/27R runway
-            lowerParams = calculateTowards(lowerRunway, distFromLeftThreshold);
-            upperParams = calculateAway(upperRunway, distFromRightThreshold);
-        } else {
-            // object is closer to left hand side on 09L/27R runway
             lowerParams = calculateAway(lowerRunway, distFromLeftThreshold);
             upperParams = calculateTowards(upperRunway, distFromRightThreshold);
+        } else {
+            // object is closer to left hand side on 09L/27R runway
+            lowerParams = calculateTowards(lowerRunway, distFromLeftThreshold);
+            upperParams = calculateAway(upperRunway, distFromRightThreshold);
         }
 
         ArrayList<RunwayParameters> params = new ArrayList<>();
@@ -70,12 +70,12 @@ public class Calculator {
 
         if (distFromRightThreshold >= runway.getDefaultParameters().getTORA()){
             // object is closer to right hand side on 09L/27R runway
-            lowerParams = calcTowardsAsString(lowerRunway, distFromLeftThreshold);
-            upperParams = calcAwayAsString(upperRunway, distFromRightThreshold);
-        } else {
-            // object is closer to left hand side on 09L/27R runway
             lowerParams = calcAwayAsString(lowerRunway, distFromLeftThreshold);
             upperParams = calcTowardsAsString(upperRunway, distFromRightThreshold);
+        } else {
+            // object is closer to left hand side on 09L/27R runway
+            lowerParams = calcTowardsAsString(lowerRunway, distFromLeftThreshold);
+            upperParams = calcAwayAsString(upperRunway, distFromRightThreshold);
         }
 
         result += lowerParams;
@@ -86,7 +86,7 @@ public class Calculator {
     public String calcTowardsAsString(RunwaySection section, Double distFromThreshold){
         RunwayParameters params = calculateTowards(section, distFromThreshold);
 
-        String result = String.format("\t Runway %s: TakeOff Toward Obstacle, Landing Toward Obstacle", section.getAngle());
+        String result = String.format("\t Runway %s: TakeOff Toward Obstacle, Landing Toward Obstacle\n", section.getAngle());
         result += String.format("\t\t- TORA: %s - %s - %s = %s \n", distFromThreshold, slopeCalc(), section.getStripEndLength(), params.getTORA());
         result += String.format("\t\t- ASDA: %s = %s \n", params.getTORA(), params.getASDA());
         result += String.format("\t\t- TODA: %s = %s \n", params.getTORA(), params.getTODA());
@@ -98,11 +98,11 @@ public class Calculator {
     public String calcAwayAsString(RunwaySection section, Double distFromThreshold){
         RunwayParameters params = calculateAway(section, distFromThreshold);
 
-        String result = String.format("\t Runway %s: TakeOff Away From Obstacle, Landing Over Obstacle", section.getAngle());
+        String result = String.format("\t Runway %s: TakeOff Away From Obstacle, Landing Over Obstacle\n", section.getAngle());
         result += String.format("\t\t- TORA: %s - %s - %s - %s = %s\n", section.getDefaultParameters().getTORA(), plane.getBlastProtection(), distFromThreshold, runway.getDisplacedThreshold(), params.getTORA());
         result += String.format("\t\t- ASDA: %s + %s = %s\n", params.getTORA(), section.getStopWayLength(), params.getASDA());
-        result += String.format("\t\t- TODA: %s + %s = %s\n", params.getTORA(), runway.getClearWayLength(), params.getTODA());
-        result += String.format("\t\t- LDA : %s - %s - %s - %s = %s\n", runway.getDefaultParameters().getLDA(), distFromThreshold, slopeCalc(), runway.getStripEndLength(), params.getLDA());
+        result += String.format("\t\t- TODA: %s + %s = %s\n", params.getTORA(), section.getClearWayLength(), params.getTODA());
+        result += String.format("\t\t- LDA : %s - %s - %s - %s = %s\n", section.getDefaultParameters().getLDA(), distFromThreshold, slopeCalc(), runway.getStripEndLength(), params.getLDA());
 
         return result;
     }

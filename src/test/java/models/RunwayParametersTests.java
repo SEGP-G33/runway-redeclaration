@@ -20,7 +20,7 @@ public class RunwayParametersTests {
         assertEquals(100d, params.getTODA(), "Toda should equal 100.0");
         assertEquals(100d, params.getLDA(), "Lda should equal 100.0");
 
-        params.setTODA(200d);
+        params.setTORA(200d);
         params.setASDA(200d);
         params.setTODA(200d);
         params.setLDA(200d);

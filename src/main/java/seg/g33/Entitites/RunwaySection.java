@@ -11,7 +11,7 @@ public class RunwaySection {
     private Double clearWayLength = 0d;
     private Double stopWayLength = 0d;
     private Double RESALength = 240d;
-    private Double stripEndLength = 0d;
+    private Double stripEndLength = 60d;
     private Double displacedThreshold = 0d;
 
     /**
