@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RunwayParametersTests {
 
-    private static final Logger logger = LogManager.getLogger(PlaneTests.class);
+    private static final Logger logger = LogManager.getLogger(RunwayParametersTests.class);
 
     @Test
     public void testGettersSetters(){

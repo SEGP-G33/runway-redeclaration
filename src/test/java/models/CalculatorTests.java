@@ -11,8 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CalculatorTests {
 
-    private static final Logger logger = LogManager.getLogger(PlaneTests.class);
+    private static final Logger logger = LogManager.getLogger(CalculatorTests.class);
 
+    @DisplayName("Tests Setting up the Airports and Runways")
     @Test
     public void testSetup(){
         Airport airport = new Airport();
@@ -35,6 +36,7 @@ public class CalculatorTests {
         assertEquals(runway, calculator.getRunway(), "Runway set incorrectly");
     }
 
+    @DisplayName("Tests Calculation")
     @Test
     public void testCalculation(){
         Airport airport = new Airport();

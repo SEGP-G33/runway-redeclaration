@@ -1,9 +1,6 @@
 package misc;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import seg.g33.Entitites.Obstacle;
 import seg.g33.Helpers.XMLReading;
 import seg.g33.Helpers.XMLWriting;
@@ -18,37 +15,28 @@ public class XMLWritingTests {
     /**
      * XML Writer
      */
-    private XMLWriting xmlWriting;
+    private static  XMLWriting xmlWriting = new XMLWriting();
 
     /**
      * XML Reader
      */
-    private XMLReading xmlReading;
+    private XMLReading xmlReading = new XMLReading();
 
     /**
-     * Runs before each test case is executed. Configure the XML parsing classes.
+     * Obstacle
      */
-    @BeforeEach
-    public void setup() {
-        xmlReading = new XMLReading();
-        xmlWriting = new XMLWriting();
-    }
+    private static Obstacle obstacle;
 
-    /**
-     * Runs after each test case is executed. Releases XML parsing classes from memory.
-     */
-    @AfterEach
-    public void tearDown() {
-        xmlWriting = null;
-        xmlReading = null;
+    @BeforeAll
+    public static void setupObstacleFile() {
+        obstacle = new Obstacle("Obstacle1", 123.1, 10.0, 5.0, 6.0);
+        xmlWriting.createObstacleXMLFile(obstacle, "TestObstacle1");
     }
 
     @DisplayName("Test Writing an Obstacle instance and then Reading it.")
     @Test
     public void testSaveReadObstacle() {
-        var obstacle = new Obstacle("Obstacle1", 123.1, 10.0, 5.0, 6.0);
-        xmlWriting.createObstacleXMLFile(obstacle, "TestObstacle1");
-        var readObstacle = xmlReading.configureObstacleFromXMLFile("TestObstacle1");
+        var readObstacle = xmlReading.configureObstacleFromXMLFile("TestObstacle1.xml");
 
         assertEquals(obstacle.getName(), readObstacle.getName());
         assertEquals(obstacle.getCenterDistance(), readObstacle.getCenterDistance());
