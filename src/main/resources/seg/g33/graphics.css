@@ -1,0 +1,7 @@
+/* exists to modify the flashing pane results */
+
+.pane {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+}

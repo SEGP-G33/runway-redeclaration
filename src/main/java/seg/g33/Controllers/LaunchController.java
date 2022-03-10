@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import seg.g33.App;
-import seg.g33.Helpers.XMLReading;
 
 import java.io.IOException;
 
