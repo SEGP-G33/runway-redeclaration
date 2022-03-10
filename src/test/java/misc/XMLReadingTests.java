@@ -43,6 +43,10 @@ public class XMLReadingTests {
         airportPresets = null;
     }
 
+    /**
+     * MARK: TESTS
+     */
+
     @DisplayName("Test Reading Obstacle")
     @Test
     public void testReadingObstacleProperties() {
@@ -62,10 +66,32 @@ public class XMLReadingTests {
         assertNull(obstacle, "Obstacle Should be null");
     }
 
+    @DisplayName("Test Reading all obstacles")
+    @Test
+    public void testReadingAllObstacles() {
+        var obstacles = obstaclePresets.getAllObstaclePresets();
+        assertEquals(3, obstacles.size(), "Should have 3 preset obstacles");
+    }
+
+    @DisplayName("Test Reading Airport")
+    @Test
+    public void testReadingAirportProperties() {
+        var airport = airportPresets.getAirportPreset("Airport");
+
+        assertEquals("JFK International Airport", airport.getName());
+    }
+
     @DisplayName("Tests Reading Airport That Doesn't Exist")
     @Test
     public void testReadingAirportThatDoesNotExist() {
         var airport = airportPresets.getAirportPreset("NotThere");
         assertNull(airport, "Airport should be null");
+    }
+
+    @DisplayName("Test Reading all Airports")
+    @Test
+    public void testReadingAllAirports() {
+        var airports = airportPresets.getAllAirportPresets();
+        assertEquals(1, airports.size(), "Should have 3 preset obstacles");
     }
 }
