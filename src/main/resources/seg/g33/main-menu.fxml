@@ -7,7 +7,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,9 +19,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fx:id="root_scroll" prefHeight="1234.0" prefWidth="609.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.g33.Controllers.MainController">
+<ScrollPane fx:id="root_scroll" prefHeight="1234.0" prefWidth="609.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.g33.Controllers.MainController">
    <content>
-      <VBox fx:id="root_vbox" alignment="CENTER" prefHeight="1232.0" prefWidth="600.0" spacing="20.0">
+      <VBox fx:id="root_vbox" alignment="CENTER" prefHeight="1300.0" prefWidth="600.0" spacing="20.0">
          <padding>
             <Insets left="20.0" right="20.0" />
          </padding>
@@ -44,7 +43,7 @@
                   <VBox alignment="CENTER" prefHeight="89.0" prefWidth="266.0" spacing="10.0">
                      <children>
                         <Button fx:id="button_export_runway" mnemonicParsing="false" text="Export XML Runway Information" />
-                        <Button fx:id="button_export_obstacle" alignment="CENTER" mnemonicParsing="false" text="Export XML Obstacle Information" />
+                        <Button fx:id="button_export_obstacle" alignment="CENTER" mnemonicParsing="false" onAction="#handleExportObstacle" text="Export XML Obstacle Information" />
                         <Button fx:id="button_export_text" mnemonicParsing="false" text="Export Situation as Textual Format" />
                      </children>
                   </VBox>
@@ -57,25 +56,14 @@
             </AnchorPane>
             <HBox alignment="CENTER" prefHeight="30.0" prefWidth="600.0" spacing="20.0">
                <children>
-                  <Label text="Threshold" />
-                  <Label fx:id="label_threshold_designator_1" text="0L" />
-                  <Slider fx:id="slider_threshold" />
-                  <Label fx:id="label_threshold_designator_2" text="36R" />
+                  <Label text="Select Obstacle Preset" />
+                  <ComboBox fx:id="selectObstacleComboBox" prefWidth="150.0" promptText="Choose" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Label text="Obstacle-Plane Interaction" />
-                  <ComboBox fx:id="cbox_interaction" prefHeight="24.0" prefWidth="222.0" promptText="Select from options">
-                     <items>
-                        <FXCollections fx:factory="observableArrayList">
-                           <String fx:id="cbox_interaction_1" fx:value="Landing Over the Obstacle" />
-                           <String fx:id="cbox_interaction_2" fx:value="Landing Towards the Obstacle" />
-                           <String fx:id="cbox_interaction_3" fx:value="Take-Off Towards the Obstacle" />
-                           <String fx:id="cbox_interaction_4" fx:value="Take-Off Away the Obstacle" />
-                        </FXCollections>
-                     </items>
-                  </ComboBox>
+                  <Label text="Obsctacle Name" />
+                  <TextField fx:id="obstacleNameField" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" spacing="20.0">

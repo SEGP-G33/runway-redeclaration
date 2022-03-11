@@ -1,30 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="650.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.g33.Controllers.LaunchController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="650.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.g33.Controllers.LaunchController">
    <children>
-      <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="225.0" layoutY="49.0">
+      <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="223.0" layoutY="51.0">
          <image>
             <Image url="@logo.png" />
          </image>
       </ImageView>
-      <Text layoutX="199.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Software Engineering Group Project 2021-22" />
-      <Text layoutX="295.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Group 33" />
-      <Button defaultButton="true" layoutX="245.0" layoutY="363.0" mnemonicParsing="false" onAction="#handleLaunchClicked" prefHeight="44.0" prefWidth="217.0" style="-fx-background-color: blue; -fx-background-radius: 10; -fx-cursor: hand;" text="Launch Application" textFill="WHITE">
+      <Text layoutX="197.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Software Engineering Group Project 2021-22" />
+      <Text layoutX="293.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Group 33" />
+      <Button defaultButton="true" layoutX="212.0" layoutY="407.0" mnemonicParsing="false" onAction="#handleLaunchClicked" prefHeight="44.0" prefWidth="217.0" style="-fx-background-color: blue; -fx-background-radius: 10; -fx-cursor: hand;" text="Launch Application" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <Button cancelButton="true" layoutX="245.0" layoutY="420.0" mnemonicParsing="false" onAction="#handleQuitApplication" prefHeight="44.0" prefWidth="217.0" style="-fx-background-color: red; -fx-background-radius: 10; -fx-cursor: hand;" text="Quit Application" textFill="WHITE">
+      <Button cancelButton="true" layoutX="212.0" layoutY="464.0" mnemonicParsing="false" onAction="#handleQuitApplication" prefHeight="44.0" prefWidth="217.0" style="-fx-background-color: red; -fx-background-radius: 10; -fx-cursor: hand;" text="Quit Application" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
+      <MenuBar layoutY="-1.0" prefHeight="29.0" prefWidth="645.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleLaunchClicked" text="Launch ">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+              <MenuItem mnemonicParsing="false" onAction="#handleQuitApplication" text="Quit">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
    </children>
 </Pane>

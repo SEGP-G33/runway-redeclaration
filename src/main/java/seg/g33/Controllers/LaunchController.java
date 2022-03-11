@@ -4,6 +4,8 @@ package seg.g33.Controllers;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import seg.g33.App;
@@ -35,7 +37,13 @@ public class LaunchController {
      */
     @FXML
     private void handleQuitApplication(ActionEvent event) {
-        Platform.exit();;
+        var alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to quit?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            logger.info("Exiting Application....");
+            Platform.exit();
+        }
     }
 
 }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Obstacle>
+    <name>BackWing</name>
+    <height>20.0</height>
+    <centerDistance>150.0</centerDistance>
+    <leftDistance>200.0</leftDistance>
+    <rightDistance>1500.0</rightDistance>
+</Obstacle>
