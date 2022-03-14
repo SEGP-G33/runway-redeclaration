@@ -17,11 +17,12 @@ public class RunwaySectionTests {
      * Initialises all necessary classes
      */
     private final Airport airport = new Airport("airport");
-    private final Runway runway1 = new Runway("runway1",airport,1,'R',1.0,1.0,1.0,1.0);
-    private final Runway runway2 = new Runway("runway2",airport,2,'L',2.0,2.0,2.0,2.0);
+    private final Runway runway1 = new Runway("runway1");
+    private final Runway runway2 = new Runway("runway2");
     private final RunwayParameters runwayParameters1 = new RunwayParameters(1.0,1.0,1.0,1.0);
     private final RunwayParameters runwayParameters2 = new RunwayParameters(2.0,2.0,2.0,2.0);
-    private final RunwaySection runwaySection = new RunwaySection(runway1,1,1.0,runwayParameters1);
+    private final RunwaySection runwaySection1 = new RunwaySection(runway1,10,'L',1.0,runwayParameters1);
+    private final RunwaySection runwaySection2 = new RunwaySection(runway1, 100, 'R', 1.0, runwayParameters2);
 
     /**
      *
@@ -29,17 +30,17 @@ public class RunwaySectionTests {
      */
     @Test
     public void CheckRunwaySectionProperties() {
-        var isRunway = runwaySection.getRunway();
+        var isRunway = runwaySection1.getRunway();
         assertEquals(runway1,isRunway);
 
-        runway1.addRunwaySection(runwaySection);
-        var isRunwaySection = runway1.getRunwaySections().contains(runwaySection);
-        assertEquals(true, isRunwaySection);
+        runway1.addRunwaySection(runwaySection1);
+        var isRunwaySection = runway1.getRunwaySections().contains(runwaySection1);
+        assertTrue(isRunwaySection);
 
-        assertEquals(runway1,runwaySection.getRunway());
-        assertEquals(1,runwaySection.getAngle());
-        assertEquals(1.0,runwaySection.getDisplaced());
-        assertEquals(runwayParameters1,runwaySection.getParameters());
+        assertEquals(runway1,runwaySection1.getRunway());
+        assertEquals(1,runwaySection1.getAngle());
+        assertEquals(1.0,runwaySection1.getDisplacedThreshold());
+        assertEquals(runwayParameters1,runwaySection1.getDefaultParameters());
     }
 
     /**
@@ -47,15 +48,15 @@ public class RunwaySectionTests {
      */
     @Test
     public void CheckSettersAndGetters() {
-        runwaySection.setRunway(runway2);
-        runwaySection.setAngle(2);
-        runwaySection.setDisplaced(2.0);
-        runwaySection.setParameters(runwayParameters2);
+        runwaySection1.setRunway(runway2);
+        runwaySection1.setAngle(2);
+        runwaySection1.setDisplaced(2.0);
+        runwaySection1.setDefaultParameters(runwayParameters2);
 
-        assertNotEquals(runway1,runwaySection.getRunway());
-        assertEquals(runway2,runwaySection.getRunway());
-        assertEquals(2,runwaySection.getAngle());
-        assertEquals(2.0,runwaySection.getDisplaced());
-        assertEquals(runwayParameters2,runwaySection.getParameters());
+        assertNotEquals(runway1,runwaySection1.getRunway());
+        assertEquals(runway2,runwaySection1.getRunway());
+        assertEquals(2,runwaySection1.getAngle());
+        assertEquals(2.0,runwaySection1.getDisplacedThreshold());
+        assertEquals(runwayParameters2,runwaySection1.getDefaultParameters());
     }
 }

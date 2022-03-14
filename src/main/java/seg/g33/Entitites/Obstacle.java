@@ -13,7 +13,7 @@ public class Obstacle {
     private double height;
 
     /**
-     * Distance from the centerpoint of the runway
+     * Distance from the center-line of the runway
      */
     private Double centerDistance;
 
@@ -126,10 +126,10 @@ public class Obstacle {
     public String toString() {
         return "Obstacle{" +
                 "name='" + name + '\'' +
-                ", height=" + height +
-                ", centerDistance=" + centerDistance +
-                ", leftDistance=" + leftDistance +
-                ", rightDistance=" + rightDistance +
-                '}';
+                "\n\t- height=" + height +
+                "\n\t- centerDistance=" + centerDistance +
+                "\n\t- leftDistance=" + leftDistance +
+                "\n\t- rightDistance=" + rightDistance +
+                "\n}";
     }
 }

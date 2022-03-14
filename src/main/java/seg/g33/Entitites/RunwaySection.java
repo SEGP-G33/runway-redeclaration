@@ -4,9 +4,9 @@ public class RunwaySection {
 
     private Runway runway;
     private Integer angle;
+    private Character direction;
     private RunwayParameters defaultParameters;
 
-    // TODO: This might not be needed? IDK?
     // Getters and setters aren't provided for these yet.
     private Double clearWayLength = 0d;
     private Double stopWayLength = 0d;
@@ -18,13 +18,12 @@ public class RunwaySection {
      * Constructor
      * @param runway The runway that this section is a part of
      * @param angle The angle of the runway. Should be 1-36
-     * @param displacedThreshold The displaced threshold
      * @param parameters Runway parameters
      */
-    public RunwaySection(Runway runway, Integer angle, Double displacedThreshold, RunwayParameters parameters) {
+    public RunwaySection(Runway runway, Integer angle, Character direction, RunwayParameters parameters) {
         this.runway = runway;
         this.angle = angle;
-        this.displacedThreshold = displacedThreshold;
+        this.direction = direction;
         this.defaultParameters = parameters;
     }
 
@@ -33,17 +32,18 @@ public class RunwaySection {
      * stopway or RESA
      * @param runway
      * @param angle
-     * @param displacedThreshold
      * @param parameters
+     * @param displacedThreshold
      * @param clearWayLength
      * @param stopWayLength
      * @param RESALength
      * @param stripEndLength
      */
-    public RunwaySection(Runway runway, Integer angle, Double displacedThreshold, RunwayParameters parameters,
+    public RunwaySection(Runway runway, Integer angle, Character direction, RunwayParameters parameters, Double displacedThreshold,
                          Double clearWayLength, Double stopWayLength, Double RESALength, Double stripEndLength) {
         this.runway = runway;
         this.angle = angle;
+        this.direction = direction;
         this.displacedThreshold = displacedThreshold;
         this.defaultParameters = parameters;
         this.clearWayLength = clearWayLength;
@@ -67,30 +67,12 @@ public class RunwaySection {
         return angle;
     }
 
+    public Character getDirection(){
+        return this.direction;
+    }
+
     public Double getDisplacedThreshold() {
         return displacedThreshold;
-    }
-
-
-    /**
-     * -=-=-=-=-=-=-=-
-     * Getter Methods
-     * -=-=-=-=-=-=-=-
-     */
-    public void setRunway(Runway runway) {
-        this.runway = runway;
-    }
-
-    public void setAngle(Integer angle) {
-        this.angle = angle;
-    }
-
-    public void setDisplaced(Double displaced) {
-        this.displacedThreshold = displaced;
-    }
-
-    public void setDefaultParameters(RunwayParameters defaultParameters) {
-        this.defaultParameters = defaultParameters;
     }
 
     public RunwayParameters getDefaultParameters() {
@@ -113,21 +95,48 @@ public class RunwaySection {
         return stripEndLength;
     }
 
+
+    /**
+     * -=-=-=-=-=-=-=-
+     * Setter Methods
+     * -=-=-=-=-=-=-=-
+     */
+    public void setRunway(Runway runway) {
+        this.runway = runway;
+    }
+
+    public void setAngle(Integer angle) {
+        this.angle = angle;
+    }
+
+    public void setDirection(Character direction){
+        this.direction = direction;
+    }
+
+    public void setDisplaced(Double displaced) {
+        this.displacedThreshold = displaced;
+    }
+
+    public void setDefaultParameters(RunwayParameters params){
+        this.defaultParameters = params;
+    }
+
     /**
      * toString method used for debugging.
-     * @return
+     * @return A string describing the runway section
      */
     @Override
     public String toString() {
         return "RunwaySection{" +
-                "runway=" + runway +
-                ", angle=" + angle +
-                ", defaultParameters=" + defaultParameters +
-                ", clearWayLength=" + clearWayLength +
-                ", stopWayLength=" + stopWayLength +
-                ", RESALength=" + RESALength +
-                ", stripEndLength=" + stripEndLength +
-                ", displacedThreshold=" + displacedThreshold +
-                '}';
+                "\n\t- runway=" + runway +
+                "\n\t- angle=" + angle +
+                "\n\t- direction=" + direction +
+                "\n\t-  defaultParameters=" + defaultParameters +
+                "\n\t-  clearWayLength=" + clearWayLength +
+                "\n\t-  stopWayLength=" + stopWayLength +
+                "\n\t-  RESALength=" + RESALength +
+                "\n\t-  stripEndLength=" + stripEndLength +
+                "\n\t-  displacedThreshold=" + displacedThreshold +
+                "\n}";
     }
 }

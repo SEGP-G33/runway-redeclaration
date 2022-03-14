@@ -68,9 +68,9 @@ public class Plane {
     @Override
     public String toString() {
         return "Plane{" +
-                "name='" + name + '\'' +
-                ", blastProtection=" + blastProtection +
-                ", slope=" + slope +
-                '}';
+                "\n\t- name='" + name + '\'' +
+                "\n\t- blastProtection=" + blastProtection +
+                "\n\t- slope=" + slope +
+                "\n}";
     }
 }

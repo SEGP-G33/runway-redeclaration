@@ -19,9 +19,9 @@ public class AirportTests {
      */
     private final Airport airport1 = new Airport("Airport1");
     private final Airport airport2 = new Airport("Airport2");
-    private final Runway runway1 = new Runway("Runway1",airport1,0,'R',1.0,1.0,1.0,1.0);
-    private final Runway runway2 = new Runway("Runway2",airport1,0,'L',1.0,1.0,1.0,1.0);
-    private final Runway runway3 = new Runway("Runway3",airport2,0,'L',1.0,1.0,1.0,1.0);
+    private final Runway runway1 = new Runway("Runway1");
+    private final Runway runway2 = new Runway("Runway2");
+    private final Runway runway3 = new Runway("Runway3");
 
     /**
      *
@@ -41,10 +41,10 @@ public class AirportTests {
 
         assertEquals("Airport1", name1, "Airport Name should be \"Airport1\".");
         assertEquals("Airport2", name2, "Airport Name should be \"Airport2\".");
-        assertEquals(true, isRunway1, "Airport1 should have \"Runway1\".");
-        assertEquals(true, isRunway2, "Airport1 should have \"Runway2\".");
-        assertEquals(false, isRunway3, "Airport1 should not have \"Runway3\".");
-        assertEquals(true, isRunway4, "Airport2 should have \"Runway3\".");
+        assertTrue(isRunway1, "Airport1 should have \"Runway1\".");
+        assertTrue(isRunway2, "Airport1 should have \"Runway2\".");
+        assertFalse(isRunway3, "Airport1 should not have \"Runway3\".");
+        assertTrue(isRunway4, "Airport2 should have \"Runway3\".");
 
 
     }
@@ -56,11 +56,11 @@ public class AirportTests {
     public void checkAddRemove(){
         airport1.removeRunway(runway2);
         var isRunway5 = airport1.getAirportRunways().contains(runway2);  // should assert to false
-        assertEquals(false, isRunway5, "Airport1 should not have\"Runway2\" anymore since it was removed.");
+        assertFalse(isRunway5, "Airport1 should not have\"Runway2\" anymore since it was removed.");
 
         airport2.addRunway(runway2);
         var isRunway6 = airport2.getAirportRunways().contains(runway2);
-        assertEquals(true, isRunway6, "Airport2 should now have \"Runway2\" since now it was added.");
+        assertTrue(isRunway6, "Airport2 should now have \"Runway2\" since now it was added.");
 
     }
 

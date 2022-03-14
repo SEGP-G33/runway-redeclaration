@@ -16,17 +16,16 @@ public class CalculatorTests {
     @DisplayName("Tests Setting up the Airports and Runways")
     @Test
     public void testSetup(){
-        Airport airport = new Airport();
-        Runway runway = new Runway("myRunway", airport, 9, 'L', 1d, 1d, 1d, 1d,
-        1d, 1d, 1d, 1d, 1d);
-        Obstacle obstacle = new Obstacle("myObstacle", 12d, 0d, 0d, 0d);
+        Airport airport = new Airport("myAirport");
+        Runway runway = new Runway("myRunway");
+        Obstacle obstacle = new Obstacle("myObstacle", 12d, 0d, -50d, 3646d);
         Plane plane = new Plane("myPlane", 300d, 50d);
 
         RunwayParameters param09L = new RunwayParameters(3902d, 3902d, 3902d, 3595d);
         RunwayParameters param27R = new RunwayParameters(3884d, 3962d, 3884d, 3884d);
 
-        RunwaySection section09L = new RunwaySection(runway, 9, 306d, param09L);
-        RunwaySection section27R = new RunwaySection(runway, 27, 0d, param27R);
+        RunwaySection section09L = new RunwaySection(runway, 9, 'L', param09L);
+        RunwaySection section27R = new RunwaySection(runway, 27, 'R', param27R);
         runway.addRunwaySection(section09L);
         runway.addRunwaySection(section27R);
 
@@ -39,22 +38,21 @@ public class CalculatorTests {
     @DisplayName("Tests Calculation")
     @Test
     public void testCalculation(){
-        Airport airport = new Airport();
-        Runway runway = new Runway("myRunway", airport, 9, 'L', 1d, 1d, 1d, 1d,
-                1d, 1d, 1d, 60d, 1d);
-        Obstacle obstacle = new Obstacle("myObstacle", 12d, 0d, 0d, 0d);
+        Airport airport = new Airport("MyAirport");
+        Runway runway = new Runway("myRunway");
+        Obstacle obstacle = new Obstacle("myObstacle", 12d, 0d, -50d, 3646d);
         Plane plane = new Plane("myPlane", 300d, 50d);
 
         RunwayParameters param09L = new RunwayParameters(3902d, 3902d, 3902d, 3595d);
         RunwayParameters param27R = new RunwayParameters(3884d, 3962d, 3884d, 3884d);
 
-        RunwaySection section09L = new RunwaySection(runway, 9, 306d, param09L, 0d, 0d, 240d, 60d);
-        RunwaySection section27R = new RunwaySection(runway, 27, 0d, param27R, 0d, 0d, 240d, 60d);
+        RunwaySection section09L = new RunwaySection(runway, 9, 'L', param09L,306d, 0d, 0d, 240d, 60d);
+        RunwaySection section27R = new RunwaySection(runway, 27, 'R', param27R);
         runway.addRunwaySection(section09L);
         runway.addRunwaySection(section27R);
 
         Calculator calculator = new Calculator("myCalculator", plane, obstacle, runway);
-        ArrayList<RunwayParameters> results = calculator.calculate(-50d, 3646d);
+        ArrayList<RunwayParameters> results = calculator.calculate();
 
         RunwayParameters params1 = results.get(0);
         RunwayParameters params2 = results.get(1);
