@@ -8,175 +8,16 @@ public class Runway {
      * Properties
      */
     private final String name;
-    private final Airport airport;
-    private final Integer angle;
-    private final Character direction;
-
-    /**
-     * ArrayList of RunwaySections
-     */
     private final ArrayList<RunwaySection> runwaySections;
 
-    // These define a runway in the spec
-    private final Double defTORA;
-    private final Double defASDA;
-    private final Double defTODA;
-    private final Double defLDA;
-
-    // We may decide that these 4 instance variables are redundant or better used elsewhere
-    private Double clearWayLength = 0d;
-    private Double stopWayLength = 0d;
-    private Double RESALength = 240d;
-    private Double stripEndLength = 0d;
-    private Double displacedThreshold = 0d;
-
     /**
-     * Constructor
+     * Constructor for the Runway
+     * @param name the name of the runway, imported from XML
      */
-    public Runway(String name, Airport airport, Integer angle, Character direction, Double defTORA, Double defASDA, Double defTODA, Double defLDA,
-                  Double clearWayLength, Double stopWayLength, Double RESALength, Double stripEndLength, Double displacedThreshold) {
-
-        // Airport assignment
-        this.airport = airport;
-        this.name = name;
-
-        this.runwaySections = new ArrayList<>();
-
-        // Guard statement for angle
-        if (angle >= 0 && angle <= 36) {
-            this.angle = angle;
-        } else {
-            throw new IllegalArgumentException("Angle must be between 0 and 36");
-        }
-
-        // Guard statement for direction
-        if (direction.equals('L') || direction.equals('R')) {
-            this.direction = direction;
-        } else {
-            throw new IllegalArgumentException("Direction must be 'L' or 'R'");
-        }
-
-        // Guard statement for default TORA
-        if (defTORA > 0){
-            this.defTODA = defTODA;
-        } else {
-            throw new IllegalArgumentException("TODA must be greater than 0");
-        }
-
-        // Guard statement for default ASDA
-        if (defASDA > 0){
-            this.defASDA = defASDA;
-        } else {
-            throw new IllegalArgumentException("ASDA must be greater than 0");
-        }
-
-        // Guard statement for default TORA
-        if (defTORA > 0){
-            this.defTORA = defTORA;
-        } else {
-            throw new IllegalArgumentException("TORA must be greater than 0");
-        }
-
-        // Guard statement for default LDA
-        if (defLDA > 0){
-            this.defLDA = defLDA;
-        } else {
-            throw new IllegalArgumentException("LDA must be greater than 0");
-        }
-
-        // Guard statement for clearWayLength
-        if (clearWayLength > 0) {
-            this.clearWayLength = clearWayLength;
-        } else {
-            throw new IllegalArgumentException("Length of the clearway must be greater than 0");
-        }
-
-        // Guard statement for stopWayLength
-        if (stopWayLength > 0){
-            this.stopWayLength = stopWayLength;
-        } else {
-            throw new IllegalArgumentException("Length of stopWay must be greater than 0");
-        }
-
-        // Guard statement for RESA
-        if (RESALength > 0) {
-            this.RESALength = RESALength;
-        } else {
-            throw new IllegalArgumentException("RESA length must be greater than 0");
-        }
-
-        // Guard statement for strip end length
-        if (stripEndLength > 0) {
-            this.stripEndLength = stripEndLength;
-        } else {
-            throw new IllegalArgumentException("Strip end length must be greater than 0");
-        }
-
-        // Guard statement for displacement threshold
-        if (displacedThreshold > 0){
-            this.displacedThreshold = displacedThreshold;
-        } else {
-            throw new IllegalArgumentException("Displacement threshold must be greater than 0");
-        }
-    }
-
-    public Runway(String name, Airport airport, Integer angle, Character direction, Double defTORA, Double defASDA, Double defTODA, Double defLDA){
+    public Runway(String name) {
 
         this.name = name;
         this.runwaySections = new ArrayList<>();
-
-        // Airport assignment
-        this.airport = airport;
-
-        // Guard statement for angle
-        if (angle >= 0 && angle <= 36) {
-            this.angle = angle;
-        } else {
-            throw new IllegalArgumentException("Angle must be between 0 and 36");
-        }
-
-        // Guard statement for direction
-        if (direction.equals('L') || direction.equals('R')) {
-            this.direction = direction;
-        } else {
-            throw new IllegalArgumentException("Direction must be 'L' or 'R'");
-        }
-
-        // Guard statement for default TORA
-        if (defTORA > 0){
-            this.defTODA = defTODA;
-        } else {
-            throw new IllegalArgumentException("TODA must be greater than 0");
-        }
-
-        // Guard statement for default ASDA
-        if (defASDA > 0){
-            this.defASDA = defASDA;
-        } else {
-            throw new IllegalArgumentException("ASDA must be greater than 0");
-        }
-
-        // Guard statement for default TORA
-        if (defTORA > 0){
-            this.defTORA = defTORA;
-        } else {
-            throw new IllegalArgumentException("TORA must be greater than 0");
-        }
-
-        // Guard statement for default LDA
-        if (defLDA > 0){
-            this.defLDA = defLDA;
-        } else {
-            throw new IllegalArgumentException("LDA must be greater than 0");
-        }
-    }
-
-    /**
-     * Adds RunwaySection to this runway
-     * @param section the RunwaySection instance to be added
-     */
-    public void addRunwaySection(RunwaySection section) {
-        this.runwaySections.add(section);
     }
 
     /**
@@ -188,60 +29,8 @@ public class Runway {
         return name;
     }
 
-    public Airport getAirport() {
-        return airport;
-    }
-
     public ArrayList<RunwaySection> getRunwaySections() {
         return runwaySections;
-    }
-
-    public Integer getAngle() {
-        return angle;
-    }
-
-    public Character getDirection() {
-        return direction;
-    }
-
-    public Double getDefTORA() {
-        return defTORA;
-    }
-
-    public Double getDefASDA() {
-        return defASDA;
-    }
-
-    public Double getDefTODA() {
-        return defTODA;
-    }
-
-    public Double getDefLDA() {
-        return defLDA;
-    }
-
-    public Double getClearWayLength() {
-        return clearWayLength;
-    }
-
-    public Double getStopWayLength() {
-        return stopWayLength;
-    }
-
-    public Double getRESALength() {
-        return RESALength;
-    }
-
-    public Double getStripEndLength() {
-        return stripEndLength;
-    }
-
-    public Double getDisplacedThreshold(){
-        return this.displacedThreshold;
-    }
-
-    public RunwayParameters getDefaultParameters(){
-        return new RunwayParameters(this.defTORA, this.defASDA, this.defTODA, this.defLDA);
     }
 
     /**
@@ -249,24 +38,12 @@ public class Runway {
      * Setter Methods
      * -=-=-=-=-=-=-=-
      */
-    public void setClearWayLength(Double clearWayLength) {
-        this.clearWayLength = clearWayLength;
-    }
-
-    public void setStopWayLength(Double stopWayLength) {
-        this.stopWayLength = stopWayLength;
-    }
-
-    public void setRESALength(Double RESALength) {
-        this.RESALength = RESALength;
-    }
-
-    public void setStripEndLength(Double stripEndLength) {
-        this.stripEndLength = stripEndLength;
-    }
-
-    public void setDisplacedThreshold(Double displacedThreshold) {
-        this.displacedThreshold = displacedThreshold;
+    public void addRunwaySection(RunwaySection section) throws IllegalArgumentException{
+        if (this.runwaySections.contains(section)){
+            throw new IllegalArgumentException("Cannot add a runway section which has already been added");
+        } else if (this.runwaySections.size() == 2){
+            throw new IllegalArgumentException("This runway already has 2 logical runways added");
+        }
     }
 
 }

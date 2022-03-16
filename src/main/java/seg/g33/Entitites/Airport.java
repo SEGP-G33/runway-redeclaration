@@ -5,21 +5,10 @@ import java.util.ArrayList;
 public final class Airport {
 
     /**
-     * Name of the airport
+     * Properties
      */
     private String name;
-
-    /**
-     * ArrayList of runways
-     */
-    private ArrayList<Runway> airportRunways;
-
-    /**
-     * Basic Constructor
-     */
-    public Airport() {
-        this.airportRunways = new ArrayList<Runway>();
-    }
+    private final ArrayList<Runway> airportRunways;
 
     /**
      * Basic Constructor

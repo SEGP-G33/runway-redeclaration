@@ -130,7 +130,7 @@ public class XMLReading {
         var stripend = Double.parseDouble(extractValue("stripend", runwaySectionElement));
         var displaced = Double.parseDouble(extractValue("displaced", runwaySectionElement));
 
-        return new Runway(runwayName, airport, angle, direction.charAt(0), tora, asda, toda, lda, clearway, stopway, resa, stripend, displaced);
+        return new Runway(runwayName);
     }
 
     /**

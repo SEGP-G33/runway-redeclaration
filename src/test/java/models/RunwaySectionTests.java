@@ -17,11 +17,12 @@ public class RunwaySectionTests {
      * Initialises all necessary classes
      */
     private final Airport airport = new Airport("airport");
-    private final Runway runway1 = new Runway("runway1",airport,1,'R',1.0,1.0,1.0,1.0);
-    private final Runway runway2 = new Runway("runway2",airport,2,'L',2.0,2.0,2.0,2.0);
+    private final Runway runway1 = new Runway("runway1");
+    private final Runway runway2 = new Runway("runway2");
     private final RunwayParameters runwayParameters1 = new RunwayParameters(1.0,1.0,1.0,1.0);
     private final RunwayParameters runwayParameters2 = new RunwayParameters(2.0,2.0,2.0,2.0);
-    private final RunwaySection runwaySection = new RunwaySection(runway1,1,1.0,runwayParameters1);
+    private final RunwaySection runwaySection1 = new RunwaySection(runway1,10,'L',1.0,runwayParameters1);
+    private final RunwaySection runwaySection2 = new RunwaySection(runway1, 100, 'R', 1.0, runwayParameters2);
 
     /**
      *
@@ -30,11 +31,12 @@ public class RunwaySectionTests {
     @Test
     public void testRunwaySectionProperties() {
         var isRunway = runwaySection.getRunway();
-        assertEquals(runway1,isRunway);
+        assertEquals(runway1, isRunway);
 
-        runway1.addRunwaySection(runwaySection);
-        var isRunwaySection = runway1.getRunwaySections().contains(runwaySection);
-        assertEquals(true, isRunwaySection);
+        runway1.addRunwaySection(runwaySection1);
+        var isRunwaySection = runway1.getRunwaySections().contains(runwaySection1);
+        assertTrue(isRunwaySection);
+
 
         assertEquals(runway1,runwaySection.getRunway());
         assertEquals(1,runwaySection.getAngle());

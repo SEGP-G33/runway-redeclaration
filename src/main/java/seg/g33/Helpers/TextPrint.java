@@ -72,16 +72,6 @@ public class TextPrint {
                         " |_| \\_\\\\___/|_| \\_|  \\_/\\_/_/   \\_\\_|  \n")
                 .append("---------- [System Information] ----------\n")
                 .append("  NAME\t\t\t:  " + runway.getName() + "\n")
-                .append("  AIRPORT\t\t:  " + runway.getAirport().getName() + "\n")
-                .append("  ANGLE\t\t\t:  " + runway.getAngle() + "\n")
-                .append("  DIRECTION\t\t:  " + runway.getDirection() + "\n")
-                .append("  TORA\t\t\t:  " + runway.getDefTORA() + "\n")
-                .append("  ASDA\t\t\t:  "+ runway.getDefASDA() + "\n")
-                .append("  TODA\t\t\t:  " + runway.getDefTODA() + "\n")
-                .append("  LDA\t\t\t:  " + runway.getDefLDA() + "\n")
-                .append("  ClearWay\t\t:  " + runway.getClearWayLength() + "\n")
-                .append("  StopWay\t\t:  " + runway.getStopWayLength() + "\n")
-                .append("  THRESHOLD\t\t:  " + runway.getDisplacedThreshold() + "\n")
                 .append("-------- [System Information End] --------\n").toString();
     }
 
@@ -149,15 +139,10 @@ public class TextPrint {
                         "| |_) / _ \\ | |_) |  / _ \\ | |\\/| |  _|   | | |  _| | |_) |\n" +
                         "|  __/ ___ \\|  _ <  / ___ \\| |  | | |___  | | | |___|  _ < \n" +
                         "|_| /_/   \\_\\_| \\_\\/_/   \\_\\_|  |_|_____| |_| |_____|_| \\_\\\n")
-                .append("  RUNWAY\t\t:  " + parameter.getRunway() + "\n")
                 .append("  TORA\t\t\t:  " + parameter.getTORA() + "\n")
                 .append("  TODA\t\t\t:  " + parameter.getTODA() + "\n")
                 .append("  ASDA\t\t\t:  " + parameter.getASDA() + "\n")
                 .append("  LDA\t\t\t:  " + parameter.getLDA() + "\n")
-                .append("  ALS\t\t\t:  " + parameter.getALS() + "\n")
-                .append("  TOCS\t\t\t:  " + parameter.getTOCS() + "\n")
-                .append("  DIRECTION\t\t:  " + parameter.getDirection() + "\n")
-                .append("  RESA\t\t\t:  " + parameter.getRESA() + "\n")
                 .append("-------- [System Information End] --------\n").toString();
     }
 }
