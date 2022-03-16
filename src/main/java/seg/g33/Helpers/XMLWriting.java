@@ -55,17 +55,17 @@ public class XMLWriting {
                     var params = runwaySection.getDefaultParameters();
 
                     var angle = Integer.toString(runwaySection.getAngle());
-                    var direction = String.valueOf(params.getDirection());
+                    var direction = String.valueOf(runwaySection.getDirection());
                     var length = Double.toString(23.0); // TODO: Need to fix this later. Remove from XML spec..
-                    var clearway = Double.toString(runway.getClearWayLength());
-                    var stopway = Double.toString(runway.getStopWayLength());
-                    var resa = Double.toString(params.getRESA());
+                    var clearway = Double.toString(runwaySection.getClearWayLength());
+                    var stopway = Double.toString(runwaySection.getStopWayLength());
+                    var resa = Double.toString(runwaySection.getRESALength());
                     var tora = Double.toString(params.getTORA());
                     var toda = Double.toString(params.getTODA());
                     var asda = Double.toString(params.getASDA());
                     var lda = Double.toString(params.getLDA());
-                    var stripend = Double.toString(runway.getStripEndLength()); // TODO: Shouldn't it be in the RunwaySection class
-                    var displaced = Double.toString(runway.getDisplacedThreshold()); // // TODO: Shouldn't it be in the RunwaySection class
+                    var stripend = Double.toString(runwaySection.getStripEndLength());
+                    var displaced = Double.toString(runwaySection.getDisplacedThreshold());
 
                     sectionElement.appendChild(createElementForValue(xmlFile, "angle", angle));
                     sectionElement.appendChild(createElementForValue(xmlFile, "direction", direction));

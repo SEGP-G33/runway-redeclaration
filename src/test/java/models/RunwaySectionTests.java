@@ -21,8 +21,7 @@ public class RunwaySectionTests {
     private final Runway runway2 = new Runway("runway2");
     private final RunwayParameters runwayParameters1 = new RunwayParameters(1.0,1.0,1.0,1.0);
     private final RunwayParameters runwayParameters2 = new RunwayParameters(2.0,2.0,2.0,2.0);
-    private final RunwaySection runwaySection1 = new RunwaySection(runway1,10,'L',1.0,runwayParameters1);
-    private final RunwaySection runwaySection2 = new RunwaySection(runway1, 100, 'R', 1.0, runwayParameters2);
+    private final RunwaySection runwaySection = new RunwaySection(runway1, 12, 'L', runwayParameters1);
 
     /**
      *
@@ -33,8 +32,8 @@ public class RunwaySectionTests {
         var isRunway = runwaySection.getRunway();
         assertEquals(runway1, isRunway);
 
-        runway1.addRunwaySection(runwaySection1);
-        var isRunwaySection = runway1.getRunwaySections().contains(runwaySection1);
+        runway1.addRunwaySection(runwaySection);
+        var isRunwaySection = runway1.getRunwaySections().contains(runwaySection);
         assertTrue(isRunwaySection);
 
 

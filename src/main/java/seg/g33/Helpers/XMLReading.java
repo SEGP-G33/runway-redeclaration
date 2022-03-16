@@ -97,7 +97,8 @@ public class XMLReading {
         var sectionParams = buildRunwaySectionParams(runwaySectionElement);
         var angle = Integer.parseInt(extractValue("angle", runwaySectionElement));
         var displaced = Double.parseDouble(extractValue("displaced", runwaySectionElement));
-        return new RunwaySection(runway, angle, displaced, sectionParams);
+        var direction = extractValue("direction", runwaySectionElement).charAt(0);
+        return new RunwaySection(runway, angle, direction, sectionParams);
     }
 
     /**
