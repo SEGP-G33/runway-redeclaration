@@ -21,8 +21,9 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         stage.setTitle("Runway Redeclaration Calculator");
-        scene = new Scene(loadFXML("launch"), 650, 800);
+        scene = new Scene(loadFXML("launch"), 900, 600);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.setTitle("Runway Redeclaration");
         stage.show();
     }
