@@ -1,5 +1,6 @@
 <airport>
     <airportName>JFK International Airport</airportName>
+    <airportCode>LHR</airportCode>
     <airportRunways>
         <airportRunway>
             <name>Runway 1</name>

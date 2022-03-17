@@ -49,8 +49,8 @@ public class AirportPresets {
      * @param airportNameWithExtension Preset name with the file extension
      * @return the preset airport, or null if it doesn't exist
      */
-    public Airport getObstaclePresetWithExtension(String airportNameWithExtension) {
-        String fullDirectory = airportNameWithExtension.concat("/"+airportNameWithExtension);
+    public Airport getAirportPresetWithExtension(String airportNameWithExtension) {
+        String fullDirectory = airportDirectory.concat("/"+airportNameWithExtension);
         return xmlReading.configureAirportFromXMLFile(fullDirectory);
     }
 
@@ -63,8 +63,8 @@ public class AirportPresets {
         File airportsFile = new File(airportDirectory);
         File[] airportNames = airportsFile.listFiles();
         if (airportNames != null) {
-            for (File obstacle : airportNames) {
-                airports.add(getObstaclePresetWithExtension(obstacle.getName()));
+            for (File airport : airportNames) {
+                airports.add(getAirportPresetWithExtension(airport.getName()));
             }
         }
         return airports;

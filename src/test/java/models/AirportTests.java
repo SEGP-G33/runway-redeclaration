@@ -17,8 +17,8 @@ public class AirportTests {
      * Basic airports with a name and a couple of runways
      * Runway parameters are set to random values because this test is to only test if runways are added to the airport.
      */
-    private final Airport airport1 = new Airport("Airport1");
-    private final Airport airport2 = new Airport("Airport2");
+    private final Airport airport1 = new Airport("Airport1", "AIR1");
+    private final Airport airport2 = new Airport("Airport2", "AIR2");
     private final Runway runway1 = new Runway("Runway1");
     private final Runway runway2 = new Runway("Runway2");
     private final Runway runway3 = new Runway("Runway3");
