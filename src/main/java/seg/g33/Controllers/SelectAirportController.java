@@ -1,13 +1,14 @@
 package seg.g33.Controllers;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import seg.g33.App;
@@ -15,7 +16,9 @@ import seg.g33.Entitites.Airport;
 import seg.g33.Entitites.Obstacle;
 import seg.g33.Helpers.AirportPresets;
 import seg.g33.Helpers.ObstaclePresets;
+import seg.g33.Helpers.XMLReading;
 
+import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,11 +49,7 @@ public class SelectAirportController {
     @FXML
     protected void initialize() {
         airports = airportPresets.getAllAirportPresets();
-
-        var codes = (airports.stream().map((airport -> airport.getShortcode()))).collect(Collectors.toList());
-
-        airportCodesObservableList = FXCollections.observableList(codes);
-        airportSelectionBox.setItems(airportCodesObservableList);
+        setAirportListsAndComboBox();
 
         airportSelectionBox.valueProperty().addListener(new ChangeListener<String>() {
             @Override public void changed(ObservableValue ov, String t, String t1) {
@@ -59,14 +58,18 @@ public class SelectAirportController {
         });
     }
 
+    private void setAirportListsAndComboBox() {
+        var codes = (airports.stream().map((airport -> airport.getShortcode()))).collect(Collectors.toList());
+        airportCodesObservableList = FXCollections.observableList(codes);
+        airportSelectionBox.setItems(airportCodesObservableList);
+    }
+
     private void setupUIForSelectedAirport(String airportCode) {
         for (Airport airport : airports) {
             if (airport.getShortcode().equals(airportCode)) {
                 selectedAirport = airport;
             }
         }
-
-        System.out.println("Selected Airport: " + selectedAirport);
 
         airportNameField.textProperty().set(selectedAirport.getName());
         airportCodeField.textProperty().set(selectedAirport.getShortcode());
@@ -88,6 +91,37 @@ public class SelectAirportController {
     @FXML
     void handleChooseFileClicked(ActionEvent event) {
         logger.info("Handling File Selection");
+
+        FileChooser.ExtensionFilter xmlFileFilter = new FileChooser.ExtensionFilter("XML Files", "*.xml");
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(xmlFileFilter);
+        File selectedFile = fileChooser.showOpenDialog(App.getPrimaryStage());
+
+        configureSelectedFile(selectedFile);
+    }
+
+    private void configureSelectedFile(File selectedFile) {
+        var xmlReading = new XMLReading();
+        var newAirport = xmlReading.configureAirportFromXMLFile(selectedFile.getAbsolutePath());
+
+        if (airportAlreadyExists(newAirport)) {
+            var alert = new Alert(Alert.AlertType.ERROR, "You have already added this Airport", ButtonType.CANCEL);
+            alert.showAndWait();
+            return;
+        }
+
+        airports.add(newAirport);
+        setAirportListsAndComboBox();
+        setupUIForSelectedAirport(newAirport.getShortcode());
+    }
+
+    private boolean airportAlreadyExists(Airport airport) {
+        for (Airport airp : airports) {
+            if (airp.getShortcode().equals(airport.getShortcode())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @FXML

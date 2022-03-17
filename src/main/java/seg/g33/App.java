@@ -18,8 +18,12 @@ public class App extends Application {
      */
     private static Scene scene;
 
+    private static Stage primaryStage;
+
     @Override
     public void start(Stage stage) throws IOException {
+        primaryStage = stage;
+
         stage.setTitle("Runway Redeclaration Calculator");
         scene = new Scene(loadFXML("launch"));
         stage.setScene(scene);
@@ -46,14 +50,19 @@ public class App extends Application {
     }
 
     /**
+     * Returns the Primary stage for the Application.
+     * Used to pass to FileChooser and other components later on.
+     * @return Application's primary stage.
+     */
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    /**
      * Main Application Entry
      */
     public static void main(String[] args) {
         launch();
-    }
-
-    static void showResponse(String breakdown){
-
     }
 
 
