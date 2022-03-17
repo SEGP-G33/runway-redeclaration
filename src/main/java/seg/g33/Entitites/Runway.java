@@ -43,6 +43,8 @@ public class Runway {
             throw new IllegalArgumentException("Cannot add a runway section which has already been added");
         } else if (this.runwaySections.size() == 2){
             throw new IllegalArgumentException("This runway already has 2 logical runways added");
+        } else {
+            this.runwaySections.add(section);
         }
     }
 

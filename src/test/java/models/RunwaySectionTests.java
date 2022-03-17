@@ -38,8 +38,8 @@ public class RunwaySectionTests {
 
 
         assertEquals(runway1,runwaySection.getRunway());
-        assertEquals(1,runwaySection.getAngle());
-        assertEquals(1.0,runwaySection.getDisplacedThreshold());
+        assertEquals(12,runwaySection.getAngle());
+        assertEquals(0d,runwaySection.getDisplacedThreshold());
         assertEquals(runwayParameters1,runwaySection.getDefaultParameters());
     }
 
