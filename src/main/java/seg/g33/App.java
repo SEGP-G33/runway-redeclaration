@@ -14,14 +14,25 @@ import java.io.IOException;
 public class App extends Application {
 
     /**
+     * Main App Directory.
+     * Used for XMLReading, XMLWriting and Saving of files...
+     */
+    private static String resourceDirectory = "src/main/resources";
+    private static String appDirectory = System.getProperty("user.dir");
+
+    /**
      * Main scene
      */
     private static Scene scene;
 
+    private static Stage primaryStage;
+
     @Override
     public void start(Stage stage) throws IOException {
+        primaryStage = stage;
+
         stage.setTitle("Runway Redeclaration Calculator");
-        scene = new Scene(loadFXML("launch"), 650, 800);
+        scene = new Scene(loadFXML("launch"));
         stage.setScene(scene);
         stage.setTitle("Runway Redeclaration");
         stage.show();
@@ -46,14 +57,30 @@ public class App extends Application {
     }
 
     /**
+     * Returns the Primary stage for the Application.
+     * Used to pass to FileChooser and other components later on.
+     * @return Application's primary stage.
+     */
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    /**
+     * Returns the main directory of the JavaFX application.
+     */
+    public static String getResourceDirectory() {
+        return resourceDirectory;
+    }
+
+    public static String getAppDirectory() {
+        return appDirectory;
+    }
+
+    /**
      * Main Application Entry
      */
     public static void main(String[] args) {
         launch();
-    }
-
-    static void showResponse(String breakdown){
-
     }
 
 

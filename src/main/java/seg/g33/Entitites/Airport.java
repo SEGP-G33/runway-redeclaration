@@ -8,14 +8,16 @@ public final class Airport {
      * Properties
      */
     private String name;
+    private String shortcode;
     private final ArrayList<Runway> airportRunways;
 
     /**
      * Basic Constructor
      * @param name is the name of the airport
      */
-    public Airport(String name) {
+    public Airport(String name, String shortcode) {
         this.name = name;
+        this.shortcode = shortcode;
         this.airportRunways = new ArrayList<Runway>();
     }
 
@@ -71,5 +73,14 @@ public final class Airport {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    public String getShortcode() {
+        return shortcode;
+    }
+
+    public void setShortcode(String shortcode) {
+        this.shortcode = shortcode;
     }
 }

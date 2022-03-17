@@ -37,7 +37,8 @@ public class XMLReading {
             xmlFile.getDocumentElement().normalize();
 
             var name =  xmlFile.getElementsByTagName("airportName").item(0).getTextContent();
-            airport = new Airport(name);
+            var code = xmlFile.getElementsByTagName("airportCode").item(0).getTextContent();
+            airport = new Airport(name, code);
 
             var airportRunwaysList = xmlFile.getElementsByTagName("airportRunway");
             for (int i = 0; i < airportRunwaysList.getLength(); i++) {
