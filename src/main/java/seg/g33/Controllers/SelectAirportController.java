@@ -94,6 +94,8 @@ public class SelectAirportController {
 
         FileChooser.ExtensionFilter xmlFileFilter = new FileChooser.ExtensionFilter("XML Files", "*.xml");
         FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose an XML File");
+        fileChooser.setInitialDirectory(new File(App.getAppDirectory()));
         fileChooser.getExtensionFilters().addAll(xmlFileFilter);
         File selectedFile = fileChooser.showOpenDialog(App.getPrimaryStage());
 

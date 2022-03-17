@@ -91,17 +91,17 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <TextField layoutX="10.0" layoutY="10.0" promptText="Direction" />
-                                          <TextField layoutX="10.0" layoutY="57.0" promptText="Length" />
-                                          <TextField layoutX="10.0" layoutY="104.0" promptText="Clearway" />
-                                          <TextField layoutX="10.0" layoutY="151.0" promptText="Stopway" />
-                                          <TextField layoutX="10.0" layoutY="198.0" promptText="RESA" />
-                                          <TextField layoutX="10.0" layoutY="245.0" promptText="TORA" />
-                                          <TextField layoutX="10.0" layoutY="292.0" promptText="TODA" />
-                                          <TextField layoutX="15.0" layoutY="339.0" promptText="ASDA" />
-                                          <TextField layoutX="15.0" layoutY="386.0" promptText="ASDA" />
-                                          <TextField layoutX="15.0" layoutY="433.0" promptText="STRIPEND" />
-                                          <TextField layoutX="15.0" layoutY="480.0" promptText="DISPLACED" />
+                                          <TextField fx:id="r1s1DirectionField" layoutX="10.0" layoutY="10.0" promptText="Direction" />
+                                          <TextField fx:id="r1s1LengthField" layoutX="10.0" layoutY="57.0" promptText="Length" />
+                                          <TextField fx:id="r1s1ClearwayField" layoutX="10.0" layoutY="104.0" promptText="Clearway" />
+                                          <TextField fx:id="r1s1StopwayField" layoutX="10.0" layoutY="151.0" promptText="Stopway" />
+                                          <TextField fx:id="r1s1RESAField" layoutX="10.0" layoutY="198.0" promptText="RESA" />
+                                          <TextField fx:id="r1s1TORAField" layoutX="10.0" layoutY="245.0" promptText="TORA" />
+                                          <TextField fx:id="r1s1TODAField" layoutX="10.0" layoutY="292.0" promptText="TODA" />
+                                          <TextField fx:id="r1s1ASDAField" layoutX="15.0" layoutY="339.0" promptText="ASDA" />
+                                          <TextField fx:id="r1s1LDAField" layoutX="15.0" layoutY="386.0" promptText="LDA" />
+                                          <TextField fx:id="r1s1StripendField" layoutX="15.0" layoutY="433.0" promptText="STRIPEND" />
+                                          <TextField fx:id="r1s1DisplacedField" layoutX="15.0" layoutY="480.0" promptText="DISPLACED" />
                                        </children>
                                        <padding>
                                           <Insets left="5.0" />
@@ -114,17 +114,17 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <TextField layoutX="10.0" layoutY="10.0" promptText="Direction" />
-                                          <TextField layoutX="10.0" layoutY="57.0" promptText="Length" />
-                                          <TextField layoutX="10.0" layoutY="104.0" promptText="Clearway" />
-                                          <TextField layoutX="10.0" layoutY="151.0" promptText="Stopway" />
-                                          <TextField layoutX="10.0" layoutY="198.0" promptText="RESA" />
-                                          <TextField layoutX="10.0" layoutY="245.0" promptText="TORA" />
-                                          <TextField layoutX="10.0" layoutY="292.0" promptText="TODA" />
-                                          <TextField layoutX="15.0" layoutY="339.0" promptText="ASDA" />
-                                          <TextField layoutX="15.0" layoutY="386.0" promptText="ASDA" />
-                                          <TextField layoutX="15.0" layoutY="433.0" promptText="STRIPEND" />
-                                          <TextField layoutX="15.0" layoutY="480.0" promptText="DISPLACED" />
+                                          <TextField fx:id="r1s2DirectionField" layoutX="10.0" layoutY="10.0" promptText="Direction" />
+                                          <TextField fx:id="r1s2LengthField" layoutX="10.0" layoutY="57.0" promptText="Length" />
+                                          <TextField fx:id="r1s2ClearwayField" layoutX="10.0" layoutY="104.0" promptText="Clearway" />
+                                          <TextField fx:id="r1s2StopwayField" layoutX="10.0" layoutY="151.0" promptText="Stopway" />
+                                          <TextField fx:id="r1s2RESAField" layoutX="10.0" layoutY="198.0" promptText="RESA" />
+                                          <TextField fx:id="r1s2TORAField" layoutX="10.0" layoutY="245.0" promptText="TORA" />
+                                          <TextField fx:id="r1s2TODAField" layoutX="10.0" layoutY="292.0" promptText="TODA" />
+                                          <TextField fx:id="r1s2ASDAField" layoutX="15.0" layoutY="339.0" promptText="ASDA" />
+                                          <TextField fx:id="r1s2LDAField" layoutX="15.0" layoutY="386.0" promptText="LDA" />
+                                          <TextField fx:id="r1s2StripendField" layoutX="15.0" layoutY="433.0" promptText="STRIPEND" />
+                                          <TextField fx:id="r1s2DisplacedField" layoutX="15.0" layoutY="480.0" promptText="DISPLACED" />
                                        </children>
                                        <padding>
                                           <Insets left="5.0" />
@@ -168,7 +168,7 @@
                                           <TextField layoutX="10.0" layoutY="245.0" promptText="TORA" />
                                           <TextField layoutX="10.0" layoutY="292.0" promptText="TODA" />
                                           <TextField layoutX="15.0" layoutY="339.0" promptText="ASDA" />
-                                          <TextField layoutX="15.0" layoutY="386.0" promptText="ASDA" />
+                                          <TextField layoutX="15.0" layoutY="386.0" promptText="LDA" />
                                           <TextField layoutX="15.0" layoutY="433.0" promptText="STRIPEND" />
                                           <TextField layoutX="15.0" layoutY="480.0" promptText="DISPLACED" />
                                        </children>
@@ -191,7 +191,7 @@
                                           <TextField layoutX="10.0" layoutY="245.0" promptText="TORA" />
                                           <TextField layoutX="10.0" layoutY="292.0" promptText="TODA" />
                                           <TextField layoutX="15.0" layoutY="339.0" promptText="ASDA" />
-                                          <TextField layoutX="15.0" layoutY="386.0" promptText="ASDA" />
+                                          <TextField layoutX="15.0" layoutY="386.0" promptText="LDA" />
                                           <TextField layoutX="15.0" layoutY="433.0" promptText="STRIPEND" />
                                           <TextField layoutX="15.0" layoutY="480.0" promptText="DISPLACED" />
                                        </children>
@@ -237,7 +237,7 @@
                                           <TextField layoutX="10.0" layoutY="245.0" promptText="TORA" />
                                           <TextField layoutX="10.0" layoutY="292.0" promptText="TODA" />
                                           <TextField layoutX="15.0" layoutY="339.0" promptText="ASDA" />
-                                          <TextField layoutX="15.0" layoutY="386.0" promptText="ASDA" />
+                                          <TextField layoutX="15.0" layoutY="386.0" promptText="LDA" />
                                           <TextField layoutX="15.0" layoutY="433.0" promptText="STRIPEND" />
                                           <TextField layoutX="15.0" layoutY="480.0" promptText="DISPLACED" />
                                        </children>
@@ -260,7 +260,7 @@
                                           <TextField layoutX="10.0" layoutY="245.0" promptText="TORA" />
                                           <TextField layoutX="10.0" layoutY="292.0" promptText="TODA" />
                                           <TextField layoutX="15.0" layoutY="339.0" promptText="ASDA" />
-                                          <TextField layoutX="15.0" layoutY="386.0" promptText="ASDA" />
+                                          <TextField layoutX="15.0" layoutY="386.0" promptText="LDA" />
                                           <TextField layoutX="15.0" layoutY="433.0" promptText="STRIPEND" />
                                           <TextField layoutX="15.0" layoutY="480.0" promptText="DISPLACED" />
                                        </children>
@@ -289,7 +289,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1153.0" spacing="30.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#handleConfirmButtonClicked" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: lightblue; -fx-cursor: hand;" text="Confirm Selection">
+                        <Button mnemonicParsing="false" onAction="#handleSaveAirportButtonClicked" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: lightblue; -fx-cursor: hand;" text="Save Airport">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>

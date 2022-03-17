@@ -14,6 +14,13 @@ import java.io.IOException;
 public class App extends Application {
 
     /**
+     * Main App Directory.
+     * Used for XMLReading, XMLWriting and Saving of files...
+     */
+    private static String resourceDirectory = "src/main/resources";
+    private static String appDirectory = System.getProperty("user.dir");
+
+    /**
      * Main scene
      */
     private static Scene scene;
@@ -56,6 +63,17 @@ public class App extends Application {
      */
     public static Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    /**
+     * Returns the main directory of the JavaFX application.
+     */
+    public static String getResourceDirectory() {
+        return resourceDirectory;
+    }
+
+    public static String getAppDirectory() {
+        return appDirectory;
     }
 
     /**

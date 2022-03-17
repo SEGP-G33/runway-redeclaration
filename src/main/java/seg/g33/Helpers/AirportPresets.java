@@ -1,5 +1,6 @@
 package seg.g33.Helpers;
 
+import seg.g33.App;
 import seg.g33.Entitites.Airport;
 import seg.g33.Entitites.Obstacle;
 
@@ -23,7 +24,7 @@ public class AirportPresets {
      * Constructor with default directory to presets
      */
     public AirportPresets() {
-        this.airportDirectory = "src/main/resources/Airports";
+        this.airportDirectory = App.getResourceDirectory().concat("/Airports");
     }
 
     /**
