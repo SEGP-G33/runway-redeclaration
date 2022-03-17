@@ -74,8 +74,9 @@ public class SelectAirportController {
     }
 
     @FXML
-    void handleAddAirportClicked(ActionEvent event) {
+    void handleAddAirportClicked(ActionEvent event) throws Exception {
         logger.info("Adding Airport Manually");
+        App.setRoot("configure-airport");
     }
 
     @FXML

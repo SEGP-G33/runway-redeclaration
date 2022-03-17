@@ -138,12 +138,12 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1153.0" spacing="30.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#handleConfirmButtonClicked" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: lightblue;" text="Confirm Selection">
+                        <Button mnemonicParsing="false" onAction="#handleConfirmButtonClicked" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: lightblue; -fx-cursor: hand;" text="Confirm Selection">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Button>
-                        <Button layoutX="493.0" layoutY="37.0" mnemonicParsing="false" onAction="#handleBackButtonClicked" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: pink;" text="Go Back">
+                        <Button layoutX="493.0" layoutY="37.0" mnemonicParsing="false" onAction="#handleBackButtonClicked" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: pink; -fx-cursor: hand;" text="Go Back">
                            <font>
                               <Font size="16.0" />
                            </font>
