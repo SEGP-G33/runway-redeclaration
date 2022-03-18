@@ -25,6 +25,9 @@ import java.io.File;
 //  Currently breaks if something expects a String but get a number or
 //  expects a Double but gets a String that can't be parsed into a Double.
 //
+//
+// TODO: Connect components for Runway2 and Runway3
+//
 public class ConfigureAirportController {
 
     /**

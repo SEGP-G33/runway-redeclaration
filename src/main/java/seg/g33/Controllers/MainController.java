@@ -31,14 +31,31 @@ import seg.g33.Helpers.XMLWriting;
 
 public class MainController {
 
+    /**
+     * XMLWriter used to write a new obstacle
+     */
     private XMLWriting xmlWriting = new XMLWriting();
+
+    /**
+     * Handles all Obstacle presets in the app.
+     */
     private ObstaclePresets obstaclePresets = new ObstaclePresets();
 
+    /**
+     * Properties used for the JavaFX ComboBox to work properly.
+     */
     private List<Obstacle> obstacles;
     private ObservableList<String> obstacleNamesObservableList;
 
+    /**
+     * The obstacle that is currently added in the the application.
+     */
     private Obstacle selectedObstacle;
 
+    /**
+     * JavaFX Initializer
+     * Called as soon as the FXML file is loaded from the FXMLLoader.
+     */
     @FXML
     protected void initialize() {
         obstacles = obstaclePresets.getAllObstaclePresets();
@@ -55,6 +72,10 @@ public class MainController {
         });
     }
 
+    /**
+     * Updated the UI for the selected obstacle element.
+     * @param obstacleName The name of the obstacle that it currently selected.
+     */
     private void setElementsForSelectedObstacle(String obstacleName) {
         for (Obstacle obstacle : obstacles) {
             if (obstacle.getName().equals(obstacleName)) {
@@ -231,13 +252,19 @@ public class MainController {
     @FXML
     private TextArea textarea_results;
 
+
     @FXML
     private ComboBox selectObstacleComboBox;
 
+    /**
+     * Invoked then the back button is pressed.
+     * Shows main welcome screen back to the user
+     */
     @FXML
     void handleButtonBack(ActionEvent event) throws IOException {
         App.setRoot("launch");
     }
+
 
     @FXML
     void handleImportXML(ActionEvent event) {
