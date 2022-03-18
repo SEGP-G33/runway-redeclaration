@@ -1,0 +1,16 @@
+.launch-quit-bottom {
+    -fx-background-color: #ff3b30;
+    -fx-background-radius: 10;
+}
+
+.launch-continue-bottom {
+    -fx-background-color: #007aff;
+    -fx-background-radius: 10;
+}
+
+.launch-bottom-shadow {
+    -fx-background-radius: 10;
+    -fx-background-color: linear-gradient(to top,rgba( 0, 0, 0, 0.28 ),#ffffff);
+    -fx-opacity: 0.17;
+    -fx-cursor: hand;
+}

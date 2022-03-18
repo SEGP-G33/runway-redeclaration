@@ -32,8 +32,10 @@ public class App extends Application {
         primaryStage = stage;
 
         stage.setTitle("Runway Redeclaration Calculator");
-        scene = new Scene(loadFXML("launch"));
+        scene = new Scene(loadFXML("launch"), 900, 600);
         stage.setScene(scene);
+        //TODO Fixed scene size on the start page, and adaptive window size
+//        stage.setResizable(false);
         stage.setTitle("Runway Redeclaration");
         stage.show();
     }
