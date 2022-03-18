@@ -35,7 +35,6 @@ public class CalculatorTests {
         assertEquals(runway, calculator.getRunway(), "Runway set incorrectly");
     }
 
-    @Disabled
     @DisplayName("Tests Calculation")
     @Test
     public void testCalculation(){

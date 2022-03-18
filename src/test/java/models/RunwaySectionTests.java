@@ -27,7 +27,6 @@ public class RunwaySectionTests {
      *
      * Makes sure the runway and runwaySection are correctly linked and that the class was constructed correctly
      */
-    @Disabled
     @Test
     public void testRunwaySectionProperties() {
         var isRunway = runwaySection.getRunway();
