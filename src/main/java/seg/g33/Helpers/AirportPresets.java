@@ -1,5 +1,6 @@
 package seg.g33.Helpers;
 
+import seg.g33.App;
 import seg.g33.Entitites.Airport;
 import seg.g33.Entitites.Obstacle;
 
@@ -23,7 +24,7 @@ public class AirportPresets {
      * Constructor with default directory to presets
      */
     public AirportPresets() {
-        this.airportDirectory = "src/main/resources/Airports";
+        this.airportDirectory = App.getResourceDirectory().concat("/Airports");
     }
 
     /**
@@ -49,8 +50,8 @@ public class AirportPresets {
      * @param airportNameWithExtension Preset name with the file extension
      * @return the preset airport, or null if it doesn't exist
      */
-    public Airport getObstaclePresetWithExtension(String airportNameWithExtension) {
-        String fullDirectory = airportNameWithExtension.concat("/"+airportNameWithExtension);
+    public Airport getAirportPresetWithExtension(String airportNameWithExtension) {
+        String fullDirectory = airportDirectory.concat("/"+airportNameWithExtension);
         return xmlReading.configureAirportFromXMLFile(fullDirectory);
     }
 
@@ -63,10 +64,11 @@ public class AirportPresets {
         File airportsFile = new File(airportDirectory);
         File[] airportNames = airportsFile.listFiles();
         if (airportNames != null) {
-            for (File obstacle : airportNames) {
-                airports.add(getObstaclePresetWithExtension(obstacle.getName()));
+            for (File airport : airportNames) {
+                airports.add(getAirportPresetWithExtension(airport.getName()));
             }
         }
         return airports;
     }
+
 }

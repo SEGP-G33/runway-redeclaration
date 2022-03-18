@@ -1,5 +1,6 @@
 package seg.g33.Helpers;
 
+import seg.g33.App;
 import seg.g33.Entitites.Obstacle;
 
 import java.io.File;
@@ -22,7 +23,7 @@ public class ObstaclePresets {
      * Constructor with default directory to presets
      */
     public ObstaclePresets() {
-        this.obstaclesDirectory = "src/main/resources/Obstacles";
+        this.obstaclesDirectory = App.getResourceDirectory().concat("/Obstacles");
     }
 
     /**

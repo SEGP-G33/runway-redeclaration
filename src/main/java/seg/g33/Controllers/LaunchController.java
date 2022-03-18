@@ -27,7 +27,7 @@ public class LaunchController {
     @FXML
     private void handleLaunchClicked(ActionEvent event) throws IOException {
         logger.info("Launching Main Menu Window...");
-        App.setRoot("main-menu");
+        App.setRoot("select-airport");
     }
 
     /**

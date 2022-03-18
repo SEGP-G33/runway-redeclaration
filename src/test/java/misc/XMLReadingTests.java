@@ -78,7 +78,7 @@ public class XMLReadingTests {
     public void testReadingAirportProperties() {
         var airport = airportPresets.getAirportPreset("Airport");
 
-        assertEquals("JFK International Airport", airport.getName());
+        assertEquals("London Heathrow", airport.getName());
     }
 
     @DisplayName("Tests Reading Airport That Doesn't Exist")

@@ -43,6 +43,7 @@ public class XMLWriting {
 
             var rootElement = xmlFile.createElement("airport");
             rootElement.appendChild(createElementForValue(xmlFile, "airportName", airport.getName()));
+            rootElement.appendChild(createElementForValue(xmlFile, "airportCode", airport.getShortcode()));
 
             var runwaysRootElement = xmlFile.createElement("airportRunways");
 
