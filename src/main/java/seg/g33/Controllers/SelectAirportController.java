@@ -129,7 +129,7 @@ public class SelectAirportController {
     @FXML
     void handleConfirmButtonClicked(ActionEvent event) throws Exception {
         logger.info("Confirming Airport Selection");
-        App.setRoot("main-menu");
+        App.setRoot("demo-canvas");
     }
 
 }
