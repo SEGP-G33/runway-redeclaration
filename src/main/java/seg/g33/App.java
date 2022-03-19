@@ -30,12 +30,12 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
+        // DON'T CHANGE THE LINES BELOW. The main scene size should remain 1200 x 800 otherwise stuff will break. :)
+        scene = new Scene(loadFXML("launch"), 1200, 800);
 
         stage.setTitle("Runway Redeclaration Calculator");
-        scene = new Scene(loadFXML("launch"), 900, 600);
         stage.setScene(scene);
-        //TODO Fixed scene size on the start page, and adaptive window size
-//        stage.setResizable(false);
+        stage.setResizable(false);
         stage.setTitle("Runway Redeclaration");
         stage.show();
     }
