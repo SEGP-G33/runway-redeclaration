@@ -52,7 +52,6 @@ public class ImageExporter {
     private FileChooser setExtFilters(FileChooser chooser){
         chooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("PNG", "*.png")
-
         );
         return chooser;
     }
