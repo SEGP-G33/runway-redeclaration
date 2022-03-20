@@ -19,6 +19,7 @@ import seg.g33.Helpers.ObstaclePresets;
 import seg.g33.Helpers.XMLReading;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -127,9 +128,18 @@ public class SelectAirportController {
     }
 
     @FXML
-    void handleConfirmButtonClicked(ActionEvent event) throws Exception {
+    void handleConfirmButtonClicked(ActionEvent event) {
         logger.info("Confirming Airport Selection");
-        App.setRoot("calculator-view");
+        if (selectedAirport != null){
+            try {
+                App.setRoot("main-menu");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            var alert = new Alert(Alert.AlertType.WARNING, "Please select an airport.", ButtonType.CANCEL);
+            alert.showAndWait();
+        }
     }
 
 }

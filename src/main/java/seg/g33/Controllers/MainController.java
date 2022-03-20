@@ -26,8 +26,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import seg.g33.App;
 import seg.g33.Entitites.Obstacle;
+import seg.g33.Helpers.AirportPresets;
 import seg.g33.Helpers.ObstaclePresets;
 import seg.g33.Helpers.XMLWriting;
+import seg.g33.Entitites.*;
 
 public class MainController {
 
@@ -51,7 +53,12 @@ public class MainController {
      * The obstacle that is currently added in the the application.
      */
     private Obstacle selectedObstacle;
+    private ArrayList<RunwayParameters> runwayParameters;
 
+
+    private AirportPresets airportPresets = new AirportPresets();
+    private List<Airport> airports;
+    private ObservableList<String> airportNamesObservableList;
     /**
      * JavaFX Initializer
      * Called as soon as the FXML file is loaded from the FXMLLoader.
@@ -94,6 +101,10 @@ public class MainController {
         field_centerline.textProperty().set(center);
         field_threshold_1.textProperty().set(left);
         field_threshold_2.textProperty().set(right);
+    }
+
+    private void setValuesForSelectedAirport(){
+        
     }
 
     @FXML
@@ -262,7 +273,7 @@ public class MainController {
      */
     @FXML
     void handleButtonBack(ActionEvent event) throws IOException {
-        App.setRoot("launch");
+        App.setRoot("select-airport");
     }
 
 
