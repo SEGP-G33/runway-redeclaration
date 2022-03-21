@@ -19,8 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane prefHeight="1500.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.g33.Controllers.MainController">
+<BorderPane prefHeight="1500.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.g33.Controllers.CalculatorController">
    <left>
       <ScrollPane fx:id="root_scroll" prefHeight="800.0" prefWidth="511.0" BorderPane.alignment="CENTER">
          <content>
@@ -89,10 +88,10 @@
                               </VBox>
                               <VBox layoutX="10.0" layoutY="10.0" prefHeight="149.0" prefWidth="226.0" spacing="10.0">
                                  <children>
-                                    <TextField editable="false" promptText="eg: London Heathrow" />
-                                    <TextField editable="false" layoutX="10.0" layoutY="10.0" promptText="eg: LHR" />
-                                    <TextField editable="false" layoutX="10.0" layoutY="57.0" promptText="eg: 2" />
-                                    <ComboBox prefHeight="22.0" prefWidth="146.0" promptText="None Selected" />
+                                    <TextField fx:id="airportNameField" editable="false" promptText="eg: London Heathrow" />
+                                    <TextField fx:id="airportCodeField" editable="false" layoutX="10.0" layoutY="10.0" promptText="eg: LHR" />
+                                    <TextField fx:id="numberOfRunwaysField" editable="false" layoutX="10.0" layoutY="57.0" promptText="eg: 2" />
+                                    <ComboBox fx:id="selectRunwayComboBox" prefHeight="22.0" prefWidth="146.0" promptText="None Selected" />
                                  </children>
                                  <HBox.margin>
                                     <Insets top="5.0" />
@@ -118,7 +117,7 @@
                         <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="37.0" prefWidth="452.0" spacing="20.0">
                            <children>
                               <Label text="Use Presdefined" />
-                              <CheckBox mnemonicParsing="false" selected="true" text="Uncheck to enter manually" />
+                              <CheckBox fx:id="useObstaclePresetCheckbox" mnemonicParsing="false" selected="true" text="Uncheck to enter manually" />
                            </children>
                         </HBox>
                      </children>
@@ -135,20 +134,20 @@
                               <HBox>
                                  <children>
                                     <Region prefHeight="0.0" prefWidth="100.0" />
-                                    <TextField prefHeight="27.0" prefWidth="276.0" promptText="Obstacle Name" />
+                                    <TextField fx:id="obstacleNameField" prefHeight="27.0" prefWidth="276.0" promptText="Obstacle Name" />
                                     <Region layoutX="10.0" layoutY="10.0" prefHeight="0.0" prefWidth="100.0" />
                                  </children>
                               </HBox>
                               <HBox layoutX="10.0" layoutY="10.0" spacing="20.0">
                                  <children>
-                                    <TextField prefHeight="27.0" prefWidth="276.0" promptText="Distance from center (metres)" />
-                                    <TextField layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="297.0" promptText="Obstacle Height (metres)" />
+                                    <TextField fx:id="obstacleCenterField" prefHeight="27.0" prefWidth="276.0" promptText="Distance from center (metres)" />
+                                    <TextField fx:id="obstacleHeightField" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="297.0" promptText="Obstacle Height (metres)" />
                                  </children>
                               </HBox>
                               <HBox layoutX="10.0" layoutY="37.0" spacing="20.0">
                                  <children>
-                                    <TextField prefHeight="27.0" prefWidth="276.0" promptText="Distance from R (metres)" />
-                                    <TextField layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="297.0" promptText="Distance from L (metres)" />
+                                    <TextField fx:id="obstacleRightField" prefHeight="27.0" prefWidth="276.0" promptText="Distance from R (metres)" />
+                                    <TextField fx:id="obstacleLeftField" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="297.0" promptText="Distance from L (metres)" />
                                  </children>
                               </HBox>
                            </children>

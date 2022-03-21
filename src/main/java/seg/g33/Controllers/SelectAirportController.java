@@ -15,6 +15,7 @@ import seg.g33.App;
 import seg.g33.Entitites.Airport;
 import seg.g33.Entitites.Obstacle;
 import seg.g33.Helpers.AirportPresets;
+import seg.g33.Helpers.Environment;
 import seg.g33.Helpers.ObstaclePresets;
 import seg.g33.Helpers.XMLReading;
 
@@ -128,14 +129,12 @@ public class SelectAirportController {
     }
 
     @FXML
-    void handleConfirmButtonClicked(ActionEvent event) {
+    void handleConfirmButtonClicked(ActionEvent event) throws Exception {
         logger.info("Confirming Airport Selection");
         if (selectedAirport != null){
-            try {
-                App.setRoot("main-menu");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            var env = Environment.getInstance();
+            env.setSelectedAirport(selectedAirport);
+            App.setRoot("calculator");
         } else {
             var alert = new Alert(Alert.AlertType.WARNING, "Please select an airport.", ButtonType.CANCEL);
             alert.showAndWait();
