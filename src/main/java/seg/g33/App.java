@@ -31,7 +31,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
         // DON'T CHANGE THE LINES BELOW. The main scene size should remain 1200 x 800 otherwise stuff will break. :)
-        scene = new Scene(loadFXML("launch"), 1200, 800);
+        scene = new Scene(loadFXML("demo-canvas"), 1200, 800);
 
         stage.setTitle("Runway Redeclaration Calculator");
         stage.setScene(scene);

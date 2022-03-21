@@ -8,13 +8,17 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import seg.g33.Entitites.*;
 
+import java.util.ArrayList;
+
+import static seg.g33.Helpers.TextPrint.text;
+
 public class Drawer {
 
     public static Paint white = Color.WHITE;
     public static Paint black = Color.BLACK;
-    public static Paint grey1 = Color.rgb(64, 64, 64);
-    public static Paint grey2 = Color.rgb(128, 128, 128);
-    public static Paint grey3 = Color.rgb(192, 192, 192);
+    public static Paint grey1 = Color.rgb(64,64,64);
+    public static Paint grey2 = Color.rgb(128,128,128);
+    public static Paint grey3 = Color.rgb(192,192,192);
 
     /**
      * Draws the runway from the top down view
@@ -26,7 +30,8 @@ public class Drawer {
      * @param params1 the redeclared parameters for the lesser angle runway
      * @param params2 the redeclared parameters for the higher angle runway
      */
-    public static void drawTopDown(Canvas canvas, Integer angle, Runway runway, Obstacle obstacle, RunwayParameters params1, RunwayParameters params2){
+    public static void drawTopDown(Canvas canvas, Integer angle, Runway runway, Obstacle obstacle, RunwayParameters params1, RunwayParameters params2)
+    {
         angle=angle-90;
         double width = canvas.getWidth();
         double height = canvas.getHeight();
@@ -294,6 +299,191 @@ public class Drawer {
      * @param params2 the second set of redeclared parameters
      */
     public static void drawSideOn(Canvas canvas, Runway runway, Obstacle obstacle, Plane plane, RunwayParameters params1, RunwayParameters params2){
-        // TODO
+        double width = canvas.getWidth();
+        double height = canvas.getHeight();
+
+        RunwaySection section1 = runway.getRunwaySections().get(0);
+        RunwaySection section2 = runway.getRunwaySections().get(1);
+        Double runwayLength = Math.max(section1.getDefaultParameters().getTORA(), section2.getDefaultParameters().getTORA());
+
+        // Runway width is an arbitrary value because it is not mentioned in the specification
+
+
+        Double leftClearway = section1.getClearWayLength();
+        Double rightClearway = section2.getClearWayLength();
+
+        Double leftStopway = section1.getStopWayLength();
+        Double rightStopway = section2.getStopWayLength();
+
+        // Normalises scale so that runway will fit onto the canvas
+        double totalLength = runwayLength + leftClearway + rightClearway;
+        double scale = width / totalLength;
+        runwayLength *= scale;
+        leftClearway *= scale;
+        rightClearway *= scale;
+        leftStopway *= scale;
+        rightStopway *= scale;
+
+
+        // Define the points of all shapes
+        var heightUp = height/2+25d*scale;
+        var heightDown = height/2-25d*scale;
+        Double[][] clearwayArea = {
+                {0d,    heightUp},      {width, heightUp},
+                {width, heightDown},    {0d,    heightDown}
+        };
+
+        Double[][] leftTORAPoints = {
+//                {rightClearway+section1.()*scale,                         height/2-30},
+                {rightClearway+section1.getDisplacedThreshold()*scale+params1.getTORA()*scale, height/2-30}};
+        Double[][] leftASDAPoints = {
+                {rightClearway+section1.getDisplacedThreshold()*scale,                         height/2-50},
+                {rightClearway+section1.getDisplacedThreshold()*scale+params1.getASDA()*scale, height/2-50}};
+        Double[][] leftTODAPoints = {
+                {rightClearway+section1.getDisplacedThreshold()*scale,                         height/2-70},
+                {rightClearway+section1.getDisplacedThreshold()*scale+params1.getTODA()*scale, height/2-70}};
+        Double[][] leftLDAPoints  = {
+                {rightClearway+section1.getDisplacedThreshold()*scale,                          height/2-90},
+                {rightClearway+section1.getDisplacedThreshold()*scale+params1.getLDA()*scale,   height/2-90}};
+
+        Double[] leftTORAText = {leftTORAPoints[0][0], leftTORAPoints[0][1]-5};
+        Double[] leftASDAText = {leftASDAPoints[0][0], leftASDAPoints[0][1]-5};
+        Double[] leftTODAText = {leftTODAPoints[0][0], leftTODAPoints[0][1]-5};
+        Double[] leftLDAText = {leftLDAPoints[0][0], leftLDAPoints[0][1]-5};
+
+        Double[][] rightAnglePoints = {
+                {60d*scale+rightClearway+runwayLength,                            height/2+10},
+                {60d*scale+rightClearway+runwayLength-params2.getTORA()*scale,    height/2+10}
+        };
+        Double[][] rightTORAPoints = {
+                {60d*scale+rightClearway+runwayLength,                            height/2+40},
+                {60d*scale+rightClearway+runwayLength-params2.getTORA()*scale,    height/2+40}};
+        Double[][] rightASDAPoints = {
+                {60d*scale+rightClearway+runwayLength,                            height/2+60},
+                {60d*scale+rightClearway+runwayLength-params2.getASDA()*scale,    height/2+60}};
+        Double[][] rightTODAPoints = {
+                {60d*scale+rightClearway+runwayLength,                            height/2+80},
+                {60d*scale+rightClearway+runwayLength-params2.getTODA()*scale,    height/2+80}};
+        Double[][] rightLDAPoints  = {
+                {60d*scale+rightClearway+runwayLength,                            height/2+100},
+                {60d*scale+rightClearway+runwayLength-params2.getLDA()*scale,    height/2+100}};
+
+        Double[] rightAngleText = {rightAnglePoints[0][0], rightAnglePoints[0][1]+10};
+        Double[] rightTORAText = {rightTORAPoints[0][0], rightTORAPoints[0][1]+10};
+        Double[] rightASDAText = {rightASDAPoints[0][0], rightASDAPoints[0][1]+10};
+        Double[] rightTODAText = {rightTODAPoints[0][0], rightTODAPoints[0][1]+10};
+        Double[] rightLDAText = {rightLDAPoints[0][0], rightLDAPoints[0][1]+10};
+
+        // Right and Left stopway points (appears on the right of the runway)
+        Double[][] leftStopwayPoints = {
+                {60d * scale + rightClearway - rightStopway, heightUp},
+                {60d * scale + rightClearway - rightStopway, heightDown},
+                {60d * scale + rightClearway, heightDown},
+                {60d * scale + rightClearway, heightUp}
+            };
+        Double[][] rightStopwayPoints = {
+                {60d*scale+rightClearway+runwayLength, heightDown},
+                {60d*scale+rightClearway+runwayLength, heightUp},
+                {60d*scale+rightClearway+runwayLength+leftStopway, heightUp},
+                {60d*scale+rightClearway+runwayLength+leftStopway, heightDown}
+        };
+
+        Double[][] obstaclePoints = {
+                {60d*scale+rightClearway+obstacle.getLeftDistance()*scale-25, heightDown},
+                {60d*scale+rightClearway+obstacle.getLeftDistance()*scale-25, heightUp},
+                {60d*scale+rightClearway+obstacle.getLeftDistance()*scale+25, heightUp},
+                {60d*scale+rightClearway+obstacle.getLeftDistance()*scale+25, heightDown}
+        };
+
+        // Runway points
+        Double[][] runwayPoints = {
+                {60d*scale+rightClearway, heightUp},
+                {60d*scale+rightClearway, heightDown},
+                {60d*scale+rightClearway+runwayLength, heightDown},
+                {60d*scale+rightClearway+runwayLength, heightUp}
+        };
+        Double[][] centerLine = {
+                {60d*scale+rightClearway+25, height/2},
+                {60d*scale+rightClearway+runwayLength-25, height/2}
+        };
+
+        // TODO Draw all elements onto the screen
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        gc.setFill(white);
+        // Fill the background in white
+        gc.fillRect(0, 0, width, height);
+
+        // Draw clearway
+        gc.setFill(grey1);
+        gc.fillPolygon(getFromIndex(0, clearwayArea), getFromIndex(1, clearwayArea), 4);
+        // Draw stop-ways
+        gc.setFill(grey2);
+        gc.fillPolygon(getFromIndex(0, rightStopwayPoints), getFromIndex(1, rightStopwayPoints), 4);
+        gc.fillPolygon(getFromIndex(0, leftStopwayPoints), getFromIndex(1, leftStopwayPoints), 4);
+        // Draw runway
+        gc.setFill(grey3);
+        gc.fillPolygon(getFromIndex(0, runwayPoints), getFromIndex(1, runwayPoints), 4);
+
+        // Draw Lines
+        gc.strokeLine(rightTORAPoints[0][0], rightTORAPoints[0][1], rightTORAPoints[1][0], rightTORAPoints[1][1]);
+        gc.strokeLine(rightASDAPoints[0][0], rightASDAPoints[0][1], rightASDAPoints[1][0], rightASDAPoints[1][1]);
+        gc.strokeLine(rightTODAPoints[0][0], rightTODAPoints[0][1], rightTODAPoints[1][0], rightTODAPoints[1][1]);
+        gc.strokeLine(rightLDAPoints[0][0],  rightLDAPoints[0][1],  rightLDAPoints[1][0],  rightLDAPoints[1][1]);
+
+        //左边线
+        gc.strokeLine(leftTORAPoints[0][0], leftTORAPoints[0][1], leftTORAPoints[1][0], leftTORAPoints[1][1]);
+        gc.strokeLine(leftASDAPoints[0][0], leftASDAPoints[0][1], leftASDAPoints[1][0], leftASDAPoints[1][1]);
+        gc.strokeLine(leftTODAPoints[0][0], leftTODAPoints[0][1], leftTODAPoints[1][0], leftTODAPoints[1][1]);
+        gc.strokeLine(leftLDAPoints[0][0],  leftLDAPoints[0][1],  leftLDAPoints[1][0],  leftLDAPoints[1][1]);
+
+        // Draw Displaced Threshold
+        gc.setStroke(white);
+        gc.strokeLine(centerLine[0][0], centerLine[0][1], centerLine[1][0], centerLine[1][1]);
+
+        // Draw Obstacle
+        gc.setFill(black);
+        gc.fillPolygon(getFromIndex(0, obstaclePoints), getFromIndex(1, obstaclePoints), 4);
+
+        // Draw Threshold identifiers
+        gc.setFill(white);
+        gc.setTextAlign(TextAlignment.CENTER);
+        gc.setFont(new Font(18d/1000*width));
+        gc.setFill(black);
+        gc.setTextAlign(TextAlignment.LEFT);
+        gc.setFont(new Font(15d/1000*width));
+        rotateText(gc, leftTORAText[0], leftTORAText[1], String.format("TORA: %sm >", params1.getTORA()), 0);
+        rotateText(gc, leftASDAText[0], leftASDAText[1], String.format("ASDA: %sm >", params1.getASDA()), 0);
+        rotateText(gc, leftTODAText[0], leftTODAText[1], String.format("TODA: %sm >", params1.getTODA()), 0);
+        rotateText(gc, leftLDAText[0], leftLDAText[1], String.format("LDA: %sm >", params1.getLDA()), 0);
+        gc.setTextAlign(TextAlignment.RIGHT);
+        rotateText(gc, rightAngleText[0], rightAngleText[1], String.format("< Angle: %s", section2.getAngle()), 0);
+        rotateText(gc, rightTORAText[0], rightTORAText[1], String.format("< TORA: %sm", params2.getTORA()), 0);
+        rotateText(gc, rightASDAText[0], rightASDAText[1], String.format("< ASDA: %sm", params2.getASDA()), 0);
+        rotateText(gc, rightTODAText[0], rightTODAText[1], String.format("< TODA: %sm", params2.getTODA()), 0);
+        rotateText(gc, rightLDAText[0], rightLDAText[1], String.format("< LDA: %sm", params2.getLDA()), 0);
+    }
+
+    public static void main(String[] args) {
+        Runway runway = new Runway("myRunway");
+        RunwayParameters param09R = new RunwayParameters(3660d, 3690d, 3780d, 3353d);
+        RunwayParameters param27L = new RunwayParameters(3660d, 3720d, 3660d, 3660d);
+
+        RunwaySection section09R = new RunwaySection(runway, 9, 'R', param09R, 307d, 00d, 60d, 240d, 60d);
+        RunwaySection section27L = new RunwaySection(runway, 27, 'L', param27L, 0D, 90d, 60d, 240d, 60d);
+        runway.addRunwaySection(section09R);
+        runway.addRunwaySection(section27L);
+
+        Plane plane = new Plane("myPlane", 300d, 50d);
+
+        Obstacle obstacle = new Obstacle("myObstacle", 25d, 20d, 2853d, 500d);
+
+        Calculator calculator = new Calculator("myCalculator", plane, obstacle, runway);
+        ArrayList<RunwayParameters> results = calculator.calculate();
+
+        RunwayParameters params1 = results.get(0);
+        RunwayParameters params2 = results.get(1);
+
+        System.out.println(text(params1));
     }
 }
