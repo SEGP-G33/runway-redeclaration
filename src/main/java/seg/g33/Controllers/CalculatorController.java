@@ -13,10 +13,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import seg.g33.App;
 import seg.g33.Entitites.*;
 import seg.g33.Helpers.*;
 
+import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,10 +70,7 @@ public class CalculatorController {
         testCanvas();
 
         obstacles = obstaclePresets.getAllObstaclePresets();
-        var names = (obstacles.stream().map((obstacle -> obstacle.getName()))).collect(Collectors.toList());
-
-        obstacleNamesObservableList = FXCollections.observableList(names);
-        selectObstacleComboBox.setItems(obstacleNamesObservableList);
+        setObstacleListsAndComboBox();
 
         selectObstacleComboBox.valueProperty().addListener(new ChangeListener<String>() {
             @Override public void changed(ObservableValue ov, String t, String t1) {
@@ -361,6 +360,69 @@ public class CalculatorController {
     @FXML
     private TextArea textarea_results;
 
+    /**
+     * Called when the Import Obstacle XML button is pressed.
+     */
+    @FXML
+    void handleImportObstacleXML(ActionEvent event) {
+        FileChooser.ExtensionFilter xmlFileFilter = new FileChooser.ExtensionFilter("XML Files", "*.xml");
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose an XML File");
+        fileChooser.setInitialDirectory(new File(App.getAppDirectory()));
+        fileChooser.getExtensionFilters().addAll(xmlFileFilter);
+        File selectedFile = fileChooser.showOpenDialog(App.getPrimaryStage());
+
+        configureSelectedFile(selectedFile);
+    }
+
+    /**
+     * Handles reading an Obstacle XML file and configuring the UI with that.
+     * @param selectedFile the file selected from the file chooser.
+     */
+    private void configureSelectedFile(File selectedFile) {
+        var xmlReading = new XMLReading();
+        var newObstacle = xmlReading.configureObstacleFromXMLFile(selectedFile.getAbsolutePath());
+
+        if (obstacleAlreadyExists(newObstacle)) {
+            var alert = new Alert(Alert.AlertType.ERROR, "You have already added this Obstacle", ButtonType.CANCEL);
+            alert.showAndWait();
+            return;
+        }
+
+        obstacles.add(newObstacle);
+        setObstacleListsAndComboBox();
+        setElementsForSelectedObstacle(newObstacle.getName());
+    }
+
+    /**
+     * Sets properties required for the ComboBox to work properly.
+     */
+    private void setObstacleListsAndComboBox() {
+        var names = (obstacles.stream().map((obstacle -> obstacle.getName()))).collect(Collectors.toList());
+        obstacleNamesObservableList = FXCollections.observableList(names);
+        selectObstacleComboBox.setItems(obstacleNamesObservableList);
+    }
+
+    /**
+     * Checks if an obstacle already exists in the obstacle list.
+     * @param obstacle the obstacle to be added and to be checked against.
+     * @return true if the obstacle already exists, false otherwise
+     */
+    private boolean obstacleAlreadyExists(Obstacle obstacle) {
+        for (Obstacle obs : obstacles) {
+            // TODO: Checking based only on Name and Height here. Should we use something else or check more fields?
+            if (obs.getName().equals(obstacle.getName()) && obs.getHeight() == obstacle.getHeight()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Called then the back button is pressed.
+     * Returns to SelectAirport scene, after confirming navigation with an alert.
+     * @throws Exception In case the FXML file isn't there or can't be read correctly. This should never happen.
+     */
     @FXML
     void handleButtonBack(ActionEvent event) throws Exception {
         var alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to go back?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);

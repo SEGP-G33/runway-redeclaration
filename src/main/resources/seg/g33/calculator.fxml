@@ -42,7 +42,7 @@
                      <children>
                         <VBox alignment="CENTER" prefHeight="89.0" prefWidth="234.0" spacing="10.0">
                            <children>
-                              <Button fx:id="button_import_obstacle" mnemonicParsing="false" prefHeight="24.0" prefWidth="246.0" text="Import  Obstacle XML Information" />
+                              <Button fx:id="button_import_obstacle" mnemonicParsing="false" onAction="#handleImportObstacleXML" prefHeight="24.0" prefWidth="246.0" text="Import  Obstacle XML Information" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="89.0" prefWidth="266.0" spacing="10.0">
