@@ -450,7 +450,7 @@
    <center>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <Canvas height="535.0" width="687.0" />
+            <Canvas fx:id="canvas" height="535.0" width="687.0" />
          </children>
       </VBox>
    </center>

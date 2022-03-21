@@ -31,6 +31,10 @@ import seg.g33.Helpers.ObstaclePresets;
 import seg.g33.Helpers.XMLWriting;
 import seg.g33.Entitites.*;
 
+/**
+ * TODO: Delete this. This isn't used anymore.
+ *  All functionality has been moved to CalculatorController.
+ */
 public class MainController {
 
     /**
