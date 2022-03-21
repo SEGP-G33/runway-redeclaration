@@ -131,12 +131,12 @@ public class RunwaySection {
                 "\n\t- runway=" + runway +
                 "\n\t- angle=" + angle +
                 "\n\t- direction=" + direction +
-                "\n\t-  defaultParameters=" + defaultParameters +
-                "\n\t-  clearWayLength=" + clearWayLength +
-                "\n\t-  stopWayLength=" + stopWayLength +
-                "\n\t-  RESALength=" + RESALength +
-                "\n\t-  stripEndLength=" + stripEndLength +
-                "\n\t-  displacedThreshold=" + displacedThreshold +
+                "\n\t- defaultParameters=" + defaultParameters +
+                "\n\t- clearWayLength=" + clearWayLength +
+                "\n\t- stopWayLength=" + stopWayLength +
+                "\n\t- RESALength=" + RESALength +
+                "\n\t- stripEndLength=" + stripEndLength +
+                "\n\t- displacedThreshold=" + displacedThreshold +
                 "\n}";
     }
 }

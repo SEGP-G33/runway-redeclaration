@@ -6,6 +6,6 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.g33.Controllers.CanvasController">
    <center>
-      <Canvas fx:id="canvas" height="200.0" width="441.0" BorderPane.alignment="CENTER" />
+      <Canvas fx:id="canvas" height="750" width="750" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

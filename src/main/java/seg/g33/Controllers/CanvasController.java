@@ -20,17 +20,17 @@ public class CanvasController {
     @FXML
     protected void initialize() {
         Runway runway = new Runway("myRunway");
-        RunwayParameters param09L = new RunwayParameters(3902d, 3902d, 3902d, 3595d);
-        RunwayParameters param27R = new RunwayParameters(3884d, 3962d, 3884d, 3884d);
+        RunwayParameters param09R = new RunwayParameters(3660d, 3660d, 3660d, 3353d);
+        RunwayParameters param27L = new RunwayParameters(3660d, 3660d, 3660d, 3660d);
 
-        RunwaySection section09L = new RunwaySection(runway, 9, 'L', param09L);
-        RunwaySection section27R = new RunwaySection(runway, 27, 'R', param27R);
-        runway.addRunwaySection(section09L);
-        runway.addRunwaySection(section27R);
+        RunwaySection section09R = new RunwaySection(runway, 9, 'R', param09R, 307d, 0d, 0d, 240d, 60d);
+        RunwaySection section27L = new RunwaySection(runway, 27, 'L', param27L, 0D, 0d, 0d, 240d, 60d);
+        runway.addRunwaySection(section09R);
+        runway.addRunwaySection(section27L);
 
         Plane plane = new Plane("myPlane", 300d, 50d);
 
-        Obstacle obstacle = new Obstacle("myObstacle", 12d, 0d, -50d, 3646d);
+        Obstacle obstacle = new Obstacle("myObstacle", 25d, 20d, 2853d, 500d);
 
         Calculator calculator = new Calculator("myCalculator", plane, obstacle, runway);
         ArrayList<RunwayParameters> results = calculator.calculate();
@@ -38,7 +38,7 @@ public class CanvasController {
         RunwayParameters params1 = results.get(0);
         RunwayParameters params2 = results.get(1);
 
-        Drawer.drawTopDown(canvas, 0, runway, obstacle, params1, params2);
+        Drawer.drawTopDown(canvas, 10*section09R.getAngle(), runway, obstacle, params1, params2);
     }
 
     @FXML

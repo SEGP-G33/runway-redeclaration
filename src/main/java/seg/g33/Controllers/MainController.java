@@ -265,7 +265,6 @@ public class MainController {
         App.setRoot("launch");
     }
 
-
     @FXML
     void handleImportXML(ActionEvent event) {
 
