@@ -1,25 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<ScrollPane fx:id="root_scroll" prefHeight="1234.0" prefWidth="609.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.g33.Controllers.MainController">
+<ScrollPane fx:id="root_scroll" prefHeight="1234.0" prefWidth="609.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.g33.Controllers.MainController">
    <content>
       <VBox fx:id="root_vbox" alignment="CENTER" prefHeight="1300.0" prefWidth="600.0" spacing="20.0">
          <padding>
@@ -36,7 +24,7 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="89.0" prefWidth="234.0" spacing="10.0">
                      <children>
-                        <Button fx:id="button_import_runway" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleImportXML" text="Import XML Runway Information" />
+                        <Button fx:id="button_import_runway" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleImportXML" text="Import XML Airport Information" />
                         <Button fx:id="button_import_obstacle" mnemonicParsing="false" prefHeight="24.0" prefWidth="246.0" text="Import XML Obstacle Information" />
                      </children>
                   </VBox>
@@ -44,7 +32,7 @@
                      <children>
                         <Button fx:id="button_export_runway" mnemonicParsing="false" text="Export XML Runway Information" />
                         <Button fx:id="button_export_obstacle" alignment="CENTER" mnemonicParsing="false" onAction="#handleExportObstacle" text="Export XML Obstacle Information" />
-                        <Button fx:id="button_export_text" mnemonicParsing="false" text="Export Situation as Textual Format" />
+                        <Button fx:id="button_export_text" mnemonicParsing="false" text="Print Results of Current Situation" />
                      </children>
                   </VBox>
                </children>
