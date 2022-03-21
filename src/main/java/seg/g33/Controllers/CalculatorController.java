@@ -44,6 +44,11 @@ public class CalculatorController {
 
     private Airport selectedAirport;
 
+    /**
+     * Properties used for the JavaFX ComboBox to work properly.
+     */
+    private List<Runway> airportRunways;
+    private ObservableList<String> airportRunwayNamesObservableList;
 
     /**
      * JavaFX Initializer
@@ -98,6 +103,18 @@ public class CalculatorController {
     private void setAirportProperties() {
         var env = Environment.getInstance();
         selectedAirport = env.getSelectedAirport();
+
+        airportRunways = selectedAirport.getAirportRunways();
+        var names = (airportRunways.stream().map((runway -> runway.getName()))).collect(Collectors.toList());
+
+        airportRunwayNamesObservableList = FXCollections.observableList(names);
+        selectRunwayComboBox.setItems(airportRunwayNamesObservableList);
+
+        selectRunwayComboBox.valueProperty().addListener(new ChangeListener<String>() {
+            @Override public void changed(ObservableValue ov, String t, String t1) {
+                // TODO: Set values for params.
+            }
+        });
 
         airportNameField.setText(selectedAirport.getName());
         airportCodeField.setText(selectedAirport.getShortcode());
