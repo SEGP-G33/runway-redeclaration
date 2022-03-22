@@ -304,36 +304,15 @@ public class Drawer {
         double height = canvas.getHeight();
         RunwaySection leftSection;
         RunwaySection rightSection;
-        RunwayParameters leftPars;
-        RunwayParameters rightPars;
 
-        //L is the left
-        if (runway.getRunwaySections().get(0).getAngle() < runway.getRunwaySections().get(1).getAngle()){
-            if (runway.getRunwaySections().get(0).getDirection().equals('L')) {
+        //Left is always left
+        if (runway.getRunwaySections().get(0).getDirection().equals('L')) {
                 leftSection = runway.getRunwaySections().get(0);
                 rightSection = runway.getRunwaySections().get(1);
-                leftPars = params1;
-                rightPars = params2;
             } else {
-                leftSection = runway.getRunwaySections().get(0);
-                rightSection = runway.getRunwaySections().get(1);
-                leftPars = params2;
-                rightPars = params1;
-            }
-        } else{
-            if (runway.getRunwaySections().get(0).getDirection().equals('R')) {
                 leftSection = runway.getRunwaySections().get(1);
                 rightSection = runway.getRunwaySections().get(0);
-                leftPars = params1;
-                rightPars = params2;
-            } else {
-                leftSection = runway.getRunwaySections().get(0);
-                rightSection = runway.getRunwaySections().get(1);
-                leftPars = params2;
-                rightPars = params1;
             }
-        }
-
 
         Double runwayLength = Math.max(leftSection.getDefaultParameters().getTORA(), rightSection.getDefaultParameters().getTORA()) + 120d;
 
@@ -348,56 +327,143 @@ public class Drawer {
         double totalLength = runwayLength + Math.max(leftClearway, leftStopway) + Math.max(rightClearway, rightStopway);
         double scale = width / totalLength;
         double leftLength = Math.max(leftClearway, leftStopway) * scale;
-        double rightLength = Math.max(rightClearway, rightStopway) * scale;
         runwayLength *= scale;
-//        leftClearway *= scale;
         rightClearway *= scale;
         leftStopway *= scale;
         rightStopway *= scale;
 
         // Define the points of all shapes
-        var heightUp = height/2+25d*scale;
-        var heightDown = height/2-25d*scale;
+        double heightUp = height/2+25d*scale;
+        double heightDown = height/2-25d*scale;
+
         Double[][] clearwayArea = {
                 {60d*scale,    heightUp},      {(totalLength-60d)*scale, heightUp},
                 {(totalLength-60d)*scale, heightDown},    {60d*scale,    heightDown}
         };
-        Double[][] leftTORAPoints = {
-                {60d*scale+(leftSection.getDefaultParameters().getTORA()-leftPars.getTORA())*scale, height/2-30},
-                {60d*scale+leftSection.getDefaultParameters().getTORA()*scale, height/2-30}};
-        Double[][] leftASDAPoints = {
-                {60d*scale+(leftSection.getDefaultParameters().getASDA()-leftPars.getASDA())*scale, height/2-50},
-                {60d*scale+leftSection.getDefaultParameters().getASDA()*scale, height/2-50}};
-        Double[][] leftTODAPoints = {
-                {60d*scale+leftLength +(leftSection.getDefaultParameters().getTODA()-leftPars.getTODA())*scale, height/2-70},
-                {60d*scale+leftSection.getDefaultParameters().getTODA()*scale, height/2-70}};
-        Double[][] leftLDAPoints  = {
-                {60d*scale+leftLength+(leftSection.getDisplacedThreshold()+leftSection.getDefaultParameters().getLDA()-leftPars.getLDA())*scale,   height/2-90},
-                {60d*scale+leftLength+(leftSection.getDisplacedThreshold()+leftSection.getDefaultParameters().getLDA())*scale,   height/2-90}};
-        Double[][] leftTOCSPoints  = {
-                {60d*scale+(obstacle.getLeftDistance())*scale,   height/2-110},
-                {60d*scale+(obstacle.getLeftDistance()+obstacle.getHeight()* plane.getSlope())*scale,   height/2-110}};
-        Double[][] leftSE1Points  = {
-                {60d*scale+(obstacle.getLeftDistance()+Math.max(obstacle.getHeight()* plane.getSlope(),leftSection.getRESALength()))*scale+2,  height/2-110},
-                {60d*scale+(obstacle.getLeftDistance()+Math.max(obstacle.getHeight()* plane.getSlope(),leftSection.getRESALength())+60)*scale-2,   height/2-110}};
-        Double[][] leftDT1Points  = {
-                {60d*scale+(obstacle.getLeftDistance()+Math.max(obstacle.getHeight()* plane.getSlope(),leftSection.getRESALength())+60)*scale,  height/2-110},
-                {60d*scale+(obstacle.getLeftDistance()+Math.max(obstacle.getHeight()* plane.getSlope(),leftSection.getRESALength())+60+leftSection.getDisplacedThreshold())*scale,   height/2-110}};
-        Double[][] leftBlastPoints  = {
-                {60d*scale+(obstacle.getLeftDistance())*scale,  height/2-130},
-                {60d*scale+(obstacle.getLeftDistance()+plane.getBlastProtection())*scale,   height/2-130}};
-        Double[][] leftDT2Points  = {
-                {60d*scale+(obstacle.getLeftDistance()+plane.getBlastProtection())*scale+2,  height/2-130},
-                {60d*scale+(obstacle.getLeftDistance()+plane.getBlastProtection()+leftSection.getDisplacedThreshold())*scale,   height/2-130}};
-        Double[][] leftRESAPoints  = {
-                {60d*scale+(obstacle.getLeftDistance())*scale,  height/2-150},
-                {60d*scale+(obstacle.getLeftDistance()+leftSection.getRESALength())*scale,   height/2-150}};
-        Double[][] leftSE2Points  = {
-                {60d*scale+(obstacle.getLeftDistance()+leftSection.getRESALength())*scale+2,  height/2-150},
-                {60d*scale+(obstacle.getLeftDistance()+leftSection.getRESALength()+60)*scale,   height/2-150}};
 
 
-//
+        Double[][] leftTORAPoints;
+        Double[][] leftASDAPoints;
+        Double[][] leftTODAPoints;
+        Double[][] leftLDAPoints;
+        Double[][] leftTOCSPoints;
+        Double[][] leftSE1Points;
+        Double[][] leftDT1Points;
+        Double[][] leftBlastPoints;
+        Double[][] leftDT2Points;
+        Double[][] leftRESAPoints;
+        Double[][] leftSE2Points;
+
+        Double[][] rightTORAPoints;
+        Double[][] rightASDAPoints;
+        Double[][] rightTODAPoints;
+        Double[][] rightLDAPoints;
+        Double[][] rightDTPoints;
+        Double[][] rightMapSymbolPoints;
+        if (true) {
+            leftTORAPoints = new Double[][]{
+                    {60d * scale + (leftSection.getDefaultParameters().getTORA() - params1.getTORA()) * scale, height / 2 - 30},
+                    {60d * scale + leftSection.getDefaultParameters().getTORA() * scale, height / 2 - 30}};
+            leftASDAPoints = new Double[][]{
+                    {60d * scale + (leftSection.getDefaultParameters().getASDA() - params1.getASDA()) * scale, height / 2 - 50},
+                    {60d * scale + leftSection.getDefaultParameters().getASDA() * scale, height / 2 - 50}};
+            leftTODAPoints = new Double[][]{
+                    {60d * scale + leftLength + (leftSection.getDefaultParameters().getTODA() - params1.getTODA()) * scale, height / 2 - 70},
+                    {60d * scale + leftSection.getDefaultParameters().getTODA() * scale, height / 2 - 70}};
+            leftLDAPoints = new Double[][]{
+                    {60d * scale + leftLength + (leftSection.getDisplacedThreshold() + leftSection.getDefaultParameters().getLDA() - params1.getLDA()) * scale, height / 2 - 90},
+                    {60d * scale + leftLength + (leftSection.getDisplacedThreshold() + leftSection.getDefaultParameters().getLDA()) * scale, height / 2 - 90}};
+            leftTOCSPoints = new Double[][]{
+                    {60d * scale + leftLength + (obstacle.getLeftDistance()) * scale, height / 2 - 110},
+                    {60d * scale + leftLength + (obstacle.getLeftDistance() + obstacle.getHeight() * plane.getSlope()) * scale, height / 2 - 110}};
+            leftSE1Points = new Double[][]{
+                    {60d * scale + leftLength + (obstacle.getLeftDistance() + Math.max(obstacle.getHeight() * plane.getSlope(), leftSection.getRESALength())) * scale + 2, height / 2 - 110},
+                    {60d * scale + leftLength + (obstacle.getLeftDistance() + Math.max(obstacle.getHeight() * plane.getSlope(), leftSection.getRESALength()) + leftSection.getStripEndLength()) * scale - 2, height / 2 - 110}};
+            leftDT1Points = new Double[][]{
+                    {60d * scale + (obstacle.getLeftDistance() + Math.max(obstacle.getHeight() * plane.getSlope(), leftSection.getRESALength()) + 60) * scale, height / 2 - 110},
+                    {60d * scale + (obstacle.getLeftDistance() + Math.max(obstacle.getHeight() * plane.getSlope(), leftSection.getRESALength()) + 60 + leftSection.getDisplacedThreshold()) * scale, height / 2 - 110}};
+            leftBlastPoints = new Double[][]{
+                    {60d * scale + (obstacle.getLeftDistance()) * scale, height / 2 - 130},
+                    {60d * scale + (obstacle.getLeftDistance() + plane.getBlastProtection()) * scale, height / 2 - 130}};
+            leftDT2Points = new Double[][]{
+                    {60d * scale + (obstacle.getLeftDistance() + plane.getBlastProtection()) * scale + 2, height / 2 - 130},
+                    {60d * scale + (obstacle.getLeftDistance() + plane.getBlastProtection() + leftSection.getDisplacedThreshold()) * scale, height / 2 - 130}};
+            leftRESAPoints = new Double[][]{
+                    {60d * scale + (obstacle.getLeftDistance()) * scale, height / 2 - 150},
+                    {60d * scale + (obstacle.getLeftDistance() + leftSection.getRESALength()) * scale, height / 2 - 150}};
+            leftSE2Points = new Double[][]{
+                    {60d * scale + (obstacle.getLeftDistance() + leftSection.getRESALength()) * scale + 2, height / 2 - 150},
+                    {60d * scale + (obstacle.getLeftDistance() + leftSection.getRESALength() + 60) * scale, height / 2 - 150}};
+            rightTORAPoints = new Double[][]{
+                    {-60d * scale + leftLength + runwayLength - rightSection.getDisplacedThreshold() * scale, height / 2 + 30},
+                    {-60d * scale + leftLength + runwayLength - params2.getTORA() * scale - rightSection.getDisplacedThreshold() * scale, height / 2 + 30}};
+            rightASDAPoints = new Double[][]{
+                    {-60d * scale + leftLength + runwayLength - rightSection.getDisplacedThreshold() * scale, height / 2 + 50},
+                    {-60d * scale + leftLength + runwayLength - params2.getASDA() * scale - rightSection.getDisplacedThreshold() * scale, height / 2 + 50}};
+            rightTODAPoints = new Double[][]{
+                    {-60d * scale + leftLength + runwayLength - rightSection.getDisplacedThreshold() * scale, height / 2 + 70},
+                    {-60d * scale + leftLength + runwayLength - params2.getTODA() * scale - rightSection.getDisplacedThreshold() * scale, height / 2 + 70}};
+            rightLDAPoints = new Double[][]{
+                    {-60d * scale + leftLength + runwayLength - rightSection.getDisplacedThreshold() * scale, height / 2 + 90},
+                    {-60d * scale + leftLength + runwayLength - params2.getLDA() * scale - rightSection.getDisplacedThreshold() * scale, height / 2 + 90}};
+            rightDTPoints = new Double[][]{
+                    {-60d * scale + leftLength + runwayLength, height / 2 + 110},
+                    {-60d * scale + leftLength + runwayLength - rightSection.getDisplacedThreshold() * scale + 2, height / 2 + 110}};
+            rightMapSymbolPoints = new Double[][]{
+                    {-60d * scale + leftLength + runwayLength, height / 2 + 110},
+                    {-60d * scale + leftLength + runwayLength - rightSection.getDisplacedThreshold() * scale + 2, height / 2 + 110}};
+        } else {
+            leftTORAPoints = new Double[][]{
+                    {60d * scale + leftLength, height / 2 - 30},
+                    {60d * scale +  leftLength + params1.getTORA() * scale, height / 2 - 30}};
+            leftASDAPoints = new Double[][]{
+                    {60d * scale + leftLength, height / 2 - 50},
+                    {60d * scale +  leftLength + params1.getASDA() * scale, height / 2 - 50}};
+            leftTODAPoints = new Double[][]{
+                    {60d * scale + leftLength, height / 2 - 70},
+                    {60d * scale + leftLength + params1.getTODA() * scale, height / 2 - 70}};
+            leftLDAPoints = new Double[][]{
+                    {60d*scale+leftLength+(leftSection.getDisplacedThreshold())*scale,   height/2-90},
+                    {60d*scale+leftLength+(leftSection.getDisplacedThreshold()+params1.getLDA())*scale,   height/2-90}};
+            leftTOCSPoints = new Double[][]{
+                    {60d * scale  + leftLength + (obstacle.getLeftDistance() - obstacle.getHeight() * plane.getSlope()) * scale, height / 2 - 110},
+                    {60d * scale + leftLength + (obstacle.getLeftDistance()) * scale, height / 2 - 110}};
+            leftSE1Points = new Double[][]{
+                    {60d * scale  + leftLength + (obstacle.getLeftDistance() - obstacle.getHeight() * plane.getSlope()) * scale - 2, height / 2 - 110},
+                    {60d * scale  + leftLength + (obstacle.getLeftDistance() - obstacle.getHeight() * plane.getSlope() - leftSection.getStripEndLength())  * scale, height / 2 - 110}};
+            leftDT1Points = new Double[][]{
+                    {60d * scale + (obstacle.getLeftDistance() + Math.max(obstacle.getHeight() * plane.getSlope(), leftSection.getRESALength()) + 60) * scale, height / 2 - 110},
+                    {60d * scale + (obstacle.getLeftDistance() + Math.max(obstacle.getHeight() * plane.getSlope(), leftSection.getRESALength()) + 60 + leftSection.getDisplacedThreshold()) * scale, height / 2 - 110}};
+            leftBlastPoints = new Double[][]{
+                    {60d * scale + (obstacle.getLeftDistance() - plane.getBlastProtection()) * scale, height / 2 - 130},
+                    {60d * scale + (obstacle.getLeftDistance()) * scale, height / 2 - 130}};
+            leftDT2Points = new Double[][]{
+                    {60d * scale + (obstacle.getLeftDistance() + plane.getBlastProtection()) * scale + 2, height / 2 - 130},
+                    {60d * scale + (obstacle.getLeftDistance() + plane.getBlastProtection() + leftSection.getDisplacedThreshold()) * scale, height / 2 - 130}};
+            leftRESAPoints = new Double[][]{
+                    {60d * scale + (obstacle.getLeftDistance() - leftSection.getRESALength()) * scale, height / 2 - 150},
+                    {60d * scale + (obstacle.getLeftDistance()) * scale, height / 2 - 150}};
+            leftSE2Points = new Double[][]{
+                    {60d * scale + (obstacle.getLeftDistance() - leftSection.getRESALength() - leftSection.getStripEndLength()) * scale, height / 2 - 150},
+                    {60d * scale + (obstacle.getLeftDistance() - leftSection.getRESALength()) * scale - 2, height / 2 - 150}};
+            rightTORAPoints = new Double[][]{
+                    {-60d * scale + leftLength + runwayLength - rightSection.getDisplacedThreshold() * scale, height / 2 + 30},
+                    {-60d * scale + leftLength + runwayLength - params2.getTORA() * scale - rightSection.getDisplacedThreshold() * scale, height / 2 + 30}};
+            rightASDAPoints = new Double[][]{
+                    {-60d * scale + leftLength + runwayLength - rightSection.getDisplacedThreshold() * scale, height / 2 + 50},
+                    {-60d * scale + leftLength + runwayLength - params2.getASDA() * scale - rightSection.getDisplacedThreshold() * scale, height / 2 + 50}};
+            rightTODAPoints = new Double[][]{
+                    {-60d * scale + leftLength + runwayLength - rightSection.getDisplacedThreshold() * scale, height / 2 + 70},
+                    {-60d * scale + leftLength + runwayLength - params2.getTODA() * scale - rightSection.getDisplacedThreshold() * scale, height / 2 + 70}};
+            rightLDAPoints = new Double[][]{
+                    {-60d * scale + leftLength + runwayLength - rightSection.getDisplacedThreshold() * scale, height / 2 + 90},
+                    {-60d * scale + leftLength + runwayLength - params2.getLDA() * scale - rightSection.getDisplacedThreshold() * scale, height / 2 + 90}};
+            rightDTPoints = new Double[][]{
+                    {-60d * scale + leftLength + runwayLength, height / 2 + 110},
+                    {-60d * scale + leftLength + runwayLength - rightSection.getDisplacedThreshold() * scale + 2, height / 2 + 110}};
+        }
+
+
 
         Double[] leftTORAText = {leftTORAPoints[0][0], leftTORAPoints[0][1]-5};
         Double[] leftASDAText = {leftASDAPoints[0][0], leftASDAPoints[0][1]-5};
@@ -408,24 +474,15 @@ public class Drawer {
         Double[] leftDT1Text = {leftDT1Points[0][0], leftDT1Points[0][1]-5};
         Double[] leftDT2Text = {leftDT2Points[0][0], leftDT2Points[0][1]-5};
         Double[] leftRESAText = {leftRESAPoints[0][0], leftRESAPoints[0][1]-5};
-
-        Double[][] rightTORAPoints = {
-                {-60d*scale+leftLength+runwayLength,                            height/2+30},
-                {-60d*scale+leftLength+runwayLength-rightPars.getTORA()*scale,    height/2+30}};
-        Double[][] rightASDAPoints = {
-                {-60d*scale+leftLength+runwayLength,                            height/2+50},
-                {-60d*scale+leftLength+runwayLength-rightPars.getASDA()*scale,    height/2+50}};
-        Double[][] rightTODAPoints = {
-                {-60d*scale+leftLength+runwayLength,                            height/2+70},
-                {-60d*scale+leftLength+runwayLength-rightPars.getTODA()*scale,    height/2+70}};
-        Double[][] rightLDAPoints  = {
-                {-60d*scale+leftLength+runwayLength,                            height/2+90},
-                {-60d*scale+leftLength+runwayLength-rightPars.getLDA()*scale,    height/2+90}};
+        Double[] leftDesignatorText = {0d, height/2-175};
 
         Double[] rightTORAText = {rightTORAPoints[0][0], rightTORAPoints[0][1]+10};
         Double[] rightASDAText = {rightASDAPoints[0][0], rightASDAPoints[0][1]+10};
         Double[] rightTODAText = {rightTODAPoints[0][0], rightTODAPoints[0][1]+10};
         Double[] rightLDAText = {rightLDAPoints[0][0], rightLDAPoints[0][1]+10};
+        Double[] rightDTText = {rightDTPoints[0][0], rightDTPoints[0][1]+10};
+        Double[] rightDesignatorText = {totalLength*scale-60*scale, height/2+135};
+        Double[] rightMapSymbol = {totalLength*scale-60*scale, height/2+175};
 
         // Right and Left stopway points (appears on the right of the runway)
         Double[][] leftStopwayPoints = {
@@ -452,24 +509,14 @@ public class Drawer {
                 obstaclePoints[0],
                 {60d*scale+(obstacle.getLeftDistance()+obstacle.getHeight()* plane.getSlope())*scale,   height/2}};
 
-        // Runway points
         Double[][] runwayPoints = {
                 {60d*scale+leftLength, heightUp},
                 {60d*scale+leftLength, heightDown},
                 {-60d*scale+leftLength+runwayLength, heightDown},
                 {-60d*scale+leftLength+runwayLength, heightUp}
         };
-//        Double[][] centerLine = {
-//                {60d*scale+rightClearway+25, height/2},
-//                {-60d*scale+rightClearway+runwayLength-25, height/2}
-//        };
 
-        Double[][] displacedThreshold = {
-                {60d*scale+leftLength+leftSection.getDirection()-5, heightUp},
-                {60d*scale+leftLength+leftSection.getDirection()-5, heightDown},
-                {60d*scale+leftLength+leftSection.getDirection()+5, heightDown},
-                {60d*scale+leftLength+leftSection.getDirection()+5, heightUp}
-        };
+
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -501,15 +548,12 @@ public class Drawer {
         gc.strokeLine(leftTOCSPoints[0][0],  leftTOCSPoints[0][1],  leftTOCSPoints[1][0],  leftTOCSPoints[1][1]);
         gc.strokeLine(leftSE1Points[0][0],  leftSE1Points[0][1],  leftSE1Points[1][0],  leftSE1Points[1][1]);
         gc.strokeLine(leftBlastPoints[0][0],  leftBlastPoints[0][1],  leftBlastPoints[1][0],  leftBlastPoints[1][1]);
-        gc.strokeLine(leftDT1Points[0][0],  leftDT1Points[0][1],  leftDT1Points[1][0],  leftDT1Points[1][1]);
-        gc.strokeLine(leftDT2Points[0][0],  leftDT2Points[0][1],  leftDT2Points[1][0],  leftDT2Points[1][1]);
+        if (leftSection.getDisplacedThreshold() > 0 )gc.strokeLine(leftDT1Points[0][0],  leftDT1Points[0][1],  leftDT1Points[1][0],  leftDT1Points[1][1]);
+        if (leftSection.getDisplacedThreshold() > 0 )gc.strokeLine(leftDT2Points[0][0],  leftDT2Points[0][1],  leftDT2Points[1][0],  leftDT2Points[1][1]);
+        if (rightSection.getDisplacedThreshold() > 0 )gc.strokeLine(rightDTPoints[0][0],  rightDTPoints[0][1],  rightDTPoints[1][0],  rightDTPoints[1][1]);
         gc.strokeLine(SlopeAnglesPoints[0][0],  SlopeAnglesPoints[0][1],  SlopeAnglesPoints[1][0],  SlopeAnglesPoints[1][1]);
         gc.strokeLine(leftRESAPoints[0][0],  leftRESAPoints[0][1],  leftRESAPoints[1][0],  leftRESAPoints[1][1]);
         gc.strokeLine(leftSE2Points[0][0],  leftSE2Points[0][1],  leftSE2Points[1][0],  leftSE2Points[1][1]);
-
-        // Draw Displaced Threshold
-//        gc.setStroke(white);
-//        gc.strokeLine(centerLine[0][0], centerLine[0][1], centerLine[1][0], centerLine[1][1]);
 
         // Draw Obstacle
         gc.setFill(black);
@@ -518,27 +562,47 @@ public class Drawer {
         // Draw Threshold identifiers
         gc.setFill(white);
         gc.setTextAlign(TextAlignment.CENTER);
-        gc.fillPolygon(getFromIndex(0, displacedThreshold), getFromIndex(1, displacedThreshold), 4);
+        if (leftSection.getDisplacedThreshold() > 0 ) {
+            Double[][] displacedThreshold = {
+                    {60d * scale + leftLength + leftSection.getDisplacedThreshold()*scale - 5, heightUp},
+                    {60d * scale + leftLength + leftSection.getDisplacedThreshold()*scale - 5, heightDown},
+                    {60d * scale + leftLength + leftSection.getDisplacedThreshold()*scale + 5, heightDown},
+                    {60d * scale + leftLength + leftSection.getDisplacedThreshold()*scale + 5, heightUp}
+            };
+            gc.fillPolygon(getFromIndex(0, displacedThreshold), getFromIndex(1, displacedThreshold), 4);
+        }
+        if (rightSection.getDisplacedThreshold() > 0 ) {
+            Double[][] displacedThreshold = {
+                    {-60d*scale+leftLength+runwayLength-rightSection.getDisplacedThreshold()*scale - 5, heightUp},
+                    {-60d*scale+leftLength+runwayLength-rightSection.getDisplacedThreshold()*scale - 5, heightDown},
+                    {-60d*scale+leftLength+runwayLength-rightSection.getDisplacedThreshold()*scale + 5, heightDown},
+                    {-60d*scale+leftLength+runwayLength-rightSection.getDisplacedThreshold()*scale + 5, heightUp}
+            };
+            gc.fillPolygon(getFromIndex(0, displacedThreshold), getFromIndex(1, displacedThreshold), 4);
+        }
         gc.setFont(new Font(18d/1000*width));
         gc.setFill(black);
         gc.setTextAlign(TextAlignment.LEFT);
         gc.setFont(new Font(15d/1000*width));
 
-        rotateText(gc, leftTORAText[0], leftTORAText[1], String.format("TORA: %sm → %s%s %s", leftPars.getTORA(), leftSection.getAngle(), leftSection.getDirection(), "Take Off Away"), 0);
-        rotateText(gc, leftASDAText[0], leftASDAText[1], String.format("ASDA: %sm → %s%s %s", leftPars.getASDA(), leftSection.getAngle(), leftSection.getDirection(), "Take Off Away"), 0);
-        rotateText(gc, leftTODAText[0], leftTODAText[1], String.format("TODA: %sm → %s%s %s", leftPars.getTODA(), leftSection.getAngle(), leftSection.getDirection(), "Take Off Away"), 0);
-        rotateText(gc, leftLDAText[0], leftLDAText[1], String.format("LDA: %sm → %s%s %s", leftPars.getLDA(), leftSection.getAngle(), leftSection.getDirection(), "Landing Over"), 0);
+        rotateText(gc, leftDesignatorText[0], leftDesignatorText[1], String.format("%s%s", leftSection.getAngle(), leftSection.getDirection()), 0);
+        rotateText(gc, leftTORAText[0], leftTORAText[1], String.format("TORA: %sm → %s", params1.getTORA(), "Take Off Away"), 0);
+        rotateText(gc, leftASDAText[0], leftASDAText[1], String.format("ASDA: %sm → %s", params1.getASDA(), "Take Off Away"), 0);
+        rotateText(gc, leftTODAText[0], leftTODAText[1], String.format("TODA: %sm → %s", params1.getTODA(), "Take Off Away"), 0);
+        rotateText(gc, leftLDAText[0], leftLDAText[1], String.format("LDA: %sm → %s", params1.getLDA(), "Landing Over"), 0);
         rotateText(gc, leftTOCSText[0], leftTOCSText[1], String.format("TOCS/ALS: %sm", obstacle.getHeight()* plane.getSlope()), 0);
         rotateText(gc, leftBlastText[0], leftBlastText[1], String.format("BD: %sm", plane.getBlastProtection()), 0);
-        rotateText(gc, leftDT1Text[0], leftDT1Text[1], String.format("DT: %sm", leftSection.getDisplacedThreshold()), 0);
-        rotateText(gc, leftDT2Text[0], leftDT2Text[1], String.format("DT: %sm",  leftSection.getDisplacedThreshold()), 0);
+        if (leftSection.getDisplacedThreshold() > 0 ) rotateText(gc, leftDT1Text[0], leftDT1Text[1], String.format("DT: %sm", leftSection.getDisplacedThreshold()), 0);
+        if (leftSection.getDisplacedThreshold() > 0 ) rotateText(gc, leftDT2Text[0], leftDT2Text[1], String.format("DT: %sm",  leftSection.getDisplacedThreshold()), 0);
         rotateText(gc, leftRESAText[0], leftRESAText[1], String.format("RESA: %sm",  leftSection.getRESALength()), 0);
 
         gc.setTextAlign(TextAlignment.RIGHT);
-        rotateText(gc, rightTORAText[0], rightTORAText[1], String.format("%s %s%s ← TORA: %sm", "Take Off Towards",rightSection.getAngle(), rightSection.getDirection(), rightPars.getTORA()), 0);
-        rotateText(gc, rightASDAText[0], rightASDAText[1], String.format("%s %s%s ← ASDA: %sm", "Take Off Towards",rightSection.getAngle(), rightSection.getDirection(),rightPars.getASDA()), 0);
-        rotateText(gc, rightTODAText[0], rightTODAText[1], String.format("%s %s%s ← TODA: %sm", "Take Off Towards",rightSection.getAngle(), rightSection.getDirection(),rightPars.getTODA()), 0);
-        rotateText(gc, rightLDAText[0], rightLDAText[1], String.format("%s %s%s ← LDA: %sm","Landing Towards", rightSection.getAngle(), rightSection.getDirection(), rightPars.getLDA()), 0);
+        rotateText(gc, rightDesignatorText[0], rightDesignatorText[1], String.format("%s%s", rightSection.getAngle(), rightSection.getDirection()), 0);
+        rotateText(gc, rightTORAText[0], rightTORAText[1], String.format("%s ← TORA: %sm", "Take Off Towards", params2.getTORA()), 0);
+        rotateText(gc, rightASDAText[0], rightASDAText[1], String.format("%s ← ASDA: %sm", "Take Off Towards", params2.getASDA()), 0);
+        rotateText(gc, rightTODAText[0], rightTODAText[1], String.format("%s ← TODA: %sm", "Take Off Towards", params2.getTODA()), 0);
+        rotateText(gc, rightLDAText[0], rightLDAText[1], String.format("%s ← LDA: %sm","Landing Towards", params2.getLDA()), 0);
+        if (rightSection.getDisplacedThreshold() > 0 ) rotateText(gc, rightDTText[0], rightDTText[1], String.format("DT: %sm",  rightSection.getDisplacedThreshold()), 0);
     }
 
     /**
@@ -558,31 +622,4 @@ public class Drawer {
      * - [ ] Debug
      *
      */
-
-
-
-//    public static void main(String[] args) {
-//        Runway runway = new Runway("myRunway");
-//        RunwayParameters param09R = new RunwayParameters(3902d, 3902d, 3902d, 3595d);
-//        RunwayParameters param27L = new RunwayParameters(3884d, 3962d, 3884d, 3884d);
-//
-//        RunwaySection section09R = new RunwaySection(runway, 9, 'R', param09R, 306d, 00d, 00d, 240d, 60d);
-//        RunwaySection section27L = new RunwaySection(runway, 27, 'L', param27L, 0D, 00d, 00d, 240d, 60d);
-//        runway.addRunwaySection(section09R);
-//        runway.addRunwaySection(section27L);
-//
-//        Plane plane = new Plane("myPlane", 300d, 50d);
-//
-//        Obstacle obstacle = new Obstacle("myObstacle", 12d, 20d, -50d, 3646d);
-//
-//        Calculator calculator = new Calculator("myCalculator", plane, obstacle, runway);
-//        ArrayList<RunwayParameters> results = calculator.calculate();
-//
-//        RunwayParameters params1 = results.get(0);
-//        RunwayParameters params2 = results.get(1);
-//
-//        System.out.println(calculator.calcAsString());
-//
-////        calculator.calcAsString();
-//    }
 }
