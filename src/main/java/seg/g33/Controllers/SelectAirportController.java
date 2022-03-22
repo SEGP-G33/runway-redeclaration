@@ -94,7 +94,7 @@ public class SelectAirportController {
     void handleChooseFileClicked(ActionEvent event) {
         logger.info("Handling File Selection");
 
-        FileChooser.ExtensionFilter xmlFileFilter = new FileChooser.ExtensionFilter("XML Files", "*.xml");
+        FileChooser.ExtensionFilter xmlFileFilter = new FileChooser.ExtensionFilter("XML Files", "*EX2.xml");
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose an XML File");
         fileChooser.setInitialDirectory(new File(App.getAppDirectory()));

@@ -135,7 +135,7 @@ public class XMLWriting {
             xmlFile.appendChild(rootElement);
 
             var source = new DOMSource(xmlFile);
-            var outputStream = new FileOutputStream(filename + ".xml");
+            var outputStream = new FileOutputStream(filename + "EX2.xml");
             var result = new StreamResult(outputStream);
 
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");

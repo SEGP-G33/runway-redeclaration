@@ -234,6 +234,7 @@ public class CalculatorController {
         ArrayList<RunwayParameters> results = calculator.calculate();
         setRecalculateParamsUI(results);
 
+
         var angle = selectedRunway.getRunwaySections().get(0).getAngle();
         Drawer.drawTopDown(canvas, 10*angle, selectedRunway, selectedObstacle, results.get(0), results.get(1));
     }
@@ -261,7 +262,7 @@ public class CalculatorController {
      */
     @FXML
     void handleImportObstacleXML(ActionEvent event) {
-        FileChooser.ExtensionFilter xmlFileFilter = new FileChooser.ExtensionFilter("XML Files", "*.xml");
+        FileChooser.ExtensionFilter xmlFileFilter = new FileChooser.ExtensionFilter("XML Files", "*EX2.xml");
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose an XML File");
         fileChooser.setInitialDirectory(new File(App.getAppDirectory()));
@@ -373,11 +374,11 @@ public class CalculatorController {
         File directory = directoryChooser.showDialog(App.getPrimaryStage());
 
         var xmlWriter = new XMLWriting();
-        var filename = directory.getAbsolutePath().concat("/" + obstacle.getName() + ".xml");
+        var filename = directory.getAbsolutePath().concat("/" + obstacle.getName() + "EX2.xml");
         System.out.println("Saving Airport " + obstacle + " at location " + filename);
         xmlWriter.createObstacleXMLFile(obstacle, filename);
 
-        var alert = new Alert(Alert.AlertType.INFORMATION, "File " + obstacle.getName() + ".xml written.", ButtonType.CANCEL);
+        var alert = new Alert(Alert.AlertType.INFORMATION, "File " + obstacle.getName() + "EX2.xml written.", ButtonType.CANCEL);
         alert.showAndWait();
     }
 

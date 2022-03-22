@@ -40,7 +40,7 @@ public class ObstaclePresets {
      * @return the preset obstacle, or null if it doesn't exist
      */
     public Obstacle getObstaclePreset(String obstacleName) {
-        String fullDirectory = obstaclesDirectory.concat("/"+obstacleName+".xml");
+        String fullDirectory = obstaclesDirectory.concat("/"+obstacleName+"EX2.xml");
         return xmlReading.configureObstacleFromXMLFile(fullDirectory);
     }
 
@@ -76,6 +76,6 @@ public class ObstaclePresets {
      */
     public void createObstaclePreset(Obstacle obstacle) {
         XMLWriting writer = new XMLWriting();
-        writer.createObstacleXMLFile(obstacle, obstaclesDirectory+"/"+obstacle.getName()+".xml");
+        writer.createObstacleXMLFile(obstacle, obstaclesDirectory+"/"+obstacle.getName()+"EX2.xml");
     }
 }

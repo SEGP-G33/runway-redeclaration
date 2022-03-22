@@ -41,7 +41,7 @@ public class AirportPresets {
      * @return the preset obstacle, or null if it doesn't exist
      */
     public Airport getAirportPreset(String airportName) {
-        String fullDirectory = airportDirectory.concat("/"+airportName+".xml");
+        String fullDirectory = airportDirectory.concat("/"+airportName+"EX2.xml");
         return xmlReading.configureAirportFromXMLFile(fullDirectory);
     }
 
