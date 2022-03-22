@@ -10,39 +10,9 @@ import seg.g33.Entitites.*;
  */
 public class TextPrint {
 
-    /**************
-     * Test Script *
-     * need delete *
-     **************/
-
-//    public static void main(String[] args) {
-//        Airport airport = new Airport("LHR");
-//        Runway runway = new Runway("R27", airport, 10, 'L', 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0);
-//        System.out.println(text(airport));
-//        System.out.println(text(runway));
-//
-//        Obstacle obstacle = new Obstacle("test",20.0,20.0,20.0,20.0);
-//        System.out.println(text(obstacle));
-//
-//        Plane plane = new Plane("787-1");
-//        System.out.println(text(plane));
-//
-//        Calculator calculator = new Calculator();
-//        System.out.println(text(calculator));
-//
-//        RunwayParameters parameters = new RunwayParameters();
-//        System.out.println(text(parameters));
-//
-//        ObstaclePresets presets = new ObstaclePresets();
-//        presets.createObstaclePreset(obstacle);
-//        System.out.println(text(presets.getObstaclePreset("Obstacle")));
-//        System.out.println(text(presets.getAllObstaclePresets().get(2)));
-//    }
-
     /********************
      * TextPrint Airport *
      ********************/
-
     public static String text(Airport airport) {
         StringBuilder string = new StringBuilder();
         var runwayIndex = 0;
@@ -62,7 +32,6 @@ public class TextPrint {
     /*******************
      * TextPrint Runway *
      *******************/
-
     public static String text(Runway runway) {
         StringBuilder string = new StringBuilder();
         return string.append("  ____  _   _ _   ___        ___ __   __\n" +
@@ -78,7 +47,6 @@ public class TextPrint {
     /******************
      * TextPrint Plane *
      ******************/
-
     public static String text(Plane plane) {
         StringBuilder string = new StringBuilder();
         return string.append("     ____  _        _    _   _ _____ \n" +
@@ -94,7 +62,6 @@ public class TextPrint {
     /********************
      * TextPrint Obstacle *
      ********************/
-
     public static String text(Obstacle obstacle) {
         StringBuilder string = new StringBuilder();
         return string.append("  ___  ____ ____ _____  _    ____ _     _____ \n" +
@@ -113,7 +80,6 @@ public class TextPrint {
     /**********************
      * TextPrint Calculator *
      **********************/
-
     public static String text(Calculator calculator) {
         StringBuilder string = new StringBuilder();
         return string.append("  ____    _    _     ____ _   _ _        _  _____ ___  ____  \n" +
@@ -131,7 +97,6 @@ public class TextPrint {
     /****************************
      * TextPrint RunwayParameters *
      ****************************/
-
     public static String text(RunwayParameters parameter) {
         StringBuilder string = new StringBuilder();
         return string.append(" ____   _    ____      _    __  __ _____ _____ _____ ____  \n" +

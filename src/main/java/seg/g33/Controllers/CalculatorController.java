@@ -1,5 +1,6 @@
 package seg.g33.Controllers;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -11,11 +12,17 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+import seg.g33.App;
 import seg.g33.Entitites.*;
 import seg.g33.Helpers.*;
 
+import javax.swing.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
@@ -38,11 +45,11 @@ public class CalculatorController {
     private ObservableList<String> obstacleNamesObservableList;
 
     /**
-     * The obstacle that is currently added in the the application.
+     * Properties currently selected in the application.
      */
     private Obstacle selectedObstacle;
-
     private Airport selectedAirport;
+    private Runway selectedRunway;
 
     /**
      * Properties used for the JavaFX ComboBox to work properly.
@@ -57,15 +64,13 @@ public class CalculatorController {
     @FXML
     protected void initialize() {
         setAirportProperties();
+        setupObstacleBoxUI();
 
         // TODO: Testing Canvas. Remove later
         testCanvas();
 
         obstacles = obstaclePresets.getAllObstaclePresets();
-        var names = (obstacles.stream().map((obstacle -> obstacle.getName()))).collect(Collectors.toList());
-
-        obstacleNamesObservableList = FXCollections.observableList(names);
-        selectObstacleComboBox.setItems(obstacleNamesObservableList);
+        setObstacleListsAndComboBox();
 
         selectObstacleComboBox.valueProperty().addListener(new ChangeListener<String>() {
             @Override public void changed(ObservableValue ov, String t, String t1) {
@@ -79,8 +84,8 @@ public class CalculatorController {
         RunwayParameters param09R = new RunwayParameters(3660d, 3660d, 3660d, 3353d);
         RunwayParameters param27L = new RunwayParameters(3660d, 3660d, 3660d, 3660d);
 
-        RunwaySection section09R = new RunwaySection(runway, 9, 'R', param09R, 307d, 0d, 0d, 240d, 60d);
-        RunwaySection section27L = new RunwaySection(runway, 27, 'L', param27L, 0D, 0d, 0d, 240d, 60d);
+        RunwaySection section09R = new RunwaySection(runway, 5, 'R', param09R, 307d, 0d, 0d, 240d, 60d);
+        RunwaySection section27L = new RunwaySection(runway, 23, 'L', param27L, 0D, 0d, 0d, 240d, 60d);
         runway.addRunwaySection(section09R);
         runway.addRunwaySection(section27L);
 
@@ -95,6 +100,34 @@ public class CalculatorController {
         RunwayParameters params2 = results.get(1);
 
         Drawer.drawTopDown(canvas, 10*section09R.getAngle(), runway, obstacle, params1, params2);
+    }
+
+    private void setupObstacleBoxUI() {
+        if (useObstaclePresetCheckbox.isSelected()) {
+           setEditableFields(false);
+        }
+
+        useObstaclePresetCheckbox.setOnAction(action -> {
+            setEditableFields(useObstaclePresetCheckbox.isSelected() ? false : true);
+            clearObstacleFields();
+        });
+    }
+
+    private void clearObstacleFields() {
+        obstacleLeftField.setText(null);
+        obstacleCenterField.setText(null);
+        obstacleHeightField.setText(null);
+        obstacleNameField.setText(null);
+        obstacleRightField.setText(null);
+    }
+
+    private void setEditableFields(Boolean editable) {
+        selectObstacleComboBox.setDisable(editable);
+        obstacleRightField.setEditable(editable);
+        obstacleLeftField.setEditable(editable);
+        obstacleHeightField.setEditable(editable);
+        obstacleNameField.setEditable(editable);
+        obstacleCenterField.setEditable(editable);
     }
 
     /**
@@ -112,13 +145,51 @@ public class CalculatorController {
 
         selectRunwayComboBox.valueProperty().addListener(new ChangeListener<String>() {
             @Override public void changed(ObservableValue ov, String t, String t1) {
-                // TODO: Set values for params.
+                setSelectedRunway(t1);
             }
         });
 
         airportNameField.setText(selectedAirport.getName());
         airportCodeField.setText(selectedAirport.getShortcode());
         numberOfRunwaysField.setText(String.valueOf(selectedAirport.getAirportRunways().size()));
+    }
+
+    /**
+     * Sets the selectedRunway field based on the Runway name that was selected from the drop-down.
+     * @param runwayName
+     */
+    private void setSelectedRunway(String runwayName) {
+        for (Runway run : airportRunways) {
+            if (run.getName().equals(runwayName)) {
+                selectedRunway = run;
+                setElementsForSelectedRunway();
+                return;
+            }
+        }
+    }
+
+
+    /**
+     * Sets the UI elements for the currently selected runway.
+     */
+    private void setElementsForSelectedRunway() {
+        var sections = selectedRunway.getRunwaySections();
+        var section1 = sections.get(0);
+        var section2 = sections.get(1);
+        var section1Params = section1.getDefaultParameters();
+        var section2Params = section2.getDefaultParameters();
+
+        // Section 1 UI Elements
+        s1TODAField.setText(section1Params.getTODA().toString());
+        s1TORAField.setText(section1Params.getTORA().toString());
+        s1ASDAField.setText(section1Params.getASDA().toString());
+        s1LDAField.setText(section1Params.getLDA().toString());
+
+        // Section 2 UI Elements
+        s2TODAField.setText(section2Params.getTODA().toString());
+        s2TORAField.setText(section2Params.getTORA().toString());
+        s2ASDAField.setText(section2Params.getASDA().toString());
+        s2LDAField.setText(section2Params.getLDA().toString());
     }
 
     /**
@@ -145,22 +216,207 @@ public class CalculatorController {
         obstacleRightField.textProperty().set(right);
     }
 
-    @FXML private Canvas canvas;
+    /**
+     * Called when the recalculate button is pressed.
+     * If currently selected obstacle or runway is null, shows an alert and returns
+     */
+    @FXML
+    void handleRecalculateParams() {
+        var plane = Plane.DEFAULT_PLANE;
+
+        if (selectedRunway == null || selectedObstacle == null) {
+            var alert = new Alert(Alert.AlertType.ERROR, "Please select an Obstacle and a Runway...", ButtonType.CANCEL);
+            alert.showAndWait();
+            return;
+        }
+
+        Calculator calculator = new Calculator("Calculator", plane, selectedObstacle, selectedRunway);
+        ArrayList<RunwayParameters> results = calculator.calculate();
+        breakdownTextArea.setText(calculator.calcAsString());
+
+        setRecalculateParamsUI(results);
+
+        var angle = selectedRunway.getRunwaySections().get(0).getAngle();
+        Drawer.drawTopDown(canvas, 10*angle, selectedRunway, selectedObstacle, results.get(0), results.get(1));
+    }
+
+    /**
+     * Sets UI components for recalculated distances.
+     */
+    private void setRecalculateParamsUI(ArrayList<RunwayParameters> results) {
+        var section1Results = results.get(0);
+        var section2Results = results.get(1);
+
+        recalcS1TORA.setText(section1Results.getTORA().toString());
+        recalcS1TODA.setText(section1Results.getTODA().toString());
+        recalcS1LDA.setText(section1Results.getLDA().toString());
+        recalcS1ASDA.setText(section1Results.getASDA().toString());
+
+        recalcS2TORA.setText(section2Results.getTORA().toString());
+        recalcS2TODA.setText(section2Results.getTODA().toString());
+        recalcS2LDA.setText(section2Results.getLDA().toString());
+        recalcS2ASDA.setText(section2Results.getASDA().toString());
+    }
+
+    /**
+     * Called when the Import Obstacle XML button is pressed.
+     */
+    @FXML
+    void handleImportObstacleXML(ActionEvent event) {
+        FileChooser.ExtensionFilter xmlFileFilter = new FileChooser.ExtensionFilter("XML Files", "*.xml");
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose an XML File");
+        fileChooser.setInitialDirectory(new File(App.getAppDirectory()));
+        fileChooser.getExtensionFilters().addAll(xmlFileFilter);
+        File selectedFile = fileChooser.showOpenDialog(App.getPrimaryStage());
+
+        configureSelectedFile(selectedFile);
+    }
+
+    /**
+     * Handles reading an Obstacle XML file and configuring the UI with that.
+     * @param selectedFile the file selected from the file chooser.
+     */
+    private void configureSelectedFile(File selectedFile) {
+        var xmlReading = new XMLReading();
+        var newObstacle = xmlReading.configureObstacleFromXMLFile(selectedFile.getAbsolutePath());
+
+        if (obstacleAlreadyExists(newObstacle)) {
+            var alert = new Alert(Alert.AlertType.ERROR, "You have already added this Obstacle", ButtonType.CANCEL);
+            alert.showAndWait();
+            return;
+        }
+
+        obstacles.add(newObstacle);
+        setObstacleListsAndComboBox();
+        setElementsForSelectedObstacle(newObstacle.getName());
+    }
+
+    /**
+     * Sets properties required for the ComboBox to work properly.
+     */
+    private void setObstacleListsAndComboBox() {
+        var names = (obstacles.stream().map((obstacle -> obstacle.getName()))).collect(Collectors.toList());
+        obstacleNamesObservableList = FXCollections.observableList(names);
+        selectObstacleComboBox.setItems(obstacleNamesObservableList);
+    }
+
+    /**
+     * Checks if an obstacle already exists in the obstacle list.
+     * @param obstacle the obstacle to be added and to be checked against.
+     * @return true if the obstacle already exists, false otherwise
+     */
+    private boolean obstacleAlreadyExists(Obstacle obstacle) {
+        for (Obstacle obs : obstacles) {
+            // TODO: Checking based only on Name and Height here. Should we use something else or check more fields?
+            if (obs.getName().equals(obstacle.getName()) && obs.getHeight() == obstacle.getHeight()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Called then the back button is pressed.
+     * Returns to SelectAirport scene, after confirming navigation with an alert.
+     * @throws Exception In case the FXML file isn't there or can't be read correctly. This should never happen.
+     */
+    @FXML
+    void handleButtonBack(ActionEvent event) throws Exception {
+        var alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to go back?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            App.setRoot("select-airport");
+        }
+    }
+
+    /**
+     * Export the obstacle information to an XML file.
+     */
+    @FXML
+    void handleExportObstacle(ActionEvent event) {
+        if (useObstaclePresetCheckbox.isSelected()) {
+            var alert = new Alert(Alert.AlertType.CONFIRMATION, "You seem to be using an obstacle preset. Are you sure you want to export it again? ", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.YES) {
+                exportObstacleToXML();
+            }
+            return;
+        }
+
+        exportObstacleToXML();
+    }
+
+    /**
+     * Exports the currently selected obstacle to an XML file.
+     */
+    private void exportObstacleToXML() {
+        if (!validateObstacleFieldsForExport()) {
+            var alert = new Alert(Alert.AlertType.ERROR, "Please complete all fields with valid values.", ButtonType.CANCEL);
+            alert.showAndWait();
+            return;
+        }
+
+        var name = obstacleNameField.getText();
+        var height = Double.parseDouble(obstacleHeightField.getText());
+        var center = Double.parseDouble(obstacleCenterField.getText());
+        var left = Double.parseDouble(obstacleLeftField.getText());
+        var right = Double.parseDouble(obstacleRightField.getText());
+
+        var obstacle = new Obstacle(name, height, center, left, right);
+
+        System.out.println("Exporting Obstacle: " + obstacle.toString());
+
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Save");
+        directoryChooser.setInitialDirectory(new File(App.getAppDirectory()));
+        File directory = directoryChooser.showDialog(App.getPrimaryStage());
+
+        var xmlWriter = new XMLWriting();
+        var filename = directory.getAbsolutePath().concat("/" + obstacle.getName() + ".xml");
+        System.out.println("Saving Airport " + obstacle + " at location " + filename);
+        xmlWriter.createObstacleXMLFile(obstacle, filename);
+
+        var alert = new Alert(Alert.AlertType.INFORMATION, "File " + obstacle.getName() + ".xml written.", ButtonType.CANCEL);
+        alert.showAndWait();
+    }
+
+
+    /**
+     * Validates the input text fields of the obstacle properties.
+     * Guarantees they're not empty and contain legal values.
+     * @return true if all fields are valid. False otherwise.
+     */
+    private boolean validateObstacleFieldsForExport() {
+        if (obstacleNameField.getText().isBlank() || obstacleHeightField.getText().isBlank() || obstacleCenterField.getText().isBlank() || obstacleLeftField.getText().isBlank() || obstacleRightField.getText().isBlank()) {
+            return false;
+        }
+
+        if (!isNumber(obstacleHeightField.getText()) || !isNumber(obstacleCenterField.getText()) || !isNumber(obstacleLeftField.getText()) || !isNumber(obstacleRightField.getText())) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Checks if a given input string has a numeric value.
+     * Used to export Obstacle information to XML file.
+     * Source code adapted from: https://www.baeldung.com/java-check-string-number
+     * @param input the string to be checked
+     * @return true if input is a number. False otherwise
+     */
+    public boolean isNumber(String input) {
+        Pattern pattern = Pattern.compile("\\d+(\\.\\d+)?");
+        if (input == null) {
+            return false;
+        }
+        return pattern.matcher(input).matches();
+    }
 
     @FXML
-    private ScrollPane root_scroll;
-
-    @FXML
-    private VBox root_vbox;
-
-    @FXML
-    private Button button_back;
-
-    @FXML
-    private Button button_import_obstacle;
-
-    @FXML
-    private Button button_export_obstacle;
+    private TextArea breakdownTextArea;
 
     @FXML
     private TextField airportNameField;
@@ -196,145 +452,57 @@ public class CalculatorController {
     private TextField obstacleLeftField;
 
     @FXML
-    private TextField field_original_lda;
+    private TextField s1LDAField;
 
     @FXML
-    private TextField field_original_asda;
+    private TextField s1ASDAField;
 
     @FXML
-    private TextField field_original_toda;
+    private TextField s1TODAField;
 
     @FXML
-    private TextField field_original_tora;
+    private TextField s1TORAField;
 
     @FXML
-    private Pane pane_flash_7;
+    private TextField s2TODAField;
 
     @FXML
-    private Pane pane_flash_8;
+    private TextField s2ASDAField;
 
     @FXML
-    private TextField field_original_tora2;
+    private TextField s2LDAField;
 
     @FXML
-    private Pane pane_flash_10;
+    private TextField s2TORAField;
 
     @FXML
-    private Pane pane_flash_13;
+    private TextField recalcS1LDA;
 
     @FXML
-    private Pane pane_flash_14;
+    private TextField recalcS1ASDA;
 
     @FXML
-    private Pane pane_flash_9;
+    private TextField recalcS1TODA;
 
     @FXML
-    private Pane pane_flash_12;
+    private TextField recalcS1TORA;
 
     @FXML
-    private Pane pane_flash_15;
-
-    @FXML
-    private Pane pane_flash_3;
-
-    @FXML
-    private BorderPane pane_flash_4;
-
-    @FXML
-    private BorderPane pane_flash_5;
-
-    @FXML
-    private BorderPane pane_flash_2;
-
-    @FXML
-    private Pane pane_flash_1;
-
-    @FXML
-    private Pane pane_flash_6;
-
-    @FXML
-    private Button button_recalculate;
-
-    @FXML
-    private Button button_breakdown;
-
-    @FXML
-    private TextField field_original_lda1;
-
-    @FXML
-    private TextField field_original_asda1;
-
-    @FXML
-    private TextField field_original_toda1;
-
-    @FXML
-    private TextField field_original_tora1;
-
-    @FXML
-    private Pane pane_flash_71;
-
-    @FXML
-    private Pane pane_flash_81;
-
-    @FXML
-    private TextField field_original_tora21;
+    private TextField recalcS2TODA;
 
     @FXML
     private Pane pane_flash_101;
 
     @FXML
-    private TextField field_original_asda11;
+    private TextField recalcS2ASDA;
 
     @FXML
-    private Pane pane_flash_131;
+    private TextField recalcS2LDA;
 
     @FXML
-    private Pane pane_flash_141;
+    private TextField recalcS2TORA;
 
     @FXML
-    private TextField field_original_lda11;
-
-    @FXML
-    private Pane pane_flash_91;
-
-    @FXML
-    private Pane pane_flash_121;
-
-    @FXML
-    private Pane pane_flash_151;
-
-    @FXML
-    private Pane pane_flash_31;
-
-    @FXML
-    private BorderPane pane_flash_41;
-
-    @FXML
-    private BorderPane pane_flash_51;
-
-    @FXML
-    private TextField field_original_tora11;
-
-    @FXML
-    private BorderPane pane_flash_21;
-
-    @FXML
-    private Pane pane_flash_61;
-
-    @FXML
-    private Label label_msg_results;
-
-    @FXML
-    private TextArea textarea_results;
-
-    @FXML
-    void handleButtonBack(ActionEvent event) {
-
-    }
-
-    @FXML
-    void handleExportObstacle(ActionEvent event) {
-
-    }
+    private Canvas canvas;
 
 }
