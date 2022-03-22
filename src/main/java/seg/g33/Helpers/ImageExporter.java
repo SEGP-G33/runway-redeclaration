@@ -1,9 +1,10 @@
 package seg.g33.Helpers;
 
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.image.WritableImage;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+
 
 import java.awt.image.RenderedImage;
 import java.io.File;
@@ -14,27 +15,28 @@ import javax.imageio.ImageIO;
 
 public class ImageExporter {
     private FileChooser fileChooser = new FileChooser();
-    private Stage stageToExport;
+
+    private Canvas canvasToExport;
 
     /**
      * Image exporter constructor
-     * @param stageToExport The stage that contains the current scene to export
+     * @param canvasToExport The stage that contains the current scene to export
      */
-    public ImageExporter (Stage stageToExport) {
-        this.stageToExport = stageToExport;
+    public ImageExporter (Canvas canvasToExport) {
+        this.canvasToExport = canvasToExport;
     }
 
     /**
-     * Exports whatever the current scene is showing, at whatever size it is on
+     * Exports whatever the given canvas is showing, at whatever size it is on
      * Opens up file explorer to let the user select where they want the file to be saved
      */
     public void exportImage () {
-        File exportFile = setExtFilters(fileChooser).showSaveDialog(stageToExport);
+        File exportFile = setExtFilters(fileChooser).showSaveDialog(null);
 
         if (exportFile != null) {
             try {
-                WritableImage writableImage = new WritableImage((int)stageToExport.getWidth(), (int) stageToExport.getHeight());
-                stageToExport.getScene().snapshot(writableImage);
+                WritableImage writableImage = new WritableImage((int)canvasToExport.getWidth(), (int)canvasToExport.getHeight());
+                canvasToExport.snapshot(null, writableImage);
                 RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
                 ImageIO.write(renderedImage, "png", exportFile);
             } catch (IOException ex) {
@@ -43,6 +45,7 @@ public class ImageExporter {
             }
         }
     }
+
 
     /**
      * Adds default file extensions to the file explorer window that pops up
