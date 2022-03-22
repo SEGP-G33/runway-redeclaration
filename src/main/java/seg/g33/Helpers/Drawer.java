@@ -331,8 +331,8 @@ public class Drawer {
                     {60d * scale + leftLength, height / 2 - 70},
                     {60d * scale + leftLength + params1.getTODA() * scale, height / 2 - 70}};
             leftLDAPoints = new Double[][]{
-                    {60d * scale + leftLength, height / 2 - 90},
-                    {60d * scale + leftLength + (params1.getLDA()) * scale, height / 2 - 90}};
+                    {60d * scale + + leftSection.getDisplacedThreshold() * scale, height / 2 - 90},
+                    {60d * scale + leftLength + (leftSection.getDisplacedThreshold() + params1.getLDA()) * scale, height / 2 - 90}};
             leftDTPoints = new Double[][]{
                     {60d * scale + leftLength, height / 2 - 110},
                     {60d * scale + leftLength + leftSection.getDisplacedThreshold() * scale, height / 2 - 110}};
