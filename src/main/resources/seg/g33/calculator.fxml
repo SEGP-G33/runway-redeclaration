@@ -455,7 +455,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="textarea_results" disable="true" prefHeight="186.0" prefWidth="433.0" />
+                  <TextArea fx:id="breakdownTextArea" editable="false" prefHeight="186.0" prefWidth="433.0" />
                </children>
             </VBox>
          </content>

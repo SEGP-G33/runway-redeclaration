@@ -232,6 +232,8 @@ public class CalculatorController {
 
         Calculator calculator = new Calculator("Calculator", plane, selectedObstacle, selectedRunway);
         ArrayList<RunwayParameters> results = calculator.calculate();
+        breakdownTextArea.setText(calculator.calcAsString());
+
         setRecalculateParamsUI(results);
 
 
@@ -413,6 +415,9 @@ public class CalculatorController {
         }
         return pattern.matcher(input).matches();
     }
+
+    @FXML
+    private TextArea breakdownTextArea;
 
     @FXML
     private TextField airportNameField;
