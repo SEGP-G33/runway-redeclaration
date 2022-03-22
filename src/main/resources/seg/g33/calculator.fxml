@@ -182,28 +182,28 @@
                            </rowConstraints>
                            <children>
                               <Label text="LDA" GridPane.rowIndex="4" />
-                              <TextField fx:id="field_original_lda" prefHeight="24.0" prefWidth="76.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="s1LDAField" prefHeight="24.0" prefWidth="76.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                               <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="4">
                                  <GridPane.margin>
                                     <Insets left="15.0" />
                                  </GridPane.margin>
                               </Label>
                               <Label text="ASDA" GridPane.rowIndex="3" />
-                              <TextField fx:id="field_original_asda" prefHeight="24.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="s1ASDAField" prefHeight="24.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets left="15.0" />
                                  </GridPane.margin>
                               </Label>
                               <Label text="TODA" GridPane.rowIndex="2" />
-                              <TextField fx:id="field_original_toda" prefHeight="24.0" prefWidth="79.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="s1TODAField" prefHeight="24.0" prefWidth="79.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets left="15.0" />
                                  </GridPane.margin>
                               </Label>
                               <Label text="TORA" GridPane.rowIndex="1" />
-                              <TextField fx:id="field_original_tora" prefHeight="24.0" prefWidth="85.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="s1TORAField" prefHeight="24.0" prefWidth="85.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets left="15.0" />
@@ -216,7 +216,7 @@
                               </Pane>
                               <Pane fx:id="pane_flash_8" GridPane.columnIndex="5" GridPane.rowIndex="2">
                                  <children>
-                                    <TextField fx:id="field_original_tora2" prefHeight="27.0" prefWidth="62.0" />
+                                    <TextField fx:id="s2TODAField" prefHeight="27.0" prefWidth="62.0" />
                                  </children>
                               </Pane>
                               <Pane fx:id="pane_flash_10" GridPane.columnIndex="4" GridPane.rowIndex="3">
@@ -226,7 +226,7 @@
                               </Pane>
                               <Pane prefHeight="37.0" prefWidth="62.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
                                  <children>
-                                    <TextField layoutY="-1.0" prefHeight="20.0" prefWidth="62.0" />
+                                    <TextField fx:id="s2ASDAField" layoutY="-1.0" prefHeight="20.0" prefWidth="62.0" />
                                  </children>
                               </Pane>
                               <Pane fx:id="pane_flash_13" GridPane.columnIndex="4" GridPane.rowIndex="4">
@@ -236,7 +236,7 @@
                               </Pane>
                               <Pane fx:id="pane_flash_14" GridPane.columnIndex="5" GridPane.rowIndex="4">
                                  <children>
-                                    <TextField layoutY="-1.0" prefHeight="27.0" prefWidth="62.0" />
+                                    <TextField fx:id="s2LDAField" layoutY="-1.0" prefHeight="27.0" prefWidth="62.0" />
                                  </children>
                               </Pane>
                               <Pane fx:id="pane_flash_9" GridPane.columnIndex="6" GridPane.rowIndex="2">
@@ -271,7 +271,7 @@
                               </BorderPane>
                               <BorderPane fx:id="pane_flash_5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
                                  <center>
-                                    <TextField prefHeight="27.0" prefWidth="82.0" BorderPane.alignment="CENTER" />
+                                    <TextField fx:id="s2TORAField" prefHeight="27.0" prefWidth="82.0" BorderPane.alignment="CENTER" />
                                  </center>
                               </BorderPane>
                               <BorderPane fx:id="pane_flash_2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
@@ -296,7 +296,7 @@
                   </VBox>
                   <HBox alignment="CENTER" prefHeight="30.0" prefWidth="560.0" spacing="30.0">
                      <children>
-                        <Button fx:id="button_recalculate" mnemonicParsing="false" text="Recalculate Parameters" />
+                        <Button fx:id="button_recalculate" mnemonicParsing="false" onAction="#handleRecalculateParams" text="Recalculate Parameters" />
                         <Button fx:id="button_breakdown" disable="true" mnemonicParsing="false" text="Show Breakdown Calculations" />
                      </children>
                   </HBox>
@@ -326,28 +326,28 @@
                            </rowConstraints>
                            <children>
                               <Label text="LDA" GridPane.rowIndex="4" />
-                              <TextField fx:id="field_original_lda1" prefHeight="24.0" prefWidth="76.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="recalcS1LDA" prefHeight="24.0" prefWidth="76.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                               <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="4">
                                  <GridPane.margin>
                                     <Insets left="15.0" />
                                  </GridPane.margin>
                               </Label>
                               <Label text="ASDA" GridPane.rowIndex="3" />
-                              <TextField fx:id="field_original_asda1" prefHeight="24.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="recalcS1ASDA" prefHeight="24.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets left="15.0" />
                                  </GridPane.margin>
                               </Label>
                               <Label text="TODA" GridPane.rowIndex="2" />
-                              <TextField fx:id="field_original_toda1" prefHeight="24.0" prefWidth="79.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="recalcS1TODA" prefHeight="24.0" prefWidth="79.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets left="15.0" />
                                  </GridPane.margin>
                               </Label>
                               <Label text="TORA" GridPane.rowIndex="1" />
-                              <TextField fx:id="field_original_tora1" prefHeight="24.0" prefWidth="85.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="recalcS1TORA" prefHeight="24.0" prefWidth="85.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets left="15.0" />
@@ -360,7 +360,10 @@
                               </Pane>
                               <Pane fx:id="pane_flash_81" GridPane.columnIndex="5" GridPane.rowIndex="2">
                                  <children>
-                                    <TextField fx:id="field_original_tora21" prefHeight="27.0" prefWidth="62.0" />
+                                    <TextField fx:id="recalcS2TODA" prefHeight="27.0" prefWidth="62.0">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font></TextField>
                                  </children>
                               </Pane>
                               <Pane fx:id="pane_flash_101" GridPane.columnIndex="4" GridPane.rowIndex="3">
@@ -370,7 +373,10 @@
                               </Pane>
                               <Pane prefHeight="37.0" prefWidth="62.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
                                  <children>
-                                    <TextField fx:id="field_original_asda11" layoutY="-1.0" prefHeight="20.0" prefWidth="62.0" />
+                                    <TextField fx:id="recalcS2ASDA" layoutY="2.0" prefHeight="20.0" prefWidth="62.0">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font></TextField>
                                  </children>
                               </Pane>
                               <Pane fx:id="pane_flash_131" GridPane.columnIndex="4" GridPane.rowIndex="4">
@@ -380,7 +386,10 @@
                               </Pane>
                               <Pane fx:id="pane_flash_141" GridPane.columnIndex="5" GridPane.rowIndex="4">
                                  <children>
-                                    <TextField fx:id="field_original_lda11" layoutY="-1.0" prefHeight="27.0" prefWidth="62.0" />
+                                    <TextField fx:id="recalcS2LDA" layoutY="-1.0" prefHeight="27.0" prefWidth="62.0">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font></TextField>
                                  </children>
                               </Pane>
                               <Pane fx:id="pane_flash_91" GridPane.columnIndex="6" GridPane.rowIndex="2">
@@ -415,7 +424,10 @@
                               </BorderPane>
                               <BorderPane fx:id="pane_flash_51" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
                                  <center>
-                                    <TextField fx:id="field_original_tora11" prefHeight="27.0" prefWidth="82.0" BorderPane.alignment="CENTER" />
+                                    <TextField fx:id="recalcS2TORA" prefHeight="27.0" prefWidth="102.0" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font></TextField>
                                  </center>
                               </BorderPane>
                               <BorderPane fx:id="pane_flash_21" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
@@ -443,7 +455,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="textarea_results" disable="true" prefHeight="319.0" prefWidth="560.0" />
+                  <TextArea fx:id="textarea_results" disable="true" prefHeight="186.0" prefWidth="433.0" />
                </children>
             </VBox>
          </content>
