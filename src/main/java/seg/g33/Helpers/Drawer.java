@@ -9,10 +9,6 @@ import javafx.scene.text.TextAlignment;
 import org.w3c.dom.ls.LSOutput;
 import seg.g33.Entitites.*;
 
-import java.util.ArrayList;
-
-import static seg.g33.Helpers.TextPrint.text;
-
 public class Drawer {
 
     public static Paint white = Color.WHITE;
@@ -332,9 +328,9 @@ public class Drawer {
         Double heightUp = height / 2 + 25d * scale;
         Double heightDown = height / 2 - 25d * scale;
 
-        Double[][] clearwayArea = {
-                {60d * scale, heightUp}, {(totalLength - 60d) * scale, heightUp},
-                {(totalLength - 60d) * scale, heightDown}, {60d * scale, heightDown}
+        double[][] clearwayArea = {
+                {60d * scale, (totalLength - 60d) * scale, (totalLength - 60d) * scale, 60d * scale},
+                {heightUp, heightUp, heightDown, heightDown}
         };
 
         Boolean takeOffAway = obstacle.getLeftDistance() < Math.max(leftSection.getDefaultParameters().getTORA(), rightSection.getDefaultParameters().getTORA()) / 2;
@@ -367,12 +363,12 @@ public class Drawer {
         Double[] obstaclePoint = {
                 60d * scale + leftLength + obstacle.getLeftDistance() * scale + leftSection.getDisplacedThreshold() * scale, -60d * scale + totalLength * scale - rightLength - obstacle.getRightDistance() * scale
         };
-        Double[][] obstaclePoints = {
-                {obstaclePoint[0] - 2, heightDown - 2 * obstacle.getHeight()},
-                {obstaclePoint[0] - 2, heightUp},
-                {obstaclePoint[1] + 2, heightUp},
-                {obstaclePoint[1] + 2, heightDown - 2 * obstacle.getHeight()}
+
+        double[][] obstaclePoints = {
+                {obstaclePoint[0] - 2, obstaclePoint[0] - 2, obstaclePoint[1] + 2, obstaclePoint[1] + 2},
+                {heightDown - 2 * obstacle.getHeight(), heightUp, heightUp, heightDown - 2 * obstacle.getHeight()}
         };
+
 
         if (takeOffAway) {
             leftTORAPoints = new Double[][]{
@@ -421,7 +417,7 @@ public class Drawer {
                     {-60d * scale + totalLength * scale - rightLength, height / 2 + 110},
                     {-60d * scale + totalLength * scale - rightLength - rightSection.getDisplacedThreshold() * scale + 2, height / 2 + 110}};
             slopeAnglesPoints = new Double[][]{
-                    obstaclePoints[3],
+                    {obstaclePoints[0][3], obstaclePoints[1][3]},
                     {obstaclePoint[1] + (obstacle.getHeight() * plane.getSlope()) * scale, height / 2}};
             takeOff1 = "Take Off Away";
             loading1 = "Loading Over";
@@ -475,7 +471,7 @@ public class Drawer {
                     {-60d * scale + totalLength * scale - rightLength - rightSection.getDisplacedThreshold() * scale + 2, height / 2 + 110}};
             slopeAnglesPoints = new Double[][]{
                     {obstaclePoint[0] - (obstacle.getHeight() * plane.getSlope()) * scale, height / 2},
-                    obstaclePoints[0]};
+                    {obstaclePoints[0][0],obstaclePoints[1][0]}};
             takeOff1 = "Take Off Towards";
             loading1 = "Loading Towards";
             takeOff2 = "Take Off Away";
@@ -500,62 +496,45 @@ public class Drawer {
         Double[] rightDTText = {rightDTPoints[0][0], rightDTPoints[0][1] + 10};
         Double[] rightDesignatorText = {totalLength * scale - 60 * scale, height / 2 + 135};
 
-        Double[][] mapSymbol1Points = new Double[][]{
-                {-60d * scale + totalLength * scale - 80, height / 2 + 150},
-                {-60d * scale + totalLength * scale - 70, height / 2 + 150},
-                {-60d * scale + totalLength * scale - 70, height / 2 + 160},
-                {-60d * scale + totalLength * scale - 80, height / 2 + 160}};
-        Double[] mapSymbol1Text = {mapSymbol1Points[0][0] + 15, mapSymbol1Points[2][1] - 1};
+        double[][] mapSymbol1Points = new double[][]{
+                {-60d * scale + totalLength * scale - 80, -60d * scale + totalLength * scale - 70, -60d * scale + totalLength * scale - 70, -60d * scale + totalLength * scale - 80},
+                {height / 2 + 150, height / 2 + 150, height / 2 + 160, height / 2 + 160}};
+        Double[] mapSymbol1Text = {mapSymbol1Points[0][0] + 15, mapSymbol1Points[1][3] - 1};
 
-        Double[][] mapSymbol2Points = new Double[][]{
-                {-60d * scale + totalLength * scale - 80, height / 2 + 170},
-                {-60d * scale + totalLength * scale - 70, height / 2 + 170},
-                {-60d * scale + totalLength * scale - 70, height / 2 + 180},
-                {-60d * scale + totalLength * scale - 80, height / 2 + 180}};
-        Double[] mapSymbol2Text = {mapSymbol2Points[0][0] + 15, mapSymbol2Points[2][1] - 1};
+        double[][] mapSymbol2Points = new double[][]{
+                {-60d * scale + totalLength * scale - 80, -60d * scale + totalLength * scale - 70, -60d * scale + totalLength * scale - 70, -60d * scale + totalLength * scale - 80},
+                {height / 2 + 170, height / 2 + 170, height / 2 + 180, height / 2 + 180}};
+        Double[] mapSymbol2Text = {mapSymbol2Points[0][0] + 15, mapSymbol2Points[1][3] - 1};
 
-        Double[][] mapSymbol3Points = new Double[][]{
-                {-60d * scale + totalLength * scale - 80, height / 2 + 190},
-                {-60d * scale + totalLength * scale - 70, height / 2 + 190},
-                {-60d * scale + totalLength * scale - 70, height / 2 + 200},
-                {-60d * scale + totalLength * scale - 80, height / 2 + 200}};
-        Double[] mapSymbol3Text = {mapSymbol3Points[0][0] + 15, mapSymbol3Points[2][1] - 1};
+        double[][] mapSymbol3Points = new double[][]{
+                {-60d * scale + totalLength * scale - 80, -60d * scale + totalLength * scale - 70, -60d * scale + totalLength * scale - 70, -60d * scale + totalLength * scale - 80},
+                {height / 2 + 190, height / 2 + 190, height / 2 + 200, height / 2 + 200}};
+        Double[] mapSymbol3Text = {mapSymbol3Points[0][0] + 15, mapSymbol3Points[1][3] - 1};
 
-        Double[][] mapSymbol4Points = new Double[][]{
-                {-60d * scale + totalLength * scale - 80, height / 2 + 210},
-                {-60d * scale + totalLength * scale - 70, height / 2 + 210},
-                {-60d * scale + totalLength * scale - 70, height / 2 + 220},
-                {-60d * scale + totalLength * scale - 80, height / 2 + 220}};
-        Double[] mapSymbol4Text = {mapSymbol4Points[0][0] + 15, mapSymbol4Points[2][1] - 1};
+        double[][] mapSymbol4Points = new double[][]{
+                {-60d * scale + totalLength * scale - 80, -60d * scale + totalLength * scale - 70, -60d * scale + totalLength * scale - 70, -60d * scale + totalLength * scale - 80},
+                {height / 2 + 210, height / 2 + 210, height / 2 + 220, height / 2 + 220}};
+        Double[] mapSymbol4Text = {mapSymbol4Points[0][0] + 15, mapSymbol4Points[1][3] - 1};
 
-        Double[][] mapSymbol5Points = new Double[][]{
-                {-60d * scale + totalLength * scale - 80, height / 2 + 230},
-                {-60d * scale + totalLength * scale - 70, height / 2 + 230},
-                {-60d * scale + totalLength * scale - 70, height / 2 + 240},
-                {-60d * scale + totalLength * scale - 80, height / 2 + 240}};
-        Double[] mapSymbol5Text = {mapSymbol5Points[0][0] + 15, mapSymbol5Points[2][1] - 1};
+        double[][] mapSymbol5Points = new double[][]{
+                {-60d * scale + totalLength * scale - 80, -60d * scale + totalLength * scale - 70, -60d * scale + totalLength * scale - 70, -60d * scale + totalLength * scale - 80},
+                {height / 2 + 230, height / 2 + 230, height / 2 + 240, height / 2 + 240}};
+        Double[] mapSymbol5Text = {mapSymbol5Points[0][0] + 15, mapSymbol5Points[1][3] - 1};
 
 
         // Right and Left stopway points (appears on the right of the runway)
-        Double[][] leftStopwayPoints = {
-                {60d * scale + leftLength - leftStopway, heightUp},
-                {60d * scale + leftLength - leftStopway, heightDown},
-                {60d * scale + leftLength, heightDown},
-                {60d * scale + leftLength, heightUp}
+        double[][] leftStopwayPoints = {
+                {60d * scale + leftLength - leftStopway, 60d * scale + leftLength - leftStopway, 60d * scale + leftLength, 60d * scale + leftLength},
+                {heightUp, heightDown, heightDown, heightUp}
         };
-        Double[][] rightStopwayPoints = {
-                {60d * scale + leftLength + runwayLength, heightDown},
-                {60d * scale + leftLength + runwayLength, heightUp},
-                {60d * scale + leftLength + runwayLength + rightStopway, heightUp},
-                {60d * scale + leftLength + runwayLength + rightStopway, heightDown}
+        double[][] rightStopwayPoints = {
+                {60d * scale + leftLength + runwayLength, 60d * scale + leftLength + runwayLength, 60d * scale + leftLength + runwayLength + rightStopway, 60d * scale + leftLength + runwayLength + rightStopway},
+                {heightDown, heightUp, heightUp, heightDown}
         };
 
-
-        Double[][] runwayPoints = {
-                {60d * scale + leftLength, heightUp},
-                {60d * scale + leftLength, heightDown},
-                {-60d * scale + leftLength + runwayLength, heightDown},
-                {-60d * scale + leftLength + runwayLength, heightUp}
+        double[][] runwayPoints = {
+                {60d * scale + leftLength, 60d * scale + leftLength, -60d * scale + leftLength + runwayLength, -60d * scale + leftLength + runwayLength},
+                {heightDown, heightUp, heightUp, heightDown}
         };
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -566,17 +545,17 @@ public class Drawer {
 
         // Draw clearway
         gc.setFill(grey1);
-        gc.fillPolygon(getFromIndex(0, clearwayArea), getFromIndex(1, clearwayArea), 4);
-        gc.fillPolygon(getFromIndex(0, mapSymbol1Points), getFromIndex(1, mapSymbol1Points), 4);
+        gc.fillPolygon(clearwayArea[0], clearwayArea[1], 4);
+        gc.fillPolygon(mapSymbol1Points[0], mapSymbol1Points[1], 4);
         // Draw stop-ways
         gc.setFill(grey2);
-        gc.fillPolygon(getFromIndex(0, rightStopwayPoints), getFromIndex(1, rightStopwayPoints), 4);
-        gc.fillPolygon(getFromIndex(0, leftStopwayPoints), getFromIndex(1, leftStopwayPoints), 4);
-        gc.fillPolygon(getFromIndex(0, mapSymbol2Points), getFromIndex(1, mapSymbol2Points), 4);
+        gc.fillPolygon(rightStopwayPoints[0], rightStopwayPoints[1], 4);
+        gc.fillPolygon(leftStopwayPoints[0], leftStopwayPoints[1], 4);
+        gc.fillPolygon(mapSymbol2Points[0], mapSymbol2Points[1], 4);
         // Draw runway
         gc.setFill(grey3);
-        gc.fillPolygon(getFromIndex(0, runwayPoints), getFromIndex(1, runwayPoints), 4);
-        gc.fillPolygon(getFromIndex(0, mapSymbol3Points), getFromIndex(1, mapSymbol3Points), 4);
+        gc.fillPolygon(runwayPoints[0], runwayPoints[1], 4);
+        gc.fillPolygon(mapSymbol3Points[0], mapSymbol3Points[1], 4);
         // Draw Lines
         gc.strokeLine(rightTORAPoints[0][0], rightTORAPoints[0][1], rightTORAPoints[1][0], rightTORAPoints[1][1]);
         gc.strokeLine(rightASDAPoints[0][0], rightASDAPoints[0][1], rightASDAPoints[1][0], rightASDAPoints[1][1]);
@@ -600,30 +579,26 @@ public class Drawer {
 
         // Draw Obstacle
         gc.setFill(black);
-        gc.fillPolygon(getFromIndex(0, obstaclePoints), getFromIndex(1, obstaclePoints), 4);
-        gc.fillPolygon(getFromIndex(0, mapSymbol4Points), getFromIndex(1, mapSymbol4Points), 4);
-        gc.strokePolygon(getFromIndex(0, mapSymbol5Points), getFromIndex(1, mapSymbol5Points), 4);
+        gc.fillPolygon(obstaclePoints[0], obstaclePoints[1], 4);
+        gc.fillPolygon(mapSymbol4Points[0], mapSymbol4Points[1], 4);
+        gc.strokePolygon(mapSymbol5Points[0], mapSymbol5Points[1], 4);
 
         // Draw Threshold identifiers
         gc.setFill(white);
         gc.setTextAlign(TextAlignment.CENTER);
         if (leftSection.getDisplacedThreshold() > 0) {
-            Double[][] displacedThreshold = {
-                    {60d * scale + leftLength + leftSection.getDisplacedThreshold() * scale - 5, heightUp},
-                    {60d * scale + leftLength + leftSection.getDisplacedThreshold() * scale - 5, heightDown},
-                    {60d * scale + leftLength + leftSection.getDisplacedThreshold() * scale + 5, heightDown},
-                    {60d * scale + leftLength + leftSection.getDisplacedThreshold() * scale + 5, heightUp}
+            double[][] displacedThreshold = {
+                    {60d * scale + leftLength + leftSection.getDisplacedThreshold() * scale - 5, 60d * scale + leftLength + leftSection.getDisplacedThreshold() * scale - 5,60d * scale + leftLength + leftSection.getDisplacedThreshold() * scale + 5, 60d * scale + leftLength + leftSection.getDisplacedThreshold() * scale + 5},
+                    {heightUp, heightDown, heightDown, heightUp},
             };
-            gc.fillPolygon(getFromIndex(0, displacedThreshold), getFromIndex(1, displacedThreshold), 4);
+            gc.fillPolygon(displacedThreshold[0], displacedThreshold[1], 4);
         }
         if (rightSection.getDisplacedThreshold() > 0) {
-            Double[][] displacedThreshold = {
-                    {-60d * scale + leftLength + runwayLength - rightSection.getDisplacedThreshold() * scale - 5, heightUp},
-                    {-60d * scale + leftLength + runwayLength - rightSection.getDisplacedThreshold() * scale - 5, heightDown},
-                    {-60d * scale + leftLength + runwayLength - rightSection.getDisplacedThreshold() * scale + 5, heightDown},
-                    {-60d * scale + leftLength + runwayLength - rightSection.getDisplacedThreshold() * scale + 5, heightUp}
+            double[][] displacedThreshold = {
+                    {-60d * scale + leftLength + runwayLength - rightSection.getDisplacedThreshold() * scale - 5, -60d * scale + leftLength + runwayLength - rightSection.getDisplacedThreshold() * scale - 5, -60d * scale + leftLength + runwayLength - rightSection.getDisplacedThreshold() * scale + 5, heightDown, -60d * scale + leftLength + runwayLength - rightSection.getDisplacedThreshold() * scale + 5, heightUp},
+                    {heightUp, heightDown, heightDown, heightUp},
             };
-            gc.fillPolygon(getFromIndex(0, displacedThreshold), getFromIndex(1, displacedThreshold), 4);
+            gc.fillPolygon(displacedThreshold[0], displacedThreshold[1], 4);
         }
         gc.setFont(new Font(18d / 1000 * width));
         gc.setFill(black);
