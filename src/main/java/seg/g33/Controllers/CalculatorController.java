@@ -217,6 +217,39 @@ public class CalculatorController {
     }
 
     @FXML
+    void handleRecalculateParams() {
+        var plane = Plane.DEFAULT_PLANE;
+
+        if (selectedRunway == null || selectedObstacle == null) {
+            var alert = new Alert(Alert.AlertType.ERROR, "Please select an Obstacle and a Runway...", ButtonType.CANCEL);
+            alert.showAndWait();
+            return;
+        }
+
+        Calculator calculator = new Calculator("Calculator", plane, selectedObstacle, selectedRunway);
+        ArrayList<RunwayParameters> results = calculator.calculate();
+        setRecalculateParamsUI(results);
+
+        var angle = selectedRunway.getRunwaySections().get(0).getAngle();
+        Drawer.drawTopDown(canvas, 10*angle, selectedRunway, selectedObstacle, results.get(0), results.get(1));
+    }
+
+    private void setRecalculateParamsUI(ArrayList<RunwayParameters> results) {
+        var section1Results = results.get(0);
+        var section2Results = results.get(1);
+
+        recalcS1TORA.setText(section1Results.getTORA().toString());
+        recalcS1TODA.setText(section1Results.getTODA().toString());
+        recalcS1LDA.setText(section1Results.getLDA().toString());
+        recalcS1ASDA.setText(section1Results.getASDA().toString());
+
+        recalcS2TORA.setText(section2Results.getTORA().toString());
+        recalcS2TODA.setText(section2Results.getTODA().toString());
+        recalcS2LDA.setText(section2Results.getLDA().toString());
+        recalcS2ASDA.setText(section2Results.getASDA().toString());
+    }
+
+    @FXML
     private ScrollPane root_scroll;
 
     @FXML
@@ -337,13 +370,16 @@ public class CalculatorController {
     private Button button_breakdown;
 
     @FXML
-    private TextField field_original_lda1;
+    private TextField recalcS1LDA;
 
     @FXML
-    private TextField field_original_asda1;
+    private TextField recalcS1ASDA;
 
     @FXML
-    private TextField field_original_toda1;
+    private TextField recalcS1TODA;
+
+    @FXML
+    private TextField recalcS1TORA;
 
     @FXML
     private Pane pane_flash_71;
@@ -352,13 +388,13 @@ public class CalculatorController {
     private Pane pane_flash_81;
 
     @FXML
-    private TextField field_original_tora21;
+    private TextField recalcS2TODA;
 
     @FXML
     private Pane pane_flash_101;
 
     @FXML
-    private TextField field_original_asda11;
+    private TextField recalcS2ASDA;
 
     @FXML
     private Pane pane_flash_131;
@@ -367,7 +403,7 @@ public class CalculatorController {
     private Pane pane_flash_141;
 
     @FXML
-    private TextField field_original_lda11;
+    private TextField recalcS2LDA;
 
     @FXML
     private Pane pane_flash_91;
@@ -388,7 +424,7 @@ public class CalculatorController {
     private BorderPane pane_flash_51;
 
     @FXML
-    private TextField field_original_tora11;
+    private TextField recalcS2TORA;
 
     @FXML
     private BorderPane pane_flash_21;
@@ -404,6 +440,10 @@ public class CalculatorController {
 
     @FXML
     private Canvas canvas;
+
+    @FXML
+    private Canvas canvas1;
+
 
 
     /**
