@@ -84,8 +84,8 @@ public class CalculatorController {
         RunwayParameters param09R = new RunwayParameters(3660d, 3660d, 3660d, 3353d);
         RunwayParameters param27L = new RunwayParameters(3660d, 3660d, 3660d, 3660d);
 
-        RunwaySection section09R = new RunwaySection(runway, 9, 'R', param09R, 307d, 0d, 0d, 240d, 60d);
-        RunwaySection section27L = new RunwaySection(runway, 27, 'L', param27L, 0D, 0d, 0d, 240d, 60d);
+        RunwaySection section09R = new RunwaySection(runway, 5, 'R', param09R, 307d, 0d, 0d, 240d, 60d);
+        RunwaySection section27L = new RunwaySection(runway, 23, 'L', param27L, 0D, 0d, 0d, 240d, 60d);
         runway.addRunwaySection(section09R);
         runway.addRunwaySection(section27L);
 
