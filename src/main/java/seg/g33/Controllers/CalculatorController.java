@@ -45,11 +45,11 @@ public class CalculatorController {
     private ObservableList<String> obstacleNamesObservableList;
 
     /**
-     * The obstacle that is currently added in the the application.
+     * Properties currently selected in the application.
      */
     private Obstacle selectedObstacle;
-
     private Airport selectedAirport;
+    private Runway selectedRunway;
 
     /**
      * Properties used for the JavaFX ComboBox to work properly.
@@ -145,13 +145,51 @@ public class CalculatorController {
 
         selectRunwayComboBox.valueProperty().addListener(new ChangeListener<String>() {
             @Override public void changed(ObservableValue ov, String t, String t1) {
-                // TODO: Set values for params.
+                setSelectedRunway(t1);
             }
         });
 
         airportNameField.setText(selectedAirport.getName());
         airportCodeField.setText(selectedAirport.getShortcode());
         numberOfRunwaysField.setText(String.valueOf(selectedAirport.getAirportRunways().size()));
+    }
+
+    /**
+     * Sets the selectedRunway field based on the Runway name that was selected from the drop-down.
+     * @param runwayName
+     */
+    private void setSelectedRunway(String runwayName) {
+        for (Runway run : airportRunways) {
+            if (run.getName().equals(runwayName)) {
+                selectedRunway = run;
+                setElementsForSelectedRunway();
+                return;
+            }
+        }
+    }
+
+
+    /**
+     * Sets the UI elements for the currently selected runway.
+     */
+    private void setElementsForSelectedRunway() {
+        var sections = selectedRunway.getRunwaySections();
+        var section1 = sections.get(0);
+        var section2 = sections.get(1);
+        var section1Params = section1.getDefaultParameters();
+        var section2Params = section2.getDefaultParameters();
+
+        // Section 1 UI Elements
+        s1TODAField.setText(section1Params.getTODA().toString());
+        s1TORAField.setText(section1Params.getTORA().toString());
+        s1ASDAField.setText(section1Params.getASDA().toString());
+        s1LDAField.setText(section1Params.getLDA().toString());
+
+        // Section 2 UI Elements
+        s2TODAField.setText(section2Params.getTODA().toString());
+        s2TORAField.setText(section2Params.getTORA().toString());
+        s2ASDAField.setText(section2Params.getASDA().toString());
+        s2LDAField.setText(section2Params.getLDA().toString());
     }
 
     /**
@@ -177,8 +215,6 @@ public class CalculatorController {
         obstacleLeftField.textProperty().set(left);
         obstacleRightField.textProperty().set(right);
     }
-
-    @FXML private Canvas canvas;
 
     @FXML
     private ScrollPane root_scroll;
@@ -229,16 +265,16 @@ public class CalculatorController {
     private TextField obstacleLeftField;
 
     @FXML
-    private TextField field_original_lda;
+    private TextField s1LDAField;
 
     @FXML
-    private TextField field_original_asda;
+    private TextField s1ASDAField;
 
     @FXML
-    private TextField field_original_toda;
+    private TextField s1TODAField;
 
     @FXML
-    private TextField field_original_tora;
+    private TextField s1TORAField;
 
     @FXML
     private Pane pane_flash_7;
@@ -247,16 +283,22 @@ public class CalculatorController {
     private Pane pane_flash_8;
 
     @FXML
-    private TextField field_original_tora2;
+    private TextField s2TODAField;
 
     @FXML
     private Pane pane_flash_10;
+
+    @FXML
+    private TextField s2ASDAField;
 
     @FXML
     private Pane pane_flash_13;
 
     @FXML
     private Pane pane_flash_14;
+
+    @FXML
+    private TextField s2LDAField;
 
     @FXML
     private Pane pane_flash_9;
@@ -275,6 +317,9 @@ public class CalculatorController {
 
     @FXML
     private BorderPane pane_flash_5;
+
+    @FXML
+    private TextField s2TORAField;
 
     @FXML
     private BorderPane pane_flash_2;
@@ -299,9 +344,6 @@ public class CalculatorController {
 
     @FXML
     private TextField field_original_toda1;
-
-    @FXML
-    private TextField field_original_tora1;
 
     @FXML
     private Pane pane_flash_71;
@@ -359,6 +401,10 @@ public class CalculatorController {
 
     @FXML
     private TextArea textarea_results;
+
+    @FXML
+    private Canvas canvas;
+
 
     /**
      * Called when the Import Obstacle XML button is pressed.
