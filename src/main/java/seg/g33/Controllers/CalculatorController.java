@@ -216,6 +216,10 @@ public class CalculatorController {
         obstacleRightField.textProperty().set(right);
     }
 
+    /**
+     * Called when the recalculate button is pressed.
+     * If currently selected obstacle or runway is null, shows an alert and returns
+     */
     @FXML
     void handleRecalculateParams() {
         var plane = Plane.DEFAULT_PLANE;
@@ -234,6 +238,9 @@ public class CalculatorController {
         Drawer.drawTopDown(canvas, 10*angle, selectedRunway, selectedObstacle, results.get(0), results.get(1));
     }
 
+    /**
+     * Sets UI components for recalculated distances.
+     */
     private void setRecalculateParamsUI(ArrayList<RunwayParameters> results) {
         var section1Results = results.get(0);
         var section2Results = results.get(1);
@@ -248,203 +255,6 @@ public class CalculatorController {
         recalcS2LDA.setText(section2Results.getLDA().toString());
         recalcS2ASDA.setText(section2Results.getASDA().toString());
     }
-
-    @FXML
-    private ScrollPane root_scroll;
-
-    @FXML
-    private VBox root_vbox;
-
-    @FXML
-    private Button button_back;
-
-    @FXML
-    private Button button_import_obstacle;
-
-    @FXML
-    private Button button_export_obstacle;
-
-    @FXML
-    private TextField airportNameField;
-
-    @FXML
-    private TextField airportCodeField;
-
-    @FXML
-    private TextField numberOfRunwaysField;
-
-    @FXML
-    private ComboBox<String> selectRunwayComboBox;
-
-    @FXML
-    private ComboBox<String> selectObstacleComboBox;
-
-    @FXML
-    private CheckBox useObstaclePresetCheckbox;
-
-    @FXML
-    private TextField obstacleNameField;
-
-    @FXML
-    private TextField obstacleCenterField;
-
-    @FXML
-    private TextField obstacleHeightField;
-
-    @FXML
-    private TextField obstacleRightField;
-
-    @FXML
-    private TextField obstacleLeftField;
-
-    @FXML
-    private TextField s1LDAField;
-
-    @FXML
-    private TextField s1ASDAField;
-
-    @FXML
-    private TextField s1TODAField;
-
-    @FXML
-    private TextField s1TORAField;
-
-    @FXML
-    private Pane pane_flash_7;
-
-    @FXML
-    private Pane pane_flash_8;
-
-    @FXML
-    private TextField s2TODAField;
-
-    @FXML
-    private Pane pane_flash_10;
-
-    @FXML
-    private TextField s2ASDAField;
-
-    @FXML
-    private Pane pane_flash_13;
-
-    @FXML
-    private Pane pane_flash_14;
-
-    @FXML
-    private TextField s2LDAField;
-
-    @FXML
-    private Pane pane_flash_9;
-
-    @FXML
-    private Pane pane_flash_12;
-
-    @FXML
-    private Pane pane_flash_15;
-
-    @FXML
-    private Pane pane_flash_3;
-
-    @FXML
-    private BorderPane pane_flash_4;
-
-    @FXML
-    private BorderPane pane_flash_5;
-
-    @FXML
-    private TextField s2TORAField;
-
-    @FXML
-    private BorderPane pane_flash_2;
-
-    @FXML
-    private Pane pane_flash_1;
-
-    @FXML
-    private Pane pane_flash_6;
-
-    @FXML
-    private Button button_recalculate;
-
-    @FXML
-    private Button button_breakdown;
-
-    @FXML
-    private TextField recalcS1LDA;
-
-    @FXML
-    private TextField recalcS1ASDA;
-
-    @FXML
-    private TextField recalcS1TODA;
-
-    @FXML
-    private TextField recalcS1TORA;
-
-    @FXML
-    private Pane pane_flash_71;
-
-    @FXML
-    private Pane pane_flash_81;
-
-    @FXML
-    private TextField recalcS2TODA;
-
-    @FXML
-    private Pane pane_flash_101;
-
-    @FXML
-    private TextField recalcS2ASDA;
-
-    @FXML
-    private Pane pane_flash_131;
-
-    @FXML
-    private Pane pane_flash_141;
-
-    @FXML
-    private TextField recalcS2LDA;
-
-    @FXML
-    private Pane pane_flash_91;
-
-    @FXML
-    private Pane pane_flash_121;
-
-    @FXML
-    private Pane pane_flash_151;
-
-    @FXML
-    private Pane pane_flash_31;
-
-    @FXML
-    private BorderPane pane_flash_41;
-
-    @FXML
-    private BorderPane pane_flash_51;
-
-    @FXML
-    private TextField recalcS2TORA;
-
-    @FXML
-    private BorderPane pane_flash_21;
-
-    @FXML
-    private Pane pane_flash_61;
-
-    @FXML
-    private Label label_msg_results;
-
-    @FXML
-    private TextArea textarea_results;
-
-    @FXML
-    private Canvas canvas;
-
-    @FXML
-    private Canvas canvas1;
-
-
 
     /**
      * Called when the Import Obstacle XML button is pressed.
@@ -602,5 +412,92 @@ public class CalculatorController {
         }
         return pattern.matcher(input).matches();
     }
+
+    @FXML
+    private TextField airportNameField;
+
+    @FXML
+    private TextField airportCodeField;
+
+    @FXML
+    private TextField numberOfRunwaysField;
+
+    @FXML
+    private ComboBox<String> selectRunwayComboBox;
+
+    @FXML
+    private ComboBox<String> selectObstacleComboBox;
+
+    @FXML
+    private CheckBox useObstaclePresetCheckbox;
+
+    @FXML
+    private TextField obstacleNameField;
+
+    @FXML
+    private TextField obstacleCenterField;
+
+    @FXML
+    private TextField obstacleHeightField;
+
+    @FXML
+    private TextField obstacleRightField;
+
+    @FXML
+    private TextField obstacleLeftField;
+
+    @FXML
+    private TextField s1LDAField;
+
+    @FXML
+    private TextField s1ASDAField;
+
+    @FXML
+    private TextField s1TODAField;
+
+    @FXML
+    private TextField s1TORAField;
+
+    @FXML
+    private TextField s2TODAField;
+
+    @FXML
+    private TextField s2ASDAField;
+
+    @FXML
+    private TextField s2LDAField;
+
+    @FXML
+    private TextField s2TORAField;
+
+    @FXML
+    private TextField recalcS1LDA;
+
+    @FXML
+    private TextField recalcS1ASDA;
+
+    @FXML
+    private TextField recalcS1TODA;
+
+    @FXML
+    private TextField recalcS1TORA;
+
+    @FXML
+    private TextField recalcS2TODA;
+
+    @FXML
+    private Pane pane_flash_101;
+
+    @FXML
+    private TextField recalcS2ASDA;
+
+    @FXML
+    private TextField recalcS2LDA;
+
+    @FXML
+    private TextField recalcS2TORA;
+
+    @FXML
+    private Canvas canvas;
 
 }
