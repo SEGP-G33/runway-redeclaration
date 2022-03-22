@@ -1,0 +1,33 @@
+# GitHub Actions workflow for automatically testing the Runway Redeclaration project when a push is made to certain branches. 
+# Forms part of system and regression testing for sprint 2 & 3. 
+# 
+# Java Continuous Integration with Maven Action 
+# Adapted from https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Java Maven Testing and Building (CI)
+
+on:
+  # Enables Manually Trigger for Action 
+  workflow_dispatch:
+  push:
+    branches: [ main, incr2 ]
+  pull_request:
+    branches: [ main, incr2 ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Project in working directory
+      uses: actions/checkout@v2
+    
+    - name: Set up JDK 17 
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
