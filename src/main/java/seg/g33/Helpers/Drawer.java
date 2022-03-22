@@ -203,11 +203,12 @@ public class Drawer {
     public static void drawSideOn(Canvas canvas, Runway runway, Obstacle obstacle, Plane plane, RunwayParameters params1, RunwayParameters params2) {
         Double width = canvas.getWidth();
         Double height = canvas.getHeight();
-        RunwaySection leftSection;
-        RunwaySection rightSection;
-        leftSection = runway.getRunwaySections().get(0);
-        rightSection = runway.getRunwaySections().get(1);
 
+        // Get two sections
+        RunwaySection leftSection = runway.getRunwaySections().get(0);
+        RunwaySection rightSection = runway.getRunwaySections().get(1);
+
+        // Blank for 60d on each side
         Double runwayLength = Math.max(leftSection.getDefaultParameters().getTORA(), rightSection.getDefaultParameters().getTORA()) + 120d;
 
         // Runway width is an arbitrary value because it is not mentioned in the specification
@@ -230,17 +231,6 @@ public class Drawer {
         Double heightUp = height / 2 + 25d * scale;
         Double heightDown = height / 2 - 25d * scale;
 
-        double[][] clearwayArea = {
-                {60d * scale, (totalLength - 60d) * scale, (totalLength - 60d) * scale, 60d * scale},
-                {heightUp, heightUp, heightDown, heightDown}
-        };
-
-        Boolean takeOffAway = obstacle.getLeftDistance() < Math.max(leftSection.getDefaultParameters().getTORA(), rightSection.getDefaultParameters().getTORA()) / 2;
-        String takeOff1;
-        String loading1;
-        String takeOff2;
-        String loading2;
-
         Double[][] leftTORAPoints;
         Double[][] leftASDAPoints;
         Double[][] leftTODAPoints;
@@ -260,17 +250,22 @@ public class Drawer {
 
         Double[][] slopeAnglesPoints;
 
-        System.out.println();
+        // Judging Take Off Away or Take Off Towards
+        Boolean takeOffAway = obstacle.getLeftDistance() < Math.max(leftSection.getDefaultParameters().getTORA(), rightSection.getDefaultParameters().getTORA()) / 2;
+        String takeOff1;
+        String loading1;
+        String takeOff2;
+        String loading2;
 
+        // The exact location of the obstacle
         Double[] obstaclePoint = {
                 60d * scale + leftLength + obstacle.getLeftDistance() * scale + leftSection.getDisplacedThreshold() * scale, -60d * scale + totalLength * scale - rightLength - obstacle.getRightDistance() * scale
         };
-
+        //The filled location of the obstacle
         double[][] obstaclePoints = {
                 {obstaclePoint[0] - 2, obstaclePoint[0] - 2, obstaclePoint[1] + 2, obstaclePoint[1] + 2},
                 {heightDown - 2 * obstacle.getHeight(), heightUp, heightUp, heightDown - 2 * obstacle.getHeight()}
         };
-
 
         if (takeOffAway) {
             leftTORAPoints = new Double[][]{
@@ -398,30 +393,31 @@ public class Drawer {
         Double[] rightDTText = {rightDTPoints[0][0], rightDTPoints[0][1] + 10};
         Double[] rightDesignatorText = {totalLength * scale - 60 * scale, height / 2 + 135};
 
+        // Map symbols and location
         double[][] mapSymbol1Points = new double[][]{
                 {-60d * scale + totalLength * scale - 100, -60d * scale + totalLength * scale - 90, -60d * scale + totalLength * scale - 90, -60d * scale + totalLength * scale - 100},
                 {height / 2 + 150, height / 2 + 150, height / 2 + 160, height / 2 + 160}};
-        Double[] mapSymbol1Text = {mapSymbol1Points[0][0] + 15, mapSymbol1Points[1][3] - 1};
+        double[] mapSymbol1Text = {mapSymbol1Points[0][0] + 15, mapSymbol1Points[1][3] - 1};
 
         double[][] mapSymbol2Points = new double[][]{
                 {-60d * scale + totalLength * scale - 100, -60d * scale + totalLength * scale - 90, -60d * scale + totalLength * scale - 90, -60d * scale + totalLength * scale - 100},
                 {height / 2 + 170, height / 2 + 170, height / 2 + 180, height / 2 + 180}};
-        Double[] mapSymbol2Text = {mapSymbol2Points[0][0] + 15, mapSymbol2Points[1][3] - 1};
+        double[] mapSymbol2Text = {mapSymbol2Points[0][0] + 15, mapSymbol2Points[1][3] - 1};
 
         double[][] mapSymbol3Points = new double[][]{
                 {-60d * scale + totalLength * scale - 100, -60d * scale + totalLength * scale - 90, -60d * scale + totalLength * scale - 90, -60d * scale + totalLength * scale - 100},
                 {height / 2 + 190, height / 2 + 190, height / 2 + 200, height / 2 + 200}};
-        Double[] mapSymbol3Text = {mapSymbol3Points[0][0] + 15, mapSymbol3Points[1][3] - 1};
+        double[] mapSymbol3Text = {mapSymbol3Points[0][0] + 15, mapSymbol3Points[1][3] - 1};
 
         double[][] mapSymbol4Points = new double[][]{
                 {-60d * scale + totalLength * scale - 100, -60d * scale + totalLength * scale - 90, -60d * scale + totalLength * scale - 90, -60d * scale + totalLength * scale - 100},
                 {height / 2 + 210, height / 2 + 210, height / 2 + 220, height / 2 + 220}};
-        Double[] mapSymbol4Text = {mapSymbol4Points[0][0] + 15, mapSymbol4Points[1][3] - 1};
+        double[] mapSymbol4Text = {mapSymbol4Points[0][0] + 15, mapSymbol4Points[1][3] - 1};
 
         double[][] mapSymbol5Points = new double[][]{
                 {-60d * scale + totalLength * scale - 100, -60d * scale + totalLength * scale - 90, -60d * scale + totalLength * scale - 90, -60d * scale + totalLength * scale - 100},
                 {height / 2 + 230, height / 2 + 230, height / 2 + 240, height / 2 + 240}};
-        Double[] mapSymbol5Text = {mapSymbol5Points[0][0] + 15, mapSymbol5Points[1][3] - 1};
+        double[] mapSymbol5Text = {mapSymbol5Points[0][0] + 15, mapSymbol5Points[1][3] - 1};
 
 
         // Right and Left stopway points (appears on the right of the runway)
@@ -433,10 +429,13 @@ public class Drawer {
                 {60d * scale + leftLength + runwayLength, 60d * scale + leftLength + runwayLength, 60d * scale + leftLength + runwayLength + rightStopway, 60d * scale + leftLength + runwayLength + rightStopway},
                 {heightDown, heightUp, heightUp, heightDown}
         };
-
         double[][] runwayPoints = {
                 {60d * scale + leftLength, 60d * scale + leftLength, -60d * scale + leftLength + runwayLength, -60d * scale + leftLength + runwayLength},
                 {heightDown, heightUp, heightUp, heightDown}
+        };
+        double[][] clearwayArea = {
+                {60d * scale, (totalLength - 60d) * scale, (totalLength - 60d) * scale, 60d * scale},
+                {heightUp, heightUp, heightDown, heightDown}
         };
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -485,7 +484,7 @@ public class Drawer {
         gc.fillPolygon(mapSymbol4Points[0], mapSymbol4Points[1], 4);
         gc.strokePolygon(mapSymbol5Points[0], mapSymbol5Points[1], 4);
 
-        // Draw Threshold identifiers
+        // Draw Threshold identifiers and Displaced Threshold
         gc.setFill(white);
         gc.setTextAlign(TextAlignment.CENTER);
         if (leftSection.getDisplacedThreshold() > 0) {
@@ -502,11 +501,11 @@ public class Drawer {
             };
             gc.fillPolygon(displacedThreshold[0], displacedThreshold[1], 4);
         }
-        gc.setFont(new Font(18d / 1000 * width));
+
+        // Text on top
         gc.setFill(black);
         gc.setTextAlign(TextAlignment.LEFT);
         gc.setFont(new Font(15d / 1000 * width));
-
         rotateText(gc, leftDesignatorText[0], leftDesignatorText[1], String.format("%s%s", leftSection.getAngle(), leftSection.getDirection()), 0);
         rotateText(gc, leftTORAText[0], leftTORAText[1], String.format("TORA: %sm → %s", params1.getTORA(), takeOff1), 0);
         rotateText(gc, leftASDAText[0], leftASDAText[1], String.format("ASDA: %sm → %s", params1.getASDA(), takeOff1), 0);
@@ -523,6 +522,7 @@ public class Drawer {
         rotateText(gc, mapSymbol4Text[0], mapSymbol4Text[1], String.format("Obstacle"), 0);
         rotateText(gc, mapSymbol5Text[0], mapSymbol5Text[1], String.format("Displaced Threshold"), 0);
 
+        // Text on bottom
         gc.setTextAlign(TextAlignment.RIGHT);
         rotateText(gc, rightDesignatorText[0], rightDesignatorText[1], String.format("%s%s", rightSection.getAngle(), rightSection.getDirection()), 0);
         rotateText(gc, rightTORAText[0], rightTORAText[1], String.format("%s ← TORA: %sm", takeOff2, params2.getTORA()), 0);
