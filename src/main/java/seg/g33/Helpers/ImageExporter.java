@@ -51,6 +51,7 @@ public class ImageExporter {
      * Adds default file extensions to the file explorer window that pops up
      * @param chooser The chooser which the extensions are being added to
      * @return The modified chooser with the new file extensions
+     * TODO: Potentially add more file extension types
      */
     private FileChooser setExtFilters(FileChooser chooser){
         chooser.getExtensionFilters().addAll(
