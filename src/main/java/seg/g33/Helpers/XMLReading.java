@@ -70,6 +70,8 @@ public class XMLReading {
             var runwayName = runwayElement.getElementsByTagName("name").item(0).getTextContent();
             System.out.println("***** " + runwayName + " *****");
 
+            runway = new Runway(runwayName);
+
             var runwaySectionsList = runwayElement.getElementsByTagName("runwaySection");
             System.out.println(runwayName + " has " + runwaySectionsList.getLength() + " sections");
 
@@ -78,9 +80,6 @@ public class XMLReading {
                 if (runwayNode.getNodeType() == Node.ELEMENT_NODE) {
                     var runwaySectionElement = (Element) runwaySectionNode;
                     var runwaySection = buildRunwaySection(runway, runwaySectionElement);
-                    // TODO: There is something wrong here. In line 73 this will be set for every run of the loop.
-                    // TODO: We don't want that. I'll change later tho.
-                    runway = buildRunwayFromElement(runwayName, airport, runwaySectionElement);
                     runway.addRunwaySection(runwaySection);
                 }
             }
@@ -99,7 +98,7 @@ public class XMLReading {
         var angle = Integer.parseInt(extractValue("angle", runwaySectionElement));
         var displaced = Double.parseDouble(extractValue("displaced", runwaySectionElement));
         var direction = extractValue("direction", runwaySectionElement).charAt(0);
-        return new RunwaySection(runway, angle, direction, sectionParams);
+        return new RunwaySection(runway, angle, direction, sectionParams, displaced);
     }
 
     /**
@@ -113,26 +112,6 @@ public class XMLReading {
         var toda = Double.parseDouble(extractValue("toda", runwaySectionElement));
         var lda = Double.parseDouble(extractValue("lda", runwaySectionElement));
         return new RunwayParameters(tora, asda, toda, lda);
-    }
-
-    /**
-     * Builds an instance of the Runway class
-     */
-    private Runway buildRunwayFromElement(String runwayName, Airport airport, Element runwaySectionElement) {
-        var angle = Integer.parseInt(extractValue("angle", runwaySectionElement));
-        var direction = extractValue("direction", runwaySectionElement);
-        var length = Double.parseDouble(extractValue("length", runwaySectionElement));
-        var clearway = Double.parseDouble(extractValue("clearway", runwaySectionElement));
-        var stopway = Double.parseDouble(extractValue("stopway", runwaySectionElement));
-        var resa = Double.parseDouble(extractValue("resa", runwaySectionElement));
-        var tora = Double.parseDouble(extractValue("tora", runwaySectionElement));
-        var asda = Double.parseDouble(extractValue("asda", runwaySectionElement));
-        var toda = Double.parseDouble(extractValue("toda", runwaySectionElement));
-        var lda = Double.parseDouble(extractValue("lda", runwaySectionElement));
-        var stripend = Double.parseDouble(extractValue("stripend", runwaySectionElement));
-        var displaced = Double.parseDouble(extractValue("displaced", runwaySectionElement));
-
-        return new Runway(runwayName);
     }
 
     /**

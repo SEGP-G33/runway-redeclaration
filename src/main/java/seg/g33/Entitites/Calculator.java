@@ -32,15 +32,14 @@ public class Calculator {
      * Calculate will return a pair of RunwayParameters after calculating the results for both logical runways
      * @return the pair of runwayParameters calculated
      */
-    public ArrayList<RunwayParameters> calculate(){
+    public ArrayList<RunwayParameters> calculate() throws IllegalArgumentException{
         Double distFromLeftThreshold = this.obstacle.getLeftDistance();
         Double distFromRightThreshold = this.obstacle.getRightDistance();
         RunwaySection lowerRunway = runway.getRunwaySections().get(0);
         RunwaySection upperRunway = runway.getRunwaySections().get(1);
         RunwayParameters lowerParams;
         RunwayParameters upperParams;
-
-        if (distFromRightThreshold >= distFromLeftThreshold){
+        if (distFromRightThreshold >= distFromLeftThreshold) {
             // object is closer to right hand side on 09L/27R runway
             lowerParams = calculateAway(lowerRunway, distFromLeftThreshold);
             upperParams = calculateTowards(upperRunway, distFromRightThreshold);
@@ -49,7 +48,6 @@ public class Calculator {
             lowerParams = calculateTowards(lowerRunway, distFromLeftThreshold);
             upperParams = calculateAway(upperRunway, distFromRightThreshold);
         }
-
         ArrayList<RunwayParameters> params = new ArrayList<>();
         params.add(lowerParams);
         params.add(upperParams);
@@ -62,8 +60,8 @@ public class Calculator {
      * @param distFromThreshold the distance the obstacle is from the threshold
      * @return redeclared runwayParameters
      */
-    private RunwayParameters calculateTowards(RunwaySection section, Double distFromThreshold){
-        Double TORA = distFromThreshold - slopeCalc() - section.getStripEndLength();
+    private RunwayParameters calculateTowards(RunwaySection section, Double distFromThreshold) throws IllegalArgumentException{
+        Double TORA = distFromThreshold + section.getDisplacedThreshold() - slopeCalc() - section.getStripEndLength();
         Double LDA = distFromThreshold - section.getRESALength() - section.getStripEndLength();
 
         return new RunwayParameters(TORA, TORA, TORA, LDA);
@@ -75,7 +73,7 @@ public class Calculator {
      * @param distFromThreshold the distance the obstacle is from the threshold
      * @return redeclared runwayParameters
      */
-    private RunwayParameters calculateAway(RunwaySection section, Double distFromThreshold){
+    private RunwayParameters calculateAway(RunwaySection section, Double distFromThreshold) throws IllegalArgumentException{
         RunwayParameters original = section.getDefaultParameters();
         Double TORA = original.getTORA() - plane.getBlastProtection() - distFromThreshold - section.getDisplacedThreshold();
         Double ASDA = TORA + section.getStopWayLength();
@@ -124,7 +122,7 @@ public class Calculator {
         RunwayParameters params = calculateTowards(section, distFromThreshold);
 
         String result = String.format("\t Runway %s: TakeOff Toward Obstacle, Landing Toward Obstacle\n", section.getAngle());
-        result += String.format("\t\t- TORA: %s - %s - %s = %s \n", distFromThreshold, slopeCalc(), section.getStripEndLength(), params.getTORA());
+        result += String.format("\t\t- TORA: %s + %s - %s - %s = %s \n", distFromThreshold, section.getDisplacedThreshold(), slopeCalc(), section.getStripEndLength(), params.getTORA());
         result += String.format("\t\t- ASDA: %s = %s \n", params.getTORA(), params.getASDA());
         result += String.format("\t\t- TODA: %s = %s \n", params.getTORA(), params.getTODA());
         result += String.format("\t\t- LDA : %s - %s - %s = %s \n", distFromThreshold, section.getRESALength(), section.getStripEndLength(), params.getLDA());

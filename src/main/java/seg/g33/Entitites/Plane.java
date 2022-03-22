@@ -9,6 +9,8 @@ public class Plane {
     private Double blastProtection;
     private Double slope;
 
+    public static Plane DEFAULT_PLANE = new Plane("Default Plane");
+
     /**
      * Constructor
      * @param name Plane Name

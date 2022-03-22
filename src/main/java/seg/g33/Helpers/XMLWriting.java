@@ -57,7 +57,6 @@ public class XMLWriting {
 
                     var angle = Integer.toString(runwaySection.getAngle());
                     var direction = String.valueOf(runwaySection.getDirection());
-                    var length = Double.toString(23.0); // TODO: Need to fix this later. Remove from XML spec..
                     var clearway = Double.toString(runwaySection.getClearWayLength());
                     var stopway = Double.toString(runwaySection.getStopWayLength());
                     var resa = Double.toString(runwaySection.getRESALength());
@@ -70,7 +69,6 @@ public class XMLWriting {
 
                     sectionElement.appendChild(createElementForValue(xmlFile, "angle", angle));
                     sectionElement.appendChild(createElementForValue(xmlFile, "direction", direction));
-                    sectionElement.appendChild(createElementForValue(xmlFile, "length", length));
                     sectionElement.appendChild(createElementForValue(xmlFile, "clearway", clearway));
                     sectionElement.appendChild(createElementForValue(xmlFile, "stopway", stopway));
                     sectionElement.appendChild(createElementForValue(xmlFile, "resa", resa));
@@ -95,7 +93,6 @@ public class XMLWriting {
             var outputStream = new FileOutputStream(filename);
             var result = new StreamResult(outputStream);
 
-            // TODO: Look more into properties for tranformer. These 2 are needed to properly indent the XML File.
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
             transformer.transform(source, result);
@@ -136,10 +133,9 @@ public class XMLWriting {
             xmlFile.appendChild(rootElement);
 
             var source = new DOMSource(xmlFile);
-            var outputStream = new FileOutputStream(filename + ".xml");
+            var outputStream = new FileOutputStream(filename + "EX2.xml");
             var result = new StreamResult(outputStream);
 
-            // TODO: Look more into properties for tranformer. These 2 are needed to properly indent the XML File.
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
             transformer.transform(source, result);

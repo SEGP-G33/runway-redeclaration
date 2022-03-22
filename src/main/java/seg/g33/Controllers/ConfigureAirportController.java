@@ -116,11 +116,11 @@ public class ConfigureAirportController {
         File directory = directoryChooser.showDialog(App.getPrimaryStage());
 
         var xmlWriter = new XMLWriting();
-        var filename = directory.getAbsolutePath().concat("/" + airport.getShortcode() + ".xml");
+        var filename = directory.getAbsolutePath().concat("/" + airport.getShortcode() + "EX2.xml");
         System.out.println("Saving Airport " + airport + " at location " + filename);
         xmlWriter.createAirportXMLFile(airport, filename);
 
-        var alert = new Alert(Alert.AlertType.INFORMATION, "File " + airport.getShortcode() + ".xml written.", ButtonType.CANCEL);
+        var alert = new Alert(Alert.AlertType.INFORMATION, "File " + airport.getShortcode() + "EX2.xml written.", ButtonType.CANCEL);
         alert.showAndWait();
     }
 

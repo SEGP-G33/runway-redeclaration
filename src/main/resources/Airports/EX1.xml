@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<airport>
+    <airportName>ExampleCalculationsAirport</airportName>
+    <airportCode>EX1</airportCode>
+    <airportRunways>
+        <airportRunway>
+            <name>09R/27L</name>
+            <runwaySection>
+                <angle>9</angle>
+                <direction>R</direction>
+                <length>23.0</length>
+                <clearway>0.0</clearway>
+                <stopway>0.0</stopway>
+                <resa>240.0</resa>
+                <tora>3660.0</tora>
+                <toda>3660.0</toda>
+                <asda>3660.0</asda>
+                <lda>3353.0</lda>
+                <stripend>60.0</stripend>
+                <displaced>0.0</displaced>
+            </runwaySection>
+            <runwaySection>
+                <angle>27</angle>
+                <direction>L</direction>
+                <length>23.0</length>
+                <clearway>0.0</clearway>
+                <stopway>0.0</stopway>
+                <resa>240.0</resa>
+                <tora>3660.0</tora>
+                <toda>3660.0</toda>
+                <asda>3660.0</asda>
+                <lda>3660.0</lda>
+                <stripend>60.0</stripend>
+                <displaced>0.0</displaced>
+            </runwaySection>
+        </airportRunway>
+        <airportRunway>
+            <name>09R/27L</name>
+        </airportRunway>
+    </airportRunways>
+</airport>

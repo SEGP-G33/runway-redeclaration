@@ -20,6 +20,14 @@ public class RunwaySection {
      * @param angle The angle of the runway. Should be 1-36
      * @param parameters Runway parameters
      */
+    public RunwaySection(Runway runway, Integer angle, Character direction, RunwayParameters parameters, Double displacedThreshold) {
+        this.runway = runway;
+        this.angle = angle;
+        this.direction = direction;
+        this.defaultParameters = parameters;
+        this.displacedThreshold = displacedThreshold;
+    }
+
     public RunwaySection(Runway runway, Integer angle, Character direction, RunwayParameters parameters) {
         this.runway = runway;
         this.angle = angle;
