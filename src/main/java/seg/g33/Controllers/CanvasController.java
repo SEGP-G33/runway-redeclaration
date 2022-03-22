@@ -11,8 +11,6 @@ import seg.g33.Helpers.Drawer;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-import static seg.g33.Helpers.TextPrint.text;
-
 public class CanvasController {
 
     /**
@@ -22,11 +20,11 @@ public class CanvasController {
     @FXML
     protected void initialize() {
         Runway runway = new Runway("myRunway");
-        RunwayParameters param09R = new RunwayParameters(3660d, 3690d, 3780d, 3353d);
-        RunwayParameters param27L = new RunwayParameters(3660d, 3720d, 3660d, 3660d);
+        RunwayParameters param09R = new RunwayParameters(3660d, 3660d, 3660d, 3353d);
+        RunwayParameters param27L = new RunwayParameters(3660d, 3660d, 3660d, 3660d);
 
-        RunwaySection section09R = new RunwaySection(runway, 9, 'R', param09R, 307d, 00d, 00d, 240d, 60d);
-        RunwaySection section27L = new RunwaySection(runway, 27, 'L', param27L, 0D, 00d, 00d, 240d, 60d);
+        RunwaySection section09R = new RunwaySection(runway, 9, 'R', param09R, 307d, 0d, 0d, 240d, 60d);
+        RunwaySection section27L = new RunwaySection(runway, 27, 'L', param27L, 0D, 0d, 0d, 240d, 60d);
         runway.addRunwaySection(section09R);
         runway.addRunwaySection(section27L);
 
@@ -40,9 +38,7 @@ public class CanvasController {
         RunwayParameters params1 = results.get(0);
         RunwayParameters params2 = results.get(1);
 
-//        Drawer.drawTopDown(canvas, 10*section09R.getAngle(), runway, obstacle, params1, params2);
-        Drawer.drawSideOn(canvas, runway, obstacle, plane, params1, params2);
-        System.out.println(calculator.calcAsString());
+        Drawer.drawTopDown(canvas, 10*section09R.getAngle(), runway, obstacle, params1, params2);
     }
 
     @FXML
