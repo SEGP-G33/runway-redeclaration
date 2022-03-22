@@ -13,9 +13,19 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Optional Requirement 4: Export views as Images
+ *
+ * Handles exporting a Canvas to a PNG image.
+ */
 public class ImageExporter {
+
+
     private FileChooser fileChooser = new FileChooser();
 
+    /**
+     * Canvas element to be exported
+     */
     private Canvas canvasToExport;
 
     /**
