@@ -29,7 +29,6 @@ public class Drawer {
      * @param params2 the redeclared parameters for the higher angle runway
      */
     public static void drawTopDown(Canvas canvas, Integer angle, Runway runway, Obstacle obstacle, RunwayParameters params1, RunwayParameters params2){
-        angle=angle-90;
         double width = canvas.getWidth();
         double height = canvas.getHeight();
 
@@ -109,10 +108,12 @@ public class Drawer {
         gc.setFill(white);
         // Fill the background in white
         gc.fillRect(0, 0, width, height);
-        gc.save();
-        gc.translate(width/2, height/2);
-        gc.rotate(angle);
-        gc.translate(-width/2, -height/2);
+        // TODO Add rotation stuff
+//        angle=angle-90;
+//        gc.save();
+//        gc.translate(width/2, height/2);
+//        gc.rotate(angle);
+//        gc.translate(-width/2, -height/2);
 
         // Draw cleared and graded area
         gc.setFill(grey1);
@@ -165,8 +166,8 @@ public class Drawer {
         gc.fillText(String.format("< ASDA: %sm", params2.getASDA()), rightASDAPoints[0][0], rightASDAPoints[0][1]+10);
         gc.fillText(String.format("< TODA: %sm", params2.getTODA()), rightTODAPoints[0][0], rightTODAPoints[0][1]+10);
         gc.fillText(String.format("< LDA : %sm", params2.getLDA()), rightLDAPoints[0][0], rightLDAPoints[0][1]+10);
-        gc.restore();
         gc.setTextAlign(TextAlignment.LEFT);
+        // TODO Make sure all elements are drawn on the screen after rotation
         gc.fillText("* Obstacle may not be drawn to scale", 5, height-10);
         // Draw the compass
         Image image = new Image(Drawer.class.getResource("/seg/g33/images/compass.png").toExternalForm());
