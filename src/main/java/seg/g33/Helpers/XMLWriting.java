@@ -95,7 +95,6 @@ public class XMLWriting {
             var outputStream = new FileOutputStream(filename);
             var result = new StreamResult(outputStream);
 
-            // TODO: Look more into properties for tranformer. These 2 are needed to properly indent the XML File.
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
             transformer.transform(source, result);
@@ -139,7 +138,6 @@ public class XMLWriting {
             var outputStream = new FileOutputStream(filename + ".xml");
             var result = new StreamResult(outputStream);
 
-            // TODO: Look more into properties for tranformer. These 2 are needed to properly indent the XML File.
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
             transformer.transform(source, result);

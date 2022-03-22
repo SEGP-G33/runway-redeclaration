@@ -80,8 +80,6 @@ public class XMLReading {
                 if (runwayNode.getNodeType() == Node.ELEMENT_NODE) {
                     var runwaySectionElement = (Element) runwaySectionNode;
                     var runwaySection = buildRunwaySection(runway, runwaySectionElement);
-                    // TODO: There is something wrong here. In line 73 this will be set for every run of the loop.
-                    // TODO: We don't want that. I'll change later tho.
                     runway.addRunwaySection(runwaySection);
                 }
             }
