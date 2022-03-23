@@ -15,7 +15,7 @@ import seg.g33.Entitites.Airport;
 import seg.g33.Entitites.Runway;
 import seg.g33.Entitites.RunwayParameters;
 import seg.g33.Entitites.RunwaySection;
-import seg.g33.Helpers.XMLWriting;
+import seg.g33.XMLParsing.XMLWriting;
 
 import java.io.File;
 

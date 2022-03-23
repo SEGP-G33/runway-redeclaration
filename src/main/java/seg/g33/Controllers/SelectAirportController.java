@@ -1,6 +1,5 @@
 package seg.g33.Controllers;
 
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -13,14 +12,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import seg.g33.App;
 import seg.g33.Entitites.Airport;
-import seg.g33.Entitites.Obstacle;
-import seg.g33.Helpers.AirportPresets;
-import seg.g33.Helpers.Environment;
-import seg.g33.Helpers.ObstaclePresets;
-import seg.g33.Helpers.XMLReading;
+import seg.g33.DataHolders.AirportPresets;
+import seg.g33.DataHolders.Environment;
+import seg.g33.XMLParsing.XMLReading;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 

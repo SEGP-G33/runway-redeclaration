@@ -1,4 +1,4 @@
-package seg.g33.Helpers;
+package seg.g33.DataHolders;
 
 import seg.g33.Entitites.Airport;
 
