@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>seg.g33</groupId>
     <artifactId>runway-redeclaration</artifactId>
-    <version>0.1-INCREMENT-1</version>
+    <version>0.1-INCREMENT-2</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>

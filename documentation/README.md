@@ -17,3 +17,4 @@ This will compile the application. You can then run it using `mvn javafx:run`.
 ## 3. Known Bugs 
 1. Currently, the lines on the top-down view don't align properly. 
 2. Input validation still needs to be handled.
+3. Configuring Airports only works with 1 runway for now. Fields for Runway 2 and 3 aren't connected to their controller. 
