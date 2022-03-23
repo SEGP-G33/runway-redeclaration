@@ -393,7 +393,7 @@ public class CalculatorController {
      * @return true if input is a number. False otherwise
      */
     public boolean isNumber(String input) {
-        Pattern pattern = Pattern.compile("\\d+(\\.\\d+)?");
+        Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
         if (input == null) {
             return false;
         }
