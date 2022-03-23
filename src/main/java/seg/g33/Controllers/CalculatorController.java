@@ -66,9 +66,6 @@ public class CalculatorController {
         setAirportProperties();
         setupObstacleBoxUI();
 
-        // TODO: Testing Canvas. Remove later
-        testCanvas();
-
         obstacles = obstaclePresets.getAllObstaclePresets();
         setObstacleListsAndComboBox();
 
@@ -77,29 +74,6 @@ public class CalculatorController {
                 setElementsForSelectedObstacle(t1);
             }
         });
-    }
-
-    private void testCanvas() {
-        Runway runway = new Runway("myRunway");
-        RunwayParameters param09R = new RunwayParameters(3660d, 3660d, 3660d, 3353d);
-        RunwayParameters param27L = new RunwayParameters(3660d, 3660d, 3660d, 3660d);
-
-        RunwaySection section09R = new RunwaySection(runway, 5, 'R', param09R, 307d, 0d, 0d, 240d, 60d);
-        RunwaySection section27L = new RunwaySection(runway, 23, 'L', param27L, 0D, 0d, 0d, 240d, 60d);
-        runway.addRunwaySection(section09R);
-        runway.addRunwaySection(section27L);
-
-        Plane plane = new Plane("myPlane", 300d, 50d);
-
-        Obstacle obstacle = new Obstacle("myObstacle", 25d, 20d, 2853d, 500d);
-
-        Calculator calculator = new Calculator("myCalculator", plane, obstacle, runway);
-        ArrayList<RunwayParameters> results = calculator.calculate();
-
-        RunwayParameters params1 = results.get(0);
-        RunwayParameters params2 = results.get(1);
-
-        Drawer.drawTopDown(canvas, 10*section09R.getAngle(), runway, obstacle, params1, params2);
     }
 
     private void setupObstacleBoxUI() {
@@ -230,12 +204,22 @@ public class CalculatorController {
             return;
         }
 
+        if (!useObstaclePresetCheckbox.isSelected()) {
+            var name = obstacleNameField.getText();
+            var height = Double.parseDouble(obstacleHeightField.getText());
+            var center = Double.parseDouble(obstacleCenterField.getText());
+            var left = Double.parseDouble(obstacleLeftField.getText());
+            var right = Double.parseDouble(obstacleRightField.getText());
+            selectedObstacle = new Obstacle(name, height, center, left, right);
+        }
+
         Calculator calculator = new Calculator("Calculator", plane, selectedObstacle, selectedRunway);
         ArrayList<RunwayParameters> results = calculator.calculate();
         breakdownTextArea.setText(calculator.calcAsString());
 
-        setRecalculateParamsUI(results);
+        System.out.println("Obstacle: " + selectedObstacle);
 
+        setRecalculateParamsUI(results);
 
         var angle = selectedRunway.getRunwaySections().get(0).getAngle();
         Drawer.drawTopDown(canvas, 10*angle, selectedRunway, selectedObstacle, results.get(0), results.get(1));
