@@ -91,10 +91,10 @@ public class Drawer {
 
         // Right clearway (appears on the left of the runway)
         double[][] rightClearwayPoints = {  {runwayStart,                            runwayStart,                            runwayStart+rightClearway,                           runwayStart+rightClearway},
-                                            {height/2-runwayWidth/2-5,               height/2+runwayWidth/2+5,               height/2+runwayWidth/2-5,                            height/2-runwayWidth/2-5}};
+                                            {height/2-runwayWidth/2-5,               height/2+runwayWidth/2+5,               height/2+runwayWidth/2+5,                            height/2-runwayWidth/2-5}};
         // Right stopway (appears on the left of the runway)
         double[][] rightStopwayPoints =  {  {runwayStart+rightClearway-rightStopway, runwayStart+rightClearway-rightStopway, runwayStart+rightClearway,                           runwayStart+rightClearway},
-                                            {height/2-runwayWidth/2-5,               height/2+runwayWidth/2+5,               height/2+runwayWidth/2-5,                            height/2-runwayWidth/2-5}};
+                                            {height/2-runwayWidth/2-5,               height/2+runwayWidth/2+5,               height/2+runwayWidth/2+5,                            height/2-runwayWidth/2-5}};
         // Runway points
         double[][] runwayPoints =        {  {runwayStart+rightClearway,              runwayStart+rightClearway,              runwayStart+rightClearway+runwayLength,              runwayStart+rightClearway+runwayLength},
                                             {height/2-runwayWidth/2,                 height/2+runwayWidth/2,                 height/2+runwayWidth/2,                              height/2-runwayWidth/2}};

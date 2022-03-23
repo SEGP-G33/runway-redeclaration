@@ -82,7 +82,7 @@ public class CalculatorController {
         }
 
         useObstaclePresetCheckbox.setOnAction(action -> {
-            setEditableFields(useObstaclePresetCheckbox.isSelected() ? false : true);
+            setEditableFields(!useObstaclePresetCheckbox.isSelected());
             clearObstacleFields();
         });
     }

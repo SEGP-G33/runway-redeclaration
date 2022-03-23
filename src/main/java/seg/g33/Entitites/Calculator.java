@@ -121,7 +121,7 @@ public class Calculator {
     private String calcTowardsAsString(RunwaySection section, Double distFromThreshold){
         RunwayParameters params = calculateTowards(section, distFromThreshold);
 
-        String result = String.format("\t Runway %s: TakeOff Toward Obstacle, Landing Toward Obstacle\n", section.getAngle());
+        String result = String.format("\t Runway %s%s: TakeOff Toward Obstacle, Landing Toward Obstacle\n", section.getAngle(), section.getDirection());
         result += String.format("\t\t- TORA: %s + %s - %s - %s = %s \n", distFromThreshold, section.getDisplacedThreshold(), slopeCalc(), section.getStripEndLength(), params.getTORA());
         result += String.format("\t\t- ASDA: %s = %s \n", params.getTORA(), params.getASDA());
         result += String.format("\t\t- TODA: %s = %s \n", params.getTORA(), params.getTODA());
@@ -139,7 +139,7 @@ public class Calculator {
     private String calcAwayAsString(RunwaySection section, Double distFromThreshold){
         RunwayParameters params = calculateAway(section, distFromThreshold);
 
-        String result = String.format("\t Runway %s: TakeOff Away From Obstacle, Landing Over Obstacle\n", section.getAngle());
+        String result = String.format("\t Runway %s%s: TakeOff Away From Obstacle, Landing Over Obstacle\n", section.getAngle(), section.getDirection());
         result += String.format("\t\t- TORA: %s - %s - %s - %s = %s\n", section.getDefaultParameters().getTORA(), plane.getBlastProtection(), distFromThreshold, section.getDisplacedThreshold(), params.getTORA());
         result += String.format("\t\t- ASDA: %s + %s = %s\n", params.getTORA(), section.getStopWayLength(), params.getASDA());
         result += String.format("\t\t- TODA: %s + %s = %s\n", params.getTORA(), section.getClearWayLength(), params.getTODA());
