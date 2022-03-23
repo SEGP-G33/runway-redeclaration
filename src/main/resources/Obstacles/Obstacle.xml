@@ -1,0 +1,7 @@
+<Obstacle>
+    <name>Pigeon</name>
+    <height>34</height>
+    <centerDistance>10</centerDistance>
+    <leftDistance>20</leftDistance>
+    <rightDistance>30</rightDistance>
+</Obstacle>

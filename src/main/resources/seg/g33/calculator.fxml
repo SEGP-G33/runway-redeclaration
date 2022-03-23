@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="1500.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.g33.Controllers.CalculatorController">
+   <left>
+      <ScrollPane fx:id="root_scroll" prefHeight="800.0" prefWidth="511.0" BorderPane.alignment="CENTER">
+         <content>
+            <VBox fx:id="root_vbox" alignment="CENTER" prefHeight="1285.0" prefWidth="473.0" spacing="20.0">
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+               <children>
+                  <HBox>
+                     <children>
+                        <Button fx:id="button_back" mnemonicParsing="false" onAction="#handleButtonBack" text="Go Back" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="15.0" prefWidth="467.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="89.0" prefWidth="234.0" spacing="10.0">
+                           <children>
+                              <Button fx:id="button_import_obstacle" mnemonicParsing="false" onAction="#handleImportObstacleXML" prefHeight="24.0" prefWidth="246.0" text="Import  Obstacle XML Information" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="89.0" prefWidth="266.0" spacing="10.0">
+                           <children>
+                              <Button fx:id="button_export_obstacle" alignment="CENTER" mnemonicParsing="false" onAction="#handleExportObstacle" text="Export XML Obstacle Information" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="182.0" prefWidth="469.0" spacing="5.0">
+                     <children>
+                        <Label text="Selected AIrport">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" fillHeight="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="173.0" prefWidth="440.0">
+                           <children>
+                              <VBox alignment="CENTER_LEFT" prefHeight="204.0" prefWidth="167.0" spacing="15.0">
+                                 <children>
+                                    <Label prefHeight="0.0" prefWidth="182.0" text="Airport Name">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="23.0" prefWidth="184.0" text="Airport Code ">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="74.0" prefHeight="23.0" prefWidth="184.0" text="Number of Runways">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="86.0" prefHeight="23.0" prefWidth="184.0" text="Select Runway">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox layoutX="10.0" layoutY="10.0" prefHeight="149.0" prefWidth="226.0" spacing="10.0">
+                                 <children>
+                                    <TextField fx:id="airportNameField" editable="false" promptText="eg: London Heathrow" />
+                                    <TextField fx:id="airportCodeField" editable="false" layoutX="10.0" layoutY="10.0" promptText="eg: LHR" />
+                                    <TextField fx:id="numberOfRunwaysField" editable="false" layoutX="10.0" layoutY="57.0" promptText="eg: 2" />
+                                    <ComboBox fx:id="selectRunwayComboBox" prefHeight="22.0" prefWidth="146.0" promptText="None Selected" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" spacing="5.0">
+                     <children>
+                        <Label text="Obstacle Selection">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="38.0" prefWidth="452.0" spacing="20.0">
+                           <children>
+                              <Label text="Select Obstacle Preset" />
+                              <ComboBox fx:id="selectObstacleComboBox" prefWidth="150.0" promptText="Choose" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="37.0" prefWidth="452.0" spacing="20.0">
+                           <children>
+                              <Label text="Use Presdefined" />
+                              <CheckBox fx:id="useObstaclePresetCheckbox" mnemonicParsing="false" selected="true" text="Uncheck to enter manually" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" layoutX="30.0" layoutY="311.0" spacing="5.0">
+                     <children>
+                        <Label text="Obstacle Information">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <VBox prefHeight="45.0" prefWidth="452.0" spacing="7.0">
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <Region prefHeight="0.0" prefWidth="100.0" />
+                                    <TextField fx:id="obstacleNameField" prefHeight="27.0" prefWidth="276.0" promptText="Obstacle Name" />
+                                    <Region layoutX="10.0" layoutY="10.0" prefHeight="0.0" prefWidth="100.0" />
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="10.0" spacing="20.0">
+                                 <children>
+                                    <TextField fx:id="obstacleCenterField" prefHeight="27.0" prefWidth="276.0" promptText="Distance from center (metres)" />
+                                    <TextField fx:id="obstacleHeightField" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="297.0" promptText="Obstacle Height (metres)" />
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="37.0" spacing="20.0">
+                                 <children>
+                                    <TextField fx:id="obstacleRightField" prefHeight="27.0" prefWidth="276.0" promptText="Distance from R (metres)" />
+                                    <TextField fx:id="obstacleLeftField" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="297.0" promptText="Distance from L (metres)" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" spacing="5.0">
+                     <children>
+                        <Label text="Original Runway Values">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <GridPane alignment="BASELINE_CENTER" prefHeight="145.0" prefWidth="529.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label text="LDA" GridPane.rowIndex="4" />
+                              <TextField fx:id="s1LDAField" prefHeight="24.0" prefWidth="76.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="ASDA" GridPane.rowIndex="3" />
+                              <TextField fx:id="s1ASDAField" prefHeight="24.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="TODA" GridPane.rowIndex="2" />
+                              <TextField fx:id="s1TODAField" prefHeight="24.0" prefWidth="79.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="TORA" GridPane.rowIndex="1" />
+                              <TextField fx:id="s1TORAField" prefHeight="24.0" prefWidth="85.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Pane fx:id="pane_flash_7" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                                 <children>
+                                    <Label layoutY="4.0" text="TODA" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="pane_flash_8" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                                 <children>
+                                    <TextField fx:id="s2TODAField" prefHeight="27.0" prefWidth="62.0" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="pane_flash_10" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                                 <children>
+                                    <Label layoutY="4.0" text="ASDA" />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="37.0" prefWidth="62.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                                 <children>
+                                    <TextField fx:id="s2ASDAField" layoutY="-1.0" prefHeight="20.0" prefWidth="62.0" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="pane_flash_13" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                                 <children>
+                                    <Label layoutY="4.0" text="LDA" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="pane_flash_14" GridPane.columnIndex="5" GridPane.rowIndex="4">
+                                 <children>
+                                    <TextField fx:id="s2LDAField" layoutY="-1.0" prefHeight="27.0" prefWidth="62.0" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="pane_flash_9" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" />
+                                 </GridPane.margin>
+                                 <children>
+                                    <Label layoutY="4.0" text="metre(s)" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="pane_flash_12" GridPane.columnIndex="6" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" />
+                                 </GridPane.margin>
+                                 <children>
+                                    <Label layoutY="4.0" text="metre(s)" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="pane_flash_15" GridPane.columnIndex="6" GridPane.rowIndex="4">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" />
+                                 </GridPane.margin>
+                                 <children>
+                                    <Label layoutX="-1.0" layoutY="-1.0" text="metre(s)" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="pane_flash_3" prefHeight="24.0" prefWidth="99.0" GridPane.columnIndex="6" />
+                              <BorderPane fx:id="pane_flash_4" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                 <left>
+                                    <Label text="TORA" BorderPane.alignment="CENTER" />
+                                 </left>
+                              </BorderPane>
+                              <BorderPane fx:id="pane_flash_5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                                 <center>
+                                    <TextField fx:id="s2TORAField" prefHeight="27.0" prefWidth="82.0" BorderPane.alignment="CENTER" />
+                                 </center>
+                              </BorderPane>
+                              <BorderPane fx:id="pane_flash_2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
+                                 <left>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" text="Section 2" BorderPane.alignment="CENTER" />
+                                 </left>
+                              </BorderPane>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                 <right>
+                                    <Label prefHeight="17.0" prefWidth="60.0" text="Section 1" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+                                 </right>
+                              </BorderPane>
+                              <Pane fx:id="pane_flash_1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
+                              <Pane fx:id="pane_flash_6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label layoutX="15.0" layoutY="4.0" text="metre(s)" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER" prefHeight="30.0" prefWidth="560.0" spacing="30.0">
+                     <children>
+                        <Button fx:id="button_recalculate" mnemonicParsing="false" onAction="#handleRecalculateParams" text="Recalculate Parameters" />
+                     </children>
+                  </HBox>
+                  <VBox alignment="TOP_CENTER" layoutX="30.0" layoutY="592.0" spacing="5.0">
+                     <children>
+                        <Label text="Re-Calculated Runway Values">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <GridPane alignment="BASELINE_CENTER" prefHeight="145.0" prefWidth="529.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label text="LDA" GridPane.rowIndex="4" />
+                              <TextField fx:id="recalcS1LDA" prefHeight="24.0" prefWidth="76.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="ASDA" GridPane.rowIndex="3" />
+                              <TextField fx:id="recalcS1ASDA" prefHeight="24.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="TODA" GridPane.rowIndex="2" />
+                              <TextField fx:id="recalcS1TODA" prefHeight="24.0" prefWidth="79.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="TORA" GridPane.rowIndex="1" />
+                              <TextField fx:id="recalcS1TORA" prefHeight="24.0" prefWidth="85.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Pane fx:id="pane_flash_71" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                                 <children>
+                                    <Label layoutY="4.0" text="TODA" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="pane_flash_81" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                                 <children>
+                                    <TextField fx:id="recalcS2TODA" prefHeight="27.0" prefWidth="62.0">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font></TextField>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="pane_flash_101" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                                 <children>
+                                    <Label layoutY="4.0" text="ASDA" />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="37.0" prefWidth="62.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                                 <children>
+                                    <TextField fx:id="recalcS2ASDA" layoutY="2.0" prefHeight="20.0" prefWidth="62.0">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font></TextField>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="pane_flash_131" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                                 <children>
+                                    <Label layoutY="4.0" text="LDA" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="pane_flash_141" GridPane.columnIndex="5" GridPane.rowIndex="4">
+                                 <children>
+                                    <TextField fx:id="recalcS2LDA" layoutY="-1.0" prefHeight="27.0" prefWidth="62.0">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font></TextField>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="pane_flash_91" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" />
+                                 </GridPane.margin>
+                                 <children>
+                                    <Label layoutY="4.0" text="metre(s)" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="pane_flash_121" GridPane.columnIndex="6" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" />
+                                 </GridPane.margin>
+                                 <children>
+                                    <Label layoutY="4.0" text="metre(s)" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="pane_flash_151" GridPane.columnIndex="6" GridPane.rowIndex="4">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" />
+                                 </GridPane.margin>
+                                 <children>
+                                    <Label layoutX="-1.0" layoutY="-1.0" text="metre(s)" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="pane_flash_31" prefHeight="24.0" prefWidth="99.0" GridPane.columnIndex="6" />
+                              <BorderPane fx:id="pane_flash_41" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                 <left>
+                                    <Label text="TORA" BorderPane.alignment="CENTER" />
+                                 </left>
+                              </BorderPane>
+                              <BorderPane fx:id="pane_flash_51" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                                 <center>
+                                    <TextField fx:id="recalcS2TORA" prefHeight="27.0" prefWidth="102.0" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font></TextField>
+                                 </center>
+                              </BorderPane>
+                              <BorderPane fx:id="pane_flash_21" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
+                                 <left>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" text="Section 2" BorderPane.alignment="CENTER" />
+                                 </left>
+                              </BorderPane>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                 <right>
+                                    <Label prefHeight="17.0" prefWidth="60.0" text="Section 1" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+                                 </right>
+                              </BorderPane>
+                              <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
+                              <Pane fx:id="pane_flash_61" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label layoutX="15.0" layoutY="4.0" text="metre(s)" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
+                  <Label fx:id="label_msg_results" text="Breakdown Calculations">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="breakdownTextArea" editable="false" prefHeight="186.0" prefWidth="433.0" />
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </left>
+   <center>
+      <TabPane BorderPane.alignment="CENTER">
+         <tabs>
+            <Tab text="Top-Down View">
+               <content>
+                  <VBox spacing="20.0">
+                     <children>
+                        <Canvas fx:id="canvas" height="535.0" width="687.0" />
+                        <HBox alignment="CENTER" spacing="20.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#handleSaveTopDown" text="Save Top-Down Image" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab text="Side View">
+               <content>
+                  <VBox spacing="20.0">
+                     <children>
+                        <Canvas fx:id="sideCanvas" height="535.0" width="687.0" />
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#handleSaveSideView" text="Save Side-View" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </center>
+</BorderPane>

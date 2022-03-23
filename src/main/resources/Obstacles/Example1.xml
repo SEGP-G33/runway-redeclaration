@@ -1,0 +1,7 @@
+<Obstacle>
+    <name>Example1 9L/27R</name>
+    <height>12</height>
+    <centerDistance>10</centerDistance>
+    <leftDistance>-50</leftDistance>
+    <rightDistance>3646</rightDistance>
+</Obstacle>

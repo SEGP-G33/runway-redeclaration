@@ -13,26 +13,77 @@ import java.io.IOException;
  */
 public class App extends Application {
 
+    /**
+     * Main App Directory.
+     * Used for XMLReading, XMLWriting and Saving of files...
+     */
+    private static String resourceDirectory = "src/main/resources";
+    private static String appDirectory = System.getProperty("user.dir");
+
+    /**
+     * Main scene
+     */
     private static Scene scene;
+
+    private static Stage primaryStage;
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        primaryStage = stage;
+        // DON'T CHANGE THE LINES BELOW. The main scene size should remain 1200 x 800 otherwise stuff will break. :)
+        scene = new Scene(loadFXML("launch"), 1200, 800);
+
+        stage.setTitle("Runway Redeclaration Calculator");
         stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("Runway Redeclaration");
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
+    /**
+     * Sets the Root of the scene to an FXML file
+     * @param fxml the name of the fxml file
+     */
+    public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
+    /**
+     * Loads an FXML file using an FXMLLoader
+     * @param fxml the name of the FXML file
+     * @throws IOException exception if the file isn't there
+     */
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
 
+    /**
+     * Returns the Primary stage for the Application.
+     * Used to pass to FileChooser and other components later on.
+     * @return Application's primary stage.
+     */
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    /**
+     * Returns the main directory of the JavaFX application.
+     */
+    public static String getResourceDirectory() {
+        return resourceDirectory;
+    }
+
+    public static String getAppDirectory() {
+        return appDirectory;
+    }
+
+    /**
+     * Main Application Entry
+     */
     public static void main(String[] args) {
         launch();
     }
+
 
 }
