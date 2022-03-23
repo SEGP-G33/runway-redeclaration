@@ -355,8 +355,8 @@ public class Drawer {
                     {-60d * scale + totalLength * scale - rightLength - (rightSection.getDefaultParameters().getTORA() - params2.getTORA()) * scale, height / 2 + 30},
                     {-60d * scale + totalLength * scale - rightLength - rightSection.getDefaultParameters().getTORA() * scale, height / 2 + 30}};
             rightASDAPoints = new Double[][]{
-                    {totalLength * scale - rightLength - (rightSection.getDefaultParameters().getASDA() - params2.getASDA()) * scale, height / 2 + 50},
-                    {totalLength * scale - rightLength - rightSection.getDefaultParameters().getASDA() * scale, height / 2 + 50}};
+                    {-60d * scale + totalLength * scale - rightLength - (rightSection.getDefaultParameters().getASDA() - params2.getASDA()) * scale, height / 2 + 50},
+                    {-60d * scale + totalLength * scale - rightLength - rightSection.getDefaultParameters().getASDA() * scale, height / 2 + 50}};
             rightTODAPoints = new Double[][]{
                     {-60d * scale + totalLength * scale - rightLength - (rightSection.getDefaultParameters().getTODA() - params2.getTODA()) * scale, height / 2 + 70},
                     {-60d * scale + totalLength * scale - rightLength - rightSection.getDefaultParameters().getTODA() * scale, height / 2 + 70}};
