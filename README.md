@@ -14,6 +14,43 @@ Runway Re-declaration tool for SEG 2021-22
 
 [Final documents to be submit](https://docs.google.com/document/d/1XfpTn_eq0Yh-e-SoBirX_h_gyPdRtlNwJGsJjJAuO6I/edit?usp=sharing)
 
+#### To do list
+- [ ] R3 Calculate the new runway distance
+    - [x] UML
+    - [x] Code
+    - [ ] Test
+    - [ ] Debug (done)
+- [ ] R5 Values before and after calculation (Maybe Louis do)
+    - [ ] UML
+    - [ ] Code
+    - [ ] Test
+    - [ ] Debug (done)
+- [ ] R6 Breakdown of calculations
+    - [x] UML
+    - [x] Code
+    - [ ] Test
+    - [ ] Debug (done)
+- [ ] R7 XML import and export (Andreas doing)
+    - [ ] UML
+    - [ ] Code
+    - [ ] Test
+    - [ ] Debug (done)
+- [ ] R4 List of predefined obstacles
+    - [ ] UML
+    - [ ] Code
+    - [ ] Test
+    - [ ] Debug (done)
+- [ ] ~~M5 API support~~ (delay)
+    - [ ] ~~UML~~
+    - [ ] ~~Code~~
+    - [ ] ~~Test~~
+    - [ ] ~~Debug (done)~~
+- [ ] M7 Currently situation in a textual format
+    - [ ] UML
+    - [x] Code
+    - [ ] Test
+    - [ ] Debug (done)
+
 ### Deliverable 3 / Increment 2
 [Design & Plan & Kanban](https://www.notion.so/Deliverible-3-6d03e8454fd54716bdccf92610ced711)
 
