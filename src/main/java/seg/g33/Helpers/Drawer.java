@@ -288,7 +288,7 @@ public class Drawer {
                     {obstaclePoint[1] + (obstacle.getHeight() * plane.getSlope()) * scale, height / 2 - 130}};
             leftSE1Points = new Double[][]{
                     {obstaclePoint[1] + (obstacle.getHeight() * plane.getSlope()) * scale + 2, height / 2 - 130},
-                    {obstaclePoint[1] + (obstacle.getHeight() * plane.getSlope() + leftSection.getStripEndLength()) * scale + 2, height / 2 - 130}};
+                    {obstaclePoint[1] + (obstacle.getHeight() * plane.getSlope() + leftSection.getStripEndLength()) * scale, height / 2 - 130}};
             leftBlastPoints = new Double[][]{
                     {obstaclePoint[1], height / 2 - 150},
                     {obstaclePoint[1] + plane.getBlastProtection() * scale, height / 2 - 150}};
