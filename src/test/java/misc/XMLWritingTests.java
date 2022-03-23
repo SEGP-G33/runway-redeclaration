@@ -2,8 +2,8 @@ package misc;
 
 import org.junit.jupiter.api.*;
 import seg.g33.Entitites.Obstacle;
-import seg.g33.Helpers.XMLReading;
-import seg.g33.Helpers.XMLWriting;
+import seg.g33.XMLParsing.XMLReading;
+import seg.g33.XMLParsing.XMLWriting;
 
 import static org.junit.jupiter.api.Assertions.*;
 

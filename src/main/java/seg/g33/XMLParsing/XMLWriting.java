@@ -1,4 +1,4 @@
-package seg.g33.Helpers;
+package seg.g33.XMLParsing;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -1,6 +1,5 @@
 package seg.g33.Controllers;
 
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -9,16 +8,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import seg.g33.App;
+import seg.g33.DataHolders.Environment;
+import seg.g33.DataHolders.ObstaclePresets;
 import seg.g33.Entitites.*;
 import seg.g33.Helpers.*;
+import seg.g33.XMLParsing.XMLReading;
+import seg.g33.XMLParsing.XMLWriting;
 
-import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -223,6 +222,7 @@ public class CalculatorController {
 
         var angle = selectedRunway.getRunwaySections().get(0).getAngle();
         Drawer.drawTopDown(canvas, 10*angle, selectedRunway, selectedObstacle, results.get(0), results.get(1));
+        Drawer.drawSideOn(sideCanvas, selectedRunway, selectedObstacle, plane, results.get(0), results.get(1));
     }
 
     /**
@@ -401,6 +401,26 @@ public class CalculatorController {
     }
 
     @FXML
+    void handleSaveTopDown(ActionEvent event) {
+        System.out.println("Saving Top-Down");
+        ImageExporter exporter = new ImageExporter(canvas);
+        exporter.exportImage();
+
+        var alert = new Alert(Alert.AlertType.CONFIRMATION, "Image Exported!", ButtonType.CANCEL);
+        alert.showAndWait();
+    }
+
+    @FXML
+    void handleSaveSideView(ActionEvent event) {
+        System.out.println("Saving Side-View");
+        ImageExporter exporter = new ImageExporter(sideCanvas);
+        exporter.exportImage();
+
+        var alert = new Alert(Alert.AlertType.CONFIRMATION, "Image Exported!", ButtonType.CANCEL);
+        alert.showAndWait();
+    }
+
+    @FXML
     private TextArea breakdownTextArea;
 
     @FXML
@@ -476,9 +496,6 @@ public class CalculatorController {
     private TextField recalcS2TODA;
 
     @FXML
-    private Pane pane_flash_101;
-
-    @FXML
     private TextField recalcS2ASDA;
 
     @FXML
@@ -489,5 +506,8 @@ public class CalculatorController {
 
     @FXML
     private Canvas canvas;
+
+    @FXML
+    private Canvas sideCanvas;
 
 }

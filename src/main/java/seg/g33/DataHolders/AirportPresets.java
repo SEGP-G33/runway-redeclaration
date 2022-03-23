@@ -1,8 +1,8 @@
-package seg.g33.Helpers;
+package seg.g33.DataHolders;
 
 import seg.g33.App;
 import seg.g33.Entitites.Airport;
-import seg.g33.Entitites.Obstacle;
+import seg.g33.XMLParsing.XMLReading;
 
 import java.io.File;
 import java.util.ArrayList;

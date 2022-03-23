@@ -40,7 +40,7 @@ public class ImageExporter {
      * Exports whatever the given canvas is showing, at whatever size it is on
      * Opens up file explorer to let the user select where they want the file to be saved
      */
-    public void exportImage () {
+    public void exportImage() {
         File exportFile = setExtFilters(fileChooser).showSaveDialog(null);
 
         if (exportFile != null) {

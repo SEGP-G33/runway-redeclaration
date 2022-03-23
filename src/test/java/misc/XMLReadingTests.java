@@ -1,12 +1,8 @@
 package misc;
 
 import org.junit.jupiter.api.*;
-import seg.g33.Entitites.Obstacle;
-import seg.g33.Helpers.AirportPresets;
-import seg.g33.Helpers.ObstaclePresets;
-import seg.g33.Helpers.XMLReading;
-
-import java.io.FileNotFoundException;
+import seg.g33.DataHolders.AirportPresets;
+import seg.g33.DataHolders.ObstaclePresets;
 
 import static org.junit.jupiter.api.Assertions.*;
 
