@@ -6,13 +6,14 @@ public class RunwaySection {
     private Integer angle;
     private Character direction;
     private RunwayParameters defaultParameters;
+    private Double displacedThreshold = 0d;
+    private Double clearWayLength = 0d;
 
     // Getters and setters aren't provided for these yet.
-    private Double clearWayLength = 0d;
     private Double stopWayLength = 0d;
     private Double RESALength = 240d;
     private Double stripEndLength = 60d;
-    private Double displacedThreshold = 0d;
+
 
     /**
      * Constructor
@@ -20,12 +21,13 @@ public class RunwaySection {
      * @param angle The angle of the runway. Should be 1-36
      * @param parameters Runway parameters
      */
-    public RunwaySection(Runway runway, Integer angle, Character direction, RunwayParameters parameters, Double displacedThreshold) {
+    public RunwaySection(Runway runway, Integer angle, Character direction, RunwayParameters parameters, Double displacedThreshold, Double clearWayLength) {
         this.runway = runway;
         this.angle = angle;
         this.direction = direction;
         this.defaultParameters = parameters;
         this.displacedThreshold = displacedThreshold;
+        this.clearWayLength = clearWayLength;
     }
 
     public RunwaySection(Runway runway, Integer angle, Character direction, RunwayParameters parameters) {
