@@ -384,7 +384,7 @@ public class Drawer {
         Double[] leftBlastText = {leftBlastPoints[0][0], leftBlastPoints[0][1] - 5};
         Double[] leftDTText = {leftDTPoints[0][0], leftDTPoints[0][1] - 5};
         Double[] leftRESAText = {leftRESAPoints[0][0], leftRESAPoints[0][1] - 5};
-        Double[] leftDesignatorText = {0d, height / 2 - 195};
+        Double[] leftDesignatorText = {60d * scale, height / 2 - 195};
 
         Double[] rightTORAText = {rightTORAPoints[0][0], rightTORAPoints[0][1] + 10};
         Double[] rightASDAText = {rightASDAPoints[0][0], rightASDAPoints[0][1] + 10};
