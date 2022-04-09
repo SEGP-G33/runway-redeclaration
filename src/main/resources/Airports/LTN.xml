@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <airport>
-    <airportName>My Airport</airportName>
-    <airportCode>EXa</airportCode>
+    <airportName>London Luton Airport</airportName>
+    <airportCode>LTN</airportCode>
     <airportRunways>
         <airportRunway>
             <name>09L/27R</name>

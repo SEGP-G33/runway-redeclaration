@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<airport>
+    <airportName>Athens International Airport</airportName>
+    <airportCode>ATH</airportCode>
+    <airportRunways>
+        <airportRunway>
+            <name>06L/30R</name>
+            <runwaySection>
+                <angle>6</angle>
+                <direction>L</direction>
+                <length>13.0</length>
+                <clearway>80.0</clearway>
+                <stopway>80.0</stopway>
+                <resa>240.0</resa>
+                <tora>3902.0</tora>
+                <toda>3902.0</toda>
+                <asda>3902.0</asda>
+                <lda>3595.0</lda>
+                <stripend>56.0</stripend>
+                <displaced>289.0</displaced>
+            </runwaySection>
+            <runwaySection>
+                <angle>30</angle>
+                <direction>R</direction>
+                <length>13.0</length>
+                <clearway>80.0</clearway>
+                <stopway>80.0</stopway>
+                <resa>240.0</resa>
+                <tora>3884.0</tora>
+                <toda>3962.0</toda>
+                <asda>3884.0</asda>
+                <lda>3884.0</lda>
+                <stripend>56.0</stripend>
+                <displaced>289.0</displaced>
+            </runwaySection>
+        </airportRunway>
+    </airportRunways>
+</airport>
