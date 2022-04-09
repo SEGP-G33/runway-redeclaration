@@ -288,7 +288,7 @@ public class Drawer {
                     {obstaclePoint[1] + (obstacle.getHeight() * plane.getSlope()) * scale, height / 2 - 130}};
             leftSE1Points = new Double[][]{
                     {obstaclePoint[1] + (obstacle.getHeight() * plane.getSlope()) * scale + 2, height / 2 - 130},
-                    {obstaclePoint[1] + (obstacle.getHeight() * plane.getSlope() + leftSection.getStripEndLength()) * scale + 2, height / 2 - 130}};
+                    {obstaclePoint[1] + (obstacle.getHeight() * plane.getSlope() + leftSection.getStripEndLength()) * scale, height / 2 - 130}};
             leftBlastPoints = new Double[][]{
                     {obstaclePoint[1], height / 2 - 150},
                     {obstaclePoint[1] + plane.getBlastProtection() * scale, height / 2 - 150}};
@@ -331,7 +331,7 @@ public class Drawer {
                     {60d * scale + leftLength, height / 2 - 70},
                     {60d * scale + leftLength + params1.getTODA() * scale, height / 2 - 70}};
             leftLDAPoints = new Double[][]{
-                    {60d * scale + + leftSection.getDisplacedThreshold() * scale, height / 2 - 90},
+                    {60d * scale + leftLength + leftSection.getDisplacedThreshold() * scale, height / 2 - 90},
                     {60d * scale + leftLength + (leftSection.getDisplacedThreshold() + params1.getLDA()) * scale, height / 2 - 90}};
             leftDTPoints = new Double[][]{
                     {60d * scale + leftLength, height / 2 - 110},
@@ -355,8 +355,8 @@ public class Drawer {
                     {-60d * scale + totalLength * scale - rightLength - (rightSection.getDefaultParameters().getTORA() - params2.getTORA()) * scale, height / 2 + 30},
                     {-60d * scale + totalLength * scale - rightLength - rightSection.getDefaultParameters().getTORA() * scale, height / 2 + 30}};
             rightASDAPoints = new Double[][]{
-                    {totalLength * scale - rightLength - (rightSection.getDefaultParameters().getASDA() - params2.getASDA()) * scale, height / 2 + 50},
-                    {totalLength * scale - rightLength - rightSection.getDefaultParameters().getASDA() * scale, height / 2 + 50}};
+                    {-60d * scale + totalLength * scale - rightLength - (rightSection.getDefaultParameters().getASDA() - params2.getASDA()) * scale, height / 2 + 50},
+                    {-60d * scale + totalLength * scale - rightLength - rightSection.getDefaultParameters().getASDA() * scale, height / 2 + 50}};
             rightTODAPoints = new Double[][]{
                     {-60d * scale + totalLength * scale - rightLength - (rightSection.getDefaultParameters().getTODA() - params2.getTODA()) * scale, height / 2 + 70},
                     {-60d * scale + totalLength * scale - rightLength - rightSection.getDefaultParameters().getTODA() * scale, height / 2 + 70}};
@@ -384,7 +384,7 @@ public class Drawer {
         Double[] leftBlastText = {leftBlastPoints[0][0], leftBlastPoints[0][1] - 5};
         Double[] leftDTText = {leftDTPoints[0][0], leftDTPoints[0][1] - 5};
         Double[] leftRESAText = {leftRESAPoints[0][0], leftRESAPoints[0][1] - 5};
-        Double[] leftDesignatorText = {0d, height / 2 - 195};
+        Double[] leftDesignatorText = {60d * scale, height / 2 - 195};
 
         Double[] rightTORAText = {rightTORAPoints[0][0], rightTORAPoints[0][1] + 10};
         Double[] rightASDAText = {rightASDAPoints[0][0], rightASDAPoints[0][1] + 10};
