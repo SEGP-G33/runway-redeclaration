@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Obstacle>
-    <name>Example3 9R/27L</name>
-    <height>15.0</height>
+    <name>BuggageTrolley</name>
+    <height>2.0</height>
     <centerDistance>60.0</centerDistance>
     <leftDistance>150.0</leftDistance>
     <rightDistance>3203.0</rightDistance>

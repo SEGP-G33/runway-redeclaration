@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Obstacle>
-    <name>Example1 9L/27R</name>
+    <name>AircraftNut</name>
     <height>12</height>
     <centerDistance>10</centerDistance>
     <leftDistance>-50</leftDistance>

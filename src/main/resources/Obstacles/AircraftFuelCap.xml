@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Obstacle>
-    <name>Example2 9R/27L</name>
+    <name>AircraftFuelCap</name>
     <height>25.0</height>
     <centerDistance>20.0</centerDistance>
     <leftDistance>2853.0</leftDistance>

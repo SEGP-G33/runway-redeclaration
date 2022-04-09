@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Obstacle>
+    <name>FreightPallet</name>
+    <height>6.0</height>
+    <centerDistance>40.0</centerDistance>
+    <leftDistance>1853.0</leftDistance>
+    <rightDistance>800.0</rightDistance>
+</Obstacle>

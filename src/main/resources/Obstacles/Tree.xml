@@ -1,7 +1,0 @@
-<Obstacle>
-    <name>Tree</name>
-    <height>4</height>
-    <centerDistance>50</centerDistance>
-    <leftDistance>15</leftDistance>
-    <rightDistance>73</rightDistance>
-</Obstacle>
