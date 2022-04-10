@@ -15,6 +15,7 @@ import seg.g33.Entitites.Airport;
 import seg.g33.Entitites.Runway;
 import seg.g33.Entitites.RunwayParameters;
 import seg.g33.Entitites.RunwaySection;
+import seg.g33.Helpers.Constants;
 import seg.g33.XMLParsing.XMLWriting;
 
 import java.io.File;
@@ -35,6 +36,9 @@ public class ConfigureAirportController {
      */
     private static final Logger logger = LogManager.getLogger(ConfigureAirportController.class);
 
+    /**
+     * The airport instance to be built manually from the inputs
+     */
     private Airport airport;
 
     /**
@@ -97,7 +101,7 @@ public class ConfigureAirportController {
      */
     @FXML void handleBackButtonClicked(ActionEvent event)  {
         try {
-            App.setRoot("select-airport");
+            App.setRoot(Constants.getSelectAirportFXML());
         }
         catch (Exception e) {
             logger.error("Error Going to select-airport Scene from ConfigureAirportController");
@@ -140,11 +144,15 @@ public class ConfigureAirportController {
 
         // Runway 2 and 3 could not be there.
         if (enableR2Check.isSelected()) {
-            Runway runway2 = new Runway(runway1NameField.getText());
+            Runway runway2 = new Runway(runway2NameField.getText());
+            runway2.addRunwaySection(buildR2S1(runway2));
+            runway2.addRunwaySection(buildR2S2(runway2));
             airport.addRunway(runway2);
         }
         if (enableR3Check.isSelected()) {
-            Runway runway3 = new Runway(runway1NameField.getText());
+            Runway runway3 = new Runway(runway3NameField.getText());
+            runway3.addRunwaySection(buildR3S1(runway3));
+            runway3.addRunwaySection(buildR3S2(runway3));
             airport.addRunway(runway3);
         }
 
@@ -185,6 +193,46 @@ public class ConfigureAirportController {
         RunwayParameters r1s2Params = new RunwayParameters(r1s2TORA, r1s2ASDA, r1s2TODA, r1s2LDA);
         RunwaySection r1s2 = new RunwaySection(runway1, r1s2Angle, r1s2Direction, r1s2Params);
         return r1s2;
+    }
+
+    /**
+     * Builds the first section of the second runway
+     * @param runway2 the second runway of the Airport
+     * @return The RunwaySection class instance for r2s1
+     */
+    private RunwaySection buildR2S1(Runway runway2) {
+        // TODO
+        return null;
+    }
+
+    /**
+     * Builds the second section of the second runway
+     * @param runway2 the second runway of the Airport
+     * @return The RunwaySection class instance for r2s2
+     */
+    private RunwaySection buildR2S2(Runway runway2) {
+        // TODO
+        return null;
+    }
+
+    /**
+     * Builds the first section of the third runway
+     * @param runway3 the third runway of the Airport
+     * @return The RunwaySection class instance for r3s1
+     */
+    private RunwaySection buildR3S1(Runway runway3) {
+        // TODO
+        return null;
+    }
+
+    /**
+     * Builds the second section of the third runway
+     * @param runway3 the third runway of the Airport
+     * @return The RunwaySection class instance for r3s2
+     */
+    private RunwaySection buildR3S2(Runway runway3) {
+        // TODO
+        return null;
     }
 
     /**

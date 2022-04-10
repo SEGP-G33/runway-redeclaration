@@ -9,6 +9,7 @@ import javafx.scene.control.ButtonType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import seg.g33.App;
+import seg.g33.Helpers.Constants;
 
 import java.io.IOException;
 
@@ -27,7 +28,7 @@ public class LaunchController {
     @FXML
     private void handleLaunchClicked(ActionEvent event) throws IOException {
         logger.info("Launching Main Menu Window...");
-        App.setRoot("select-airport");
+        App.setRoot(Constants.getSelectAirportFXML());
     }
 
     /**

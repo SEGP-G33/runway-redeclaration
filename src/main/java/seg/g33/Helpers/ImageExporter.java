@@ -40,19 +40,14 @@ public class ImageExporter {
      * Exports whatever the given canvas is showing, at whatever size it is on
      * Opens up file explorer to let the user select where they want the file to be saved
      */
-    public void exportImage() {
+    public void exportImage() throws IOException {
         File exportFile = setExtFilters(fileChooser).showSaveDialog(null);
 
         if (exportFile != null) {
-            try {
-                WritableImage writableImage = new WritableImage((int)canvasToExport.getWidth(), (int)canvasToExport.getHeight());
-                canvasToExport.snapshot(null, writableImage);
-                RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
-                ImageIO.write(renderedImage, "png", exportFile);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-                System.out.println("Image export error!");
-            }
+            WritableImage writableImage = new WritableImage((int)canvasToExport.getWidth(), (int)canvasToExport.getHeight());
+            canvasToExport.snapshot(null, writableImage);
+            RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
+            ImageIO.write(renderedImage, "png", exportFile);
         }
     }
 

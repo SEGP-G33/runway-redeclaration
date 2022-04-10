@@ -10,6 +10,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 import seg.g33.App;
 import seg.g33.DataHolders.Environment;
 import seg.g33.DataHolders.ObstaclePresets;
@@ -17,8 +18,10 @@ import seg.g33.Entitites.*;
 import seg.g33.Helpers.*;
 import seg.g33.XMLParsing.XMLReading;
 import seg.g33.XMLParsing.XMLWriting;
+import seg.g33.ui.FieldTooltip;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -62,6 +65,7 @@ public class CalculatorController {
      */
     @FXML
     protected void initialize() {
+        addTooltipsToFields();
         setAirportProperties();
         setupObstacleBoxUI();
 
@@ -75,6 +79,17 @@ public class CalculatorController {
         });
     }
 
+    /**
+     * Adds tooltips for user convenience in all UI elements that need them.
+     */
+    private void addTooltipsToFields() {
+        obstacleNameField.setTooltip(new FieldTooltip("Obstacle Name"));
+        // TODO: Add tooltips for all elements.
+    }
+
+    /**
+     * Sets & updates the UI for the obstacle boxes, based on whether the usePreset check is ticked
+     */
     private void setupObstacleBoxUI() {
         if (useObstaclePresetCheckbox.isSelected()) {
            setEditableFields(false);
@@ -86,6 +101,9 @@ public class CalculatorController {
         });
     }
 
+    /**
+     * Removes all text values from the obstacle fields.
+     */
     private void clearObstacleFields() {
         obstacleLeftField.setText(null);
         obstacleCenterField.setText(null);
@@ -94,6 +112,10 @@ public class CalculatorController {
         obstacleRightField.setText(null);
     }
 
+    /**
+     * Disables or enables the obstacle input fields.
+     * @param editable true or false
+     */
     private void setEditableFields(Boolean editable) {
         selectObstacleComboBox.setDisable(editable);
         obstacleRightField.setEditable(editable);
@@ -312,7 +334,7 @@ public class CalculatorController {
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.YES) {
-            App.setRoot("select-airport");
+            App.setRoot(Constants.getSelectAirportFXML());
         }
     }
 
@@ -400,24 +422,44 @@ public class CalculatorController {
         return pattern.matcher(input).matches();
     }
 
+    /**
+     * Called when the "Save Top-Down" button is pressed.
+     *      Saves the canvas as an image, and shows an alert on the state.
+     * @param event the button click ActionEvent
+     */
     @FXML
     void handleSaveTopDown(ActionEvent event) {
-        System.out.println("Saving Top-Down");
         ImageExporter exporter = new ImageExporter(canvas);
-        exporter.exportImage();
 
-        var alert = new Alert(Alert.AlertType.CONFIRMATION, "Image Exported!", ButtonType.CANCEL);
-        alert.showAndWait();
+        try {
+            exporter.exportImage();
+            var alert = new Alert(Alert.AlertType.CONFIRMATION, "Image Exported!", ButtonType.CANCEL);
+            alert.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+            var alert = new Alert(Alert.AlertType.ERROR, "Image Export Failed! ", ButtonType.CANCEL);
+            alert.showAndWait();
+        }
     }
 
+    /**
+     * Called when the "Save Side-View" button is pressed.
+     *      Saves the canvas as an image, and shows an alert on the state.
+     * @param event the button click ActionEvent
+     */
     @FXML
     void handleSaveSideView(ActionEvent event) {
-        System.out.println("Saving Side-View");
         ImageExporter exporter = new ImageExporter(sideCanvas);
-        exporter.exportImage();
 
-        var alert = new Alert(Alert.AlertType.CONFIRMATION, "Image Exported!", ButtonType.CANCEL);
-        alert.showAndWait();
+        try {
+            exporter.exportImage();
+            var alert = new Alert(Alert.AlertType.CONFIRMATION, "Image Exported!", ButtonType.CANCEL);
+            alert.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+            var alert = new Alert(Alert.AlertType.ERROR, "Image Export Failed! ", ButtonType.CANCEL);
+            alert.showAndWait();
+        }
     }
 
     @FXML
