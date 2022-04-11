@@ -15,7 +15,6 @@ public class Runway {
      * @param name the name of the runway, imported from XML
      */
     public Runway(String name) {
-
         this.name = name;
         this.runwaySections = new ArrayList<>();
     }

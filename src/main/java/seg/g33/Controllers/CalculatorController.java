@@ -315,7 +315,6 @@ public class CalculatorController {
      */
     private boolean obstacleAlreadyExists(Obstacle obstacle) {
         for (Obstacle obs : obstacles) {
-            // TODO: Checking based only on Name and Height here. Should we use something else or check more fields?
             if (obs.getName().equals(obstacle.getName()) && obs.getHeight() == obstacle.getHeight()) {
                 return true;
             }
@@ -397,30 +396,22 @@ public class CalculatorController {
      * @return true if all fields are valid. False otherwise.
      */
     private boolean validateObstacleFieldsForExport() {
-        if (obstacleNameField.getText().isBlank() || obstacleHeightField.getText().isBlank() || obstacleCenterField.getText().isBlank() || obstacleLeftField.getText().isBlank() || obstacleRightField.getText().isBlank()) {
+        // Don't want to allow blank text values
+        var obstacleFields = new TextField[] { obstacleNameField, obstacleHeightField, obstacleCenterField, obstacleLeftField, obstacleRightField };
+        if (!Validator.areAllFieldsValid(obstacleFields)) {
             return false;
         }
 
-        if (!isNumber(obstacleHeightField.getText()) || !isNumber(obstacleCenterField.getText()) || !isNumber(obstacleLeftField.getText()) || !isNumber(obstacleRightField.getText())) {
+        // Values for these fields need to be numbers
+        obstacleFields = new TextField[] { obstacleHeightField, obstacleCenterField, obstacleLeftField, obstacleRightField };
+        var areObstacleFieldsValid = Validator.checkObstacleTextFieldsValid(obstacleFields);
+        if (!areObstacleFieldsValid) {
             return false;
         }
+
         return true;
     }
 
-    /**
-     * Checks if a given input string has a numeric value.
-     * Used to export Obstacle information to XML file.
-     * Source code adapted from: https://www.baeldung.com/java-check-string-number
-     * @param input the string to be checked
-     * @return true if input is a number. False otherwise
-     */
-    public boolean isNumber(String input) {
-        Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
-        if (input == null) {
-            return false;
-        }
-        return pattern.matcher(input).matches();
-    }
 
     /**
      * Called when the "Save Top-Down" button is pressed.

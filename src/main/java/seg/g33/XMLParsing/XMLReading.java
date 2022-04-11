@@ -5,16 +5,13 @@ import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import seg.g33.Entitites.*;
+import seg.g33.Helpers.Validator;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.io.IOException;
 
 public class XMLReading {
-
-    /**
-     * Logger
-     */
-    private static final Logger logger = LogManager.getLogger(XMLReading.class);
 
     /**
      * Reads an Airport from an XML file.
@@ -23,10 +20,13 @@ public class XMLReading {
      */
     public Airport configureAirportFromXMLFile(String filename) {
         var factory = DocumentBuilderFactory.newInstance();
-
         Airport airport = null;
 
         try {
+            if (!Validator.isXMLFile(filename)) {
+                throw new IllegalArgumentException("Airport file needs to be XML");
+            }
+
             var builder = factory.newDocumentBuilder();
             var file = new File(filename);
             var xmlFile = builder.parse(file);
@@ -39,7 +39,7 @@ public class XMLReading {
             var airportRunwaysList = xmlFile.getElementsByTagName("airportRunway");
             for (int i = 0; i < airportRunwaysList.getLength(); i++) {
                 var runwayNode = airportRunwaysList.item(i);
-                var runway = buildRunwayFromNode(runwayNode, airport);
+                var runway = buildRunwayFromNode(runwayNode);
                 airport.addRunway(runway);
             }
         }
@@ -55,10 +55,9 @@ public class XMLReading {
     /**
      * Builds a Runway instance from a Node
      * @param runwayNode the node of the XMl file
-     * @param airport the airport which the runway is a part of
      * @return an instance of the Runway class
      */
-    private Runway buildRunwayFromNode(Node runwayNode, Airport airport) {
+    private Runway buildRunwayFromNode(Node runwayNode) {
         Runway runway = null;
 
         if (runwayNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -122,6 +121,10 @@ public class XMLReading {
         var builderFactory = DocumentBuilderFactory.newInstance();
 
         try {
+            if (!Validator.isXMLFile(filename)) {
+                throw new IOException("Obstacle File needs to be XML");
+            }
+
             var builder = builderFactory.newDocumentBuilder();
 
             var file = new File(filename);
