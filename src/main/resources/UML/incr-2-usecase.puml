@@ -1,0 +1,51 @@
+@startuml
+
+skinparam style strictuml
+left to right direction
+
+' ACTORS
+actor "Runway\ncalculator" as rc
+actor "Air traffic\ncontroller" as atc
+actor "Ground crew" as gc
+actor "Pilot" as p 
+
+' REQUIREMENTS
+note "Requirement R2" as R2
+note "Requirement R8" as R8
+note "Requirement R11" as R11
+note "Requirement R12" as R12
+' note "Requirement M2" as M2
+note "Requirement M4" as M4
+' note "Requirement M6" as M6
+
+rectangle "Runway Redeclaration System" {
+
+  ' USE CASES
+  usecase "Provide\nside-on view\nof the runways" as sideviz_provide
+  usecase "Provide\ntop-down view\nof the runways" as topdownviz_provide
+  usecase "Provide 2D\nvisualisations of\nthe situation" as viz_provide
+  usecase "Export\nPNG image of\nthe situation" as png_export
+}
+
+' RELATIONSHIPS
+gc -> topdownviz_provide
+atc -> topdownviz_provide
+atc ---> sideviz_provide
+
+topdownviz_provide ..> viz_provide : include
+sideviz_provide ..> viz_provide : include
+
+png_export ..> viz_provide : extends
+
+atc -> png_export
+
+
+
+R2 .down.. viz_provide
+R8 .down.. viz_provide
+R11 .down.. topdownviz_provide
+R12 .down.. sideviz_provide
+M4 .down.. png_export
+
+
+@enduml
