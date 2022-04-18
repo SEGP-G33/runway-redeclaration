@@ -28,16 +28,17 @@ rectangle "Runway Redeclaration System" {
 }
 
 ' RELATIONSHIPS
-gc -> topdownviz_provide
-atc -> topdownviz_provide
-atc ---> sideviz_provide
+gc -- topdownviz_provide
+gc -- png_export
+atc -- topdownviz_provide
+atc --- sideviz_provide
+atc -- png_export
 
-topdownviz_provide ..> viz_provide : include
-sideviz_provide ..> viz_provide : include
+topdownviz_provide <.. viz_provide : <<include>>
+sideviz_provide <.. viz_provide : <<include>>
 
-png_export ..> viz_provide : extends
+png_export ..> viz_provide : <<extends>>
 
-atc -> png_export
 
 
 

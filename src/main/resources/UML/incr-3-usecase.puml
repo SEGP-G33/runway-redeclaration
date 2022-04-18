@@ -1,0 +1,89 @@
+@startuml
+
+skinparam style strictuml
+left to right direction
+
+' ACTORS
+actor "Runway\ncalculator" as rc
+actor "Air traffic\ncontroller" as atc
+actor "Ground crew" as gc
+actor "Pilot" as p 
+
+' REQUIREMENTS
+note "Requirement R1" as R1 #Orange
+note "Requirement R9" as R9 #Orange
+note "Requirement R10" as R10 #Orange
+note "Requirement R13" as R13 #HotPink
+note "Requirement R14" as R14 #HotPink
+note "Requirement M1" as M1 #LawnGreen
+note "Requirement M3" as M3 #LawnGreen
+
+note "Requirement M4" as M4 #LawnGreen
+note "Requirement M7" as M7 #LawnGreen
+
+rectangle "Runway Redeclaration System" {
+
+    ' USE CASES
+    usecase "Configure to permit\nuse at any UK\ncommercial airport" as system_configure
+    usecase "Add airport\ninformation" as airport_add
+    usecase "Add runway\ninformation" as runway_add
+    usecase "Add parameters" as params_add
+    usecase "Display notifications\nof user actions" as notifications_display
+    usecase "Provide revised\nrunway parameters" as params_provide
+
+    usecase "Provide 2D\nvisualisations of\nthe situation" as viz_provide
+    usecase "Always place lower\nthreshold on the left" as threshold_placement
+    usecase "Provide\ntop-down view\nof the runways" as topdownviz_provide
+    usecase "Provide a map view" as map_provide
+    usecase "Rotate\nrunway to match\ncompass if desired" as runway_rotate
+    usecase "Export\nPNG image of\nthe situation" as png_export
+    usecase "Provide a 3D\nvisualisation of the\nairfield" as viz3d_provide
+    usecase "Print out results of\ncurrent situation" as results_print
+
+    usecase "Change parameters" as params_change
+    usecase "Update views as you\nselect runways\n& thresholds" as views_adapt
+
+
+
+
+}
+
+' RELATIONSHIPS
+atc -- runway_rotate
+atc -- threshold_placement
+atc -- views_adapt
+atc -- notifications_display
+atc -- viz3d_provide
+atc -- results_print
+atc -- png_export
+rc -- system_configure
+rc -- threshold_placement
+gc -- map_provide
+gc -- viz3d_provide
+gc -- png_export
+
+
+system_configure ..> params_add : <<include>>
+params_add ..> airport_add : <<include>>
+params_add ..> params_change : <<extends>>
+viz_provide ..> threshold_placement : <<include>>
+topdownviz_provide ...> runway_rotate : <<include>>
+
+runway_add ..> views_adapt : <<include>>
+params_change ..> notifications_display : <<include>>
+params_provide ..> notifications_display : <<include>>
+topdownviz_provide ..> map_provide : <<include>>
+
+
+R10 .down. runway_rotate
+R1 .down. system_configure
+R9 .up. threshold_placement
+R13 .down. views_adapt
+R14 .down. notifications_display
+M1 .up. map_provide
+M3 .down. viz3d_provide
+M4 .down. png_export
+M7 .down. results_print
+
+
+@enduml

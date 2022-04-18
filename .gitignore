@@ -29,6 +29,8 @@ hs_err_pid*
 # Maven
 target/
 
+**/*usecase.png
+
 # IntelliJ IDEA
 .idea/
 *.iml
