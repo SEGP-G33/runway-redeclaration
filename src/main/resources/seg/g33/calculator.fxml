@@ -16,7 +16,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -37,20 +36,6 @@
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="15.0" prefWidth="467.0">
-                     <children>
-                        <VBox alignment="CENTER" prefHeight="89.0" prefWidth="234.0" spacing="10.0">
-                           <children>
-                              <Button fx:id="button_import_obstacle" mnemonicParsing="false" onAction="#handleImportObstacleXML" prefHeight="24.0" prefWidth="246.0" text="Import  Obstacle XML Information" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="89.0" prefWidth="266.0" spacing="10.0">
-                           <children>
-                              <Button fx:id="button_export_obstacle" alignment="CENTER" mnemonicParsing="false" onAction="#handleExportObstacle" text="Export XML Obstacle Information" />
-                           </children>
-                        </VBox>
-                     </children>
                   </HBox>
                   <VBox alignment="TOP_CENTER" prefHeight="182.0" prefWidth="469.0" spacing="5.0">
                      <children>
@@ -131,31 +116,70 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <VBox prefHeight="45.0" prefWidth="452.0" spacing="7.0">
+                        <HBox alignment="CENTER" fillHeight="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="173.0" prefWidth="440.0">
                            <children>
-                              <HBox>
+                              <VBox alignment="CENTER_LEFT" prefHeight="204.0" prefWidth="167.0" spacing="15.0">
                                  <children>
-                                    <Region prefHeight="0.0" prefWidth="100.0" />
-                                    <TextField fx:id="obstacleNameField" prefHeight="27.0" prefWidth="276.0" promptText="Obstacle Name" />
-                                    <Region layoutX="10.0" layoutY="10.0" prefHeight="0.0" prefWidth="100.0" />
+                                    <Label prefHeight="0.0" prefWidth="182.0" text="Obstacle Name">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="23.0" prefWidth="184.0" text="Height (metres)">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="74.0" prefHeight="23.0" prefWidth="184.0" text="Distance from center (m)">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="89.0" prefHeight="23.0" prefWidth="184.0" text="Distance from R (m)">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="174.0" prefHeight="23.0" prefWidth="184.0" text="Distance from L (m)">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
                                  </children>
-                              </HBox>
-                              <HBox layoutX="10.0" layoutY="10.0" spacing="20.0">
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox layoutX="10.0" layoutY="10.0" prefHeight="149.0" prefWidth="226.0" spacing="10.0">
                                  <children>
-                                    <TextField fx:id="obstacleCenterField" prefHeight="27.0" prefWidth="276.0" promptText="Distance from center (metres)" />
-                                    <TextField fx:id="obstacleHeightField" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="297.0" promptText="Obstacle Height (metres)" />
+                                    <TextField fx:id="obstacleNameField" editable="false" promptText="eg: Stopped Vehicle" />
+                                    <TextField fx:id="obstacleHeightField" editable="false" layoutX="10.0" layoutY="10.0" promptText="eg: 4" />
+                                    <TextField fx:id="obstacleCenterField" editable="false" layoutX="10.0" layoutY="57.0" promptText="eg: 200" />
+                                    <TextField fx:id="ostacleRightField" editable="false" layoutX="10.0" layoutY="84.0" promptText="eg: 1300" />
+                                    <TextField fx:id="obstacleLeftField" editable="false" layoutX="10.0" layoutY="158.0" promptText="eg: 2100" />
                                  </children>
-                              </HBox>
-                              <HBox layoutX="10.0" layoutY="37.0" spacing="20.0">
-                                 <children>
-                                    <TextField fx:id="obstacleRightField" prefHeight="27.0" prefWidth="276.0" promptText="Distance from R (metres)" />
-                                    <TextField fx:id="obstacleLeftField" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="297.0" promptText="Distance from L (metres)" />
-                                 </children>
-                              </HBox>
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="433.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="89.0" prefWidth="234.0" spacing="10.0">
+                           <children>
+                              <Button fx:id="button_import_obstacle" mnemonicParsing="false" onAction="#handleImportObstacleXML" prefHeight="24.0" prefWidth="246.0" text="Import  Obstacle XML " />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="89.0" prefWidth="266.0" spacing="10.0">
+                           <children>
+                              <Button fx:id="button_export_obstacle" alignment="CENTER" mnemonicParsing="false" onAction="#handleExportObstacle" prefHeight="27.0" prefWidth="195.0" text="Export XML Obstacle " />
                            </children>
                         </VBox>
                      </children>
-                  </VBox>
+                  </HBox>
                   <VBox alignment="TOP_CENTER" spacing="5.0">
                      <children>
                         <Label text="Original Runway Values">
@@ -461,37 +485,53 @@
       </ScrollPane>
    </left>
    <center>
-      <TabPane BorderPane.alignment="CENTER">
-         <tabs>
-            <Tab text="Top-Down View">
-               <content>
-                  <VBox spacing="20.0">
-                     <children>
-                        <Canvas fx:id="canvas" height="535.0" width="687.0" />
-                        <HBox alignment="CENTER" spacing="20.0">
+      <VBox spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <TabPane>
+               <tabs>
+                  <Tab text="Top-Down View">
+                     <content>
+                        <VBox spacing="20.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#handleSaveTopDown" text="Save Top-Down Image" />
+                              <Canvas fx:id="canvas" height="535.0" width="687.0" />
+                              <HBox alignment="CENTER" spacing="20.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#handleSaveTopDown" text="Save Top-Down Image" />
+                                 </children>
+                              </HBox>
                            </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </content>
-            </Tab>
-            <Tab text="Side View">
-               <content>
-                  <VBox spacing="20.0">
-                     <children>
-                        <Canvas fx:id="sideCanvas" height="535.0" width="687.0" />
-                        <HBox alignment="CENTER">
+                        </VBox>
+                     </content>
+                  </Tab>
+                  <Tab text="Side View">
+                     <content>
+                        <VBox spacing="20.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#handleSaveSideView" text="Save Side-View" />
+                              <Canvas fx:id="sideCanvas" height="535.0" width="687.0" />
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#handleSaveSideView" text="Save Side-View" />
+                                 </children>
+                              </HBox>
                            </children>
-                        </HBox>
+                        </VBox>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#handleExportCanvas" text="Export Current Canvas" />
+                        <CheckBox fx:id="pngFileCheck" mnemonicParsing="false" selected="true" text="PNG" />
+                        <CheckBox fx:id="jpegFileCheck" layoutX="151.0" layoutY="10.0" mnemonicParsing="false" text="JPEG" />
+                        <CheckBox fx:id="gifFileCheck" layoutX="231.0" layoutY="10.0" mnemonicParsing="false" text="GIF" />
                      </children>
-                  </VBox>
-               </content>
-            </Tab>
-         </tabs>
-      </TabPane>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
    </center>
 </BorderPane>
