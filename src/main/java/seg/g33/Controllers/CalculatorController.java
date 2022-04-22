@@ -20,6 +20,7 @@ import seg.g33.XMLParsing.XMLReading;
 import seg.g33.XMLParsing.XMLWriting;
 import seg.g33.ui.FieldTooltip;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -412,15 +413,15 @@ public class CalculatorController {
         return true;
     }
 
-
     /**
-     * Called when the "Save Top-Down" button is pressed.
+     * Called when the "Export Canvas" button is pressed.
      *      Saves the canvas as an image, and shows an alert on the state.
      * @param event the button click ActionEvent
      */
     @FXML
-    void handleSaveTopDown(ActionEvent event) {
-        ImageExporter exporter = new ImageExporter(canvas);
+    void handleExportCanvas(ActionEvent event) {
+        var selectedIndex  = mainTabPane.getSelectionModel().getSelectedIndex();
+        ImageExporter exporter = new ImageExporter(selectedIndex == 0 ? canvas : sideCanvas);
 
         try {
             exporter.exportImage();
@@ -433,25 +434,8 @@ public class CalculatorController {
         }
     }
 
-    /**
-     * Called when the "Save Side-View" button is pressed.
-     *      Saves the canvas as an image, and shows an alert on the state.
-     * @param event the button click ActionEvent
-     */
     @FXML
-    void handleSaveSideView(ActionEvent event) {
-        ImageExporter exporter = new ImageExporter(sideCanvas);
-
-        try {
-            exporter.exportImage();
-            var alert = new Alert(Alert.AlertType.CONFIRMATION, "Image Exported!", ButtonType.CANCEL);
-            alert.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-            var alert = new Alert(Alert.AlertType.ERROR, "Image Export Failed! ", ButtonType.CANCEL);
-            alert.showAndWait();
-        }
-    }
+    private TabPane mainTabPane;
 
     @FXML
     private TextArea breakdownTextArea;
@@ -542,5 +526,14 @@ public class CalculatorController {
 
     @FXML
     private Canvas sideCanvas;
+
+    @FXML
+    private CheckBox pngFileCheck;
+
+    @FXML
+    private CheckBox jpegFileCheck;
+
+    @FXML
+    private CheckBox gifFileCheck;
 
 }
