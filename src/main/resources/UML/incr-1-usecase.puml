@@ -1,0 +1,92 @@
+/'
+How to edit .txt file using plantUML to output a new .png file:
+1. go to https://plantuml.com/download
+2. download plantuml jar file.
+3. open terminal
+4. enter "java -jar plantum1.<version>.jar runway-use-case.txt"
+
+Should now output a runway-use-case.png file.
+
+actors:
+    runway calculator
+    air traffic controller
+    ground worker
+    pilot
+
+use cases:
+    .add runway\ninformation
+    .add obstacle\ninformation
+    .report obstacle
+    provide revised\nrunway parameters
+    decide runway\n operations
+    redeclare runway\nparameters
+    perform runway\ncalculations
+    fly airplane
+'/
+
+@startuml
+skinparam style strictuml
+left to right direction
+actor "Runway\ncalculator" as rc
+actor "Air traffic\ncontroller" as atc
+actor "Ground crew" as gc
+actor "Pilot" as p 
+
+note "Report obstacle" as gc_note
+note "Fly\nairplane" as p_note
+note "Decide runway\noperations" as atc_note
+note "Redeclare runway\nparameters" as rc_note
+
+note "Requirement R3" as R3
+note "Requirement R4" as R4
+note "Requirement R5" as R5
+note "Requirement R6" as R6
+note "Requirement R7" as R7
+note "Requirement M7" as M7
+
+rectangle "Runway Redeclaration System" {
+  usecase "Add parameters" as params_add
+  usecase "Add runway\ninformation" as runway_add
+  usecase "Add obstacle\ninformation" as obstacle_add
+  usecase "Import XML file" as xml_import
+  usecase "Export XML file" as xml_export
+  usecase "Print out results of\ncurrent situation" as results_print
+  usecase "Perform runway\ncalculations" as calc_perform
+  usecase "Provide revised\nrunway parameters" as params_provide
+  usecase "View calculation\nbreakdown" as breakdown_view
+}
+
+
+
+gc .. gc_note
+p .. p_note
+rc .. rc_note
+atc .. atc_note
+
+rc -> params_add
+atc -> params_add
+xml_import ...> runway_add : extends
+xml_import ...> obstacle_add : extends
+xml_export ...> params_provide : extends
+results_print ...> params_provide : extends 
+breakdown_view ...> params_provide : extends
+
+obstacle_add ...> params_add : include
+runway_add ...> params_add : include
+
+rc -> xml_import
+atc -> xml_import
+
+rc ---> xml_export
+atc ---> xml_export
+
+R3 .down.. calc_perform
+R4 .down... obstacle_add
+R5 .up.. params_provide
+R5 .left... runway_add
+R6 .down.. breakdown_view
+R7 .down. xml_import
+R7 .down. xml_export
+M7 .down.. results_print
+
+@enduml
