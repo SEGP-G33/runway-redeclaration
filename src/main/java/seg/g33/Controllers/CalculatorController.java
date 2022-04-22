@@ -164,7 +164,6 @@ public class CalculatorController {
         }
     }
 
-
     /**
      * Sets the UI elements for the currently selected runway.
      */
@@ -421,6 +420,7 @@ public class CalculatorController {
     @FXML
     void handleExportCanvas(ActionEvent event) {
         var selectedIndex  = mainTabPane.getSelectionModel().getSelectedIndex();
+
         ImageExporter exporter = new ImageExporter(selectedIndex == 0 ? canvas : sideCanvas);
 
         try {

@@ -44,24 +44,24 @@ public class ImageExporter {
         File exportFile = setExtFilters(fileChooser).showSaveDialog(null);
 
         if (exportFile != null) {
-            WritableImage writableImage = new WritableImage((int)canvasToExport.getWidth(), (int)canvasToExport.getHeight());
+            WritableImage writableImage = new WritableImage((int) canvasToExport.getWidth(), (int) canvasToExport.getHeight());
             canvasToExport.snapshot(null, writableImage);
             RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
             ImageIO.write(renderedImage, "png", exportFile);
         }
     }
 
-
     /**
      * Adds default file extensions to the file explorer window that pops up
      * @param chooser The chooser which the extensions are being added to
      * @return The modified chooser with the new file extensions
-     * TODO: Potentially add more file extension types
      */
     private FileChooser setExtFilters(FileChooser chooser){
-        chooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("PNG", "*.png")
-        );
+        FileChooser.ExtensionFilter pngFilter = new FileChooser.ExtensionFilter("PNG", "*.png");
+        FileChooser.ExtensionFilter jpegFilter = new FileChooser.ExtensionFilter("JPEG", "*.jpeg");
+        FileChooser.ExtensionFilter gifFilter = new FileChooser.ExtensionFilter("GIF", "*.gif");
+
+        chooser.getExtensionFilters().addAll(pngFilter, jpegFilter, gifFilter);
         return chooser;
     }
 }
