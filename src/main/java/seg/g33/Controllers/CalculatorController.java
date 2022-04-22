@@ -526,14 +526,4 @@ public class CalculatorController {
 
     @FXML
     private Canvas sideCanvas;
-
-    @FXML
-    private CheckBox pngFileCheck;
-
-    @FXML
-    private CheckBox jpegFileCheck;
-
-    @FXML
-    private CheckBox gifFileCheck;
-
 }
