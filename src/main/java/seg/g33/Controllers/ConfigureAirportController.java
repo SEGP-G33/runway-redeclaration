@@ -142,7 +142,7 @@ public class ConfigureAirportController {
      */
     public Airport configureAirport() {
         if (!Validator.areAllFieldsValid(new TextField[] { airportNameField, airportCodeField })) {
-            showInputsAlert();
+            showInputsAlert("the name and the code");
             return null;
         }
 
@@ -150,7 +150,7 @@ public class ConfigureAirportController {
 
         // Runway 1 will always be there.
         if (Validator.textFieldHasBlankText(runway1NameField)) {
-            showInputsAlert();
+            showInputsAlert("the runway 1 name");
             return null;
         }
         Runway runway1 = new Runway(runway1NameField.getText());
@@ -159,7 +159,7 @@ public class ConfigureAirportController {
 
         // if these are null there was an error on the input fields, so show alert and return null.
         if (r1s1 == null || r1s2 == null) {
-            showInputsAlert();
+            showInputsAlert("the runway 1 properties");
             return null;
         }
 
@@ -170,7 +170,7 @@ public class ConfigureAirportController {
         // Runway 2 and 3 could not be there.
         if (enableR2Check.isSelected()) {
             if (Validator.textFieldHasBlankText(runway2NameField)) {
-                showInputsAlert();
+                showInputsAlert("the runway 2 name");
                 return null;
             }
             Runway runway2 = new Runway(runway2NameField.getText());
@@ -179,7 +179,7 @@ public class ConfigureAirportController {
 
             // if these are null there was an error on the input fields, so show alert and return null.
             if (r2s1 == null || r2s2 == null) {
-                showInputsAlert();
+                showInputsAlert("the runway 2 properties");
                 return null;
             }
 
@@ -189,7 +189,7 @@ public class ConfigureAirportController {
         }
         if (enableR3Check.isSelected()) {
             if (Validator.textFieldHasBlankText(runway3NameField)) {
-                showInputsAlert();
+                showInputsAlert("the runway 3 name");
                 return null;
             }
             Runway runway3 = new Runway(runway3NameField.getText());
@@ -199,7 +199,7 @@ public class ConfigureAirportController {
 
             // if these are null there was an error on the input fields, so show alert and return null.
             if (r3s1 == null || r3s2 == null) {
-                showInputsAlert();
+                showInputsAlert("the runway 3 properties");
                 return null;
             }
 
@@ -217,7 +217,7 @@ public class ConfigureAirportController {
      * @return The RunwaySection class instance for r1s1
      */
     private RunwaySection buildR1S1(Runway runway1) {
-        RunwaySection r1s1 = null;
+        RunwaySection r1s1;
         try {
             var r1s1TORA = number(r1s1TORAField.getText());
             var r1s1TODA = number(r1s1TODAField.getText());
@@ -241,7 +241,7 @@ public class ConfigureAirportController {
      * @return The RunwaySection class instance for r1s2
      */
     private RunwaySection buildR1S2(Runway runway1) {
-        RunwaySection r1s2 = null;
+        RunwaySection r1s2;
         try {
             var r1s2TORA = number(r1s2TORAField.getText());
             var r1s2TODA = number(r1s2TODAField.getText());
@@ -266,7 +266,7 @@ public class ConfigureAirportController {
      * @return The RunwaySection class instance for r2s1
      */
     private RunwaySection buildR2S1(Runway runway2) {
-        RunwaySection r2s1 = null;
+        RunwaySection r2s1;
         try {
             var tora = number(r2s1TORAField.getText());
             var toda = number(r2s1TODAField.getText());
@@ -291,7 +291,7 @@ public class ConfigureAirportController {
      * @return The RunwaySection class instance for r2s2
      */
     private RunwaySection buildR2S2(Runway runway2) {
-        RunwaySection r2s2 = null;
+        RunwaySection r2s2;
         try {
             var tora = number(r2s2TORAField.getText());
             var toda = number(r2s2TODAField.getText());
@@ -316,7 +316,7 @@ public class ConfigureAirportController {
      * @return The RunwaySection class instance for r3s1
      */
     private RunwaySection buildR3S1(Runway runway3) {
-        RunwaySection r3s1 = null;
+        RunwaySection r3s1;
         try {
             var tora = number(r3s1TORAField.getText());
             var toda = number(r3s1TODAField.getText());
@@ -341,7 +341,7 @@ public class ConfigureAirportController {
      * @return The RunwaySection class instance for r3s2
      */
     private RunwaySection buildR3S2(Runway runway3) {
-        RunwaySection r3s2 = null;
+        RunwaySection r3s2;
         try {
             var tora = number(r3s2TORAField.getText());
             var toda = number(r3s2TODAField.getText());
@@ -360,8 +360,8 @@ public class ConfigureAirportController {
         return r3s2;
     }
 
-    private void showInputsAlert() {
-        var alert = new Alert(Alert.AlertType.ERROR, "Please make sure all fields are completed and have valid inputs.", ButtonType.CANCEL);
+    private void showInputsAlert(String forInput) {
+        var alert = new Alert(Alert.AlertType.ERROR, "Please make sure all fields for " + forInput + " are valid. ", ButtonType.CANCEL);
         alert.showAndWait();
     }
 
