@@ -16,6 +16,7 @@ import seg.g33.Entitites.Runway;
 import seg.g33.Entitites.RunwayParameters;
 import seg.g33.Entitites.RunwaySection;
 import seg.g33.Helpers.Constants;
+import seg.g33.Helpers.Validator;
 import seg.g33.XMLParsing.XMLWriting;
 
 import java.io.File;
@@ -114,6 +115,12 @@ public class ConfigureAirportController {
     @FXML void handleSaveAirportButtonClicked(ActionEvent event) {
         airport = configureAirport();
 
+        // Some fields weren't entered so alert was shown and airport returned null.
+        if (airport == null) {
+            return;
+        }
+
+        // All fields are entered okay, continue with saving
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Save");
         directoryChooser.setInitialDirectory(new File(App.getAppDirectory()));
@@ -134,25 +141,70 @@ public class ConfigureAirportController {
      * @return An instance of the Airport class
      */
     public Airport configureAirport() {
+        if (!Validator.areAllFieldsValid(new TextField[] { airportNameField, airportCodeField })) {
+            showInputsAlert();
+            return null;
+        }
+
         airport = new Airport(airportNameField.getText(), airportCodeField.getText());
 
         // Runway 1 will always be there.
+        if (Validator.textFieldHasBlankText(runway1NameField)) {
+            showInputsAlert();
+            return null;
+        }
         Runway runway1 = new Runway(runway1NameField.getText());
+        var r1s1 = buildR1S1(runway1);
+        var r1s2 = buildR1S2(runway1);
+
+        // if these are null there was an error on the input fields, so show alert and return null.
+        if (r1s1 == null || r1s2 == null) {
+            showInputsAlert();
+            return null;
+        }
+
         runway1.addRunwaySection(buildR1S1(runway1));
         runway1.addRunwaySection(buildR1S2(runway1));
         airport.addRunway(runway1);
 
         // Runway 2 and 3 could not be there.
         if (enableR2Check.isSelected()) {
+            if (Validator.textFieldHasBlankText(runway2NameField)) {
+                showInputsAlert();
+                return null;
+            }
             Runway runway2 = new Runway(runway2NameField.getText());
-            runway2.addRunwaySection(buildR2S1(runway2));
-            runway2.addRunwaySection(buildR2S2(runway2));
+            var r2s1 = buildR2S1(runway2);
+            var r2s2 = buildR2S2(runway2);
+
+            // if these are null there was an error on the input fields, so show alert and return null.
+            if (r2s1 == null || r2s2 == null) {
+                showInputsAlert();
+                return null;
+            }
+
+            runway2.addRunwaySection(r2s1);
+            runway2.addRunwaySection(r2s2);
             airport.addRunway(runway2);
         }
         if (enableR3Check.isSelected()) {
+            if (Validator.textFieldHasBlankText(runway3NameField)) {
+                showInputsAlert();
+                return null;
+            }
             Runway runway3 = new Runway(runway3NameField.getText());
-            runway3.addRunwaySection(buildR3S1(runway3));
-            runway3.addRunwaySection(buildR3S2(runway3));
+
+            var r3s1 = buildR3S1(runway3);
+            var r3s2 = buildR3S2(runway3);
+
+            // if these are null there was an error on the input fields, so show alert and return null.
+            if (r3s1 == null || r3s2 == null) {
+                showInputsAlert();
+                return null;
+            }
+
+            runway3.addRunwaySection(r3s1);
+            runway3.addRunwaySection(r3s2);
             airport.addRunway(runway3);
         }
 
@@ -165,15 +217,21 @@ public class ConfigureAirportController {
      * @return The RunwaySection class instance for r1s1
      */
     private RunwaySection buildR1S1(Runway runway1) {
-        var r1s1TORA = number(r1s1TORAField.getText());
-        var r1s1TODA = number(r1s1TODAField.getText());
-        var r1s1ASDA = number(r1s1ASDAField.getText());
-        var r1s1LDA = number(r1s1LDAField.getText());
-        var r1s1Angle = Integer.parseInt(r1s1AngleField.getText());
-        var r1s1Direction = (r1s1DirectionField.getText()).charAt(0);
+        RunwaySection r1s1 = null;
+        try {
+            var r1s1TORA = number(r1s1TORAField.getText());
+            var r1s1TODA = number(r1s1TODAField.getText());
+            var r1s1ASDA = number(r1s1ASDAField.getText());
+            var r1s1LDA = number(r1s1LDAField.getText());
+            var r1s1Angle = Integer.parseInt(r1s1AngleField.getText());
+            var r1s1Direction = (r1s1DirectionField.getText()).charAt(0);
 
-        RunwayParameters r1s1Params = new RunwayParameters(r1s1TORA, r1s1ASDA, r1s1TODA, r1s1LDA);
-        RunwaySection r1s1 = new RunwaySection(runway1, r1s1Angle, r1s1Direction, r1s1Params);
+            RunwayParameters r1s1Params = new RunwayParameters(r1s1TORA, r1s1ASDA, r1s1TODA, r1s1LDA);
+            r1s1 = new RunwaySection(runway1, r1s1Angle, r1s1Direction, r1s1Params);
+        }
+        catch (Exception e) {
+            return null;
+        }
         return r1s1;
     }
 
@@ -183,15 +241,22 @@ public class ConfigureAirportController {
      * @return The RunwaySection class instance for r1s2
      */
     private RunwaySection buildR1S2(Runway runway1) {
-        var r1s2TORA = number(r1s2TORAField.getText());
-        var r1s2TODA = number(r1s2TODAField.getText());
-        var r1s2ASDA = number(r1s2ASDAField.getText());
-        var r1s2LDA = number(r1s2LDAField.getText());
-        var r1s2Angle = Integer.parseInt(r1s2AngleField.getText());
-        var r1s2Direction = (r1s2DirectionField.getText()).charAt(0);
+        RunwaySection r1s2 = null;
+        try {
+            var r1s2TORA = number(r1s2TORAField.getText());
+            var r1s2TODA = number(r1s2TODAField.getText());
+            var r1s2ASDA = number(r1s2ASDAField.getText());
+            var r1s2LDA = number(r1s2LDAField.getText());
+            var r1s2Angle = Integer.parseInt(r1s2AngleField.getText());
+            var r1s2Direction = (r1s2DirectionField.getText()).charAt(0);
 
-        RunwayParameters r1s2Params = new RunwayParameters(r1s2TORA, r1s2ASDA, r1s2TODA, r1s2LDA);
-        RunwaySection r1s2 = new RunwaySection(runway1, r1s2Angle, r1s2Direction, r1s2Params);
+            RunwayParameters r1s2Params = new RunwayParameters(r1s2TORA, r1s2ASDA, r1s2TODA, r1s2LDA);
+            r1s2 = new RunwaySection(runway1, r1s2Angle, r1s2Direction, r1s2Params);
+
+        }
+        catch (Exception e) {
+            return null;
+        }
         return r1s2;
     }
 
@@ -235,12 +300,17 @@ public class ConfigureAirportController {
         return null;
     }
 
+    private void showInputsAlert() {
+        var alert = new Alert(Alert.AlertType.ERROR, "Please make sure all fields are completed and have valid inputs.", ButtonType.CANCEL);
+        alert.showAndWait();
+    }
+
     /**
      * Turns a string input into a Double
      * @param input the string
      * @return a Double representing the value of the string
      */
-    private Double number(String input) {
+    private Double number(String input) throws NumberFormatException {
         return Double.parseDouble(input);
     }
 
