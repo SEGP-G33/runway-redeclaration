@@ -10,9 +10,9 @@ on:
   # Enables Manually Trigger for Action 
   workflow_dispatch:
   push:
-    branches: [ main, incr2 ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, incr2 ]
+    branches: [ main, incr3 ]
 
 jobs:
   build:
