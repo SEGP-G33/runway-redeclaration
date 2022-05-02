@@ -24,6 +24,7 @@ import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -233,6 +234,9 @@ public class CalculatorController {
             var right = Double.parseDouble(obstacleRightField.getText());
             selectedObstacle = new Obstacle(name, height, center, left, right);
         }
+
+        // lower threshold is on the left side of the view
+        Collections.sort(selectedRunway.getRunwaySections(), (o1, o2) -> o1.getAngle().compareTo(o2.getAngle()));
 
         Calculator calculator = new Calculator("Calculator", plane, selectedObstacle, selectedRunway);
         ArrayList<RunwayParameters> results = calculator.calculate();

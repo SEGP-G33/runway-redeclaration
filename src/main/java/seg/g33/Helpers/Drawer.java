@@ -264,7 +264,7 @@ public class Drawer {
         //The filled location of the obstacle
         double[][] obstaclePoints = {
                 {obstaclePoint[0] - 2, obstaclePoint[0] - 2, obstaclePoint[1] + 2, obstaclePoint[1] + 2},
-                {heightDown - 2 * obstacle.getHeight(), heightUp, heightUp, heightDown - 2 * obstacle.getHeight()}
+                {heightDown - 2 * 7, heightUp, heightUp, heightDown - 2 * 7}
         };
 
         if (takeOffAway) {
