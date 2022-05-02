@@ -266,8 +266,23 @@ public class ConfigureAirportController {
      * @return The RunwaySection class instance for r2s1
      */
     private RunwaySection buildR2S1(Runway runway2) {
-        // TODO
-        return null;
+        RunwaySection r2s1 = null;
+        try {
+            var tora = number(r2s1TORAField.getText());
+            var toda = number(r2s1TODAField.getText());
+            var asda = number(r2s1ASDAField.getText());
+            var lda = number(r2s1LDAField.getText());
+            var angle = Integer.parseInt(r2s1AngleField.getText());
+            var direction = (r2s1DirectionField.getText()).charAt(0);
+
+            RunwayParameters r1s2Params = new RunwayParameters(tora, asda, toda, lda);
+            r2s1 = new RunwaySection(runway2, angle, direction, r1s2Params);
+        }
+        catch (Exception e) {
+            return null;
+        }
+
+        return r2s1;
     }
 
     /**
@@ -276,8 +291,23 @@ public class ConfigureAirportController {
      * @return The RunwaySection class instance for r2s2
      */
     private RunwaySection buildR2S2(Runway runway2) {
-        // TODO
-        return null;
+        RunwaySection r2s2 = null;
+        try {
+            var tora = number(r2s2TORAField.getText());
+            var toda = number(r2s2TODAField.getText());
+            var asda = number(r2s2ASDAField.getText());
+            var lda = number(r2s2LDAField.getText());
+            var angle = Integer.parseInt(r2s2AngleField.getText());
+            var direction = (r2s2DirectionField.getText()).charAt(0);
+
+            RunwayParameters r1s2Params = new RunwayParameters(tora, asda, toda, lda);
+            r2s2 = new RunwaySection(runway2, angle, direction, r1s2Params);
+        }
+        catch (Exception e) {
+            return null;
+        }
+
+        return r2s2;
     }
 
     /**
@@ -286,8 +316,23 @@ public class ConfigureAirportController {
      * @return The RunwaySection class instance for r3s1
      */
     private RunwaySection buildR3S1(Runway runway3) {
-        // TODO
-        return null;
+        RunwaySection r3s1 = null;
+        try {
+            var tora = number(r3s1TORAField.getText());
+            var toda = number(r3s1TODAField.getText());
+            var asda = number(r3s1ASDAField.getText());
+            var lda = number(r3s1LDAField.getText());
+            var angle = Integer.parseInt(r3s1AngleField.getText());
+            var direction = (r3s1DirectionField.getText()).charAt(0);
+
+            RunwayParameters r1s2Params = new RunwayParameters(tora, asda, toda, lda);
+            r3s1 = new RunwaySection(runway3, angle, direction, r1s2Params);
+        }
+        catch (Exception e) {
+            return null;
+        }
+
+        return r3s1;
     }
 
     /**
@@ -296,8 +341,23 @@ public class ConfigureAirportController {
      * @return The RunwaySection class instance for r3s2
      */
     private RunwaySection buildR3S2(Runway runway3) {
-        // TODO
-        return null;
+        RunwaySection r3s2 = null;
+        try {
+            var tora = number(r3s2TORAField.getText());
+            var toda = number(r3s2TODAField.getText());
+            var asda = number(r3s2ASDAField.getText());
+            var lda = number(r3s2LDAField.getText());
+            var angle = Integer.parseInt(r3s2AngleField.getText());
+            var direction = (r3s2DirectionField.getText()).charAt(0);
+
+            RunwayParameters r1s2Params = new RunwayParameters(tora, asda, toda, lda);
+            r3s2 = new RunwaySection(runway3, angle, direction, r1s2Params);
+        }
+        catch (Exception e) {
+            return null;
+        }
+
+        return r3s2;
     }
 
     private void showInputsAlert() {
