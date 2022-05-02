@@ -15,21 +15,6 @@ public class RunwaySection {
     private Double stripEndLength = 60d;
 
 
-    /**
-     * Constructor
-     * @param runway The runway that this section is a part of
-     * @param angle The angle of the runway. Should be 1-36
-     * @param parameters Runway parameters
-     */
-    public RunwaySection(Runway runway, Integer angle, Character direction, RunwayParameters parameters, Double displacedThreshold, Double clearWayLength) {
-        this.runway = runway;
-        this.angle = angle;
-        this.direction = direction;
-        this.defaultParameters = parameters;
-        this.displacedThreshold = displacedThreshold;
-        this.clearWayLength = clearWayLength;
-    }
-
     public RunwaySection(Runway runway, Integer angle, Character direction, RunwayParameters parameters) {
         this.runway = runway;
         this.angle = angle;
@@ -60,6 +45,18 @@ public class RunwaySection {
         this.stopWayLength = stopWayLength;
         this.RESALength = RESALength;
         this.stripEndLength = stripEndLength;
+    }
+
+    public RunwaySection(Runway runway, Integer angle, Character direction, RunwayParameters runwayParameters, Double RESALength, Double stripEndLength){
+        this.runway = runway;
+        this.angle = angle;
+        this.direction = direction;
+        this.defaultParameters = runwayParameters;
+        this.RESALength = RESALength;
+        this.stripEndLength = stripEndLength;
+        this.stopWayLength = runwayParameters.getASDA() - runwayParameters.getTORA();
+        this.clearWayLength = runwayParameters.getTODA() - runwayParameters.getTORA();
+        this.displacedThreshold = runwayParameters.getTORA() - runwayParameters.getLDA();
     }
 
 

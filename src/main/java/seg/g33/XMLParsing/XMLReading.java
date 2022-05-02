@@ -94,7 +94,9 @@ public class XMLReading {
         var displaced = Double.parseDouble(extractValue("displaced", runwaySectionElement));
         var direction = extractValue("direction", runwaySectionElement).charAt(0);
         var clearway = Double.parseDouble(extractValue("clearway", runwaySectionElement));
-        return new RunwaySection(runway, angle, direction, sectionParams, displaced, clearway);
+        var resa = Double.parseDouble(extractValue("resa", runwaySectionElement));
+        var stripEnd = Double.parseDouble(extractValue("stripend", runwaySectionElement));
+        return new RunwaySection(runway, angle, direction, sectionParams, 240d, 60d);
     }
 
     /**

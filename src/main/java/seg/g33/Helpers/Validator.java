@@ -1,6 +1,9 @@
 package seg.g33.Helpers;
 
 import javafx.scene.control.TextField;
+import seg.g33.Entitites.Runway;
+import seg.g33.Entitites.RunwayParameters;
+import seg.g33.Entitites.RunwaySection;
 
 import java.util.regex.Pattern;
 
@@ -80,4 +83,44 @@ public final class Validator {
     }
 
 
+    /**
+     * Checks that an obstacle has valid distances from the left and right side of the runway, if their distances don't add up to the length of the runway, it can cause problems for the calculator
+     * @param runway the runway to check against
+     * @param distFromLeft the distance of the obstacle from the left threshold
+     * @param distFromRight the distance of the obstacle from the right threshold
+     * @return true if it is valid
+     */
+    public static boolean distancesAreValid(Runway runway, Double distFromLeft, Double distFromRight){
+        RunwaySection section1 = runway.getRunwaySections().get(0);
+        RunwaySection section2 = runway.getRunwaySections().get(1);
+        double length = Double.max(section1.getDefaultParameters().getTORA(), section2.getDefaultParameters().getTORA());
+        return !((distFromLeft + distFromRight < length));
+    }
+
+    /**
+     * Checks that a set of runway parameters is correct
+     * @param section the runway section being validated
+     * @return true if it is valid
+     */
+    public static boolean runwayParametersAreValid(RunwaySection section){
+        RunwayParameters params = section.getDefaultParameters();
+        return params.getTORA() + section.getClearWayLength() == params.getTODA() &&
+                params.getTORA() + section.getStopWayLength() == params.getASDA() &&
+                params.getTORA() - section.getDisplacedThreshold() == params.getLDA();
+    }
+
+    /**
+     * Same as above but with raw inputs rather than fully formed runway
+     * @param TODA TODA
+     * @param TORA TORA
+     * @param ASDA ASDA
+     * @param LDA LDA
+     * @param clearway Clearway
+     * @param stopway Stopway
+     * @param displace Displaced Threshold
+     * @return true if parameters are valid
+     */
+    public static boolean runwayParametersAreValid(Double TODA, Double TORA, Double ASDA, Double LDA, Double clearway, Double stopway, Double displace){
+        return TORA + clearway == TODA && TORA + stopway == ASDA && TORA - displace == LDA;
+    }
 }

@@ -40,7 +40,8 @@ public class Drawer {
 
         // Runway width is an arbitrary value because it is not mentioned in the specification
         double runwayWidth = 100d;
-        double runwayStart = 60d;
+        double runwayStart = section2.getStripEndLength();
+        double runwayEnd = section1.getStripEndLength();
 
         Double leftClearway = section1.getClearWayLength();
         Double rightClearway = section2.getClearWayLength();
@@ -49,7 +50,7 @@ public class Drawer {
         Double rightStopway = section2.getStopWayLength();
 
         // Normalises scale so that runway will fit onto the canvas
-        double totalLength = runwayLength + Math.max(leftClearway, leftStopway) + Math.max(rightClearway, rightStopway) + 120;
+        double totalLength = runwayLength + Math.max(leftClearway, leftStopway) + Math.max(rightClearway, rightStopway) + runwayStart + runwayEnd;
         double scale = width / totalLength;
         runwayStart *= scale;
         runwayLength *= scale;
@@ -100,22 +101,21 @@ public class Drawer {
                                             {height/2-runwayWidth/2,                 height/2+runwayWidth/2,                 height/2+runwayWidth/2,                              height/2-runwayWidth/2}};
         // Left stopway points (appears on the right of the runway)
         double[][] leftClearwayPoints =  {  {runwayStart+rightClearway+runwayLength, runwayStart+rightClearway+runwayLength, runwayStart+rightClearway+runwayLength+leftClearway, runwayStart+rightClearway+runwayLength+leftClearway},
-                                            {height/2-runwayWidth/2-5,               height/2+runwayWidth/2+5,               height/2+runwayWidth/2-5,                            height/2-runwayWidth/2-5}};
+                                            {height/2-runwayWidth/2-5,               height/2+runwayWidth/2+5,               height/2+runwayWidth/2+5,                            height/2-runwayWidth/2-5}};
         // Left clearway points (appears on the right of the runway)
         double[][] leftStopwayPoints =   {  {runwayStart+rightClearway+runwayLength, runwayStart+rightClearway+runwayLength, runwayStart+rightClearway+runwayLength+leftStopway,  runwayStart+rightClearway+runwayLength+leftStopway},
-                                            {height/2-runwayWidth/2-5,               height/2+runwayWidth/2+5,               height/2+runwayWidth/2-5,                            height/2-runwayWidth/2-5}};
+                                            {height/2-runwayWidth/2-5,               height/2+runwayWidth/2+5,               height/2+runwayWidth/2+5,                            height/2-runwayWidth/2-5}};
 
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setFill(white);
         // Fill the background in white
         gc.fillRect(0, 0, width, height);
-        // TODO Add rotation stuff
-//        angle=angle-90;
-//        gc.save();
-//        gc.translate(width/2, height/2);
-//        gc.rotate(angle);
-//        gc.translate(-width/2, -height/2);
+        angle=angle-90;
+        gc.save();
+        gc.translate(width/2, height/2);
+        gc.rotate(angle);
+        gc.translate(-width/2, -height/2);
 
         // Draw cleared and graded area
         gc.setFill(grey1);
@@ -170,12 +170,14 @@ public class Drawer {
         gc.fillText(String.format("< LDA : %sm", params2.getLDA()), rightLDAPoints[0][0], rightLDAPoints[0][1]+10);
         gc.setTextAlign(TextAlignment.LEFT);
         // TODO Make sure all elements are drawn on the screen after rotation
+        gc.restore();
+        gc.setFill(black);
+        gc.setStroke(black);
         gc.fillText("* Obstacle may not be drawn to scale", 5, height-10);
         // Draw the compass
         Image image = new Image(Drawer.class.getResource("/seg/g33/images/compass.png").toExternalForm());
         gc.drawImage(image, 0, 0, 50d, 50d);
         // Draw the scale
-        gc.setStroke(black);
         gc.strokeLine(10, height-30, 10+500*scale, height-30);
         gc.strokeLine(10, height-32, 10, height-28);
         gc.strokeLine(10+500*scale, height-32, 10+500*scale, height-28);
