@@ -162,18 +162,18 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="r1s1AngleField1" layoutX="15.0" layoutY="43.0" promptText="Angle" />
-                                          <TextField fx:id="r1s1DirectionField1" layoutX="10.0" layoutY="10.0" promptText="Direction" />
-                                          <TextField fx:id="r1s1LengthField1" layoutX="10.0" layoutY="57.0" promptText="Length" />
-                                          <TextField fx:id="r1s1ClearwayField1" layoutX="10.0" layoutY="104.0" promptText="Clearway" />
-                                          <TextField fx:id="r1s1StopwayField1" layoutX="10.0" layoutY="151.0" promptText="Stopway" />
-                                          <TextField fx:id="r1s1RESAField1" layoutX="10.0" layoutY="198.0" promptText="RESA" />
-                                          <TextField fx:id="r1s1TORAField1" layoutX="10.0" layoutY="245.0" promptText="TORA" />
-                                          <TextField fx:id="r1s1TODAField1" layoutX="10.0" layoutY="292.0" promptText="TODA" />
-                                          <TextField fx:id="r1s1ASDAField1" layoutX="15.0" layoutY="339.0" promptText="ASDA" />
-                                          <TextField fx:id="r1s1LDAField1" layoutX="15.0" layoutY="386.0" promptText="LDA" />
-                                          <TextField fx:id="r1s1StripendField1" layoutX="15.0" layoutY="433.0" promptText="STRIPEND" />
-                                          <TextField fx:id="r1s1DisplacedField1" layoutX="15.0" layoutY="480.0" promptText="DISPLACED" />
+                                          <TextField fx:id="r2s1AngleField" layoutX="15.0" layoutY="43.0" promptText="Angle" />
+                                          <TextField fx:id="r2s1DirectionField" layoutX="10.0" layoutY="10.0" promptText="Direction" />
+                                          <TextField fx:id="r2s1LengthField" layoutX="10.0" layoutY="57.0" promptText="Length" />
+                                          <TextField fx:id="r2s1ClearwayField1" layoutX="10.0" layoutY="104.0" promptText="Clearway" />
+                                          <TextField fx:id="r2s1StopwayField" layoutX="10.0" layoutY="151.0" promptText="Stopway" />
+                                          <TextField fx:id="r2s1RESAField" layoutX="10.0" layoutY="198.0" promptText="RESA" />
+                                          <TextField fx:id="r2s1TORAField" layoutX="10.0" layoutY="245.0" promptText="TORA" />
+                                          <TextField fx:id="r2s1TODAField" layoutX="10.0" layoutY="292.0" promptText="TODA" />
+                                          <TextField fx:id="r2s1ASDAField" layoutX="15.0" layoutY="339.0" promptText="ASDA" />
+                                          <TextField fx:id="r2s1LDAField" layoutX="15.0" layoutY="386.0" promptText="LDA" />
+                                          <TextField fx:id="r2s1StripendField" layoutX="15.0" layoutY="433.0" promptText="STRIPEND" />
+                                          <TextField fx:id="r2s1DisplacedField" layoutX="15.0" layoutY="480.0" promptText="DISPLACED" />
                                        </children>
                                        <padding>
                                           <Insets left="5.0" />
@@ -186,18 +186,18 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="r1s2AngleField1" promptText="Angle" />
-                                          <TextField fx:id="r1s2DirectionField1" layoutX="10.0" layoutY="10.0" promptText="Direction" />
-                                          <TextField fx:id="r1s2LengthField1" layoutX="10.0" layoutY="57.0" promptText="Length" />
-                                          <TextField fx:id="r1s2ClearwayField1" layoutX="10.0" layoutY="104.0" promptText="Clearway" />
-                                          <TextField fx:id="r1s2StopwayField1" layoutX="10.0" layoutY="151.0" promptText="Stopway" />
-                                          <TextField fx:id="r1s2RESAField1" layoutX="10.0" layoutY="198.0" promptText="RESA" />
-                                          <TextField fx:id="r1s2TORAField1" layoutX="10.0" layoutY="245.0" promptText="TORA" />
-                                          <TextField fx:id="r1s2TODAField1" layoutX="10.0" layoutY="292.0" promptText="TODA" />
-                                          <TextField fx:id="r1s2ASDAField1" layoutX="15.0" layoutY="339.0" promptText="ASDA" />
-                                          <TextField fx:id="r1s2LDAField1" layoutX="15.0" layoutY="386.0" promptText="LDA" />
-                                          <TextField fx:id="r1s2StripendField1" layoutX="15.0" layoutY="433.0" promptText="STRIPEND" />
-                                          <TextField fx:id="r1s2DisplacedField1" layoutX="15.0" layoutY="480.0" promptText="DISPLACED" />
+                                          <TextField fx:id="r2s2AngleField" promptText="Angle" />
+                                          <TextField fx:id="r2s2DirectionField" layoutX="10.0" layoutY="10.0" promptText="Direction" />
+                                          <TextField fx:id="r2s2LengthField" layoutX="10.0" layoutY="57.0" promptText="Length" />
+                                          <TextField fx:id="r2s2ClearwayField" layoutX="10.0" layoutY="104.0" promptText="Clearway" />
+                                          <TextField fx:id="r2s2StopwayField" layoutX="10.0" layoutY="151.0" promptText="Stopway" />
+                                          <TextField fx:id="r2s2RESAField" layoutX="10.0" layoutY="198.0" promptText="RESA" />
+                                          <TextField fx:id="r2s2TORAField" layoutX="10.0" layoutY="245.0" promptText="TORA" />
+                                          <TextField fx:id="r2s2TODAField" layoutX="10.0" layoutY="292.0" promptText="TODA" />
+                                          <TextField fx:id="r2s2ASDAField" layoutX="15.0" layoutY="339.0" promptText="ASDA" />
+                                          <TextField fx:id="r2s2LDAField" layoutX="15.0" layoutY="386.0" promptText="LDA" />
+                                          <TextField fx:id="r2s2StripendField" layoutX="15.0" layoutY="433.0" promptText="STRIPEND" />
+                                          <TextField fx:id="r2s2DisplacedField" layoutX="15.0" layoutY="480.0" promptText="DISPLACED" />
                                        </children>
                                        <padding>
                                           <Insets left="5.0" />
@@ -233,18 +233,18 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="r1s1AngleField11" layoutX="15.0" layoutY="43.0" promptText="Angle" />
-                                          <TextField fx:id="r1s1DirectionField11" layoutX="10.0" layoutY="10.0" promptText="Direction" />
-                                          <TextField fx:id="r1s1LengthField11" layoutX="10.0" layoutY="57.0" promptText="Length" />
-                                          <TextField fx:id="r1s1ClearwayField11" layoutX="10.0" layoutY="104.0" promptText="Clearway" />
-                                          <TextField fx:id="r1s1StopwayField11" layoutX="10.0" layoutY="151.0" promptText="Stopway" />
-                                          <TextField fx:id="r1s1RESAField11" layoutX="10.0" layoutY="198.0" promptText="RESA" />
-                                          <TextField fx:id="r1s1TORAField11" layoutX="10.0" layoutY="245.0" promptText="TORA" />
-                                          <TextField fx:id="r1s1TODAField11" layoutX="10.0" layoutY="292.0" promptText="TODA" />
-                                          <TextField fx:id="r1s1ASDAField11" layoutX="15.0" layoutY="339.0" promptText="ASDA" />
-                                          <TextField fx:id="r1s1LDAField11" layoutX="15.0" layoutY="386.0" promptText="LDA" />
-                                          <TextField fx:id="r1s1StripendField11" layoutX="15.0" layoutY="433.0" promptText="STRIPEND" />
-                                          <TextField fx:id="r1s1DisplacedField11" layoutX="15.0" layoutY="480.0" promptText="DISPLACED" />
+                                          <TextField fx:id="r3s1AngleField" layoutX="15.0" layoutY="43.0" promptText="Angle" />
+                                          <TextField fx:id="r3s1DirectionField" layoutX="10.0" layoutY="10.0" promptText="Direction" />
+                                          <TextField fx:id="r3s1LengthField" layoutX="10.0" layoutY="57.0" promptText="Length" />
+                                          <TextField fx:id="r3s1ClearwayField" layoutX="10.0" layoutY="104.0" promptText="Clearway" />
+                                          <TextField fx:id="r3s1StopwayField" layoutX="10.0" layoutY="151.0" promptText="Stopway" />
+                                          <TextField fx:id="r3s1RESAField" layoutX="10.0" layoutY="198.0" promptText="RESA" />
+                                          <TextField fx:id="r3s1TORAField" layoutX="10.0" layoutY="245.0" promptText="TORA" />
+                                          <TextField fx:id="r3s1TODAField" layoutX="10.0" layoutY="292.0" promptText="TODA" />
+                                          <TextField fx:id="r3s1ASDAField" layoutX="15.0" layoutY="339.0" promptText="ASDA" />
+                                          <TextField fx:id="r3s1LDAField" layoutX="15.0" layoutY="386.0" promptText="LDA" />
+                                          <TextField fx:id="r3s1StripendField" layoutX="15.0" layoutY="433.0" promptText="STRIPEND" />
+                                          <TextField fx:id="r3s1DisplacedField" layoutX="15.0" layoutY="480.0" promptText="DISPLACED" />
                                        </children>
                                        <padding>
                                           <Insets left="5.0" />
@@ -257,18 +257,18 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="r1s2AngleField11" promptText="Angle" />
-                                          <TextField fx:id="r1s2DirectionField11" layoutX="10.0" layoutY="10.0" promptText="Direction" />
-                                          <TextField fx:id="r1s2LengthField11" layoutX="10.0" layoutY="57.0" promptText="Length" />
-                                          <TextField fx:id="r1s2ClearwayField11" layoutX="10.0" layoutY="104.0" promptText="Clearway" />
-                                          <TextField fx:id="r1s2StopwayField11" layoutX="10.0" layoutY="151.0" promptText="Stopway" />
-                                          <TextField fx:id="r1s2RESAField11" layoutX="10.0" layoutY="198.0" promptText="RESA" />
-                                          <TextField fx:id="r1s2TORAField11" layoutX="10.0" layoutY="245.0" promptText="TORA" />
-                                          <TextField fx:id="r1s2TODAField11" layoutX="10.0" layoutY="292.0" promptText="TODA" />
-                                          <TextField fx:id="r1s2ASDAField11" layoutX="15.0" layoutY="339.0" promptText="ASDA" />
-                                          <TextField fx:id="r1s2LDAField11" layoutX="15.0" layoutY="386.0" promptText="LDA" />
-                                          <TextField fx:id="r1s2StripendField11" layoutX="15.0" layoutY="433.0" promptText="STRIPEND" />
-                                          <TextField fx:id="r1s2DisplacedField11" layoutX="15.0" layoutY="480.0" promptText="DISPLACED" />
+                                          <TextField fx:id="r3s2AngleField" promptText="Angle" />
+                                          <TextField fx:id="r3s2DirectionField" layoutX="10.0" layoutY="10.0" promptText="Direction" />
+                                          <TextField fx:id="r3s2LengthField" layoutX="10.0" layoutY="57.0" promptText="Length" />
+                                          <TextField fx:id="r3s2ClearwayField" layoutX="10.0" layoutY="104.0" promptText="Clearway" />
+                                          <TextField fx:id="r3s2StopwayField" layoutX="10.0" layoutY="151.0" promptText="Stopway" />
+                                          <TextField fx:id="r3s2RESAField" layoutX="10.0" layoutY="198.0" promptText="RESA" />
+                                          <TextField fx:id="r3s2TORAField" layoutX="10.0" layoutY="245.0" promptText="TORA" />
+                                          <TextField fx:id="r3s2TODAField" layoutX="10.0" layoutY="292.0" promptText="TODA" />
+                                          <TextField fx:id="r3s2ASDAField" layoutX="15.0" layoutY="339.0" promptText="ASDA" />
+                                          <TextField fx:id="r3s2LDAField" layoutX="15.0" layoutY="386.0" promptText="LDA" />
+                                          <TextField fx:id="r3s2StripendField" layoutX="15.0" layoutY="433.0" promptText="STRIPEND" />
+                                          <TextField fx:id="r3s2DisplacedField" layoutX="15.0" layoutY="480.0" promptText="DISPLACED" />
                                        </children>
                                        <padding>
                                           <Insets left="5.0" />

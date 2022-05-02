@@ -414,6 +414,78 @@ public class ConfigureAirportController {
     private HBox runway2HboxControls;
 
     @FXML
+    private TextField r2s1AngleField;
+
+    @FXML
+    private TextField r2s1DirectionField;
+
+    @FXML
+    private TextField r2s1LengthField;
+
+    @FXML
+    private TextField r2s1ClearwayField1;
+
+    @FXML
+    private TextField r2s1StopwayField;
+
+    @FXML
+    private TextField r2s1RESAField;
+
+    @FXML
+    private TextField r2s1TORAField;
+
+    @FXML
+    private TextField r2s1TODAField;
+
+    @FXML
+    private TextField r2s1ASDAField;
+
+    @FXML
+    private TextField r2s1LDAField;
+
+    @FXML
+    private TextField r2s1StripendField;
+
+    @FXML
+    private TextField r2s1DisplacedField;
+
+    @FXML
+    private TextField r2s2AngleField;
+
+    @FXML
+    private TextField r2s2DirectionField;
+
+    @FXML
+    private TextField r2s2LengthField;
+
+    @FXML
+    private TextField r2s2ClearwayField;
+
+    @FXML
+    private TextField r2s2StopwayField;
+
+    @FXML
+    private TextField r2s2RESAField;
+
+    @FXML
+    private TextField r2s2TORAField;
+
+    @FXML
+    private TextField r2s2TODAField;
+
+    @FXML
+    private TextField r2s2ASDAField;
+
+    @FXML
+    private TextField r2s2LDAField;
+
+    @FXML
+    private TextField r2s2StripendField;
+
+    @FXML
+    private TextField r2s2DisplacedField;
+
+    @FXML
     private CheckBox enableR3Check;
 
     @FXML
@@ -421,6 +493,78 @@ public class ConfigureAirportController {
 
     @FXML
     private HBox runway3HboxControls;
+
+    @FXML
+    private TextField r3s1AngleField;
+
+    @FXML
+    private TextField r3s1DirectionField;
+
+    @FXML
+    private TextField r3s1LengthField;
+
+    @FXML
+    private TextField r3s1ClearwayField;
+
+    @FXML
+    private TextField r3s1StopwayField;
+
+    @FXML
+    private TextField r3s1RESAField;
+
+    @FXML
+    private TextField r3s1TORAField;
+
+    @FXML
+    private TextField r3s1TODAField;
+
+    @FXML
+    private TextField r3s1ASDAField;
+
+    @FXML
+    private TextField r3s1LDAField;
+
+    @FXML
+    private TextField r3s1StripendField;
+
+    @FXML
+    private TextField r3s1DisplacedField;
+
+    @FXML
+    private TextField r3s2AngleField;
+
+    @FXML
+    private TextField r3s2DirectionField;
+
+    @FXML
+    private TextField r3s2LengthField;
+
+    @FXML
+    private TextField r3s2ClearwayField;
+
+    @FXML
+    private TextField r3s2StopwayField;
+
+    @FXML
+    private TextField r3s2RESAField;
+
+    @FXML
+    private TextField r3s2TORAField;
+
+    @FXML
+    private TextField r3s2TODAField;
+
+    @FXML
+    private TextField r3s2ASDAField;
+
+    @FXML
+    private TextField r3s2LDAField;
+
+    @FXML
+    private TextField r3s2StripendField;
+
+    @FXML
+    private TextField r3s2DisplacedField;
 
 }
 
