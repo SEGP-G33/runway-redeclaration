@@ -154,8 +154,8 @@ public class Drawer {
         gc.setFill(white);
         gc.setTextAlign(TextAlignment.CENTER);
         gc.setFont(new Font(18d/1000*width));
-        rotateText(gc, leftIndicatorPoints[0], leftIndicatorPoints[1], String.format("%s", section1.getAngle()), 90);
-        rotateText(gc, rightIndicatorPoints[0], rightIndicatorPoints[1], String.format("%s", section2.getAngle()), -90);
+        rotateText(gc, leftIndicatorPoints[0], leftIndicatorPoints[1], String.format("%s%s", (section1.getAngle() <= 9 ? "0" : ""), section1.getAngle()), 90);
+        rotateText(gc, rightIndicatorPoints[0], rightIndicatorPoints[1], String.format("%s%s", (section2.getAngle() <= 9 ? "0" : ""), section2.getAngle()), -90);
         gc.setFill(black);
         gc.setTextAlign(TextAlignment.LEFT);
         gc.setFont(new Font(15d/1000*width));
@@ -508,7 +508,7 @@ public class Drawer {
         gc.setFill(black);
         gc.setTextAlign(TextAlignment.LEFT);
         gc.setFont(new Font(15d / 1000 * width));
-        rotateText(gc, leftDesignatorText[0], leftDesignatorText[1], String.format("%s%s", leftSection.getAngle(), leftSection.getDirection()), 0);
+        rotateText(gc, leftDesignatorText[0], leftDesignatorText[1], String.format("%s%s%s", (leftSection.getAngle() <= 9 ? "0" : ""), leftSection.getAngle(), leftSection.getDirection()), 0);
         rotateText(gc, leftTORAText[0], leftTORAText[1], String.format("TORA: %sm → %s", params1.getTORA(), takeOff1), 0);
         rotateText(gc, leftASDAText[0], leftASDAText[1], String.format("ASDA: %sm → %s", params1.getASDA(), takeOff1), 0);
         rotateText(gc, leftTODAText[0], leftTODAText[1], String.format("TODA: %sm → %s", params1.getTODA(), takeOff1), 0);
@@ -526,7 +526,7 @@ public class Drawer {
 
         // Text on bottom
         gc.setTextAlign(TextAlignment.RIGHT);
-        rotateText(gc, rightDesignatorText[0], rightDesignatorText[1], String.format("%s%s", rightSection.getAngle(), rightSection.getDirection()), 0);
+        rotateText(gc, rightDesignatorText[0], rightDesignatorText[1], String.format("%s%s%s", (rightSection.getAngle() <= 9 ? "0" : ""), rightSection.getAngle(), rightSection.getDirection()), 0);
         rotateText(gc, rightTORAText[0], rightTORAText[1], String.format("%s ← TORA: %sm", takeOff2, params2.getTORA()), 0);
         rotateText(gc, rightASDAText[0], rightASDAText[1], String.format("%s ← ASDA: %sm", takeOff2, params2.getASDA()), 0);
         rotateText(gc, rightTODAText[0], rightTODAText[1], String.format("%s ← TODA: %sm", takeOff2, params2.getTODA()), 0);
