@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
@@ -437,6 +438,12 @@ public class CalculatorController {
             alert.showAndWait();
         }
     }
+
+    @FXML
+    private ScrollPane notificationsScrollPane;
+
+    @FXML
+    private VBox notificationsVBOX;
 
     @FXML
     private TabPane mainTabPane;
