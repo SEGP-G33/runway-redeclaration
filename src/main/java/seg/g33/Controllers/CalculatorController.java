@@ -5,9 +5,12 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
@@ -21,6 +24,7 @@ import seg.g33.XMLParsing.XMLWriting;
 import seg.g33.ui.FieldTooltip;
 
 import javax.swing.*;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -79,6 +83,44 @@ public class CalculatorController {
                 setElementsForSelectedObstacle(t1);
             }
         });
+
+        observeParameters();
+    }
+
+    private static int redeclParamsObserverCountdown = 15;
+
+    private void observeParameters(){
+        final ComboBoxBase[] recalculateParamsComboBoxObservables = {
+                selectRunwayComboBox,
+                selectObstacleComboBox
+        };
+
+        final TextField[] recalculateParamsTextFieldObservables = {
+                obstacleNameField,
+                obstacleHeightField,
+                obstacleCenterField,
+                obstacleRightField,
+                obstacleLeftField,
+
+                s1TORAField,
+                s1TODAField,
+                s1ASDAField,
+                s1LDAField,
+
+                s2TODAField,
+                s2TODAField,
+                s2ASDAField,
+                s2LDAField
+        };
+
+        //when one of the observables change, recalculate parameters again
+        for (ComboBoxBase<?> observable : recalculateParamsComboBoxObservables){
+            observable.valueProperty().addListener((ChangeListener) (observableValue, o, t1) -> handleRecalculateParams());
+        }
+
+        for (TextField observable : recalculateParamsTextFieldObservables){
+            observable.textProperty().addListener((observableValue, s, t1) -> handleRecalculateParams());
+        }
     }
 
     /**
@@ -220,11 +262,11 @@ public class CalculatorController {
     void handleRecalculateParams() {
         var plane = Plane.DEFAULT_PLANE;
 
-        if (selectedRunway == null || selectedObstacle == null) {
-            var alert = new Alert(Alert.AlertType.ERROR, "Please select an Obstacle and a Runway...", ButtonType.CANCEL);
-            alert.showAndWait();
-            return;
-        }
+//        if (selectedRunway == null || selectedObstacle == null ) {
+//            var alert = new Alert(Alert.AlertType.ERROR, "Please select an Obstacle and a Runway...", ButtonType.CANCEL);
+//            alert.showAndWait();
+//            return;
+//        }
 
         if (!useObstaclePresetCheckbox.isSelected()) {
             var name = obstacleNameField.getText();
