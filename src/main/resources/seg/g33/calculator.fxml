@@ -20,11 +20,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="1500.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.g33.Controllers.CalculatorController">
+<BorderPane prefHeight="1373.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.g33.Controllers.CalculatorController">
    <left>
-      <ScrollPane fx:id="root_scroll" prefHeight="800.0" prefWidth="511.0" BorderPane.alignment="CENTER">
+      <ScrollPane fx:id="root_scroll" prefHeight="1401.0" prefWidth="564.0" BorderPane.alignment="CENTER">
          <content>
-            <VBox fx:id="root_vbox" alignment="CENTER" prefHeight="1285.0" prefWidth="473.0" spacing="20.0">
+            <VBox fx:id="root_vbox" alignment="TOP_CENTER" prefHeight="1367.0" prefWidth="546.0" spacing="20.0">
                <padding>
                   <Insets left="20.0" right="20.0" />
                </padding>
@@ -44,9 +44,10 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
+                        <HBox prefHeight="100.0" prefWidth="200.0" />
                         <HBox alignment="CENTER" fillHeight="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="173.0" prefWidth="440.0">
                            <children>
-                              <VBox alignment="CENTER_LEFT" prefHeight="204.0" prefWidth="167.0" spacing="15.0">
+                              <VBox alignment="CENTER_LEFT" prefHeight="126.0" prefWidth="186.0" spacing="15.0">
                                  <children>
                                     <Label prefHeight="0.0" prefWidth="182.0" text="Airport Name">
                                        <font>
@@ -58,7 +59,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="10.0" layoutY="74.0" prefHeight="23.0" prefWidth="184.0" text="Number of Runways">
+                                    <Label layoutX="10.0" layoutY="74.0" prefHeight="21.0" prefWidth="193.0" text="Number of Runways">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -75,9 +76,9 @@
                               </VBox>
                               <VBox layoutX="10.0" layoutY="10.0" prefHeight="149.0" prefWidth="226.0" spacing="10.0">
                                  <children>
-                                    <TextField fx:id="airportNameField" editable="false" promptText="eg: London Heathrow" />
-                                    <TextField fx:id="airportCodeField" editable="false" layoutX="10.0" layoutY="10.0" promptText="eg: LHR" />
-                                    <TextField fx:id="numberOfRunwaysField" editable="false" layoutX="10.0" layoutY="57.0" promptText="eg: 2" />
+                                    <TextField fx:id="airportNameField" editable="false" promptText="eg: London Heathrow" style="-fx-background-color: #E0E0E0;" />
+                                    <TextField fx:id="airportCodeField" editable="false" layoutX="10.0" layoutY="10.0" promptText="eg: LHR" style="-fx-background-color: #E0E0E0;" />
+                                    <TextField fx:id="numberOfRunwaysField" editable="false" layoutX="10.0" layoutY="57.0" promptText="eg: 2" style="-fx-background-color: #E0E0E0;" />
                                     <ComboBox fx:id="selectRunwayComboBox" prefHeight="22.0" prefWidth="146.0" promptText="None Selected" />
                                  </children>
                                  <HBox.margin>
@@ -98,12 +99,12 @@
                         <HBox alignment="CENTER" prefHeight="38.0" prefWidth="452.0" spacing="20.0">
                            <children>
                               <Label text="Select Obstacle Preset" />
-                              <ComboBox fx:id="selectObstacleComboBox" prefWidth="150.0" promptText="Choose" />
+                              <ComboBox fx:id="selectObstacleComboBox" prefHeight="24.0" prefWidth="199.0" promptText="Choose" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="37.0" prefWidth="452.0" spacing="20.0">
                            <children>
-                              <Label text="Use Presdefined" />
+                              <Label text="Use Predefined" />
                               <CheckBox fx:id="useObstaclePresetCheckbox" mnemonicParsing="false" selected="true" text="Uncheck to enter manually" />
                            </children>
                         </HBox>
@@ -118,29 +119,29 @@
                         </Label>
                         <HBox alignment="CENTER" fillHeight="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="173.0" prefWidth="440.0">
                            <children>
-                              <VBox alignment="CENTER_LEFT" prefHeight="204.0" prefWidth="167.0" spacing="15.0">
+                              <VBox alignment="CENTER_LEFT" prefHeight="165.0" prefWidth="186.0" spacing="15.0">
                                  <children>
                                     <Label prefHeight="0.0" prefWidth="182.0" text="Obstacle Name">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label prefHeight="23.0" prefWidth="184.0" text="Height (metres)">
+                                    <Label prefHeight="23.0" prefWidth="184.0" text="Obstacle Height">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="10.0" layoutY="74.0" prefHeight="23.0" prefWidth="184.0" text="Distance from center (m)">
+                                    <Label layoutX="10.0" layoutY="74.0" prefHeight="23.0" prefWidth="184.0" text="Distance from center">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="10.0" layoutY="89.0" prefHeight="23.0" prefWidth="184.0" text="Distance from R (m)">
+                                    <Label layoutX="10.0" layoutY="89.0" prefHeight="23.0" prefWidth="184.0" text="Distance from R">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="10.0" layoutY="174.0" prefHeight="23.0" prefWidth="184.0" text="Distance from L (m)">
+                                    <Label layoutX="10.0" layoutY="174.0" prefHeight="23.0" prefWidth="184.0" text="Distance from L ">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -153,10 +154,46 @@
                               <VBox layoutX="10.0" layoutY="10.0" prefHeight="149.0" prefWidth="226.0" spacing="10.0">
                                  <children>
                                     <TextField fx:id="obstacleNameField" editable="false" promptText="eg: Stopped Vehicle" />
-                                    <TextField fx:id="obstacleHeightField" editable="false" layoutX="10.0" layoutY="10.0" promptText="eg: 4" />
-                                    <TextField fx:id="obstacleCenterField" editable="false" layoutX="10.0" layoutY="57.0" promptText="eg: 200" />
-                                    <TextField fx:id="obstacleRightField" editable="false" layoutX="10.0" layoutY="84.0" promptText="eg: 1300" />
-                                    <TextField fx:id="obstacleLeftField" editable="false" layoutX="10.0" layoutY="158.0" promptText="eg: 2100" />
+                                    <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                       <children>
+                                          <TextField fx:id="obstacleHeightField" editable="false" promptText="eg: 4" />
+                                          <Label prefHeight="23.0" prefWidth="184.0" text="metre(s)">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                       <children>
+                                          <TextField fx:id="obstacleCenterField" editable="false" promptText="eg: 200" />
+                                          <Label prefHeight="23.0" prefWidth="184.0" text="metre(s)">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                       <children>
+                                          <TextField fx:id="obstacleRightField" editable="false" promptText="eg: 1300" />
+                                          <Label prefHeight="23.0" prefWidth="184.0" text="metre(s)">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                       <children>
+                                          <TextField fx:id="obstacleLeftField" editable="false" promptText="eg: 2100" />
+                                          <Label prefHeight="23.0" prefWidth="184.0" text="metre(s)">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
                                  </children>
                                  <HBox.margin>
                                     <Insets top="5.0" />
@@ -170,12 +207,12 @@
                      <children>
                         <VBox alignment="CENTER" prefHeight="89.0" prefWidth="234.0" spacing="10.0">
                            <children>
-                              <Button fx:id="button_import_obstacle" mnemonicParsing="false" onAction="#handleImportObstacleXML" prefHeight="24.0" prefWidth="246.0" text="Import  Obstacle XML " />
+                              <Button fx:id="button_import_obstacle" mnemonicParsing="false" onAction="#handleImportObstacleXML" prefHeight="24.0" prefWidth="199.0" text="Import Obstacle XML " />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="89.0" prefWidth="266.0" spacing="10.0">
                            <children>
-                              <Button fx:id="button_export_obstacle" alignment="CENTER" mnemonicParsing="false" onAction="#handleExportObstacle" prefHeight="27.0" prefWidth="195.0" text="Export XML Obstacle " />
+                              <Button fx:id="button_export_obstacle" alignment="CENTER" mnemonicParsing="false" onAction="#handleExportObstacle" prefHeight="27.0" prefWidth="195.0" text="Export Obstacle XML" />
                            </children>
                         </VBox>
                      </children>
@@ -240,7 +277,7 @@
                               </Pane>
                               <Pane fx:id="pane_flash_8" GridPane.columnIndex="5" GridPane.rowIndex="2">
                                  <children>
-                                    <TextField fx:id="s2TODAField" prefHeight="27.0" prefWidth="62.0" />
+                                    <TextField fx:id="s2TODAField" prefHeight="27.0" prefWidth="73.0" />
                                  </children>
                               </Pane>
                               <Pane fx:id="pane_flash_10" GridPane.columnIndex="4" GridPane.rowIndex="3">
@@ -250,7 +287,7 @@
                               </Pane>
                               <Pane prefHeight="37.0" prefWidth="62.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
                                  <children>
-                                    <TextField fx:id="s2ASDAField" layoutY="-1.0" prefHeight="20.0" prefWidth="62.0" />
+                                    <TextField fx:id="s2ASDAField" layoutY="2.0" prefHeight="24.0" prefWidth="73.0" />
                                  </children>
                               </Pane>
                               <Pane fx:id="pane_flash_13" GridPane.columnIndex="4" GridPane.rowIndex="4">
@@ -260,7 +297,7 @@
                               </Pane>
                               <Pane fx:id="pane_flash_14" GridPane.columnIndex="5" GridPane.rowIndex="4">
                                  <children>
-                                    <TextField fx:id="s2LDAField" layoutY="-1.0" prefHeight="27.0" prefWidth="62.0" />
+                                    <TextField fx:id="s2LDAField" layoutY="-1.0" prefHeight="27.0" prefWidth="72.0" />
                                  </children>
                               </Pane>
                               <Pane fx:id="pane_flash_9" GridPane.columnIndex="6" GridPane.rowIndex="2">
@@ -293,20 +330,20 @@
                                     <Label text="TORA" BorderPane.alignment="CENTER" />
                                  </left>
                               </BorderPane>
-                              <BorderPane fx:id="pane_flash_5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
-                                 <center>
-                                    <TextField fx:id="s2TORAField" prefHeight="27.0" prefWidth="82.0" BorderPane.alignment="CENTER" />
-                                 </center>
-                              </BorderPane>
+                              <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                                 <children>
+                                    <TextField fx:id="s2TORAField" prefHeight="27.0" prefWidth="74.0" />
+                                 </children>
+                              </Pane>
                               <BorderPane fx:id="pane_flash_2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
                                  <left>
                                     <Label alignment="CENTER" contentDisplay="CENTER" text="Section 2" BorderPane.alignment="CENTER" />
                                  </left>
                               </BorderPane>
                               <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-                                 <right>
-                                    <Label prefHeight="17.0" prefWidth="60.0" text="Section 1" textAlignment="CENTER" BorderPane.alignment="CENTER" />
-                                 </right>
+                                 <center>
+                                    <Label prefHeight="17.0" prefWidth="67.0" text="Section 1" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+                                 </center>
                               </BorderPane>
                               <Pane fx:id="pane_flash_1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
                               <Pane fx:id="pane_flash_6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="1">
@@ -349,28 +386,28 @@
                            </rowConstraints>
                            <children>
                               <Label text="LDA" GridPane.rowIndex="4" />
-                              <TextField fx:id="recalcS1LDA" prefHeight="24.0" prefWidth="76.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="recalcS1LDA" editable="false" prefHeight="24.0" prefWidth="76.0" style="-fx-background-color: #E0E0E0;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                               <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="4">
                                  <GridPane.margin>
                                     <Insets left="15.0" />
                                  </GridPane.margin>
                               </Label>
                               <Label text="ASDA" GridPane.rowIndex="3" />
-                              <TextField fx:id="recalcS1ASDA" prefHeight="24.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="recalcS1ASDA" editable="false" prefHeight="24.0" prefWidth="80.0" style="-fx-background-color: #E0E0E0;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets left="15.0" />
                                  </GridPane.margin>
                               </Label>
                               <Label text="TODA" GridPane.rowIndex="2" />
-                              <TextField fx:id="recalcS1TODA" prefHeight="24.0" prefWidth="79.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="recalcS1TODA" editable="false" prefHeight="24.0" prefWidth="79.0" style="-fx-background-color: #E0E0E0;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets left="15.0" />
                                  </GridPane.margin>
                               </Label>
                               <Label text="TORA" GridPane.rowIndex="1" />
-                              <TextField fx:id="recalcS1TORA" prefHeight="24.0" prefWidth="85.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="recalcS1TORA" editable="false" prefHeight="24.0" prefWidth="85.0" style="-fx-background-color: #E0E0E0;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets left="15.0" />
@@ -383,10 +420,7 @@
                               </Pane>
                               <Pane fx:id="pane_flash_81" GridPane.columnIndex="5" GridPane.rowIndex="2">
                                  <children>
-                                    <TextField fx:id="recalcS2TODA" prefHeight="27.0" prefWidth="62.0">
-                                       <font>
-                                          <Font size="12.0" />
-                                       </font></TextField>
+                                    <TextField fx:id="recalcS2TODA" editable="false" layoutX="1.0" layoutY="1.0" prefHeight="27.0" prefWidth="71.0" style="-fx-background-color: #E0E0E0;" />
                                  </children>
                               </Pane>
                               <Pane fx:id="pane_flash_101" GridPane.columnIndex="4" GridPane.rowIndex="3">
@@ -394,12 +428,9 @@
                                     <Label layoutY="4.0" text="ASDA" />
                                  </children>
                               </Pane>
-                              <Pane prefHeight="37.0" prefWidth="62.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                              <Pane prefHeight="29.0" prefWidth="60.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
                                  <children>
-                                    <TextField fx:id="recalcS2ASDA" layoutY="2.0" prefHeight="20.0" prefWidth="62.0">
-                                       <font>
-                                          <Font size="12.0" />
-                                       </font></TextField>
+                                    <TextField fx:id="recalcS2ASDA" editable="false" layoutY="2.0" prefHeight="23.0" prefWidth="71.0" style="-fx-background-color: #E0E0E0;" />
                                  </children>
                               </Pane>
                               <Pane fx:id="pane_flash_131" GridPane.columnIndex="4" GridPane.rowIndex="4">
@@ -409,10 +440,7 @@
                               </Pane>
                               <Pane fx:id="pane_flash_141" GridPane.columnIndex="5" GridPane.rowIndex="4">
                                  <children>
-                                    <TextField fx:id="recalcS2LDA" layoutY="-1.0" prefHeight="27.0" prefWidth="62.0">
-                                       <font>
-                                          <Font size="12.0" />
-                                       </font></TextField>
+                                    <TextField fx:id="recalcS2LDA" editable="false" layoutY="-1.0" prefHeight="27.0" prefWidth="71.0" style="-fx-background-color: #E0E0E0;" />
                                  </children>
                               </Pane>
                               <Pane fx:id="pane_flash_91" GridPane.columnIndex="6" GridPane.rowIndex="2">
@@ -445,23 +473,20 @@
                                     <Label text="TORA" BorderPane.alignment="CENTER" />
                                  </left>
                               </BorderPane>
-                              <BorderPane fx:id="pane_flash_51" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                              <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                                 <children>
+                                    <TextField fx:id="recalcS2TORA" editable="false" prefHeight="27.0" prefWidth="71.0" style="-fx-background-color: #E0E0E0;" />
+                                 </children>
+                              </Pane>
+                              <BorderPane fx:id="pane_flash_21" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
                                  <center>
-                                    <TextField fx:id="recalcS2TORA" prefHeight="27.0" prefWidth="102.0" BorderPane.alignment="CENTER">
-                                       <font>
-                                          <Font size="12.0" />
-                                       </font></TextField>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" text="Section 2" BorderPane.alignment="CENTER" />
                                  </center>
                               </BorderPane>
-                              <BorderPane fx:id="pane_flash_21" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
-                                 <left>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" text="Section 2" BorderPane.alignment="CENTER" />
-                                 </left>
-                              </BorderPane>
                               <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-                                 <right>
-                                    <Label prefHeight="17.0" prefWidth="60.0" text="Section 1" textAlignment="CENTER" BorderPane.alignment="CENTER" />
-                                 </right>
+                                 <center>
+                                    <Label prefHeight="17.0" prefWidth="66.0" text="Section 1" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+                                 </center>
                               </BorderPane>
                               <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
                               <Pane fx:id="pane_flash_61" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="1">
@@ -475,34 +500,34 @@
                   </VBox>
                   <Label fx:id="label_msg_results" text="Breakdown Calculations">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="breakdownTextArea" editable="false" prefHeight="186.0" prefWidth="433.0" />
+                  <TextArea fx:id="breakdownTextArea" editable="false" prefHeight="216.0" prefWidth="506.0" />
                </children>
             </VBox>
          </content>
       </ScrollPane>
    </left>
    <center>
-      <VBox spacing="20.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="1373.0" prefWidth="739.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
             <TabPane fx:id="mainTabPane">
                <tabs>
-                  <Tab text="Top-Down View">
+                  <Tab closable="false" text="Top-Down View">
                      <content>
-                        <VBox spacing="20.0">
+                        <VBox prefHeight="535.0" prefWidth="730.0" spacing="20.0">
                            <children>
-                              <Canvas fx:id="canvas" height="535.0" width="687.0" />
+                              <Canvas fx:id="canvas" height="535.0" width="629.0" />
                            </children>
                         </VBox>
                      </content>
                   </Tab>
-                  <Tab text="Side View">
+                  <Tab closable="false" text="Side View">
                      <content>
                         <VBox spacing="20.0">
                            <children>
-                              <Canvas fx:id="sideCanvas" height="535.0" width="687.0" />
+                              <Canvas fx:id="sideCanvas" height="535.0" width="632.0" />
                            </children>
                         </VBox>
                      </content>
