@@ -21,7 +21,6 @@ import seg.g33.XMLParsing.XMLWriting;
 
 import java.io.File;
 
-
 public class ConfigureAirportController {
 
     /**
@@ -34,6 +33,7 @@ public class ConfigureAirportController {
      */
     private Airport airport;
 
+
     /**
      * JavaFX Initializer
      * Called as soon as the FXML file is loaded from the FXMLLoader.
@@ -41,6 +41,7 @@ public class ConfigureAirportController {
     @FXML protected void initialize() {
         setDisabledViews();
         setupListeners();
+
     }
 
     /**
@@ -127,6 +128,7 @@ public class ConfigureAirportController {
         alert.showAndWait();
     }
 
+
     /**
      * Builds a fully configured Airport instance based on the inputs from the UI and the user.
      * This airport instance will be then saved to an XML file.
@@ -137,6 +139,7 @@ public class ConfigureAirportController {
             showInputsAlert("the name and the code");
             return null;
         }
+
 
         airport = new Airport(airportNameField.getText(), airportCodeField.getText());
 

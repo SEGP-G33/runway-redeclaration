@@ -1,5 +1,6 @@
 package seg.g33.Controllers;
 
+import javafx.application.Preloader;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -9,11 +10,15 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import seg.g33.App;
 import seg.g33.DataHolders.Environment;
+import seg.g33.DataHolders.Notify;
 import seg.g33.DataHolders.ObstaclePresets;
 import seg.g33.Entitites.*;
 import seg.g33.Helpers.*;
@@ -24,6 +29,7 @@ import seg.g33.ui.FieldTooltip;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -42,6 +48,15 @@ public class CalculatorController {
      * Handles all Obstacle presets in the app.
      */
     private ObstaclePresets obstaclePresets = new ObstaclePresets();
+
+    /**
+     * Notification messages.
+     */
+    public static String airportSelection = "Airport %s successfully selected";
+    public static String runwaySelection = "Runway %s successfully selected";
+    public static String obstacleSelection = "Obstacle %s successfully selected";
+    public String calculationSuccess= "Runway redeclaration calculation successful";
+    private ArrayList<String> notifications= new ArrayList<>();
 
     /**
      * Properties used for the JavaFX ComboBox to work properly.
@@ -150,6 +165,7 @@ public class CalculatorController {
         airportNameField.setText(selectedAirport.getName());
         airportCodeField.setText(selectedAirport.getShortcode());
         numberOfRunwaysField.setText(String.valueOf(selectedAirport.getAirportRunways().size()));
+        notificationDisplay(new Notify(String.format(airportSelection,selectedAirport.getName()), LocalDateTime.now(),Notify.Type.SELECT));
     }
 
     /**
@@ -438,6 +454,18 @@ public class CalculatorController {
             alert.showAndWait();
         }
     }
+
+    public void notificationDisplay(Notify notif){
+        var message = new Label(notif.toString());
+        message.setFont(Font.font("Verdana", FontWeight.NORMAL, 13));
+        if (notif.getType().equals(Notify.Type.SELECT)){message.setTextFill(Color.valueOf(Notify.Type.SELECT.getColor()));}
+        else if (notif.getType().equals(Notify.Type.UPDATE)){message.setTextFill(Color.valueOf(Notify.Type.UPDATE.getColor()));}
+        this.notifications.add(message.toString());
+
+        notificationsVBOX.getChildren().add(message);
+        notificationsScrollPane.setContent(notificationsVBOX);
+    }
+
 
     @FXML
     private ScrollPane notificationsScrollPane;
