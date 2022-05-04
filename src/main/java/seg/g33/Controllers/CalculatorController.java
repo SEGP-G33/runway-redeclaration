@@ -1,5 +1,7 @@
 package seg.g33.Controllers;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
 import javafx.application.Preloader;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -462,8 +464,15 @@ public class CalculatorController {
         else if (notif.getType().equals(Notify.Type.UPDATE)){message.setTextFill(Color.valueOf(Notify.Type.UPDATE.getColor()));}
         this.notifications.add(message.toString());
 
+        final FadeTransition transition = new FadeTransition(Duration.millis(500), message);
+        transition.setFromValue(0);
+        transition.setToValue(1);
+        transition.setInterpolator(Interpolator.EASE_IN);
+
         notificationsVBOX.getChildren().add(message);
         notificationsScrollPane.setContent(notificationsVBOX);
+
+        transition.play();
     }
 
 
