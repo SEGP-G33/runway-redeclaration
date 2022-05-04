@@ -59,6 +59,7 @@ public class Drawer {
         rightClearway *= scale;
         leftStopway *= scale;
         rightStopway *= scale;
+        double blastProtection = 300d*scale;
 
         // Define the points of all shapes
         double[] obstaclePoint = {runwayStart+rightClearway+obstacle.getLeftDistance()*scale, height/2+obstacle.getCenterDistance()*scale};
@@ -69,24 +70,70 @@ public class Drawer {
                 {0d,                 210d*scale,         360d*scale,          width-360d*scale,    width-210d*scale,   width,              width,              width-210d*scale,   width-360d*scale,    360d*scale,          210d*scale,         0d                },
                 {height/2-75d*scale, height/2-75d*scale, height/2-105d*scale, height/2-105d*scale, height/2-75d*scale, height/2-75d*scale, height/2+75d*scale, height/2+75d*scale, height/2+105d*scale, height/2+105d*scale, height/2+75d*scale, height/2+75d*scale}};
 
-        double[][] leftTORAPoints = {   {runwayStart+rightClearway+section1.getDisplacedThreshold()*scale,                         height/2-runwayWidth/2-30},
-                                        {runwayStart+rightClearway+section1.getDisplacedThreshold()*scale+params1.getTORA()*scale, height/2-runwayWidth/2-30}};
-        double[][] leftASDAPoints = {   {runwayStart+rightClearway+section1.getDisplacedThreshold()*scale,                         height/2-runwayWidth/2-50},
-                                        {runwayStart+rightClearway+section1.getDisplacedThreshold()*scale+params1.getASDA()*scale, height/2-runwayWidth/2-50}};
-        double[][] leftTODAPoints = {   {runwayStart+rightClearway+section1.getDisplacedThreshold()*scale,                         height/2-runwayWidth/2-70},
-                                        {runwayStart+rightClearway+section1.getDisplacedThreshold()*scale+params1.getTODA()*scale, height/2-runwayWidth/2-70}};
-        double[][] leftLDAPoints  = {   {runwayStart+rightClearway+section1.getDisplacedThreshold()*scale,                         height/2-runwayWidth/2-90},
-                                        {runwayStart+rightClearway+section1.getDisplacedThreshold()*scale+params1.getLDA()*scale,  height/2-runwayWidth/2-90}};
+        double leftDisplaced = section1.getDisplacedThreshold()*scale;
+        double rightDisplaced = section2.getDisplacedThreshold()*scale;
+        double[][] leftTORAPoints;
+        double[][] leftASDAPoints;
+        double[][] leftTODAPoints;
+        double[][] leftLDAPoints;
+        double[][] rightTORAPoints;
+        double[][] rightASDAPoints;
+        double[][] rightTODAPoints;
+        double[][] rightLDAPoints;
 
-        double[][] rightTORAPoints = {  {runwayStart+rightClearway+runwayLength,                            height/2+runwayWidth/2+30},
-                                        {runwayStart+rightClearway+runwayLength-params2.getTORA()*scale,    height/2+runwayWidth/2+30}};
-        double[][] rightASDAPoints = {  {runwayStart+rightClearway+runwayLength,                            height/2+runwayWidth/2+50},
-                                        {runwayStart+rightClearway+runwayLength-params2.getASDA()*scale,    height/2+runwayWidth/2+50}};
-        double[][] rightTODAPoints = {  {runwayStart+rightClearway+runwayLength,                            height/2+runwayWidth/2+70},
-                                        {runwayStart+rightClearway+runwayLength-params2.getTODA()*scale,    height/2+runwayWidth/2+70}};
-        double[][] rightLDAPoints  = {  {runwayStart+rightClearway+runwayLength,                            height/2+runwayWidth/2+90},
-                                        {runwayStart+rightClearway+runwayLength-params2.getLDA()*scale,     height/2+runwayWidth/2+90}};
+        if (obstaclePoint[0] >= width / 2){
+            leftTORAPoints = new double[][] {
+                    {runwayStart + rightClearway, height / 2 - runwayWidth / 2 - 30},
+                    {runwayStart + rightClearway + params1.getTODA()*scale, height / 2 - runwayWidth / 2 - 30}};
+            leftASDAPoints = new double[][] {
+                    {runwayStart + rightClearway, height / 2 - runwayWidth / 2 - 50},
+                    {runwayStart + rightClearway + params1.getASDA()*scale, height / 2 - runwayWidth / 2 - 50}};
+            leftTODAPoints = new double[][] {
+                    {runwayStart + rightClearway, height / 2 - runwayWidth / 2 - 70},
+                    {runwayStart + rightClearway + params1.getTODA()*scale, height / 2 - runwayWidth / 2 - 70}};
+            leftLDAPoints = new double[][] {
+                    {runwayStart + rightClearway + leftDisplaced, height / 2 - runwayWidth / 2 - 90},
+                    {runwayStart + rightClearway + leftDisplaced + params1.getLDA()*scale, height / 2 - runwayWidth / 2 - 90}};
 
+            rightTORAPoints = new double[][] {
+                    {obstaclePoint[0] - blastProtection, height/2-runwayWidth/2+30},
+                    {obstaclePoint[0] - blastProtection - params2.getTODA()*scale, height/2-runwayWidth/2+30}};
+            rightASDAPoints = new double[][] {
+                    {obstaclePoint[0] - blastProtection, height/2-runwayWidth/2+50},
+                    {obstaclePoint[0] - blastProtection - params2.getASDA()*scale, height/2-runwayWidth/2+50}};
+            rightTODAPoints = new double[][] {
+                    {obstaclePoint[0] - blastProtection, height/2-runwayWidth/2+70},
+                    {obstaclePoint[0] - blastProtection - params2.getTORA()*scale, height/2-runwayWidth/2+70}};
+            rightLDAPoints = new double[][] {
+                    {obstaclePoint[0] - blastProtection, height/2-runwayWidth/2+90},
+                    {obstaclePoint[0] - blastProtection - params2.getLDA()*scale, height/2-runwayWidth/2+90}};
+        } else {
+            leftTORAPoints = new double[][] {
+                    {obstaclePoint[0] + blastProtection, height/2-runwayWidth/2-30},
+                    {obstaclePoint[0] + blastProtection + params1.getTODA()*scale, height/2-runwayWidth/2-30}};
+            leftASDAPoints = new double[][] {
+                    {obstaclePoint[0] + blastProtection, height/2-runwayWidth/2-50},
+                    {obstaclePoint[0] + blastProtection + params1.getASDA()*scale, height/2-runwayWidth/2-50}};
+            leftTODAPoints = new double[][] {
+                    {obstaclePoint[0] + blastProtection, height/2-runwayWidth/2-70},
+                    {obstaclePoint[0] + blastProtection + params1.getTORA()*scale, height/2-runwayWidth/2-70}};
+            leftLDAPoints = new double[][] {
+                    {obstaclePoint[0] + blastProtection, height/2-runwayWidth/2-90},
+                    {obstaclePoint[0] + blastProtection + params1.getLDA()*scale, height/2-runwayWidth/2-90}};
+
+            rightTORAPoints = new double[][] {
+                    {runwayEnd - leftClearway, height / 2 + runwayWidth / 2 + 30},
+                    {runwayEnd - leftClearway + params2.getTORA()*scale, height / 2 + runwayWidth / 2 + 30}};
+            rightASDAPoints = new double[][] {
+                    {runwayEnd - leftClearway, height / 2 + runwayWidth / 2 + 50},
+                    {runwayEnd - leftClearway + params2.getASDA()*scale, height / 2 + runwayWidth / 2 + 50}};
+            rightTODAPoints = new double[][] {
+                    {runwayEnd - leftClearway, height / 2 + runwayWidth / 2 + 70},
+                    {runwayEnd - leftClearway + params2.getTODA()*scale, height / 2 + runwayWidth / 2 + 70}};
+            rightLDAPoints = new double[][] {
+                    {runwayEnd - leftClearway + rightDisplaced, height / 2 + runwayWidth / 2 + 90},
+                    {runwayEnd - leftClearway + rightDisplaced + params2.getLDA()*scale, height / 2 + runwayWidth / 2 + 90}};
+        }
         double[][] centerLine = {       {runwayStart+rightClearway+25,              height/2},
                                         {runwayStart+rightClearway+runwayLength-25, height/2}};
 
