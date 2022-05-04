@@ -87,8 +87,11 @@ public class CalculatorController {
         observeParameters();
     }
 
-    private static int redeclParamsObserverCountdown = 15;
+//    private static int redeclParamsObserverCountdown = 15;
 
+    /**
+     * Listens to the observables required to handle recalaulation of parameters
+     */
     private void observeParameters(){
         final ComboBoxBase[] recalculateParamsComboBoxObservables = {
                 selectRunwayComboBox,
@@ -167,6 +170,22 @@ public class CalculatorController {
         obstacleHeightField.setEditable(editable);
         obstacleNameField.setEditable(editable);
         obstacleCenterField.setEditable(editable);
+
+        // if not editable, change the style of the fields to look uneditable
+        if (!editable){
+            obstacleNameField.setStyle("-fx-background-color : #E0E0E0");
+            obstacleHeightField.setStyle("-fx-background-color : #E0E0E0");
+            obstacleCenterField.setStyle("-fx-background-color : #E0E0E0");
+            obstacleLeftField.setStyle("-fx-background-color : #E0E0E0");
+            obstacleRightField.setStyle("-fx-background-color : #E0E0E0");
+        }
+        else{  // else, change it back to default
+            obstacleNameField.setStyle(null);
+            obstacleHeightField.setStyle(null);
+            obstacleCenterField.setStyle(null);
+            obstacleLeftField.setStyle(null);
+            obstacleRightField.setStyle(null);
+        }
     }
 
     /**

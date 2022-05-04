@@ -247,28 +247,28 @@
                            </rowConstraints>
                            <children>
                               <Label text="LDA" GridPane.rowIndex="4" />
-                              <TextField fx:id="s1LDAField" prefHeight="24.0" prefWidth="76.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="s1LDAField" editable="false" prefHeight="24.0" prefWidth="76.0" style="-fx-background-color: #E0E0E0;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                               <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="4">
                                  <GridPane.margin>
                                     <Insets left="15.0" />
                                  </GridPane.margin>
                               </Label>
                               <Label text="ASDA" GridPane.rowIndex="3" />
-                              <TextField fx:id="s1ASDAField" prefHeight="24.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="s1ASDAField" editable="false" prefHeight="24.0" prefWidth="80.0" style="-fx-background-color: #E0E0E0;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets left="15.0" />
                                  </GridPane.margin>
                               </Label>
                               <Label text="TODA" GridPane.rowIndex="2" />
-                              <TextField fx:id="s1TODAField" prefHeight="24.0" prefWidth="79.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="s1TODAField" editable="false" prefHeight="24.0" prefWidth="79.0" style="-fx-background-color: #E0E0E0;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets left="15.0" />
                                  </GridPane.margin>
                               </Label>
                               <Label text="TORA" GridPane.rowIndex="1" />
-                              <TextField fx:id="s1TORAField" prefHeight="24.0" prefWidth="85.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="s1TORAField" editable="false" prefHeight="24.0" prefWidth="85.0" style="-fx-background-color: #E0E0E0;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label text="metre(s)" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets left="15.0" />
@@ -281,7 +281,7 @@
                               </Pane>
                               <Pane fx:id="pane_flash_8" GridPane.columnIndex="5" GridPane.rowIndex="2">
                                  <children>
-                                    <TextField fx:id="s2TODAField" prefHeight="27.0" prefWidth="73.0" />
+                                    <TextField fx:id="s2TODAField" editable="false" prefHeight="27.0" prefWidth="73.0" style="-fx-background-color: #E0E0E0;" />
                                  </children>
                               </Pane>
                               <Pane fx:id="pane_flash_10" GridPane.columnIndex="4" GridPane.rowIndex="3">
@@ -291,7 +291,7 @@
                               </Pane>
                               <Pane prefHeight="37.0" prefWidth="62.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
                                  <children>
-                                    <TextField fx:id="s2ASDAField" layoutY="2.0" prefHeight="24.0" prefWidth="73.0" />
+                                    <TextField fx:id="s2ASDAField" editable="false" layoutY="2.0" prefHeight="24.0" prefWidth="73.0" style="-fx-background-color: #E0E0E0;" />
                                  </children>
                               </Pane>
                               <Pane fx:id="pane_flash_13" GridPane.columnIndex="4" GridPane.rowIndex="4">
@@ -301,7 +301,7 @@
                               </Pane>
                               <Pane fx:id="pane_flash_14" GridPane.columnIndex="5" GridPane.rowIndex="4">
                                  <children>
-                                    <TextField fx:id="s2LDAField" layoutY="-1.0" prefHeight="27.0" prefWidth="72.0" />
+                                    <TextField fx:id="s2LDAField" editable="false" layoutY="-1.0" prefHeight="27.0" prefWidth="72.0" style="-fx-background-color: #E0E0E0;" />
                                  </children>
                               </Pane>
                               <Pane fx:id="pane_flash_9" GridPane.columnIndex="6" GridPane.rowIndex="2">
@@ -336,7 +336,7 @@
                               </BorderPane>
                               <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
                                  <children>
-                                    <TextField fx:id="s2TORAField" prefHeight="27.0" prefWidth="74.0" />
+                                    <TextField fx:id="s2TORAField" editable="false" prefHeight="27.0" prefWidth="74.0" style="-fx-background-color: #E0E0E0;" />
                                  </children>
                               </Pane>
                               <BorderPane fx:id="pane_flash_2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
@@ -502,7 +502,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="breakdownTextArea" disable="true" editable="false" prefHeight="207.0" prefWidth="506.0" />
+                  <TextArea fx:id="breakdownTextArea" disable="true" editable="false" opacity="0.59" prefHeight="207.0" prefWidth="506.0" />
                </children>
             </VBox>
          </content>
