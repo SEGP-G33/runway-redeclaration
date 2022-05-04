@@ -104,9 +104,9 @@ public final class Validator {
      */
     public static boolean runwayParametersAreValid(RunwaySection section){
         RunwayParameters params = section.getDefaultParameters();
-        return params.getTORA() + section.getClearWayLength() == params.getTODA() &&
+        return (params.getTORA() + section.getClearWayLength() == params.getTODA() &&
                 params.getTORA() + section.getStopWayLength() == params.getASDA() &&
-                params.getTORA() - section.getDisplacedThreshold() == params.getLDA();
+                params.getTORA() - section.getDisplacedThreshold() == params.getLDA());
     }
 
     /**
@@ -120,7 +120,7 @@ public final class Validator {
      * @param displace Displaced Threshold
      * @return true if parameters are valid
      */
-    public static boolean runwayParametersAreValid(Double TODA, Double TORA, Double ASDA, Double LDA, Double clearway, Double stopway, Double displace){
+    public static boolean runwayParametersAreValid(Double TORA, Double TODA, Double ASDA, Double LDA, Double clearway, Double stopway, Double displace){
         return TORA + clearway == TODA && TORA + stopway == ASDA && TORA - displace == LDA;
     }
 }
