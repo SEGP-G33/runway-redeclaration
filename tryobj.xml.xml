@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Obstacle>
+    <name>tryobj</name>
+    <height>4.0</height>
+    <centerDistance>4000.0</centerDistance>
+    <leftDistance>400000.0</leftDistance>
+    <rightDistance>40000.0</rightDistance>
+</Obstacle>

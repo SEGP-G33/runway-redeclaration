@@ -55,6 +55,8 @@ public class CalculatorController {
     public static String airportSelection = "Airport %s successfully selected";
     public static String runwaySelection = "Runway %s successfully selected";
     public static String obstacleSelection = "Obstacle %s successfully selected";
+    public static String obstacleSelectionExport = "Obstacle presets successfully entered and %s is successfully exported as xml.";
+    public static String obstacleSelectionImport = "Obstacle presets are imported from file %s";
     public String calculationSuccess= "Runway redeclaration calculation successful";
     private ArrayList<String> notifications= new ArrayList<>();
 
@@ -177,6 +179,7 @@ public class CalculatorController {
             if (run.getName().equals(runwayName)) {
                 selectedRunway = run;
                 setElementsForSelectedRunway();
+                notificationDisplay(new Notify(String.format(runwaySelection,selectedRunway.getName()), LocalDateTime.now(),Notify.Type.SELECT));
                 return;
             }
         }
@@ -227,6 +230,7 @@ public class CalculatorController {
         obstacleCenterField.textProperty().set(center);
         obstacleLeftField.textProperty().set(left);
         obstacleRightField.textProperty().set(right);
+        notificationDisplay(new Notify(String.format(obstacleSelection,name), LocalDateTime.now(),Notify.Type.SELECT));
     }
 
     /**
@@ -266,6 +270,9 @@ public class CalculatorController {
         var angle = selectedRunway.getRunwaySections().get(0).getAngle();
         Drawer.drawTopDown(canvas, 10*angle, selectedRunway, selectedObstacle, results.get(0), results.get(1));
         Drawer.drawSideOn(sideCanvas, selectedRunway, selectedObstacle, plane, results.get(0), results.get(1));
+
+        notificationDisplay(new Notify(String.format(calculationSuccess, calculator.getName()), LocalDateTime.now(),Notify.Type.SELECT));
+
     }
 
     /**
@@ -284,6 +291,8 @@ public class CalculatorController {
         recalcS2TODA.setText(section2Results.getTODA().toString());
         recalcS2LDA.setText(section2Results.getLDA().toString());
         recalcS2ASDA.setText(section2Results.getASDA().toString());
+
+
     }
 
     /**
@@ -299,6 +308,7 @@ public class CalculatorController {
         File selectedFile = fileChooser.showOpenDialog(App.getPrimaryStage());
 
         configureSelectedFile(selectedFile);
+        notificationDisplay(new Notify(String.format(obstacleSelectionImport, selectedFile.getName()), LocalDateTime.now(),Notify.Type.SELECT));
     }
 
     /**
@@ -374,6 +384,7 @@ public class CalculatorController {
         }
 
         exportObstacleToXML();
+
     }
 
     /**
@@ -408,6 +419,8 @@ public class CalculatorController {
 
         var alert = new Alert(Alert.AlertType.INFORMATION, "File " + obstacle.getName() + ".xml written.", ButtonType.CANCEL);
         alert.showAndWait();
+        notificationDisplay(new Notify(String.format(obstacleSelectionExport,name), LocalDateTime.now(),Notify.Type.UPDATE));
+
     }
 
 
@@ -443,11 +456,11 @@ public class CalculatorController {
         var selectedIndex  = mainTabPane.getSelectionModel().getSelectedIndex();
 
         ImageExporter exporter = new ImageExporter(selectedIndex == 0 ? canvas : sideCanvas);
-
         try {
             exporter.exportImage();
             var alert = new Alert(Alert.AlertType.CONFIRMATION, "Image Exported!", ButtonType.CANCEL);
             alert.showAndWait();
+            notificationDisplay(new Notify("Canvas successfully exported! ", LocalDateTime.now(),Notify.Type.UPDATE));
         } catch (IOException e) {
             e.printStackTrace();
             var alert = new Alert(Alert.AlertType.ERROR, "Image Export Failed! ", ButtonType.CANCEL);
