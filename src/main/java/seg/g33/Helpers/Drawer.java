@@ -444,28 +444,28 @@ public class Drawer {
 
         // Map symbols and location
         double[][] mapSymbol1Points = new double[][]{
-                {-60d * scale + totalLength * scale - 100, -60d * scale + totalLength * scale - 90, -60d * scale + totalLength * scale - 90, -60d * scale + totalLength * scale - 100},
+                {60d * scale, 60d * scale + 10, 60d * scale + 10, 60d * scale},
                 {height / 2 + 150, height / 2 + 150, height / 2 + 160, height / 2 + 160}};
         double[] mapSymbol1Text = {mapSymbol1Points[0][0] + 15, mapSymbol1Points[1][3] - 1};
 
         double[][] mapSymbol2Points = new double[][]{
-                {-60d * scale + totalLength * scale - 100, -60d * scale + totalLength * scale - 90, -60d * scale + totalLength * scale - 90, -60d * scale + totalLength * scale - 100},
-                {height / 2 + 170, height / 2 + 170, height / 2 + 180, height / 2 + 180}};
+                {60d * scale + totalLength * 0.2 * scale, 60d * scale + 10 + totalLength * 0.2 * scale, 60d * scale + 10 + totalLength * 0.2 * scale, 60d * scale + totalLength * 0.2 * scale},
+                {height / 2 + 150, height / 2 + 150, height / 2 + 160, height / 2 + 160}};
         double[] mapSymbol2Text = {mapSymbol2Points[0][0] + 15, mapSymbol2Points[1][3] - 1};
 
         double[][] mapSymbol3Points = new double[][]{
-                {-60d * scale + totalLength * scale - 100, -60d * scale + totalLength * scale - 90, -60d * scale + totalLength * scale - 90, -60d * scale + totalLength * scale - 100},
-                {height / 2 + 190, height / 2 + 190, height / 2 + 200, height / 2 + 200}};
+                {60d * scale + totalLength * 0.4 * scale, 60d * scale + 10 + totalLength * 0.4 * scale, 60d * scale + 10 + totalLength * 0.4 * scale, 60d * scale + totalLength * 0.4 * scale},
+                {height / 2 + 150, height / 2 + 150, height / 2 + 160, height / 2 + 160}};
         double[] mapSymbol3Text = {mapSymbol3Points[0][0] + 15, mapSymbol3Points[1][3] - 1};
 
         double[][] mapSymbol4Points = new double[][]{
-                {-60d * scale + totalLength * scale - 100, -60d * scale + totalLength * scale - 90, -60d * scale + totalLength * scale - 90, -60d * scale + totalLength * scale - 100},
-                {height / 2 + 210, height / 2 + 210, height / 2 + 220, height / 2 + 220}};
+                {60d * scale + totalLength * 0.6 * scale, 60d * scale + 10 + totalLength * 0.6 * scale, 60d * scale + 10 + totalLength * 0.6 * scale, 60d * scale + totalLength * 0.6 * scale},
+                {height / 2 + 150, height / 2 + 150, height / 2 + 160, height / 2 + 160}};
         double[] mapSymbol4Text = {mapSymbol4Points[0][0] + 15, mapSymbol4Points[1][3] - 1};
 
         double[][] mapSymbol5Points = new double[][]{
-                {-60d * scale + totalLength * scale - 100, -60d * scale + totalLength * scale - 90, -60d * scale + totalLength * scale - 90, -60d * scale + totalLength * scale - 100},
-                {height / 2 + 230, height / 2 + 230, height / 2 + 240, height / 2 + 240}};
+                {60d * scale + totalLength * 0.8 * scale, 60d * scale + 10 + totalLength * 0.8 * scale, 60d * scale + 10 + totalLength * 0.8 * scale, 60d * scale + totalLength * 0.8  * scale},
+                {height / 2 + 150, height / 2 + 150, height / 2 + 160, height / 2 + 160}};
         double[] mapSymbol5Text = {mapSymbol5Points[0][0] + 15, mapSymbol5Points[1][3] - 1};
 
 
