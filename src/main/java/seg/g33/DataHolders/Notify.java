@@ -6,8 +6,19 @@ import java.util.Date;
 
 public class Notify {
 
+    /**
+     * The message of the notification
+     */
     private String message;
+
+    /**
+     * Notification type
+     */
     private Type type;
+
+    /**
+     * The timestamp the notification was issued.
+     */
     private String timestamp;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -29,32 +40,8 @@ public class Notify {
     public String toString () {
         return timestamp + "      " + message;
     }
-
-    /**
-     * Getters and setters.
-     */
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     public Type getType() {
         return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
-
-    public String getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
     }
 
     /**
