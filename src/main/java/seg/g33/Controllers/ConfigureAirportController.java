@@ -11,6 +11,7 @@ import javafx.stage.DirectoryChooser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import seg.g33.App;
+import seg.g33.DataHolders.Notify;
 import seg.g33.Entitites.Airport;
 import seg.g33.Entitites.Runway;
 import seg.g33.Entitites.RunwayParameters;
@@ -20,6 +21,7 @@ import seg.g33.Helpers.Validator;
 import seg.g33.XMLParsing.XMLWriting;
 
 import java.io.File;
+import java.util.Date;
 
 public class ConfigureAirportController {
 
@@ -33,6 +35,8 @@ public class ConfigureAirportController {
      */
     private Airport airport;
 
+    private static String airportConfigureNot = "Airport %s successfully configured and added to airports list";
+    private static String runwayAddedToAirportNot = "Runway %s successfully added to airport %s";
 
     /**
      * JavaFX Initializer
@@ -203,6 +207,7 @@ public class ConfigureAirportController {
             airport.addRunway(runway3);
         }
 
+        App.addNotificationHistory(new Notify(String.format(airportConfigureNot, airport.getName()), Notify.Type.UPDATE, new Date()));
         return airport;
     }
 
