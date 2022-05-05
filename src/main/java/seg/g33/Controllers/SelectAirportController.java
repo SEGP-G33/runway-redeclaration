@@ -23,6 +23,7 @@ import seg.g33.Controllers.CalculatorController;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,6 +54,8 @@ public class SelectAirportController {
      * The airport currently selected by the user.
      */
     private Airport selectedAirport;
+
+    private static String airportImportNot = "Airport %s successfully imported from your files";
 
     /**
      * JavaFX Initializer
@@ -182,6 +185,7 @@ public class SelectAirportController {
         airports.add(newAirport);
         setAirportListsAndComboBox();
         setupUIForSelectedAirport(newAirport.getShortcode());
+        App.addNotificationHistory(new Notify(String.format(airportImportNot, newAirport.getName()), Notify.Type.SELECT, new Date()));
     }
 
     /**
