@@ -54,7 +54,6 @@ public class SelectAirportController {
      * The airport currently selected by the user.
      */
     private Airport selectedAirport;
-
     private static String airportImportNot = "Airport %s successfully imported from your files";
 
     /**
