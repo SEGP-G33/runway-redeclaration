@@ -7,7 +7,6 @@ public class Launcher {
      * @param args Any command-line args passed in.
      */
     public static void main(String[] args) {
-        System.out.println("ney null");
         App.main(args);
     }
 
