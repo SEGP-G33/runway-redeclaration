@@ -11,12 +11,15 @@ import javafx.stage.FileChooser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import seg.g33.App;
+import seg.g33.DataHolders.Notify;
 import seg.g33.Entitites.Airport;
 import seg.g33.DataHolders.AirportPresets;
 import seg.g33.DataHolders.Environment;
 import seg.g33.Helpers.Constants;
 import seg.g33.Helpers.Validator;
 import seg.g33.XMLParsing.XMLReading;
+
+import seg.g33.Controllers.CalculatorController;
 
 import java.io.File;
 import java.io.IOException;

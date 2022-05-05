@@ -363,7 +363,7 @@ public class Drawer {
                     {-60d * scale + totalLength * scale - rightLength, height / 2 + 110},
                     {-60d * scale + totalLength * scale - rightLength - rightSection.getDisplacedThreshold() * scale + 2, height / 2 + 110}};
             slopeAnglesPoints = new Double[][]{
-                    {obstaclePoints[0][3], obstaclePoints[1][3]},
+                    {obstaclePoints[0][3], heightDown - 2 * obstacle.getHeight()},
                     {obstaclePoint[1] + (obstacle.getHeight() * plane.getSlope()) * scale, height / 2}};
             takeOff1 = "Take Off Away";
             loading1 = "Loading Over";
@@ -417,7 +417,7 @@ public class Drawer {
                     {-60d * scale + totalLength * scale - rightLength - rightSection.getDisplacedThreshold() * scale + 2, height / 2 + 110}};
             slopeAnglesPoints = new Double[][]{
                     {obstaclePoint[0] - (obstacle.getHeight() * plane.getSlope()) * scale, height / 2},
-                    {obstaclePoints[0][0],obstaclePoints[1][0]}};
+                    {obstaclePoints[0][0],heightDown - 2 * obstacle.getHeight()}};
             takeOff1 = "Take Off Towards";
             loading1 = "Loading Towards";
             takeOff2 = "Take Off Away";
