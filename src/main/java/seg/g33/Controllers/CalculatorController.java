@@ -20,6 +20,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 import seg.g33.App;
 import seg.g33.DataHolders.Environment;
 import seg.g33.DataHolders.Notify;
@@ -341,24 +342,24 @@ public class CalculatorController {
         Collections.sort(selectedRunway.getRunwaySections(), (o1, o2) -> o1.getAngle().compareTo(o2.getAngle()));
 
         Calculator calculator = new Calculator("Calculator", plane, selectedObstacle, selectedRunway);
-        if (Validator.distancesAreValid(selectedRunway, selectedObstacle.getLeftDistance(), selectedObstacle.getRightDistance())) {
-            ArrayList<RunwayParameters> results = calculator.calculate();
-            breakdownTextArea.setText(calculator.calcAsString());
+        //if (Validator.distancesAreValid(selectedRunway, selectedObstacle.getLeftDistance(), selectedObstacle.getRightDistance())) {
+        ArrayList<RunwayParameters> results = calculator.calculate();
+        breakdownTextArea.setText(calculator.calcAsString());
 
-            System.out.println("Obstacle: " + selectedObstacle);
+        System.out.println("Obstacle: " + selectedObstacle);
 
-            setRecalculateParamsUI(results);
+        setRecalculateParamsUI(results);
 
-            var angle = selectedRunway.getRunwaySections().get(0).getAngle();
-            Drawer.drawTopDown(canvas, 10*angle, selectedRunway, selectedObstacle, results.get(0), results.get(1));
-            Drawer.drawSideOn(sideCanvas, selectedRunway, selectedObstacle, plane, results.get(0), results.get(1));
-          
-          
-            notificationDisplay(new Notify(String.format(calculationSuccess, calculator.getName()), Notify.Type.CALCULATE, new Date()));
-        } else {
-            var alert = new Alert(Alert.AlertType.ERROR, "Distance from left and distance from right must add to total runway length", ButtonType.CANCEL);
-            alert.showAndWait();
-        }
+        var angle = selectedRunway.getRunwaySections().get(0).getAngle();
+        Drawer.drawTopDown(canvas, 10*angle, selectedRunway, selectedObstacle, results.get(0), results.get(1));
+        Drawer.drawSideOn(sideCanvas, selectedRunway, selectedObstacle, plane, results.get(0), results.get(1));
+
+
+        notificationDisplay(new Notify(String.format(calculationSuccess, calculator.getName()), Notify.Type.CALCULATE, new Date()));
+        //} else {
+        //    var alert = new Alert(Alert.AlertType.ERROR, "Distance from left and distance from right must add to total runway length", ButtonType.CANCEL);
+        //    alert.showAndWait();
+        //}
     }
 
     /**
