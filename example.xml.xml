@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Obstacle>
+    <name>example</name>
+    <height>4.0</height>
+    <centerDistance>200.0</centerDistance>
+    <leftDistance>2000.0</leftDistance>
+    <rightDistance>400.0</rightDistance>
+</Obstacle>

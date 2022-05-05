@@ -122,17 +122,17 @@ public class Drawer {
                     {obstaclePoint[0] + blastProtection + params1.getLDA()*scale, height/2-runwayWidth/2-90}};
 
             rightTORAPoints = new double[][] {
-                    {runwayEnd - leftClearway, height / 2 + runwayWidth / 2 + 30},
-                    {runwayEnd - leftClearway + params2.getTORA()*scale, height / 2 + runwayWidth / 2 + 30}};
+                    {runwayEnd - leftClearway + params2.getTORA()*scale, height / 2 + runwayWidth / 2 + 30},
+                    {runwayEnd - leftClearway, height / 2 + runwayWidth / 2 + 30}};
             rightASDAPoints = new double[][] {
-                    {runwayEnd - leftClearway, height / 2 + runwayWidth / 2 + 50},
-                    {runwayEnd - leftClearway + params2.getASDA()*scale, height / 2 + runwayWidth / 2 + 50}};
+                    {runwayEnd - leftClearway + params2.getASDA()*scale, height / 2 + runwayWidth / 2 + 50},
+                    {runwayEnd - leftClearway, height / 2 + runwayWidth / 2 + 50}};
             rightTODAPoints = new double[][] {
-                    {runwayEnd - leftClearway, height / 2 + runwayWidth / 2 + 70},
-                    {runwayEnd - leftClearway + params2.getTODA()*scale, height / 2 + runwayWidth / 2 + 70}};
+                    {runwayEnd - leftClearway + params2.getTODA()*scale, height / 2 + runwayWidth / 2 + 70},
+                    {runwayEnd - leftClearway, height / 2 + runwayWidth / 2 + 70}};
             rightLDAPoints = new double[][] {
-                    {runwayEnd - leftClearway + rightDisplaced, height / 2 + runwayWidth / 2 + 90},
-                    {runwayEnd - leftClearway + rightDisplaced + params2.getLDA()*scale, height / 2 + runwayWidth / 2 + 90}};
+                    {runwayEnd - leftClearway + rightDisplaced + params2.getLDA()*scale, height / 2 + runwayWidth / 2 + 90},
+                    {runwayEnd - leftClearway + rightDisplaced, height / 2 + runwayWidth / 2 + 90}};
         }
         double[][] centerLine = {       {runwayStart+rightClearway+25,              height/2},
                                         {runwayStart+rightClearway+runwayLength-25, height/2}};

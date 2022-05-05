@@ -4,11 +4,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import seg.g33.Helpers.Drawer;
+import seg.g33.DataHolders.Notify;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * JavaFX App
@@ -21,6 +21,8 @@ public class App extends Application {
      */
     private static String resourceDirectory = "src/main/resources";
     private static String appDirectory = System.getProperty("user.dir");
+
+    private static ArrayList<Notify> notificationHistory = new ArrayList<Notify>();
 
     /**
      * Main scene
@@ -78,6 +80,17 @@ public class App extends Application {
 
     public static String getAppDirectory() {
         return appDirectory;
+    }
+
+    /**
+     * The global list of notifications in the current session
+     */
+    public static void addNotificationHistory(Notify notification) {
+        notificationHistory.add(notification);
+    }
+
+    public static ArrayList<Notify> getNotificationHistory() {
+        return notificationHistory;
     }
 
     /**
