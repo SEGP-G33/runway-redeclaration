@@ -20,6 +20,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 import seg.g33.App;
 import seg.g33.DataHolders.Environment;
 import seg.g33.DataHolders.Notify;
