@@ -1,5 +1,7 @@
 package seg.g33.Controllers;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
 import javafx.application.Preloader;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -32,6 +34,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -58,7 +61,6 @@ public class CalculatorController {
     public static String obstacleSelectionExport = "Obstacle presets successfully entered and %s is successfully exported as xml.";
     public static String obstacleSelectionImport = "Obstacle presets are imported from file %s";
     public String calculationSuccess= "Runway redeclaration calculation successful";
-    private ArrayList<String> notifications= new ArrayList<>();
 
     /**
      * Properties used for the JavaFX ComboBox to work properly.
@@ -85,6 +87,7 @@ public class CalculatorController {
      */
     @FXML
     protected void initialize() {
+        setupNotifications();
         addTooltipsToFields();
         setAirportProperties();
         setupObstacleBoxUI();
@@ -105,6 +108,26 @@ public class CalculatorController {
     private void addTooltipsToFields() {
         obstacleNameField.setTooltip(new FieldTooltip("Obstacle Name"));
         // TODO: Add tooltips for all elements.
+    }
+
+    /**
+     * Loads all previous notifications from current session
+     */
+    private void setupNotifications() {
+        try {
+            for (Notify notif : App.getNotificationHistory()) {
+                var message = new Label(notif.toString());
+                message.setFont(Font.font("Verdana", FontWeight.NORMAL, 13));
+                message.setTextFill(Color.valueOf(notif.getType().getColor()));
+                FadeTransition transition = new FadeTransition(Duration.millis(300), message);
+                transition.setFromValue(0);
+                transition.setToValue(1);
+                transition.setInterpolator(Interpolator.EASE_IN);
+                notificationsVBOX.getChildren().add(message);
+                notificationsScrollPane.setContent(notificationsVBOX);
+                transition.play();
+            }
+        } catch (Exception ignore) {}
     }
 
     /**
@@ -167,7 +190,7 @@ public class CalculatorController {
         airportNameField.setText(selectedAirport.getName());
         airportCodeField.setText(selectedAirport.getShortcode());
         numberOfRunwaysField.setText(String.valueOf(selectedAirport.getAirportRunways().size()));
-        notificationDisplay(new Notify(String.format(airportSelection,selectedAirport.getName()), LocalDateTime.now(),Notify.Type.SELECT));
+        notificationDisplay(new Notify(String.format(airportSelection,selectedAirport.getName()),Notify.Type.SELECT, new Date()));
     }
 
     /**
@@ -179,7 +202,7 @@ public class CalculatorController {
             if (run.getName().equals(runwayName)) {
                 selectedRunway = run;
                 setElementsForSelectedRunway();
-                notificationDisplay(new Notify(String.format(runwaySelection,selectedRunway.getName()), LocalDateTime.now(),Notify.Type.SELECT));
+                notificationDisplay(new Notify(String.format(runwaySelection,selectedRunway.getName()), Notify.Type.SELECT, new Date()));
                 return;
             }
         }
@@ -230,7 +253,7 @@ public class CalculatorController {
         obstacleCenterField.textProperty().set(center);
         obstacleLeftField.textProperty().set(left);
         obstacleRightField.textProperty().set(right);
-        notificationDisplay(new Notify(String.format(obstacleSelection,name), LocalDateTime.now(),Notify.Type.SELECT));
+        notificationDisplay(new Notify(String.format(obstacleSelection,name),Notify.Type.SELECT, new Date()));
     }
 
     /**
@@ -271,7 +294,7 @@ public class CalculatorController {
         Drawer.drawTopDown(canvas, 10*angle, selectedRunway, selectedObstacle, results.get(0), results.get(1));
         Drawer.drawSideOn(sideCanvas, selectedRunway, selectedObstacle, plane, results.get(0), results.get(1));
 
-        notificationDisplay(new Notify(String.format(calculationSuccess, calculator.getName()), LocalDateTime.now(),Notify.Type.SELECT));
+        notificationDisplay(new Notify(String.format(calculationSuccess, calculator.getName()), Notify.Type.CALCULATE, new Date()));
 
     }
 
@@ -308,7 +331,7 @@ public class CalculatorController {
         File selectedFile = fileChooser.showOpenDialog(App.getPrimaryStage());
 
         configureSelectedFile(selectedFile);
-        notificationDisplay(new Notify(String.format(obstacleSelectionImport, selectedFile.getName()), LocalDateTime.now(),Notify.Type.SELECT));
+        notificationDisplay(new Notify(String.format(obstacleSelectionImport, selectedFile.getName()), Notify.Type.SELECT, new Date()));
     }
 
     /**
@@ -419,7 +442,7 @@ public class CalculatorController {
 
         var alert = new Alert(Alert.AlertType.INFORMATION, "File " + obstacle.getName() + ".xml written.", ButtonType.CANCEL);
         alert.showAndWait();
-        notificationDisplay(new Notify(String.format(obstacleSelectionExport,name), LocalDateTime.now(),Notify.Type.UPDATE));
+        notificationDisplay(new Notify(String.format(obstacleSelectionExport,name), Notify.Type.UPDATE, new Date()));
 
     }
 
@@ -460,7 +483,7 @@ public class CalculatorController {
             exporter.exportImage();
             var alert = new Alert(Alert.AlertType.CONFIRMATION, "Image Exported!", ButtonType.CANCEL);
             alert.showAndWait();
-            notificationDisplay(new Notify("Canvas successfully exported! ", LocalDateTime.now(),Notify.Type.UPDATE));
+            notificationDisplay(new Notify("Canvas successfully exported! ", Notify.Type.UPDATE, new Date()));
         } catch (IOException e) {
             e.printStackTrace();
             var alert = new Alert(Alert.AlertType.ERROR, "Image Export Failed! ", ButtonType.CANCEL);
@@ -471,12 +494,18 @@ public class CalculatorController {
     public void notificationDisplay(Notify notif){
         var message = new Label(notif.toString());
         message.setFont(Font.font("Verdana", FontWeight.NORMAL, 13));
-        if (notif.getType().equals(Notify.Type.SELECT)){message.setTextFill(Color.valueOf(Notify.Type.SELECT.getColor()));}
-        else if (notif.getType().equals(Notify.Type.UPDATE)){message.setTextFill(Color.valueOf(Notify.Type.UPDATE.getColor()));}
-        this.notifications.add(message.toString());
+        message.setTextFill(Color.valueOf(notif.getType().getColor()));
+
+        App.addNotificationHistory(notif);
+
+        FadeTransition transition = new FadeTransition(Duration.millis(300), message);
+        transition.setFromValue(0);
+        transition.setToValue(1);
+        transition.setInterpolator(Interpolator.EASE_IN);
 
         notificationsVBOX.getChildren().add(message);
         notificationsScrollPane.setContent(notificationsVBOX);
+        transition.play();
     }
 
 

@@ -6,6 +6,7 @@ module seg.g33 {
     requires java.xml;
     requires org.apache.logging.log4j;
     requires java.desktop;
+    requires controlsfx;
 
     opens seg.g33 to javafx.fxml;
     exports seg.g33;
