@@ -296,16 +296,21 @@ public class CalculatorController {
         Collections.sort(selectedRunway.getRunwaySections(), (o1, o2) -> o1.getAngle().compareTo(o2.getAngle()));
 
         Calculator calculator = new Calculator("Calculator", plane, selectedObstacle, selectedRunway);
-        ArrayList<RunwayParameters> results = calculator.calculate();
-        breakdownTextArea.setText(calculator.calcAsString());
+        if (Validator.distancesAreValid(selectedRunway, selectedObstacle.getLeftDistance(), selectedObstacle.getRightDistance())) {
+            ArrayList<RunwayParameters> results = calculator.calculate();
+            breakdownTextArea.setText(calculator.calcAsString());
 
-        System.out.println("Obstacle: " + selectedObstacle);
+            System.out.println("Obstacle: " + selectedObstacle);
 
-        setRecalculateParamsUI(results);
+            setRecalculateParamsUI(results);
 
-        var angle = selectedRunway.getRunwaySections().get(0).getAngle();
-        Drawer.drawTopDown(canvas, 10*angle, selectedRunway, selectedObstacle, results.get(0), results.get(1));
-        Drawer.drawSideOn(sideCanvas, selectedRunway, selectedObstacle, plane, results.get(0), results.get(1));
+            var angle = selectedRunway.getRunwaySections().get(0).getAngle();
+            Drawer.drawTopDown(canvas, 10*angle, selectedRunway, selectedObstacle, results.get(0), results.get(1));
+            Drawer.drawSideOn(sideCanvas, selectedRunway, selectedObstacle, plane, results.get(0), results.get(1));
+        } else {
+            var alert = new Alert(Alert.AlertType.ERROR, "Distance from left and distance from right must add to total runway length", ButtonType.CANCEL);
+            alert.showAndWait();
+        }
     }
 
     /**

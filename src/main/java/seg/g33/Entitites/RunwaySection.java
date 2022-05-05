@@ -15,11 +15,14 @@ public class RunwaySection {
     private Double stripEndLength = 60d;
 
 
-    public RunwaySection(Runway runway, Integer angle, Character direction, RunwayParameters parameters) {
+    public RunwaySection(Runway runway, Integer angle, Character direction, RunwayParameters runwayParameters) {
         this.runway = runway;
         this.angle = angle;
         this.direction = direction;
-        this.defaultParameters = parameters;
+        this.defaultParameters = runwayParameters;
+        this.stopWayLength = runwayParameters.getASDA() - runwayParameters.getTORA();
+        this.clearWayLength = runwayParameters.getTODA() - runwayParameters.getTORA();
+        this.displacedThreshold = runwayParameters.getTORA() - runwayParameters.getLDA();
     }
 
     /**
