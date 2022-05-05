@@ -1,5 +1,6 @@
 package seg.g33.Controllers;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -364,6 +365,16 @@ public class ConfigureAirportController {
      */
     private Double number(String input) throws NumberFormatException {
         return Double.parseDouble(input);
+    }
+
+    @FXML
+    void handleMenuBarQuit(ActionEvent event) {
+        var alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to quit?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            Platform.exit();
+        }
     }
 
     /**

@@ -1,19 +1,17 @@
 package seg.g33.Controllers;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
-import javafx.util.Duration;
 import seg.g33.App;
 import seg.g33.DataHolders.Environment;
 import seg.g33.DataHolders.ObstaclePresets;
@@ -23,14 +21,11 @@ import seg.g33.XMLParsing.XMLReading;
 import seg.g33.XMLParsing.XMLWriting;
 import seg.g33.ui.FieldTooltip;
 
-import javax.swing.*;
-import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
@@ -87,8 +82,6 @@ public class CalculatorController {
         observeParameters();
     }
 
-//    private static int redeclParamsObserverCountdown = 15;
-
     /**
      * Listens to the observables required to handle recalaulation of parameters
      */
@@ -130,8 +123,17 @@ public class CalculatorController {
      * Adds tooltips for user convenience in all UI elements that need them.
      */
     private void addTooltipsToFields() {
+        // Tooltips for Obstacles
         obstacleNameField.setTooltip(new FieldTooltip("Obstacle Name"));
-        // TODO: Add tooltips for all elements.
+        obstacleLeftField.setTooltip(new FieldTooltip("Distance from L (m)"));
+        obstacleHeightField.setTooltip(new FieldTooltip("Obstacle Height (m)"));
+        obstacleCenterField.setTooltip(new FieldTooltip("Distance from center line (m)"));
+        obstacleRightField.setTooltip(new FieldTooltip("Distance from R (m)"));
+
+        // Tooltips for Airport & Runway
+        airportNameField.setTooltip(new FieldTooltip("Airport Name"));
+        airportCodeField.setTooltip(new FieldTooltip("Airport Code"));
+        numberOfRunwaysField.setTooltip(new FieldTooltip("Number of runways in the airport"));
     }
 
     /**
@@ -280,12 +282,6 @@ public class CalculatorController {
     @FXML
     void handleRecalculateParams() {
         var plane = Plane.DEFAULT_PLANE;
-
-//        if (selectedRunway == null || selectedObstacle == null ) {
-//            var alert = new Alert(Alert.AlertType.ERROR, "Please select an Obstacle and a Runway...", ButtonType.CANCEL);
-//            alert.showAndWait();
-//            return;
-//        }
 
         if (!useObstaclePresetCheckbox.isSelected()) {
             var name = obstacleNameField.getText();
@@ -496,6 +492,16 @@ public class CalculatorController {
             e.printStackTrace();
             var alert = new Alert(Alert.AlertType.ERROR, "Image Export Failed! ", ButtonType.CANCEL);
             alert.showAndWait();
+        }
+    }
+
+    @FXML
+    void handleMenuBarQuit(ActionEvent event) {
+        var alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to quit?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            Platform.exit();
         }
     }
 
