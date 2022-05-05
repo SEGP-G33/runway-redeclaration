@@ -16,7 +16,7 @@ public class FieldTooltip extends Tooltip  {
      */
     public FieldTooltip(String tooltipLabel) {
         super(tooltipLabel);
-        this.setShowDelay(Duration.seconds(0.2));
+        this.setShowDelay(Duration.seconds(0.5));
     }
 
     /**

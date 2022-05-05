@@ -1,8 +1,10 @@
 package seg.g33.Controllers;
 
+
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.application.Preloader;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -15,9 +17,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
-import javafx.util.Duration;
 import seg.g33.App;
 import seg.g33.DataHolders.Environment;
 import seg.g33.DataHolders.Notify;
@@ -28,7 +30,6 @@ import seg.g33.XMLParsing.XMLReading;
 import seg.g33.XMLParsing.XMLWriting;
 import seg.g33.ui.FieldTooltip;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -36,7 +37,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
@@ -100,14 +100,62 @@ public class CalculatorController {
                 setElementsForSelectedObstacle(t1);
             }
         });
+
+        observeParameters();
+    }
+
+    /**
+     * Listens to the observables required to handle recalaulation of parameters
+     */
+    private void observeParameters(){
+        final ComboBoxBase[] recalculateParamsComboBoxObservables = {
+                selectRunwayComboBox,
+                selectObstacleComboBox
+        };
+
+        final TextField[] recalculateParamsTextFieldObservables = {
+                obstacleNameField,
+                obstacleHeightField,
+                obstacleCenterField,
+                obstacleRightField,
+                obstacleLeftField,
+
+                s1TORAField,
+                s1TODAField,
+                s1ASDAField,
+                s1LDAField,
+
+                s2TODAField,
+                s2TODAField,
+                s2ASDAField,
+                s2LDAField
+        };
+
+        //when one of the observables change, recalculate parameters again
+        for (ComboBoxBase<?> observable : recalculateParamsComboBoxObservables){
+            observable.valueProperty().addListener((ChangeListener) (observableValue, o, t1) -> handleRecalculateParams());
+        }
+
+        for (TextField observable : recalculateParamsTextFieldObservables){
+            observable.textProperty().addListener((observableValue, s, t1) -> handleRecalculateParams());
+        }
     }
 
     /**
      * Adds tooltips for user convenience in all UI elements that need them.
      */
     private void addTooltipsToFields() {
+        // Tooltips for Obstacles
         obstacleNameField.setTooltip(new FieldTooltip("Obstacle Name"));
-        // TODO: Add tooltips for all elements.
+        obstacleLeftField.setTooltip(new FieldTooltip("Distance from L (m)"));
+        obstacleHeightField.setTooltip(new FieldTooltip("Obstacle Height (m)"));
+        obstacleCenterField.setTooltip(new FieldTooltip("Distance from center line (m)"));
+        obstacleRightField.setTooltip(new FieldTooltip("Distance from R (m)"));
+
+        // Tooltips for Airport & Runway
+        airportNameField.setTooltip(new FieldTooltip("Airport Name"));
+        airportCodeField.setTooltip(new FieldTooltip("Airport Code"));
+        numberOfRunwaysField.setTooltip(new FieldTooltip("Number of runways in the airport"));
     }
 
     /**
@@ -166,6 +214,22 @@ public class CalculatorController {
         obstacleHeightField.setEditable(editable);
         obstacleNameField.setEditable(editable);
         obstacleCenterField.setEditable(editable);
+
+        // if not editable, change the style of the fields to look uneditable
+        if (!editable){
+            obstacleNameField.setStyle("-fx-background-color : #E0E0E0");
+            obstacleHeightField.setStyle("-fx-background-color : #E0E0E0");
+            obstacleCenterField.setStyle("-fx-background-color : #E0E0E0");
+            obstacleLeftField.setStyle("-fx-background-color : #E0E0E0");
+            obstacleRightField.setStyle("-fx-background-color : #E0E0E0");
+        }
+        else{  // else, change it back to default
+            obstacleNameField.setStyle(null);
+            obstacleHeightField.setStyle(null);
+            obstacleCenterField.setStyle(null);
+            obstacleLeftField.setStyle(null);
+            obstacleRightField.setStyle(null);
+        }
     }
 
     /**
@@ -264,12 +328,6 @@ public class CalculatorController {
     void handleRecalculateParams() {
         var plane = Plane.DEFAULT_PLANE;
 
-        if (selectedRunway == null || selectedObstacle == null) {
-            var alert = new Alert(Alert.AlertType.ERROR, "Please select an Obstacle and a Runway...", ButtonType.CANCEL);
-            alert.showAndWait();
-            return;
-        }
-
         if (!useObstaclePresetCheckbox.isSelected()) {
             var name = obstacleNameField.getText();
             var height = Double.parseDouble(obstacleHeightField.getText());
@@ -283,19 +341,24 @@ public class CalculatorController {
         Collections.sort(selectedRunway.getRunwaySections(), (o1, o2) -> o1.getAngle().compareTo(o2.getAngle()));
 
         Calculator calculator = new Calculator("Calculator", plane, selectedObstacle, selectedRunway);
-        ArrayList<RunwayParameters> results = calculator.calculate();
-        breakdownTextArea.setText(calculator.calcAsString());
+        if (Validator.distancesAreValid(selectedRunway, selectedObstacle.getLeftDistance(), selectedObstacle.getRightDistance())) {
+            ArrayList<RunwayParameters> results = calculator.calculate();
+            breakdownTextArea.setText(calculator.calcAsString());
 
-        System.out.println("Obstacle: " + selectedObstacle);
+            System.out.println("Obstacle: " + selectedObstacle);
 
-        setRecalculateParamsUI(results);
+            setRecalculateParamsUI(results);
 
-        var angle = selectedRunway.getRunwaySections().get(0).getAngle();
-        Drawer.drawTopDown(canvas, 10*angle, selectedRunway, selectedObstacle, results.get(0), results.get(1));
-        Drawer.drawSideOn(sideCanvas, selectedRunway, selectedObstacle, plane, results.get(0), results.get(1));
-
-        notificationDisplay(new Notify(String.format(calculationSuccess, calculator.getName()), Notify.Type.CALCULATE, new Date()));
-
+            var angle = selectedRunway.getRunwaySections().get(0).getAngle();
+            Drawer.drawTopDown(canvas, 10*angle, selectedRunway, selectedObstacle, results.get(0), results.get(1));
+            Drawer.drawSideOn(sideCanvas, selectedRunway, selectedObstacle, plane, results.get(0), results.get(1));
+          
+          
+            notificationDisplay(new Notify(String.format(calculationSuccess, calculator.getName()), Notify.Type.CALCULATE, new Date()));
+        } else {
+            var alert = new Alert(Alert.AlertType.ERROR, "Distance from left and distance from right must add to total runway length", ButtonType.CANCEL);
+            alert.showAndWait();
+        }
     }
 
     /**
@@ -514,6 +577,16 @@ public class CalculatorController {
 
     @FXML
     private VBox notificationsVBOX;
+
+    @FXML
+    void handleMenuBarQuit(ActionEvent event) {
+        var alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to quit?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            Platform.exit();
+        }
+    }
 
     @FXML
     private TabPane mainTabPane;
