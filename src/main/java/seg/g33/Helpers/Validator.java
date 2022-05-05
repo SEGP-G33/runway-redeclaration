@@ -93,8 +93,9 @@ public final class Validator {
     public static boolean distancesAreValid(Runway runway, Double distFromLeft, Double distFromRight){
         RunwaySection section1 = runway.getRunwaySections().get(0);
         RunwaySection section2 = runway.getRunwaySections().get(1);
-        double length = Double.max(section1.getDefaultParameters().getTORA(), section2.getDefaultParameters().getTORA());
+        double length = Double.min(section1.getDefaultParameters().getTORA(), section2.getDefaultParameters().getTORA());
         return !((distFromLeft + distFromRight < length));
+        //return true;
     }
 
     /**
