@@ -1,5 +1,6 @@
 package seg.g33.Controllers;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -220,14 +221,17 @@ public class ConfigureAirportController {
             var r1s1LDA = number(r1s1LDAField.getText());
             var r1s1Angle = Integer.parseInt(r1s1AngleField.getText());
             var r1s1Direction = (r1s1DirectionField.getText()).charAt(0);
-
             RunwayParameters r1s1Params = new RunwayParameters(r1s1TORA, r1s1ASDA, r1s1TODA, r1s1LDA);
             r1s1 = new RunwaySection(runway1, r1s1Angle, r1s1Direction, r1s1Params);
+            if (Validator.runwayParametersAreValid(r1s1)){
+                return r1s1;
+            } else {
+                return null;
+            }
         }
         catch (Exception e) {
             return null;
         }
-        return r1s1;
     }
 
     /**
@@ -247,12 +251,15 @@ public class ConfigureAirportController {
 
             RunwayParameters r1s2Params = new RunwayParameters(r1s2TORA, r1s2ASDA, r1s2TODA, r1s2LDA);
             r1s2 = new RunwaySection(runway1, r1s2Angle, r1s2Direction, r1s2Params);
-
+            if (Validator.runwayParametersAreValid(r1s2)){
+                return r1s2;
+            } else {
+                return null;
+            }
         }
         catch (Exception e) {
             return null;
         }
-        return r1s2;
     }
 
     /**
@@ -272,12 +279,15 @@ public class ConfigureAirportController {
 
             RunwayParameters r1s2Params = new RunwayParameters(tora, asda, toda, lda);
             r2s1 = new RunwaySection(runway2, angle, direction, r1s2Params);
+            if (Validator.runwayParametersAreValid(r2s1)){
+                return r2s1;
+            } else {
+                return null;
+            }
         }
         catch (Exception e) {
             return null;
         }
-
-        return r2s1;
     }
 
     /**
@@ -297,12 +307,15 @@ public class ConfigureAirportController {
 
             RunwayParameters r1s2Params = new RunwayParameters(tora, asda, toda, lda);
             r2s2 = new RunwaySection(runway2, angle, direction, r1s2Params);
+            if (Validator.runwayParametersAreValid(r2s2)){
+                return r2s2;
+            } else {
+                return null;
+            }
         }
         catch (Exception e) {
             return null;
         }
-
-        return r2s2;
     }
 
     /**
@@ -322,12 +335,15 @@ public class ConfigureAirportController {
 
             RunwayParameters r1s2Params = new RunwayParameters(tora, asda, toda, lda);
             r3s1 = new RunwaySection(runway3, angle, direction, r1s2Params);
+            if (Validator.runwayParametersAreValid(r3s1)){
+                return r3s1;
+            } else {
+                return null;
+            }
         }
         catch (Exception e) {
             return null;
         }
-
-        return r3s1;
     }
 
     /**
@@ -347,12 +363,15 @@ public class ConfigureAirportController {
 
             RunwayParameters r1s2Params = new RunwayParameters(tora, asda, toda, lda);
             r3s2 = new RunwaySection(runway3, angle, direction, r1s2Params);
+            if (Validator.runwayParametersAreValid(r3s2)){
+                return r3s2;
+            } else {
+                return null;
+            }
         }
         catch (Exception e) {
             return null;
         }
-
-        return r3s2;
     }
 
     private void showInputsAlert(String forInput) {
@@ -367,6 +386,16 @@ public class ConfigureAirportController {
      */
     private Double number(String input) throws NumberFormatException {
         return Double.parseDouble(input);
+    }
+
+    @FXML
+    void handleMenuBarQuit(ActionEvent event) {
+        var alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to quit?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            Platform.exit();
+        }
     }
 
     /**

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<airport>
+    <airportName>myAirport</airportName>
+    <airportCode>MAH</airportCode>
+    <airportRunways>
+        <airportRunway>
+            <name>runway1</name>
+            <runwaySection>
+                <angle>9</angle>
+                <direction>L</direction>
+                <clearway>0.0</clearway>
+                <stopway>0.0</stopway>
+                <resa>240.0</resa>
+                <tora>1.0</tora>
+                <toda>1.0</toda>
+                <asda>1.0</asda>
+                <lda>1.0</lda>
+                <stripend>60.0</stripend>
+                <displaced>0.0</displaced>
+            </runwaySection>
+            <runwaySection>
+                <angle>18</angle>
+                <direction>R</direction>
+                <clearway>0.0</clearway>
+                <stopway>0.0</stopway>
+                <resa>240.0</resa>
+                <tora>1.0</tora>
+                <toda>1.0</toda>
+                <asda>1.0</asda>
+                <lda>1.0</lda>
+                <stripend>60.0</stripend>
+                <displaced>0.0</displaced>
+            </runwaySection>
+        </airportRunway>
+    </airportRunways>
+</airport>
